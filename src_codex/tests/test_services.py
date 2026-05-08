@@ -29,6 +29,25 @@ class ServiceFlowTests(unittest.TestCase):
 
         self.assertEqual(raised.exception.code, "RELATION_MISMATCH")
 
+    def test_order_context_uses_registry_relationships(self) -> None:
+        order = self.app.ontology.get_object("O001")
+        order.values["customer_id"] = "C999"
+        order.values["product_ids"] = []
+
+        context = self.app.ontology.get_order_context("O001", "C001")
+
+        self.assertEqual(context["customer"]["id"], "C001")
+        self.assertEqual({product["id"] for product in context["products"]}, {"P001", "P003"})
+
+    def test_registry_can_traverse_relationships_in_both_directions(self) -> None:
+        related_orders = self.app.ontology.registry.find_related("C001", "PLACED_ORDER")
+        source_customers = self.app.ontology.registry.find_sources("O001", "PLACED_ORDER")
+        relationships = self.app.ontology.registry.find_relationships("ORDER_CONTAINS_PRODUCT", source_id="O001")
+
+        self.assertEqual({order.object_id for order in related_orders}, {"O001"})
+        self.assertEqual([customer.object_id for customer in source_customers], ["C001"])
+        self.assertEqual({relationship.target_id for relationship in relationships}, {"P001", "P003"})
+
     def test_unknown_order_returns_object_not_found(self) -> None:
         with self.assertRaises(AppError) as raised:
             self.app.ask("O999 주문 상태를 알려줘.", "analyst")

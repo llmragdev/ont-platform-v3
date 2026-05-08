@@ -52,6 +52,27 @@ class OntologyRegistry:
             if relationship.source_id == source_id and relationship.relationship_type.name == relationship_name
         ]
 
+    def find_sources(self, target_id: str, relationship_name: str) -> list[ObjectInstance]:
+        return [
+            self.objects[relationship.source_id]
+            for relationship in self.relationships
+            if relationship.target_id == target_id and relationship.relationship_type.name == relationship_name
+        ]
+
+    def find_relationships(
+        self,
+        relationship_name: str | None = None,
+        source_id: str | None = None,
+        target_id: str | None = None,
+    ) -> list[RelationshipInstance]:
+        return [
+            relationship
+            for relationship in self.relationships
+            if (relationship_name is None or relationship.relationship_type.name == relationship_name)
+            and (source_id is None or relationship.source_id == source_id)
+            and (target_id is None or relationship.target_id == target_id)
+        ]
+
 
 class OntologyService:
     def __init__(self, raw: dict, on_change: Callable[[dict], None] | None = None) -> None:
@@ -112,7 +133,7 @@ class OntologyService:
             {
                 "name": object_type.name,
                 "properties": [
-                    {"name": prop.name, "type": prop.value_type.__name__, "required": prop.required}
+                    {"name": prop.name, "type": prop.type_name, "required": prop.required}
                     for prop in object_type.properties.values()
                 ],
             }
@@ -135,11 +156,15 @@ class OntologyService:
         order = self.get_object(order_id)
         if order.object_type.name != "Order":
             raise AppError("OBJECT_NOT_FOUND", "요청한 객체를 찾을 수 없습니다.", 404)
-        actual_customer_id = order.values["customer_id"]
-        if customer_id and customer_id != actual_customer_id:
+
+        customers = self.registry.find_sources(order_id, "PLACED_ORDER")
+        if not customers:
+            raise AppError("RELATION_MISSING", "주문과 연결된 고객 관계를 찾을 수 없습니다.", 409)
+        customer = customers[0]
+        if customer_id and customer_id != customer.object_id:
             raise AppError("RELATION_MISMATCH", "고객과 주문의 연결 관계가 일치하지 않습니다.", 409)
-        customer = self.get_object(actual_customer_id)
-        products = [self.get_object(product_id) for product_id in order.values["product_ids"]]
+
+        products = self.registry.find_related(order_id, "ORDER_CONTAINS_PRODUCT")
         return {
             "order": self.to_dict(order),
             "customer": self.to_dict(customer),

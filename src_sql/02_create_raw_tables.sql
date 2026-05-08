@@ -5,15 +5,15 @@ USE SCHEMA RAW;
 
 CREATE OR REPLACE TABLE CUSTOMERS (
     CUSTOMER_ID VARCHAR(10) PRIMARY KEY,
-    NAME VARCHAR(100),
+    CUSTOMER_NAME VARCHAR(100),
     SEGMENT VARCHAR(50),
     REGION VARCHAR(50),
-    RISK_TIER VARCHAR(10)
+    CREATED_AT DATE
 );
 
 CREATE OR REPLACE TABLE PRODUCTS (
     PRODUCT_ID VARCHAR(10) PRIMARY KEY,
-    NAME VARCHAR(100),
+    PRODUCT_NAME VARCHAR(100),
     CATEGORY VARCHAR(50),
     UNIT_PRICE NUMBER(10, 2)
 );
@@ -26,14 +26,30 @@ CREATE OR REPLACE TABLE ORDERS (
 );
 
 CREATE OR REPLACE TABLE ORDER_ITEMS (
-    ITEM_ID VARCHAR(10) PRIMARY KEY,
+    ORDER_ITEM_ID VARCHAR(10) PRIMARY KEY,
     ORDER_ID VARCHAR(10),
     PRODUCT_ID VARCHAR(10),
-    QUANTITY NUMBER(10)
+    QUANTITY NUMBER(10, 0)
 );
 
 -- 샘플 데이터 삽입
-INSERT INTO CUSTOMERS VALUES ('C001', 'Global Tech', 'Enterprise', 'NA', 'Low'), ('C002', 'Asia Retail', 'SMB', 'APAC', 'Medium');
-INSERT INTO PRODUCTS VALUES ('P001', 'Cloud Suite', 'Software', 500.00), ('P002', 'Data Guard', 'Security', 300.00);
-INSERT INTO ORDERS VALUES ('O001', 'C001', '2024-05-01', 'Submitted'), ('O002', 'C002', '2024-05-02', 'Pending');
-INSERT INTO ORDER_ITEMS VALUES ('I001', 'O001', 'P001', 10), ('I002', 'O001', 'P002', 5), ('I003', 'O002', 'P001', 2);
+INSERT INTO CUSTOMERS VALUES
+('C001', 'Alpha Manufacturing', 'Enterprise', 'Seoul', '2025-01-10'),
+('C002', 'Beta Retail', 'SMB', 'Busan', '2025-02-15'),
+('C003', 'Gamma Logistics', 'Enterprise', 'Incheon', '2025-03-20');
+
+INSERT INTO PRODUCTS VALUES
+('P001', 'Industrial Sensor', 'Hardware', 250.00),
+('P002', 'Analytics License', 'Software', 1200.00),
+('P003', 'Support Package', 'Service', 500.00);
+
+INSERT INTO ORDERS VALUES
+('O001', 'C001', '2026-04-01', 'Submitted'),
+('O002', 'C001', '2026-04-03', 'Approved'),
+('O003', 'C002', '2026-04-05', 'Submitted');
+
+INSERT INTO ORDER_ITEMS VALUES
+('OI001', 'O001', 'P001', 10),
+('OI002', 'O001', 'P003', 1),
+('OI003', 'O002', 'P002', 3),
+('OI004', 'O003', 'P001', 2);

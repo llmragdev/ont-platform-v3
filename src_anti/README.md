@@ -2,6 +2,12 @@
 
 이 프로그램은 `06_온톨로지_AI_업무화면_기획.md` 분석 파일을 바탕으로 구현된 **온톨로지 AI 업무 의사결정 플랫폼**입니다.
 
+## 문서 (Documentation)
+
+이 프로젝트의 상세 분석 및 설계 문서는 다음 경로에서 확인할 수 있습니다.
+- **[전체 오버뷰 (00_전체_오버뷰.md)](../req_doc_hub/%EB%B6%84%EC%84%9D/00_%EC%A0%84%EC%B2%B4_%EC%98%A4%EB%B2%84%EB%B7%B0.md)**
+- **[추적도 마스터 매트릭스](../req_doc_hub/%EC%B6%94%EC%A0%81%EB%8F%84/00_%EC%B6%94%EC%A0%81%EB%8F%84_%EB%A7%88%EC%8A%A4%ED%84%B0_%EB%A7%A4%ED%8A%B8%EB%A6%AD%EC%8A%A4.md)**
+
 ## 기술 스택
 
 - **Frontend**: Semantic HTML5, Vanilla JavaScript (ES6+), Vanilla CSS

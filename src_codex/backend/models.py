@@ -11,6 +11,10 @@ class PropertyDefinition:
     value_type: type
     required: bool = False
 
+    @property
+    def type_name(self) -> str:
+        return getattr(self.value_type, "__name__", str(self.value_type))
+
 
 @dataclass
 class ObjectType:
@@ -32,7 +36,7 @@ class ObjectInstance:
             if definition.required and property_name not in self.values:
                 raise ValueError(f"Missing required property: {property_name}")
             if property_name in self.values and not isinstance(self.values[property_name], definition.value_type):
-                raise TypeError(f"{property_name} must be {definition.value_type.__name__}")
+                raise TypeError(f"{property_name} must be {definition.type_name}")
 
     def get_status(self) -> str:
         return str(self.values["status"])
@@ -96,4 +100,3 @@ class WorkflowEvent:
     actor: str
     payload: dict[str, Any]
     occurred_at: datetime = field(default_factory=datetime.utcnow)
-
