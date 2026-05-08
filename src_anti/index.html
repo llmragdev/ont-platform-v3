@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ontology Workbench - AI Decision Support</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Ontology Workbench</h1>
+                <span>AI 업무 의사결정 플랫폼</span>
+            </div>
+            <nav class="menu" id="side-menu">
+                <button class="menu-item active" data-menu="dashboard">대시보드</button>
+                <button class="menu-item" data-menu="explorer">객체 탐색</button>
+                <button class="menu-item" data-menu="ai-query">AI 질의</button>
+                <button class="menu-item" data-menu="workflow">승인 워크플로우</button>
+                <button class="menu-item" data-menu="audit">감사 로그</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content" id="main-content">
+            <!-- Header (Dynamic) -->
+            <div class="header">
+                <div>
+                    <h2 id="view-title">대시보드</h2>
+                    <p id="view-desc">객체, 문서, AI 답변을 연결하여 의사결정을 지원합니다.</p>
+                </div>
+                <div id="current-context-badge" class="badge badge-low" style="padding: 0.5rem 1rem;">
+                    Context: O001 · Submitted
+                </div>
+            </div>
+
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="view">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="label">승인 대기</div>
+                        <div class="value" id="count-pending">12</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">객체 수</div>
+                        <div class="value">152</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">최근 이벤트</div>
+                        <div class="value">21</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">AI 질의 (금일)</div>
+                        <div class="value">48</div>
+                    </div>
+                </div>
+
+                <div class="panel" style="margin-top: 2rem;">
+                    <div class="panel-header">
+                        <h3>승인 대기 주문</h3>
+                    </div>
+                    <div class="panel-content">
+                        <table id="pending-orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explorer View (Hidden by default) -->
+            <div id="explorer-view" class="view" style="display: none;">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>객체 목록 (Orders)</h3>
+                    </div>
+                    <div class="panel-content">
+                        <table id="all-orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer ID</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Query View (Hidden by default) -->
+            <div id="ai-query-view" class="view" style="display: none;">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>자연어 질의</h3>
+                    </div>
+                    <div class="panel-content">
+                        <div class="query-box">
+                            <input type="text" id="query-input" class="query-input" placeholder="예: C001 고객의 O001 주문을 승인해도 될까?">
+                            <button id="ask-btn" class="btn-primary">질의 실행</button>
+                        </div>
+                        <div id="ai-response-area" style="display: none;" class="fade-in">
+                            <div class="ai-answer">
+                                <p id="ai-answer-text"></p>
+                            </div>
+                            <div style="margin-top: 1.5rem;">
+                                <h4 style="font-size: 0.8rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">검색 근거 (Evidence)</h4>
+                                <div id="evidence-list" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                    <!-- JS Populated -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workflow View (Hidden by default) -->
+            <div id="workflow-view" class="view" style="display: none;">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>승인 액션</h3>
+                    </div>
+                    <div class="panel-content">
+                        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">현재 선택된 주문: <span id="wf-order-id" style="font-weight: 600; color: var(--primary);">O001</span></p>
+                        <div class="flex" style="display: flex; gap: 0.75rem;">
+                            <button class="btn-primary" style="background-color: #10b981;" onclick="executeAction('ApproveOrder')">승인 (Approve)</button>
+                            <button class="btn-primary" style="background-color: #ef4444;" onclick="executeAction('RejectOrder')">반려 (Reject)</button>
+                            <button class="btn-primary" style="background-color: #f59e0b;" onclick="executeAction('HoldOrder')">보류 (Hold)</button>
+                        </div>
+                    </div>
+                </div>
+            <!-- Audit View (Hidden by default) -->
+            <div id="audit-view" class="view" style="display: none;">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>시스템 감사 로그 (Audit Logs)</h3>
+                        <button class="btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.7rem;" onclick="refreshAuditLogs()">새로고침</button>
+                    </div>
+                    <div class="panel-content">
+                        <table id="audit-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>User</th>
+                                    <th>Event</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Context Sidebar -->
+        <aside class="context">
+            <h2>컨텍스트</h2>
+            
+            <div class="context-section">
+                <div class="context-card">
+                    <div class="label">선택 객체</div>
+                    <div class="value" id="ctx-order-id">Order O001</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                        Status: <span id="ctx-order-status">Submitted</span><br>
+                        Amount: <span id="ctx-order-amount">3,200</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="context-section">
+                <div class="context-card">
+                    <div class="label">고객 정보</div>
+                    <div class="value" id="ctx-cust-name">Alpha Manufacturing</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                        Segment: Enterprise<br>
+                        Risk: <span id="ctx-cust-risk" class="badge badge-low">Low</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="context-section">
+                <div class="context-card">
+                    <div class="label">관련 제품</div>
+                    <div id="ctx-products" style="font-size: 0.8rem; color: var(--text-main); margin-top: 0.25rem; display: flex; flex-direction: column; gap: 0.25rem;">
+                        <div>· Industrial Sensor (Hardware)</div>
+                        <div>· Support Package (Service)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="context-section" style="margin-top: auto;">
+                <div class="panel" style="background: var(--bg-body); border-style: dashed;">
+                    <div class="panel-content" style="padding: 1rem; text-align: center;">
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">Antigravity AI Engine v1.0.4</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

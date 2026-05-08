@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Operational Ontology Console</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="nav-pane" aria-label="Primary">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">OC</span>
+        <div>
+          <h1>Ontology Console</h1>
+          <p>운영형 업무 아키텍처</p>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <button class="nav-item active" data-view="ask">AI 질의</button>
+        <button class="nav-item" data-view="workflow">워크플로우</button>
+        <button class="nav-item" data-view="objects">객체/관계</button>
+        <button class="nav-item" data-view="audit">감사 로그</button>
+        <button class="nav-item" data-view="architecture">서비스 경계</button>
+      </nav>
+
+      <section class="operator-box" aria-label="Current user">
+        <span class="eyebrow">Authenticated User</span>
+        <strong id="user-name">Kim Ops</strong>
+        <p id="user-role">Role: AccountManager</p>
+      </section>
+    </aside>
+
+    <main class="workbench">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow" id="view-kicker">POST /api/ask</span>
+          <h2 id="view-title">권한 기반 AI 질의</h2>
+        </div>
+        <div class="status-strip">
+          <span id="selected-order-chip">Order O001</span>
+          <span id="cache-chip">Cache: ready</span>
+        </div>
+      </header>
+
+      <section class="view active" id="view-ask">
+        <div class="query-panel">
+          <label for="question-input">질문</label>
+          <div class="query-row">
+            <input id="question-input" type="text" value="C001 고객의 O001 주문을 승인해도 될까?" autocomplete="off">
+            <button id="ask-button" class="primary-btn">실행</button>
+          </div>
+        </div>
+
+        <div class="split-grid">
+          <section class="result-panel">
+            <div class="section-head">
+              <h3>답변</h3>
+              <span id="ask-latency">0 ms</span>
+            </div>
+            <p id="answer-text">질의를 실행하면 Auth, Policy, Ontology, Search/RAG, LLM Gateway, Audit 순서로 처리됩니다.</p>
+            <div id="action-list" class="action-list"></div>
+          </section>
+
+          <section class="result-panel">
+            <div class="section-head">
+              <h3>근거 문서</h3>
+              <span>permission filtered</span>
+            </div>
+            <div id="evidence-list" class="stack-list"></div>
+          </section>
+        </div>
+
+        <section class="pipeline-panel">
+          <div class="section-head">
+            <h3>요청 처리 흐름</h3>
+            <span id="pipeline-status">idle</span>
+          </div>
+          <ol id="pipeline-list" class="pipeline-list"></ol>
+        </section>
+      </section>
+
+      <section class="view" id="view-workflow">
+        <div class="split-grid">
+          <section class="result-panel">
+            <div class="section-head">
+              <h3>승인 큐</h3>
+              <span>GET /api/workflow/queue</span>
+            </div>
+            <div id="workflow-queue" class="stack-list"></div>
+          </section>
+
+          <section class="result-panel">
+            <div class="section-head">
+              <h3>액션 실행</h3>
+              <span>POST /api/workflow/execute</span>
+            </div>
+            <div id="workflow-detail"></div>
+            <div class="button-row">
+              <button class="primary-btn" data-action="ApproveOrder">Approve</button>
+              <button class="secondary-btn" data-action="RejectOrder">Reject</button>
+              <button class="secondary-btn" data-action="HoldOrder">Hold</button>
+            </div>
+            <p class="hint">액션 실행 전 권한과 최신 상태를 서버 측 서비스에서 다시 검증합니다.</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-objects">
+        <div class="split-grid wide-left">
+          <section class="result-panel">
+            <div class="section-head">
+              <h3>주문 객체</h3>
+              <span>GET /api/objects/orders/:id</span>
+            </div>
+            <div id="order-table" class="object-table"></div>
+          </section>
+
+          <section class="result-panel">
+            <div class="section-head">
+              <h3>관계 컨텍스트</h3>
+              <span>GET /api/objects/orders/:id/context</span>
+            </div>
+            <div id="ontology-context" class="context-map"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-audit">
+        <div class="result-panel">
+          <div class="section-head">
+            <h3>이벤트와 감사 로그</h3>
+            <span>GET /api/audit/events</span>
+          </div>
+          <div id="audit-list" class="audit-list"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-architecture">
+        <div class="architecture-grid" id="architecture-grid"></div>
+      </section>
+    </main>
+
+    <aside class="context-pane">
+      <section class="context-card">
+        <span class="eyebrow">Selected Object</span>
+        <h3 id="ctx-order-id">O001</h3>
+        <dl>
+          <div><dt>Status</dt><dd id="ctx-status">Submitted</dd></div>
+          <div><dt>Amount</dt><dd id="ctx-amount">3,200</dd></div>
+          <div><dt>Customer</dt><dd id="ctx-customer">Alpha Manufacturing</dd></div>
+          <div><dt>Risk</dt><dd id="ctx-risk">Low</dd></div>
+        </dl>
+      </section>
+
+      <section class="context-card">
+        <span class="eyebrow">Policy Result</span>
+        <div id="policy-summary" class="policy-summary"></div>
+      </section>
+
+      <section class="context-card">
+        <span class="eyebrow">Cache Strategy</span>
+        <ul class="cache-list">
+          <li>객체 타입과 정책 문서는 캐시 가능</li>
+          <li>권한, 주문 상태, 액션 가능 여부는 매번 재검증</li>
+          <li>워크플로우 실행 후 큐와 객체 컨텍스트 무효화</li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
