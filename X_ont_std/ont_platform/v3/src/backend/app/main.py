@@ -336,6 +336,152 @@ from app.api.metrics import router as metrics_router
 app.include_router(metrics_router)
 
 
+# ── /api/ontology/sparql ──────────────────────────────────────────────────────
+
+from app.services.sparql_service import SPARQLService
+
+# Singleton 인스턴스
+_sparql_service = SPARQLService()
+
+def get_sparql_service() -> SPARQLService:
+    """SPARQL 서비스 주입"""
+    return _sparql_service
+
+
+@app.post("/api/ontology/sparql")
+def execute_sparql_query(
+    body: dict,
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """SPARQL 쿼리 실행"""
+    query_string = body.get("query", "").strip()
+    if not query_string:
+        raise HTTPException(status_code=400, detail="SPARQL 쿼리가 필요합니다.")
+
+    result = svc.execute_sparql_query(query_string)
+    return {
+        "query_id": result.query_id,
+        "variables": result.variables,
+        "results": result.results,
+        "result_count": result.result_count,
+        "execution_time_ms": result.execution_time_ms,
+        "timestamp": result.query_timestamp.isoformat()
+    }
+
+
+@app.post("/api/ontology/entities/add-rdf")
+def add_entity_rdf(
+    body: dict,
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """엔티티를 RDF로 추가"""
+    entity_id = body.get("entity_id")
+    entity_type = body.get("entity_type")
+    properties = body.get("properties", {})
+
+    if not entity_id or not entity_type:
+        raise HTTPException(status_code=400, detail="entity_id와 entity_type이 필요합니다.")
+
+    triples = svc.add_entity_rdf(entity_id, entity_type, properties)
+    return {
+        "entity_id": entity_id,
+        "entity_type": entity_type,
+        "triples_added": len(triples),
+        "total_triples": svc.get_triple_count()
+    }
+
+
+@app.post("/api/ontology/relationships/add-rdf")
+def add_relationship_rdf(
+    body: dict,
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """관계를 RDF로 추가"""
+    from_entity_id = body.get("from_entity_id")
+    from_type = body.get("from_type")
+    to_entity_id = body.get("to_entity_id")
+    to_type = body.get("to_type")
+    relation_type = body.get("relation_type")
+    relation_props = body.get("relation_props", {})
+
+    if not all([from_entity_id, from_type, to_entity_id, to_type, relation_type]):
+        raise HTTPException(status_code=400, detail="필수 필드가 누락되었습니다.")
+
+    triples = svc.add_relationship_rdf(
+        from_entity_id, from_type, to_entity_id, to_type, relation_type, relation_props
+    )
+    return {
+        "from": f"{from_type}/{from_entity_id}",
+        "to": f"{to_type}/{to_entity_id}",
+        "relation": relation_type,
+        "triples_added": len(triples),
+        "total_triples": svc.get_triple_count()
+    }
+
+
+@app.get("/api/ontology/explore")
+def explore_ontology(
+    entity_uri: str | None = None,
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """온톨로지 탐색"""
+    return svc.explore_ontology(entity_uri)
+
+
+@app.get("/api/ontology/{entity_uri}/relationships")
+def find_relationships(
+    entity_uri: str,
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """엔티티의 관계 찾기"""
+    return svc.find_relationships(entity_uri)
+
+
+@app.get("/api/ontology/entities/by-type")
+def query_by_type(
+    type_uri: str,
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """타입별로 엔티티 조회"""
+    return svc.query_by_type(type_uri)
+
+
+@app.post("/api/ontology/import")
+def import_external_ontology(
+    body: dict,
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """외부 온톨로지 임포트"""
+    source = body.get("source")
+    source_id = body.get("source_id")
+
+    if not source or not source_id:
+        raise HTTPException(status_code=400, detail="source와 source_id가 필요합니다.")
+
+    result = svc.import_external_ontology(source, source_id, **body)
+    return result
+
+
+@app.get("/api/ontology/query-history")
+def get_query_history(
+    limit: int = 100,
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """쿼리 이력 조회"""
+    return {"queries": svc.get_query_history(limit)}
+
+
+@app.get("/api/ontology/stats")
+def get_ontology_stats(
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """온톨로지 통계"""
+    return {
+        "total_triples": svc.get_triple_count(),
+        "last_updated": None
+    }
+
+
 # ── /api/health ───────────────────────────────────────────────────────────────
 
 @app.get("/api/health")
