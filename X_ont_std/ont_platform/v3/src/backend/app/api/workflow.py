@@ -7,8 +7,11 @@ import uuid
 from fastapi import APIRouter, Depends, Header, HTTPException
 from fastapi.responses import StreamingResponse
 
+from pydantic import BaseModel, Field
+from fastapi import Query
 from app.models.tenant_context import TenantContext
 from app.models.workflow_run import StepStatus, WorkflowRun, WorkflowStepRun
+from app.models.action import ActionRequest, ActionResponse
 from app.services.ontology import OntologyService
 from app.services.workflow import WorkflowGraphService, WorkflowService
 from storage_config import get_workflow_runs_path
@@ -40,28 +43,73 @@ def _ctx(
 
 # ── Workflow ──────────────────────────────────────────────────────────────────
 
-@router.get("/queue")
+@router.get("/queue", summary="액션 큐 조회", tags=["workflow"])
 def workflow_queue(
-    entity_type: str | None = None,
-    domain_id: str = "ai-voucher-2025",
+    entity_type: str | None = Query(None, description="엔티티 타입 필터 (e.g., PROJECT)"),
+    domain_id: str = Query("ai-voucher-2025", description="도메인 ID (e.g., ai-voucher-2025, order)"),
     ctx: TenantContext = Depends(_ctx),
     svc: WorkflowService = Depends(_get_workflow_svc),
 ):
+    """
+    현재 사용자가 실행 가능한 액션 목록 조회
+
+    **파라미터**:
+    - `entity_type`: 엔티티 타입별 필터링 (선택사항)
+    - `domain_id`: 워크플로우 도메인 지정 (기본값: ai-voucher-2025)
+
+    **응답**:
+    - `count`: 반환된 액션 수
+    - `items`: 실행 가능한 액션 목록
+    """
     rows = svc.queue(ctx, entity_type=entity_type, domain_id=domain_id)
     return {"count": len(rows), "items": rows}
 
 
-@router.post("/execute")
+class WorkflowExecuteRequest(BaseModel):
+    """액션 실행 요청"""
+    doc_id: str = Field(..., description="문서 ID (e.g., ai-voucher-2025)")
+    entity_id: str = Field(..., description="엔티티 ID (e.g., P001AAA)")
+    action: str = Field(..., description="액션 이름 (e.g., approve_project)")
+    domain_id: str = Field("ai-voucher-2025", description="도메인 ID")
+    params: dict = Field({}, description="액션 파라미터 (e.g., {\"new_deadline\": \"2027-12-31\"})")
+
+
+@router.post("/execute", response_model=ActionResponse, summary="액션 실행", tags=["workflow"])
 def workflow_execute(
-    body: dict,
+    body: WorkflowExecuteRequest,
     ctx: TenantContext = Depends(_ctx),
     svc: WorkflowService = Depends(_get_workflow_svc),
 ):
-    doc_id = body.get("doc_id", "")
-    entity_id = body.get("entity_id", "")
-    action_name = body.get("action", "")
-    domain_id = body.get("domain_id", "ai-voucher-2025")
-    params = body.get("params", {})
+    """
+    엔티티에 대해 액션 실행
+
+    **가능한 액션**:
+    - `approve_project`: 과제 승인 (상태: UnderReview → Approved)
+    - `reject_project`: 과제 반려 (반려_사유 필수)
+    - `change_deadline`: 일정 변경 (new_deadline 파라미터 필수)
+    - `request_more_info`: 정보 요청 (info_needed 파라미터 필수)
+    - `start_payment`: 지급 시작 (상태: Approved → InProgress)
+    - `complete_project`: 과제 완료 (상태: InProgress → Completed)
+
+    **권한 요구사항**:
+    - `approve_project`: 조건부 권한 (예산 규모에 따라 TeamLead/FinanceManager/Admin)
+    - `reject_project`: Admin, FinanceManager, AccountManager
+    - `change_deadline`: Admin, FinanceManager, Manager
+    - `request_more_info`: Admin, FinanceManager, AccountManager
+    - `start_payment`: Admin, FinanceManager, PaymentManager
+    - `complete_project`: Admin, FinanceManager
+
+    **응답**:
+    - `entity_id`: 처리된 엔티티 ID
+    - `action`: 실행된 액션 이름
+    - `from_status`: 이전 상태
+    - `to_status`: 변경된 상태 (null이면 상태 유지)
+    """
+    doc_id = body.doc_id
+    entity_id = body.entity_id
+    action_name = body.action
+    domain_id = body.domain_id
+    params = body.params
 
     if not (doc_id and entity_id and action_name):
         raise HTTPException(status_code=400, detail="doc_id, entity_id, action 필드가 필요합니다.")
