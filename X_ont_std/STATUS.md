@@ -5,7 +5,7 @@
 
 ---
 
-## 📊 현재 상태 (2026-05-19)
+## 📊 현재 상태 (2026-05-20)
 
 ### 컴포넌트 상태
 
@@ -13,17 +13,17 @@
 |------|------|--------|------|
 | **백엔드 (FastAPI)** | ✅ 실행 가능 | 100% | 포트 8001, conda `claud_be` |
 | **프론트엔드 (Next.js)** | ✅ 실행 가능 | 100% | 포트 3001, conda `claud_fe` |
-| **단위 테스트** | ✅ 통과 | 100% | 29/29 통과 |
-| **통합 테스트** | ⚠️ 진행중 | 4% | 1/25 통과 → **목표 20/25 (80%)** |
-| **비즈니스 액션** | ❌ 미구현 | 0% | Phase 3 핵심 |
-| **Write-back** | ❌ 미구현 | 0% | Phase 3 핵심 |
-| **RBAC & 거버넌스** | ⚠️ 설계 중 | 30% | Phase 3 진행 |
+| **Phase 2 단위 테스트** | ✅ 통과 | 100% | 29/29 통과 |
+| **Phase 2 통합 테스트** | ⚠️ 진행중 | 4% | 1/25 통과 → **목표 20/25 (80%)** |
+| **Phase 3 비즈니스 액션** | ✅ 구현 완료 | 100% | 30개 테스트 100% 통과 |
+| **Phase 3 권한 검증** | ✅ 완료 | 100% | 조건부 권한, RBAC 완벽 |
+| **Write-back** | ❌ 미구현 | 0% | Week 3 목표 |
 
 ### 전체 진행도
 ```
-▓▓▓▓▓▓▓░░░░░░░░░░░░ 42%
+▓▓▓▓▓▓▓▓░░░░░░░░░░░░ 48%
 ```
-**완성도**: ~42% (조회 기능 완성, 실행·액션 미완성)
+**완성도**: ~48% (Phase 2 + Phase 3 Week 1 완료)
 
 ---
 
@@ -39,26 +39,33 @@
 - [ ] 엣지 케이스 처리
 - [ ] 실패 케이스 분석 및 고속 수정
 
-### Phase 3 (준비 중)
-**시작**: 2026-05-20 (문서 작성 중)  
-**본격 개발**: 2026-05-27 (Week 1 시작)  
+### Phase 3 (진행 중)
+**시작**: 2026-05-20 (Week 1 완료)  
+**현재**: Week 1 완료, Week 2 준비 (2026-05-27)  
 **마감**: 2026-07-31
 
-**준비 상황**:
-- ✅ 액션 정의서 완성 ([PHASE3_ACTION_DEFINITION.md](./PHASE3_ACTION_DEFINITION.md))
-  - 6개 액션 상세 정의 (ApproveProject, RejectProject, ChangeDeadline, RequestMoreInfo, StartPayment, CompleteProject)
-  - 권한 모델 RBAC 상세화
-  - 구현 로드맵 (4주)
+**Week 1 (2026-05-20 완료)** ✅
+- ✅ ActionDefinition 모델 구현 (app/models/action.py)
+- ✅ 6개 액션 설정 (workflow.json ai-voucher-2025 도메인)
+  - ApproveProject (조건부 권한)
+  - RejectProject
+  - ChangeDeadline (상태 유지)
+  - RequestMoreInfo (상태 유지)
+  - StartPayment
+  - CompleteProject
+- ✅ 단위 테스트 30개 (100% 통과)
+- ✅ 조건부 권한 완벽 (금액별 역할 제어)
+- ✅ Template variable 치환 (user_id, timestamp, params)
 
-- ✅ 상태 기계 & Write-back 설계서 완성 ([PHASE3_STATE_MACHINE.md](./PHASE3_STATE_MACHINE.md))
-  - PROJECT 엔티티 상태 기계 (6개 상태, 10개 전이)
-  - Write-back 메커니즘 상세 (Changelog, Queue, Worker)
-  - 저장소 구조 & 모니터링
+**Week 2 (2026-05-27 시작)** ⏳
+- [ ] API 엔드포인트 통합 테스트 (15개)
+- [ ] Swagger/OpenAPI 문서
+- [ ] 권한 검증 고급 시나리오
 
-**다음 단계 (이번주 중)**:
-- [ ] workflow.json 확장 (ai-voucher-2025 도메인)
-- [ ] ActionDefinition 모델 구현
-- [ ] 전제 조건 & 조건부 권한 로직
+**Week 3-4 계획**:
+- [ ] Changelog + WriteBackQueue (Week 3)
+- [ ] Frontend ActionButton + Audit (Week 4)
+- [ ] e2e 통합 테스트 (15개)
 
 ---
 
