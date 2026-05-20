@@ -453,5 +453,150 @@ class TestActionModel:
         assert action.requires_approval() is True
 
 
+class TestStartPaymentAction:
+    """StartPayment 액션 테스트"""
+
+    def test_start_payment_success(
+        self, workflow_service, tenant_context, sample_project
+    ):
+        """지급 시작 → 성공"""
+        sample_project["properties"]["status"] = "Approved"
+        sample_project["properties"]["payment_schedule"] = "2026-06-01"
+        sample_project["properties"]["bank_account_verified"] = True
+
+        result = workflow_service.execute(
+            ctx=tenant_context,
+            doc_id="ai-voucher-2025",
+            entity_id=sample_project["id"],
+            action_name="start_payment",
+            domain_id="ai-voucher-2025"
+        )
+
+        assert result["action"] == "start_payment"
+        assert result["from_status"] == "Approved"
+        assert result["to_status"] == "InProgress"
+
+    def test_start_payment_no_schedule(
+        self, workflow_service, tenant_context, sample_project
+    ):
+        """지급 일정 미설정 상태에서 지급 시작 시도 → 실패"""
+        sample_project["properties"]["status"] = "Approved"
+        sample_project["properties"]["payment_schedule"] = None
+
+        with pytest.raises(ValueError, match="지급 일정"):
+            workflow_service.execute(
+                ctx=tenant_context,
+                doc_id="ai-voucher-2025",
+                entity_id=sample_project["id"],
+                action_name="start_payment",
+                domain_id="ai-voucher-2025"
+            )
+
+    def test_start_payment_unverified_account(
+        self, workflow_service, tenant_context, sample_project
+    ):
+        """계좌 미검증 상태에서 지급 시작 시도 → 실패"""
+        sample_project["properties"]["status"] = "Approved"
+        sample_project["properties"]["payment_schedule"] = "2026-06-01"
+        sample_project["properties"]["bank_account_verified"] = False
+
+        with pytest.raises(ValueError, match="계좌"):
+            workflow_service.execute(
+                ctx=tenant_context,
+                doc_id="ai-voucher-2025",
+                entity_id=sample_project["id"],
+                action_name="start_payment",
+                domain_id="ai-voucher-2025"
+            )
+
+    def test_start_payment_wrong_status(
+        self, workflow_service, tenant_context, sample_project
+    ):
+        """UnderReview 상태에서 지급 시작 시도 → 실패"""
+        sample_project["properties"]["status"] = "UnderReview"
+
+        with pytest.raises(ValueError, match="현재 상태"):
+            workflow_service.execute(
+                ctx=tenant_context,
+                doc_id="ai-voucher-2025",
+                entity_id=sample_project["id"],
+                action_name="start_payment",
+                domain_id="ai-voucher-2025"
+            )
+
+
+class TestCompleteProjectAction:
+    """CompleteProject 액션 테스트"""
+
+    def test_complete_project_success(
+        self, workflow_service, tenant_context, sample_project
+    ):
+        """과제 완료 → 성공"""
+        sample_project["properties"]["status"] = "InProgress"
+        sample_project["properties"]["payment_completed"] = True
+        sample_project["properties"]["final_report_submitted"] = True
+
+        result = workflow_service.execute(
+            ctx=tenant_context,
+            doc_id="ai-voucher-2025",
+            entity_id=sample_project["id"],
+            action_name="complete_project",
+            domain_id="ai-voucher-2025"
+        )
+
+        assert result["action"] == "complete_project"
+        assert result["from_status"] == "InProgress"
+        assert result["to_status"] == "Completed"
+
+    def test_complete_project_payment_not_completed(
+        self, workflow_service, tenant_context, sample_project
+    ):
+        """지급 미완료 상태에서 완료 시도 → 실패"""
+        sample_project["properties"]["status"] = "InProgress"
+        sample_project["properties"]["payment_completed"] = False
+        sample_project["properties"]["final_report_submitted"] = True
+
+        with pytest.raises(ValueError, match="지급"):
+            workflow_service.execute(
+                ctx=tenant_context,
+                doc_id="ai-voucher-2025",
+                entity_id=sample_project["id"],
+                action_name="complete_project",
+                domain_id="ai-voucher-2025"
+            )
+
+    def test_complete_project_no_final_report(
+        self, workflow_service, tenant_context, sample_project
+    ):
+        """최종 보고서 미제출 상태에서 완료 시도 → 실패"""
+        sample_project["properties"]["status"] = "InProgress"
+        sample_project["properties"]["payment_completed"] = True
+        sample_project["properties"]["final_report_submitted"] = False
+
+        with pytest.raises(ValueError, match="보고서"):
+            workflow_service.execute(
+                ctx=tenant_context,
+                doc_id="ai-voucher-2025",
+                entity_id=sample_project["id"],
+                action_name="complete_project",
+                domain_id="ai-voucher-2025"
+            )
+
+    def test_complete_project_wrong_status(
+        self, workflow_service, tenant_context, sample_project
+    ):
+        """Approved 상태에서 완료 시도 → 실패"""
+        sample_project["properties"]["status"] = "Approved"
+
+        with pytest.raises(ValueError, match="현재 상태"):
+            workflow_service.execute(
+                ctx=tenant_context,
+                doc_id="ai-voucher-2025",
+                entity_id=sample_project["id"],
+                action_name="complete_project",
+                domain_id="ai-voucher-2025"
+            )
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "--tb=short"])

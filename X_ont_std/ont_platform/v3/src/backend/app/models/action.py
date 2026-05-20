@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class ConditionOperator(str, Enum):
@@ -47,6 +47,8 @@ class ConditionalPermission(BaseModel):
 
 class ActionDefinition(BaseModel):
     """액션 정의 — workflow.json에서 로드됨"""
+    model_config = ConfigDict(use_enum_values=True)
+
     id: str                                      # approve_project
     display_name: str                           # 과제 승인
     entity_type: str                            # PROJECT
@@ -58,9 +60,6 @@ class ActionDefinition(BaseModel):
     property_changes: list[PropertyChange] = []
     required_fields: list[str] = []
     side_effects: list[SideEffect] = []
-
-    class Config:
-        use_enum_values = True
 
     def __init__(self, **data):
         """workflow.json 딕셔너리에서 생성"""
