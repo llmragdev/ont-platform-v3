@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
+import { ActionButton } from "./ActionButton";
 import type { WorkflowQueueRow } from "@/types/api";
 
 function statusBadgeClass(status: string) {
@@ -9,16 +10,8 @@ function statusBadgeClass(status: string) {
   return "badge-medium";
 }
 
-function actionClass(action: string) {
-  if (action.startsWith("Approve") || action.startsWith("Fulfill") || action.startsWith("Close")) return "btn-ok";
-  if (action.startsWith("Reject")) return "btn-danger";
-  if (action.startsWith("Hold")) return "btn-warn";
-  return "btn-ghost";
-}
-
 export function Workflow() {
   const [queue, setQueue] = useState<WorkflowQueueRow[]>([]);
-  const [busyKey, setBusyKey] = useState<string | null>(null);
   const [toast, setToast] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,19 +26,13 @@ export function Workflow() {
 
   useEffect(() => { void load(); }, []);
 
-  async function execute(row: WorkflowQueueRow, action: string) {
-    const key = `${row.entity_id}:${action}`;
-    setBusyKey(key);
-    setToast(null);
-    try {
-      const res = await api.workflowExecute(row.doc_id, row.entity_id, action);
-      setToast({ kind: "ok", text: `${row.name} → ${res.to_status}` });
-      await load();
-    } catch (err) {
-      setToast({ kind: "err", text: err instanceof Error ? err.message : String(err) });
-    } finally {
-      setBusyKey(null);
-    }
+  function handleActionSuccess(row: WorkflowQueueRow, result: any) {
+    setToast({ kind: "ok", text: `${row.name} → ${result.to_status}` });
+    void load();
+  }
+
+  function handleActionError(error: string) {
+    setToast({ kind: "err", text: error });
   }
 
   return (
@@ -85,15 +72,22 @@ export function Workflow() {
                   <td>
                     <div className="flex flex-wrap gap-1">
                       {row.available_actions.map((action) => {
-                        const key = `${row.entity_id}:${action}`;
+                        let variant: "ok" | "warn" | "danger" | "ghost" = "ghost";
+                        if (action.startsWith("Approve") || action.startsWith("Fulfill") || action.startsWith("Close")) variant = "ok";
+                        else if (action.startsWith("Reject")) variant = "danger";
+                        else if (action.startsWith("Hold")) variant = "warn";
+
                         return (
-                          <button key={key} type="button"
-                            className={`btn ${actionClass(action)} text-xs py-1 px-2`}
-                            disabled={busyKey === key}
-                            onClick={() => void execute(row, action)}
-                          >
-                            {busyKey === key ? "…" : action}
-                          </button>
+                          <ActionButton
+                            key={`${row.entity_id}:${action}`}
+                            docId={row.doc_id}
+                            entityId={row.entity_id}
+                            action={action}
+                            variant={variant}
+                            size="sm"
+                            onSuccess={(result) => handleActionSuccess(row, result)}
+                            onError={handleActionError}
+                          />
                         );
                       })}
                     </div>
