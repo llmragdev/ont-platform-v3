@@ -177,11 +177,20 @@ Frontend: ActionButton + Audit 대시보드
 
 ---
 
-## 🟢 6~7월 (Phase 3 완료)
+## 🟢 7월 말 ~ 9월 (Phase 3 완료 후)
 
-- Write-back 동기화 (외부 시스템 반영)
-- 프론트엔드 Action UI
-- Decision Record System
+### Phase 4: 온톨로지 데이터 모델링 다양성 지원
+
+**기간**: 2026-07-21 ~ 2026-09-30 (10주)  
+**근거**: 2026-05-20 사용자 이슈 제기 ("온톨로지 다양한 스타일 지원 필요")
+
+**주요 목표**:
+- 5가지 온톨로지 스타일 지원 (Document, RDF Triple, Property Graph, Semantic Web, Hierarchical)
+- 메타데이터 + 감시 시스템 (버전, 감사, 혈통)
+- 외부 온톨로지 통합 (DBpedia, Wikidata)
+- SPARQL 엔드포인트
+
+**[→ PHASE4_ONTOLOGY_EXTENSIBILITY.md 에서 상세 확인](./ont_platform/v3/PHASE4_ONTOLOGY_EXTENSIBILITY.md)**
 
 ---
 
