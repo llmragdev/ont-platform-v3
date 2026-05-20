@@ -1,0 +1,12 @@
+{
+  "doc_id": "test-doc",
+  "entities": [
+    {
+      "type": "PERSON",
+      "name": "X",
+      "properties": {},
+      "id": "E5A0EA2"
+    }
+  ],
+  "relationships": []
+}

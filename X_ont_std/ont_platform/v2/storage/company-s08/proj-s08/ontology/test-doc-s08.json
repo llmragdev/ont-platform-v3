@@ -1,0 +1,420 @@
+{
+  "doc_id": "test-doc-s08",
+  "entities": [
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E5564BE"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EADD0BE"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E869D8D"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E76249F"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EDCEE5F"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EFBA8C6"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E0F4AE0"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EDF9BE4"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E9D4F24"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E55A0A1"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E4AFCA6"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E9DE4DE"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EC66366"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E170EC0"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EA7396C"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E57FD5E"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E7E42E7"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EBF7668"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EF413C2"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "ED9C2A4"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E69E891"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E6BCC29"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E8EEC9F"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E25D958"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E36EB12"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E3AFA3C"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E6F3EAF"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E4BDDE5"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EE14F7A"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EC9BE3D"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E52C0C6"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E1407E7"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E773397"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EA5D753"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EA04F09"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EF8E778"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EC636D1"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E3753D7"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EEB4701"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EAB43BA"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E5987D9"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E2870A9"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E3F4C8F"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "EB250A9"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E5DAA43"
+    },
+    {
+      "name": "Antigravity Inc",
+      "type": "ORGANIZATION",
+      "properties": {
+        "location": "Seoul",
+        "status": "active"
+      },
+      "id": "E34A395"
+    }
+  ],
+  "relationships": []
+}

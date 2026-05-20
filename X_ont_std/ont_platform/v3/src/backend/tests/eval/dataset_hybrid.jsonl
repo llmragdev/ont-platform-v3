@@ -1,0 +1,5 @@
+{"query": "하이브리드로 Submitted 상태인 Order의 특징을 설명해줘", "expected_intent": "hybrid", "expected_answer_contains": []}
+{"query": "Approved된 주문들의 공통점은 무엇인가요?", "expected_intent": "hybrid", "expected_answer_contains": []}
+{"query": "status: Fulfilled인 Order 중에서 금액이 큰 것들의 특성은?", "expected_intent": "hybrid", "expected_answer_contains": []}
+{"query": "hybrid로 PRODUCT 타입 항목을 찾고 설명해줘", "expected_intent": "hybrid", "expected_answer_contains": []}
+{"query": "Review 상태 주문들이 생긴 이유를 분석해줘", "expected_intent": "hybrid", "expected_answer_contains": []}

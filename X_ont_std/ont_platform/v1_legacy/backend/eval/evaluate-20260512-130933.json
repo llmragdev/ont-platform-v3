@@ -1,0 +1,261 @@
+{
+  "generated_at": "20260512-130933",
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0,
+    "pass_rate": 1.0,
+    "mean_precision_at_3": 1.0,
+    "latency_ms_p50": 0,
+    "latency_ms_p95": 1,
+    "latency_ms_median": 0,
+    "gemini_calls": 0,
+    "rule_based_calls": 7,
+    "fallback_warning_count": 0,
+    "gemini_success_rate": 0.0
+  },
+  "results": [
+    {
+      "case_id": "C01-approve-low-risk",
+      "question": "O001 주문 승인해도 될까?",
+      "user": "analyst",
+      "passed": true,
+      "detection_ok": true,
+      "precision_at_3": 1.0,
+      "action_match": true,
+      "error_match": null,
+      "latency_ms": 1,
+      "llm_provider": "rule-based",
+      "warning": null,
+      "detected_objects": [
+        "O001"
+      ],
+      "evidence_doc_ids": [
+        "D002",
+        "D003",
+        "D001"
+      ],
+      "available_actions": [
+        "ApproveOrder",
+        "RejectOrder",
+        "HoldOrder"
+      ],
+      "error_code": null,
+      "notes": []
+    },
+    {
+      "case_id": "C02-high-risk-blocked",
+      "question": "O003 주문 승인 가능한가요?",
+      "user": "analyst",
+      "passed": true,
+      "detection_ok": true,
+      "precision_at_3": 1.0,
+      "action_match": true,
+      "error_match": null,
+      "latency_ms": 0,
+      "llm_provider": "rule-based",
+      "warning": null,
+      "detected_objects": [
+        "O003"
+      ],
+      "evidence_doc_ids": [
+        "D003",
+        "D002",
+        "D001"
+      ],
+      "available_actions": [
+        "RejectOrder",
+        "HoldOrder"
+      ],
+      "error_code": null,
+      "notes": []
+    },
+    {
+      "case_id": "C03-amount-threshold-analyst-blocked",
+      "question": "O002 주문 8200원짜리 승인해도 될까?",
+      "user": "analyst",
+      "passed": true,
+      "detection_ok": null,
+      "precision_at_3": null,
+      "action_match": null,
+      "error_match": true,
+      "latency_ms": null,
+      "llm_provider": null,
+      "warning": null,
+      "detected_objects": [],
+      "evidence_doc_ids": [],
+      "available_actions": [],
+      "error_code": "FORBIDDEN",
+      "notes": []
+    },
+    {
+      "case_id": "C04-amount-threshold-finance-allowed",
+      "question": "O002 주문 승인 가능한가?",
+      "user": "finance",
+      "passed": true,
+      "detection_ok": true,
+      "precision_at_3": 1.0,
+      "action_match": true,
+      "error_match": null,
+      "latency_ms": 1,
+      "llm_provider": "rule-based",
+      "warning": null,
+      "detected_objects": [
+        "O002"
+      ],
+      "evidence_doc_ids": [
+        "D002",
+        "D003",
+        "D001"
+      ],
+      "available_actions": [
+        "ApproveOrder",
+        "RejectOrder",
+        "HoldOrder"
+      ],
+      "error_code": null,
+      "notes": []
+    },
+    {
+      "case_id": "C05-relation-mismatch",
+      "question": "C001 고객의 O002 주문 확인해줘",
+      "user": "analyst",
+      "passed": true,
+      "detection_ok": null,
+      "precision_at_3": null,
+      "action_match": null,
+      "error_match": true,
+      "latency_ms": null,
+      "llm_provider": null,
+      "warning": null,
+      "detected_objects": [],
+      "evidence_doc_ids": [],
+      "available_actions": [],
+      "error_code": "RELATION_MISMATCH",
+      "notes": []
+    },
+    {
+      "case_id": "C06-object-not-found",
+      "question": "O999 주문 정보 알려줘",
+      "user": "analyst",
+      "passed": true,
+      "detection_ok": null,
+      "precision_at_3": null,
+      "action_match": null,
+      "error_match": true,
+      "latency_ms": null,
+      "llm_provider": null,
+      "warning": null,
+      "detected_objects": [],
+      "evidence_doc_ids": [],
+      "available_actions": [],
+      "error_code": "OBJECT_NOT_FOUND",
+      "notes": []
+    },
+    {
+      "case_id": "C07-enterprise-contract",
+      "question": "O001 엔터프라이즈 고객 계약 검증은 어떻게 되나?",
+      "user": "analyst",
+      "passed": true,
+      "detection_ok": true,
+      "precision_at_3": 1.0,
+      "action_match": null,
+      "error_match": null,
+      "latency_ms": 0,
+      "llm_provider": "rule-based",
+      "warning": null,
+      "detected_objects": [
+        "O001"
+      ],
+      "evidence_doc_ids": [
+        "D002",
+        "D003",
+        "D001"
+      ],
+      "available_actions": [
+        "ApproveOrder",
+        "RejectOrder",
+        "HoldOrder"
+      ],
+      "error_code": null,
+      "notes": []
+    },
+    {
+      "case_id": "C08-risk-review",
+      "question": "O001 주문 리스크 등급에 따른 검토 절차는?",
+      "user": "analyst",
+      "passed": true,
+      "detection_ok": true,
+      "precision_at_3": 1.0,
+      "action_match": null,
+      "error_match": null,
+      "latency_ms": 0,
+      "llm_provider": "rule-based",
+      "warning": null,
+      "detected_objects": [
+        "O001"
+      ],
+      "evidence_doc_ids": [
+        "D002",
+        "D003",
+        "D001"
+      ],
+      "available_actions": [
+        "ApproveOrder",
+        "RejectOrder",
+        "HoldOrder"
+      ],
+      "error_code": null,
+      "notes": []
+    },
+    {
+      "case_id": "C09-finance-only-doc",
+      "question": "O003 custom pricing 정책 적용되나?",
+      "user": "finance",
+      "passed": true,
+      "detection_ok": true,
+      "precision_at_3": 1.0,
+      "action_match": null,
+      "error_match": null,
+      "latency_ms": 0,
+      "llm_provider": "rule-based",
+      "warning": null,
+      "detected_objects": [
+        "O003"
+      ],
+      "evidence_doc_ids": [
+        "D002",
+        "D003",
+        "D004"
+      ],
+      "available_actions": [
+        "RejectOrder",
+        "HoldOrder"
+      ],
+      "error_code": null,
+      "notes": []
+    },
+    {
+      "case_id": "C10-viewer-doc-filter",
+      "question": "O001 주문 정책 확인",
+      "user": "viewer",
+      "passed": true,
+      "detection_ok": true,
+      "precision_at_3": null,
+      "action_match": null,
+      "error_match": null,
+      "latency_ms": 0,
+      "llm_provider": "rule-based",
+      "warning": null,
+      "detected_objects": [
+        "O001"
+      ],
+      "evidence_doc_ids": [
+        "D001"
+      ],
+      "available_actions": [],
+      "error_code": null,
+      "notes": []
+    }
+  ]
+}

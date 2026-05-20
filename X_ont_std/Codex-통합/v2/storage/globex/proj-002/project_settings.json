@@ -1,0 +1,13 @@
+{
+  "display_name": "Globex Operations",
+  "default_language": "ko",
+  "rag": {
+    "top_k": 3,
+    "chunk_size": 1000,
+    "chunk_overlap": 150
+  },
+  "hybrid_query": {
+    "require_citations": true,
+    "allow_fallback_planner": false
+  }
+}

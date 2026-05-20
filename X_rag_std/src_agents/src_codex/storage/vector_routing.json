@@ -1,0 +1,41 @@
+{
+  "routing_rules": [
+    {
+      "vector_db_id": "vdb_policy_01",
+      "target_category_mid": [
+        "규정",
+        "지침",
+        "매뉴얼",
+        "policy"
+      ],
+      "engine_type": "local_json",
+      "connection": {
+        "collection_name": "policy_docs_dim64"
+      }
+    },
+    {
+      "vector_db_id": "vdb_tech_01",
+      "target_category_mid": [
+        "IT",
+        "개발표준",
+        "아키텍처",
+        "tech"
+      ],
+      "engine_type": "local_json",
+      "connection": {
+        "collection_name": "tech_docs_dim64"
+      }
+    },
+    {
+      "vector_db_id": "vdb_default_01",
+      "target_category_mid": [
+        "default",
+        "일반"
+      ],
+      "engine_type": "local_json",
+      "connection": {
+        "collection_name": "default_docs_dim64"
+      }
+    }
+  ]
+}

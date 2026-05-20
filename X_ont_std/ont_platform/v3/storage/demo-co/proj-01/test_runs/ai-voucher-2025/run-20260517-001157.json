@@ -1,0 +1,672 @@
+{
+  "run_id": "run-20260517-001157",
+  "project": "ai-voucher-2025",
+  "timestamp": "2026-05-17T00:11:57.815175+00:00",
+  "summary": {
+    "total": 25,
+    "passed": 1,
+    "failed": 24,
+    "pass_rate": 0.04,
+    "duration_sec": 0.3,
+    "by_source": {
+      "ontology": {
+        "total": 7,
+        "passed": 0
+      },
+      "vector": {
+        "total": 9,
+        "passed": 0
+      },
+      "hybrid": {
+        "total": 7,
+        "passed": 0
+      },
+      "no_evidence": {
+        "total": 2,
+        "passed": 1
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "Q001",
+      "tags": [
+        "ontology",
+        "budget"
+      ],
+      "question": "2025년 AI바우처 총 예산은 얼마야?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "276억",
+        "276,000"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 116,
+      "note": ""
+    },
+    {
+      "id": "Q002",
+      "tags": [
+        "ontology",
+        "quota"
+      ],
+      "question": "2025년 총 과제수는 몇 개야?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "130개",
+        "130"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 6,
+      "note": ""
+    },
+    {
+      "id": "Q003",
+      "tags": [
+        "ontology",
+        "division"
+      ],
+      "question": "글로벌 분과의 2025년 과제수는?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "30개",
+        "30"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 5,
+      "note": ""
+    },
+    {
+      "id": "Q004",
+      "tags": [
+        "ontology",
+        "organization"
+      ],
+      "question": "AI반도체 분과 CSP 컨소시엄 구성 기업을 모두 나열해줘",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "리벨리온",
+        "퓨리오사",
+        "KT클라우드",
+        "NHN"
+      ],
+      "match_mode": "all",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 12,
+      "note": ""
+    },
+    {
+      "id": "Q005",
+      "tags": [
+        "ontology",
+        "organization"
+      ],
+      "question": "이 사업의 주관 기관은 어디야?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "NIPA",
+        "정보통신산업진흥원",
+        "과학기술정보통신부"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 8,
+      "note": ""
+    },
+    {
+      "id": "Q006",
+      "tags": [
+        "ontology",
+        "quota"
+      ],
+      "question": "공급기업이 연간 신청할 수 있는 최대 과제수는?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "2개",
+        "분과별 1개"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 8,
+      "note": ""
+    },
+    {
+      "id": "Q007",
+      "tags": [
+        "ontology",
+        "event"
+      ],
+      "question": "과제 수행 기간은 언제부터 언제까지야?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "5월",
+        "11월",
+        "2025"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 6,
+      "note": ""
+    },
+    {
+      "id": "Q008",
+      "tags": [
+        "vector",
+        "procedure"
+      ],
+      "question": "공급기업 Pool 신규 등록 절차를 설명해줘",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "신청서",
+        "제출서류",
+        "AI솔루션"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 6,
+      "note": ""
+    },
+    {
+      "id": "Q009",
+      "tags": [
+        "vector",
+        "policy"
+      ],
+      "question": "데이터 관련 비용은 사업비로 쓸 수 있어?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "불가",
+        "무상제공",
+        "자체비용"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 7,
+      "note": ""
+    },
+    {
+      "id": "Q010",
+      "tags": [
+        "vector",
+        "documents"
+      ],
+      "question": "글로벌 분과에서 제출해야 하는 서류는?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "K-SURE",
+        "국제거래문서",
+        "NDA"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 6,
+      "note": ""
+    },
+    {
+      "id": "Q011",
+      "tags": [
+        "vector",
+        "matching"
+      ],
+      "question": "민간매칭에서 현금과 현물의 차이는 뭐야?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "현금",
+        "현물",
+        "인건비"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 6,
+      "note": ""
+    },
+    {
+      "id": "Q012",
+      "tags": [
+        "vector",
+        "restriction"
+      ],
+      "question": "타기관 사업과 중복 지원이 안 되는 경우는?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "KOICA",
+        "KOTRA",
+        "수출바우처"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 8,
+      "note": ""
+    },
+    {
+      "id": "Q013",
+      "tags": [
+        "vector",
+        "medical"
+      ],
+      "question": "의료 분과에서 병원이 신청할 때 제한 사항은?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "병원당",
+        "1개",
+        "진료과"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 5,
+      "note": ""
+    },
+    {
+      "id": "Q014",
+      "tags": [
+        "vector",
+        "bonus"
+      ],
+      "question": "가점을 받을 수 있는 항목들은 뭐야?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "청년기업",
+        "지역기업",
+        "클라우드"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 4,
+      "note": ""
+    },
+    {
+      "id": "Q015",
+      "tags": [
+        "vector",
+        "procedure"
+      ],
+      "question": "공급기업 변경 등록 대상은 누구야?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "기등록",
+        "변경등록",
+        "우정사항"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 10,
+      "note": ""
+    },
+    {
+      "id": "Q016",
+      "tags": [
+        "vector",
+        "hardware"
+      ],
+      "question": "소상공인 분과에서 하드웨어 지원이 가능해?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "하드웨어",
+        "소상공인"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 10,
+      "note": ""
+    },
+    {
+      "id": "Q017",
+      "tags": [
+        "hybrid",
+        "comparison"
+      ],
+      "question": "2024년과 2025년을 비교하면 예산과 과제수가 어떻게 달라졌어?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "276억",
+        "425억",
+        "130",
+        "201"
+      ],
+      "match_mode": "all",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 7,
+      "note": "비교 질문 — 2024·2025 양쪽 수치가 모두 언급되어야 통과"
+    },
+    {
+      "id": "Q018",
+      "tags": [
+        "hybrid",
+        "organization"
+      ],
+      "question": "리벨리온이 제공하는 서비스는 뭐야?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "NPU",
+        "AI반도체",
+        "컨소시엄"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 6,
+      "note": ""
+    },
+    {
+      "id": "Q019",
+      "tags": [
+        "hybrid",
+        "matching"
+      ],
+      "question": "일반 분과와 소상공인 분과의 민간매칭 방식이 어떻게 달라?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "일반",
+        "소상공인",
+        "현금",
+        "현물"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 7,
+      "note": ""
+    },
+    {
+      "id": "Q020",
+      "tags": [
+        "hybrid",
+        "organization"
+      ],
+      "question": "NIPA가 이 사업에서 하는 역할은 뭐야?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "NIPA",
+        "운영",
+        "정보통신산업진흥원"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 10,
+      "note": ""
+    },
+    {
+      "id": "Q021",
+      "tags": [
+        "hybrid",
+        "deadline"
+      ],
+      "question": "AI반도체 분과 신청 마감일은 언제고 신청 방법은?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "3월 24일",
+        "3.24",
+        "2025-03-24"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 9,
+      "note": ""
+    },
+    {
+      "id": "Q022",
+      "tags": [
+        "hybrid",
+        "eligibility"
+      ],
+      "question": "소상공인이 글로벌 분과에 신청할 수 있어?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "해외",
+        "글로벌",
+        "수요처"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 6,
+      "note": ""
+    },
+    {
+      "id": "Q023",
+      "tags": [
+        "edge",
+        "inference"
+      ],
+      "question": "이 사업에 반도체 기업이 수요기업으로 참여할 수 있어?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "중소기업",
+        "중견기업",
+        "자격"
+      ],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": false,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 7,
+      "note": ""
+    },
+    {
+      "id": "Q024",
+      "tags": [
+        "edge",
+        "out_of_scope"
+      ],
+      "question": "과제 선정 시 평가 배점 기준표는?",
+      "expected_source": "no_evidence",
+      "expected_keywords": [],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": true,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [],
+      "duration_ms": 7,
+      "note": "문서에 없는 정보 — 시스템이 '근거 없음'을 명시해야 통과"
+    },
+    {
+      "id": "Q025",
+      "tags": [
+        "edge",
+        "hallucination"
+      ],
+      "question": "2026년 AI바우처 예산은 얼마야?",
+      "expected_source": "no_evidence",
+      "expected_keywords": [],
+      "match_mode": "any",
+      "actual_source": "no_evidence",
+      "actual_answer": "[ERROR] No module named 'langchain_community'",
+      "ontology_hits": 0,
+      "vector_hits": 0,
+      "llm_used": false,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [],
+      "duration_ms": 5,
+      "note": "미래 정보 — 환각 방지 검증. LLM API 유무와 무관하게 no_evidence여야 통과"
+    }
+  ]
+}

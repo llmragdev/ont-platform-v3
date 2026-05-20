@@ -1,0 +1,14 @@
+{
+  "doc-b1d37dc9": {
+    "doc_id": "doc-b1d37dc9",
+    "filename": "Snowflake_소개서_HDC.pdf",
+    "company_id": "demo-co",
+    "project_id": "proj-01",
+    "shard_id": "default",
+    "chunk_count": 29,
+    "physical_path": "E:\\ontology_edu\\ont_platform\\storage\\demo-co\\proj-01\\uploads\\Snowflake_소개서_HDC.pdf",
+    "size_bytes": 13971681,
+    "uploaded_by": "demo-user",
+    "created_at": "2026-05-13T14:46:47.919890+00:00"
+  }
+}

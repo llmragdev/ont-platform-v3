@@ -1,0 +1,26 @@
+{
+  "admin": {
+    "can_edit_diagram": true,
+    "can_edit_ontology": true,
+    "can_upload_doc": true,
+    "can_delete_doc": true,
+    "can_manage_users": true,
+    "can_view_audit_log": true
+  },
+  "editor": {
+    "can_edit_diagram": true,
+    "can_edit_ontology": true,
+    "can_upload_doc": true,
+    "can_delete_doc": false,
+    "can_manage_users": false,
+    "can_view_audit_log": false
+  },
+  "viewer": {
+    "can_edit_diagram": false,
+    "can_edit_ontology": false,
+    "can_upload_doc": false,
+    "can_delete_doc": false,
+    "can_manage_users": false,
+    "can_view_audit_log": false
+  }
+}

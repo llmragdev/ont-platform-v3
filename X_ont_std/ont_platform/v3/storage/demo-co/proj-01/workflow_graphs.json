@@ -1,0 +1,59 @@
+{
+  "graphs": {
+    "wfg-eed18361f046": {
+      "id": "wfg-eed18361f046",
+      "name": "새 워크플로우",
+      "nodes": [
+        {
+          "id": "n-ad4q46",
+          "type": "start",
+          "position": {
+            "x": 127.225633079266,
+            "y": 89.52580237382534
+          },
+          "data": {
+            "label": "Start ad4"
+          }
+        },
+        {
+          "id": "n-f8ckpi",
+          "type": "llm",
+          "position": {
+            "x": 127.5827162443448,
+            "y": 146.63518086431756
+          },
+          "data": {
+            "label": "LLM f8c",
+            "prompt": "오늘 날씨 어때? "
+          }
+        },
+        {
+          "id": "n-lmhate",
+          "type": "end",
+          "position": {
+            "x": 130.48369112261315,
+            "y": 212.22113085715245
+          },
+          "data": {
+            "label": "End lmh"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-dkqswv",
+          "source": "n-ad4q46",
+          "target": "n-f8ckpi"
+        },
+        {
+          "id": "e-q8ptag",
+          "source": "n-f8ckpi",
+          "target": "n-lmhate"
+        }
+      ],
+      "created_at": "2026-05-14T00:09:45.665709Z",
+      "updated_at": "2026-05-14T00:09:45.665709Z",
+      "created_by": "demo-user"
+    }
+  }
+}

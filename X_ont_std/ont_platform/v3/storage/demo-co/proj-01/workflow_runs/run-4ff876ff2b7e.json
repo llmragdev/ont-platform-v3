@@ -1,0 +1,61 @@
+{
+  "run_id": "run-4ff876ff2b7e",
+  "graph_id": "wfg-eed18361f046",
+  "status": "succeeded",
+  "triggered_by": "demo-user",
+  "started_at": "2026-05-14T00:09:47.515805Z",
+  "finished_at": "2026-05-14T00:09:48.451757Z",
+  "steps": [
+    {
+      "step_id": "step-b600a5e2",
+      "node_id": "n-ad4q46",
+      "node_type": "start",
+      "status": "succeeded",
+      "started_at": "2026-05-14T00:09:47.515805Z",
+      "finished_at": "2026-05-14T00:09:47.827964Z",
+      "input": {},
+      "output": {
+        "result": "[start] executed"
+      },
+      "error": null
+    },
+    {
+      "step_id": "step-5a9aa114",
+      "node_id": "n-f8ckpi",
+      "node_type": "llm",
+      "status": "succeeded",
+      "started_at": "2026-05-14T00:09:47.827964Z",
+      "finished_at": "2026-05-14T00:09:48.147697Z",
+      "input": {},
+      "output": {
+        "result": "[llm] executed"
+      },
+      "error": null
+    },
+    {
+      "step_id": "step-59ff09ba",
+      "node_id": "n-lmhate",
+      "node_type": "end",
+      "status": "succeeded",
+      "started_at": "2026-05-14T00:09:48.147697Z",
+      "finished_at": "2026-05-14T00:09:48.451757Z",
+      "input": {},
+      "output": {
+        "result": "[end] executed"
+      },
+      "error": null
+    }
+  ],
+  "user_trace": [
+    "Start ad4 완료",
+    "LLM f8c 완료",
+    "End lmh 완료"
+  ],
+  "tech_trace": [
+    "run_id=run-4ff876ff2b7e",
+    "graph_id=wfg-eed18361f046",
+    "node=n-ad4q46 type=start duration_ms=300",
+    "node=n-f8ckpi type=llm duration_ms=300",
+    "node=n-lmhate type=end duration_ms=300"
+  ]
+}

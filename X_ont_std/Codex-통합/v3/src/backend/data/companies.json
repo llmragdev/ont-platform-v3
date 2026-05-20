@@ -1,0 +1,20 @@
+[
+  {
+    "id": "default",
+    "name": "Default",
+    "status": "active",
+    "created_at": "2026-05-13T00:00:00Z"
+  },
+  {
+    "id": "acme",
+    "name": "ACME Corp",
+    "status": "active",
+    "created_at": "2026-05-13T00:00:00Z"
+  },
+  {
+    "id": "globex",
+    "name": "Globex Corp",
+    "status": "active",
+    "created_at": "2026-05-13T00:00:00Z"
+  }
+]

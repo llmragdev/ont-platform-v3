@@ -1,0 +1,49 @@
+{
+  "object_types": [
+    {
+      "id": "Customer",
+      "display_name": "고객",
+      "icon": "Users",
+      "properties": [
+        { "name": "name", "type": "string", "required": true },
+        { "name": "segment", "type": "string", "required": true },
+        { "name": "region", "type": "string", "required": true },
+        { "name": "risk_tier", "type": "string", "required": true, "sensitive": true }
+      ]
+    },
+    {
+      "id": "Order",
+      "display_name": "주문",
+      "icon": "ShoppingCart",
+      "properties": [
+        { "name": "status", "type": "string", "required": true },
+        { "name": "amount", "type": "float", "required": true },
+        { "name": "order_date", "type": "string", "required": true }
+      ]
+    },
+    {
+      "id": "Product",
+      "display_name": "제품",
+      "icon": "Package",
+      "properties": [
+        { "name": "name", "type": "string", "required": true },
+        { "name": "category", "type": "string", "required": true },
+        { "name": "unit_price", "type": "float", "required": true }
+      ]
+    }
+  ],
+  "relationship_types": [
+    {
+      "id": "PLACED_ORDER",
+      "display_name": "주문함",
+      "source_type": "Customer",
+      "target_type": "Order"
+    },
+    {
+      "id": "CONTAINS_PRODUCT",
+      "display_name": "제품 포함",
+      "source_type": "Order",
+      "target_type": "Product"
+    }
+  ]
+}

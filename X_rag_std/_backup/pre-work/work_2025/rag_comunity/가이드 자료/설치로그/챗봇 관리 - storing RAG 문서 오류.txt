@@ -1,0 +1,167 @@
+app projectRagDoc applyingProjectRagDoc start==========
+project_biz start==========
+project_biz start==========param:  <class 'project_schema.ProjectSearchParam'>
+2024-03-13 14:49:11,174 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2024-03-13 14:49:11,174 INFO sqlalchemy.engine.Engine [raw sql] {}
+2024-03-13 14:49:11,175 INFO sqlalchemy.engine.Engine SELECT @@sql_mode
+2024-03-13 14:49:11,175 INFO sqlalchemy.engine.Engine [raw sql] {}
+2024-03-13 14:49:11,175 INFO sqlalchemy.engine.Engine SELECT @@lower_case_table_names
+2024-03-13 14:49:11,175 INFO sqlalchemy.engine.Engine [raw sql] {}
+2024-03-13 14:49:11,176 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-03-13 14:49:11,186 INFO sqlalchemy.engine.Engine SELECT count(*) AS count_1 
+FROM (SELECT wc_project.project_id AS wc_project_project_id, wc_project.company_id AS wc_project_company_id, wc_project.project_code AS wc_project_project_code, wc_project.project_name AS wc_project_project_name, wc_project.project_detail AS wc_project_project_detail, wc_project.bot_type_cd AS wc_project_bot_type_cd, wc_project.project_type_cd AS wc_project_project_type_cd, wc_project.llm_type_cd AS wc_project_llm_type_cd, wc_project.llm_nm_cd AS wc_project_llm_nm_cd, wc_project.src_type_cd AS wc_project_src_type_cd, wc_project.src_file_path AS wc_project_src_file_path, wc_project.answer_image_path AS wc_project_answer_image_path, wc_project.in_service_yn AS wc_project_in_service_yn, wc_project.service_start_dt AS wc_project_service_start_dt, wc_project.service_expire_dt AS wc_project_service_expire_dt, wc_project.order_sn AS wc_project_order_sn, wc_project.order_field_cd_project AS wc_project_order_field_cd_project, wc_project.order_field_cd_project_atch_doc AS wc_project_order_field_cd_project_atch_doc, wc_project.order_field_cd_category AS wc_project_order_field_cd_category, wc_project.order_field_cd_intent AS wc_project_order_field_cd_intent, wc_project.del_yn AS wc_project_del_yn, wc_project.create_id AS wc_project_create_id, wc_project.create_dt AS wc_project_create_dt, wc_project.modify_id AS wc_project_modify_id, wc_project.modify_dt AS wc_project_modify_dt, wc_project.delete_id AS wc_project_delete_id, wc_project.delete_dt AS wc_project_delete_dt 
+FROM wc_project) AS anon_1
+2024-03-13 14:49:11,186 INFO sqlalchemy.engine.Engine [generated in 0.00019s] {}
+project_biz get_project_list project_cnt: 10
+project_biz param.project_id: 100
+2024-03-13 14:49:11,189 INFO sqlalchemy.engine.Engine SELECT wc_project.project_id AS wc_project_project_id, wc_project.company_id AS wc_project_company_id, wc_project.project_code AS wc_project_project_code, wc_project.project_name AS wc_project_project_name, wc_project.project_detail AS wc_project_project_detail, wc_project.bot_type_cd AS wc_project_bot_type_cd, wc_project.project_type_cd AS wc_project_project_type_cd, wc_project.llm_type_cd AS wc_project_llm_type_cd, wc_project.llm_nm_cd AS wc_project_llm_nm_cd, wc_project.src_type_cd AS wc_project_src_type_cd, wc_project.src_file_path AS wc_project_src_file_path, wc_project.answer_image_path AS wc_project_answer_image_path, wc_project.in_service_yn AS wc_project_in_service_yn, wc_project.service_start_dt AS wc_project_service_start_dt, wc_project.service_expire_dt AS wc_project_service_expire_dt, wc_project.order_sn AS wc_project_order_sn, wc_project.order_field_cd_project AS wc_project_order_field_cd_project, wc_project.order_field_cd_project_atch_doc AS wc_project_order_field_cd_project_atch_doc, wc_project.order_field_cd_category AS wc_project_order_field_cd_category, wc_project.order_field_cd_intent AS wc_project_order_field_cd_intent, wc_project.del_yn AS wc_project_del_yn, wc_project.create_id AS wc_project_create_id, wc_project.create_dt AS wc_project_create_dt, wc_project.modify_id AS wc_project_modify_id, wc_project.modify_dt AS wc_project_modify_dt, wc_project.delete_id AS wc_project_delete_id, wc_project.delete_dt AS wc_project_delete_dt 
+FROM wc_project 
+WHERE wc_project.company_id = %(company_id_1)s
+2024-03-13 14:49:11,189 INFO sqlalchemy.engine.Engine [generated in 0.00015s] {'company_id_1': 'item3'}
+project_biz get_project_list ========================
+project_biz get_project_list len(project_list) total_cnt : 1
+project_biz get_project_list len(project_list) param.project_id : 100
+project_biz if sProject_id: 100
+2024-03-13 14:49:11,193 INFO sqlalchemy.engine.Engine SELECT wc_project.project_id AS wc_project_project_id, wc_project.company_id AS wc_project_company_id, wc_project.project_code AS wc_project_project_code, wc_project.project_name AS wc_project_project_name, wc_project.project_detail AS wc_project_project_detail, wc_project.bot_type_cd AS wc_project_bot_type_cd, wc_project.project_type_cd AS wc_project_project_type_cd, wc_project.llm_type_cd AS wc_project_llm_type_cd, wc_project.llm_nm_cd AS wc_project_llm_nm_cd, wc_project.src_type_cd AS wc_project_src_type_cd, wc_project.src_file_path AS wc_project_src_file_path, wc_project.answer_image_path AS wc_project_answer_image_path, wc_project.in_service_yn AS wc_project_in_service_yn, wc_project.service_start_dt AS wc_project_service_start_dt, wc_project.service_expire_dt AS wc_project_service_expire_dt, wc_project.order_sn AS wc_project_order_sn, wc_project.order_field_cd_project AS wc_project_order_field_cd_project, wc_project.order_field_cd_project_atch_doc AS wc_project_order_field_cd_project_atch_doc, wc_project.order_field_cd_category AS wc_project_order_field_cd_category, wc_project.order_field_cd_intent AS wc_project_order_field_cd_intent, wc_project.del_yn AS wc_project_del_yn, wc_project.create_id AS wc_project_create_id, wc_project.create_dt AS wc_project_create_dt, wc_project.modify_id AS wc_project_modify_id, wc_project.modify_dt AS wc_project_modify_dt, wc_project.delete_id AS wc_project_delete_id, wc_project.delete_dt AS wc_project_delete_dt 
+FROM wc_project 
+WHERE wc_project.company_id = %(company_id_1)s AND wc_project.project_id = %(project_id_1)s ORDER BY wc_project.project_name ASC 
+ LIMIT %(param_1)s, %(param_2)s
+2024-03-13 14:49:11,193 INFO sqlalchemy.engine.Engine [generated in 0.00017s] {'company_id_1': 'item3', 'project_id_1': 100, 'param_1': 0, 'param_2': 10}
+====================end of project_biz get_project_list
+================ applyingprojectRagDoc p_total_cnt:  1
+================ applyingprojectRagDoc len : _project_list:  1
+========applyingprojectRagDoc _project_list.project_id:  100
+========applyingprojectRagDoc _project_list.company_id:  item3
+========applyingprojectRagDoc _project_list.llm_nm_cd:  101
+====================projectRagDoc_biz get_projectRagDoc_list start========param <class 'projectRagDoc_schema.ProjectRagDocSrchParam'>
+====================projectRagDoc_biz get_projectRagDoc_list start param.project_id: 100
+2024-03-13 14:49:11,206 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2024-03-13 14:49:11,206 INFO sqlalchemy.engine.Engine [raw sql] {}
+2024-03-13 14:49:11,206 INFO sqlalchemy.engine.Engine SELECT @@sql_mode
+2024-03-13 14:49:11,207 INFO sqlalchemy.engine.Engine [raw sql] {}
+2024-03-13 14:49:11,207 INFO sqlalchemy.engine.Engine SELECT @@lower_case_table_names
+2024-03-13 14:49:11,207 INFO sqlalchemy.engine.Engine [raw sql] {}
+2024-03-13 14:49:11,207 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-03-13 14:49:11,212 INFO sqlalchemy.engine.Engine SELECT count(*) AS count_1 
+FROM (SELECT wc_project_rag_doc.project_rag_doc_id AS wc_project_rag_doc_project_rag_doc_id, wc_project_rag_doc.company_id AS wc_project_rag_doc_company_id, wc_project_rag_doc.project_id AS wc_project_rag_doc_project_id, wc_project_rag_doc.doc_type_cd AS wc_project_rag_doc_doc_type_cd, wc_project_rag_doc.src_url_addr AS wc_project_rag_doc_src_url_addr, wc_project_rag_doc.src_file_name AS wc_project_rag_doc_src_file_name, wc_project_rag_doc.src_real_file_name AS wc_project_rag_doc_src_real_file_name, wc_project_rag_doc.applying_yn AS wc_project_rag_doc_applying_yn, wc_project_rag_doc.last_applying_dt AS wc_project_rag_doc_last_applying_dt, wc_project_rag_doc.order_sn AS wc_project_rag_doc_order_sn, wc_project_rag_doc.create_id AS wc_project_rag_doc_create_id, wc_project_rag_doc.create_dt AS wc_project_rag_doc_create_dt, wc_project_rag_doc.modify_id AS wc_project_rag_doc_modify_id, wc_project_rag_doc.modify_dt AS wc_project_rag_doc_modify_dt 
+FROM wc_project_rag_doc) AS anon_1
+2024-03-13 14:49:11,212 INFO sqlalchemy.engine.Engine [generated in 0.00015s] {}
+projectRagDoc_biz get_projectRagDoc_list project_cnt:  15
+projectRagDoc_biz get_projectRagDoc_list int_page_size:  10
+projectRagDoc_biz get_projectRagDoc_list skip:  0
+2024-03-13 14:49:11,216 INFO sqlalchemy.engine.Engine SELECT wc_project_rag_doc.project_rag_doc_id AS wc_project_rag_doc_project_rag_doc_id, wc_project_rag_doc.company_id AS wc_project_rag_doc_company_id, wc_project_rag_doc.project_id AS wc_project_rag_doc_project_id, wc_project_rag_doc.doc_type_cd AS wc_project_rag_doc_doc_type_cd, wc_project_rag_doc.src_url_addr AS wc_project_rag_doc_src_url_addr, wc_project_rag_doc.src_file_name AS wc_project_rag_doc_src_file_name, wc_project_rag_doc.src_real_file_name AS wc_project_rag_doc_src_real_file_name, wc_project_rag_doc.applying_yn AS wc_project_rag_doc_applying_yn, wc_project_rag_doc.last_applying_dt AS wc_project_rag_doc_last_applying_dt, wc_project_rag_doc.order_sn AS wc_project_rag_doc_order_sn, wc_project_rag_doc.create_id AS wc_project_rag_doc_create_id, wc_project_rag_doc.create_dt AS wc_project_rag_doc_create_dt, wc_project_rag_doc.modify_id AS wc_project_rag_doc_modify_id, wc_project_rag_doc.modify_dt AS wc_project_rag_doc_modify_dt, wc_project_rag_doc.project_rag_doc_id AS wc_project_rag_doc_project_rag_doc_id__1, wc_project_rag_doc.company_id AS wc_project_rag_doc_company_id__1, wc_project.project_code AS wc_project_project_code, wc_project_rag_doc.project_id AS wc_project_rag_doc_project_id__1, wc_project_rag_doc.doc_type_cd AS wc_project_rag_doc_doc_type_cd__1, wc_project_rag_doc.src_url_addr AS wc_project_rag_doc_src_url_addr__1, wc_project_rag_doc.src_file_name AS wc_project_rag_doc_src_file_name__1, wc_project_rag_doc.src_real_file_name AS wc_project_rag_doc_src_real_file_name__1, wc_project_rag_doc.applying_yn AS wc_project_rag_doc_applying_yn__1, wc_project_rag_doc.last_applying_dt AS wc_project_rag_doc_last_applying_dt__1 
+FROM wc_project_rag_doc LEFT OUTER JOIN wc_project ON wc_project_rag_doc.project_id = wc_project.project_id 
+WHERE wc_project_rag_doc.company_id = %(company_id_1)s AND wc_project_rag_doc.project_id = %(project_id_1)s AND wc_project_rag_doc.project_rag_doc_id = %(project_rag_doc_id_1)s ORDER BY wc_project_rag_doc.order_sn DESC 
+ LIMIT %(param_1)s, %(param_2)s
+2024-03-13 14:49:11,216 INFO sqlalchemy.engine.Engine [generated in 0.00018s] {'company_id_1': 'item3', 'project_id_1': 100, 'project_rag_doc_id_1': 83, 'param_1': 0, 'param_2': 10}
+projectRagDoc_biz get_projectRagDoc_list result_list:  [(<chatbot_models.Project_rag_doc object at 0x7fa7396ee070>, 83, 'item3', '000003', 100, '02', 'https://www.nipa.kr/home/2-2/15197', None, None, 'N', None)]
+====================projectRagDoc_biz get_projectRagDoc_list end==========
+========applyingprojectRagDoc total_cnt :  15
+========applyingprojectRagDoc _projectRagDoc_list :  [(<chatbot_models.Project_rag_doc object at 0x7fa7396ee070>, 83, 'item3', '000003', 100, '02', 'https://www.nipa.kr/home/2-2/15197', None, None, 'N', None)]
+========resultRagDoc :  (<chatbot_models.Project_rag_doc object at 0x7fa7396ee070>, 83, 'item3', '000003', 100, '02', 'https://www.nipa.kr/home/2-2/15197', None, None, 'N', None)
+========paramRagDoc :  project_rag_doc_id=83 company_id=None project_id=None doc_type_cd=None src_url_addr='https://www.nipa.kr/home/2-2/15197' src_file_name=None src_real_file_name=None applying_yn='Y' last_applying_dt=None order_sn=None create_id='admin' modify_id=None
+========applyingprojectRagDoc 수정후 params.project_rag_doc_list:  [ProjectRagDoc_schema(project_rag_doc_id=83, company_id=None, project_id=None, doc_type_cd=None, src_url_addr='https://www.nipa.kr/home/2-2/15197', src_file_name=None, src_real_file_name=None, applying_yn='Y', last_applying_dt=None, order_sn=None, create_id='admin', modify_id=None), ProjectRagDoc_schema(project_rag_doc_id=84, company_id=None, project_id=None, doc_type_cd=None, src_url_addr=None, src_file_name=None, src_real_file_name=None, applying_yn='N', last_applying_dt=None, order_sn=None, create_id='admin', modify_id=None)]
+====================projectRagDoc_biz get_projectRagDoc_list start========param <class 'projectRagDoc_schema.ProjectRagDocSrchParam'>
+====================projectRagDoc_biz get_projectRagDoc_list start param.project_id: 100
+2024-03-13 14:49:11,219 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-03-13 14:49:11,220 INFO sqlalchemy.engine.Engine SELECT count(*) AS count_1 
+FROM (SELECT wc_project_rag_doc.project_rag_doc_id AS wc_project_rag_doc_project_rag_doc_id, wc_project_rag_doc.company_id AS wc_project_rag_doc_company_id, wc_project_rag_doc.project_id AS wc_project_rag_doc_project_id, wc_project_rag_doc.doc_type_cd AS wc_project_rag_doc_doc_type_cd, wc_project_rag_doc.src_url_addr AS wc_project_rag_doc_src_url_addr, wc_project_rag_doc.src_file_name AS wc_project_rag_doc_src_file_name, wc_project_rag_doc.src_real_file_name AS wc_project_rag_doc_src_real_file_name, wc_project_rag_doc.applying_yn AS wc_project_rag_doc_applying_yn, wc_project_rag_doc.last_applying_dt AS wc_project_rag_doc_last_applying_dt, wc_project_rag_doc.order_sn AS wc_project_rag_doc_order_sn, wc_project_rag_doc.create_id AS wc_project_rag_doc_create_id, wc_project_rag_doc.create_dt AS wc_project_rag_doc_create_dt, wc_project_rag_doc.modify_id AS wc_project_rag_doc_modify_id, wc_project_rag_doc.modify_dt AS wc_project_rag_doc_modify_dt 
+FROM wc_project_rag_doc) AS anon_1
+2024-03-13 14:49:11,220 INFO sqlalchemy.engine.Engine [cached since 0.008242s ago] {}
+projectRagDoc_biz get_projectRagDoc_list project_cnt:  15
+projectRagDoc_biz get_projectRagDoc_list int_page_size:  10
+projectRagDoc_biz get_projectRagDoc_list skip:  0
+2024-03-13 14:49:11,221 INFO sqlalchemy.engine.Engine SELECT wc_project_rag_doc.project_rag_doc_id AS wc_project_rag_doc_project_rag_doc_id, wc_project_rag_doc.company_id AS wc_project_rag_doc_company_id, wc_project_rag_doc.project_id AS wc_project_rag_doc_project_id, wc_project_rag_doc.doc_type_cd AS wc_project_rag_doc_doc_type_cd, wc_project_rag_doc.src_url_addr AS wc_project_rag_doc_src_url_addr, wc_project_rag_doc.src_file_name AS wc_project_rag_doc_src_file_name, wc_project_rag_doc.src_real_file_name AS wc_project_rag_doc_src_real_file_name, wc_project_rag_doc.applying_yn AS wc_project_rag_doc_applying_yn, wc_project_rag_doc.last_applying_dt AS wc_project_rag_doc_last_applying_dt, wc_project_rag_doc.order_sn AS wc_project_rag_doc_order_sn, wc_project_rag_doc.create_id AS wc_project_rag_doc_create_id, wc_project_rag_doc.create_dt AS wc_project_rag_doc_create_dt, wc_project_rag_doc.modify_id AS wc_project_rag_doc_modify_id, wc_project_rag_doc.modify_dt AS wc_project_rag_doc_modify_dt, wc_project_rag_doc.project_rag_doc_id AS wc_project_rag_doc_project_rag_doc_id__1, wc_project_rag_doc.company_id AS wc_project_rag_doc_company_id__1, wc_project.project_code AS wc_project_project_code, wc_project_rag_doc.project_id AS wc_project_rag_doc_project_id__1, wc_project_rag_doc.doc_type_cd AS wc_project_rag_doc_doc_type_cd__1, wc_project_rag_doc.src_url_addr AS wc_project_rag_doc_src_url_addr__1, wc_project_rag_doc.src_file_name AS wc_project_rag_doc_src_file_name__1, wc_project_rag_doc.src_real_file_name AS wc_project_rag_doc_src_real_file_name__1, wc_project_rag_doc.applying_yn AS wc_project_rag_doc_applying_yn__1, wc_project_rag_doc.last_applying_dt AS wc_project_rag_doc_last_applying_dt__1 
+FROM wc_project_rag_doc LEFT OUTER JOIN wc_project ON wc_project_rag_doc.project_id = wc_project.project_id 
+WHERE wc_project_rag_doc.company_id = %(company_id_1)s AND wc_project_rag_doc.project_id = %(project_id_1)s AND wc_project_rag_doc.project_rag_doc_id = %(project_rag_doc_id_1)s ORDER BY wc_project_rag_doc.order_sn DESC 
+ LIMIT %(param_1)s, %(param_2)s
+2024-03-13 14:49:11,221 INFO sqlalchemy.engine.Engine [cached since 0.00549s ago] {'company_id_1': 'item3', 'project_id_1': 100, 'project_rag_doc_id_1': 84, 'param_1': 0, 'param_2': 10}
+projectRagDoc_biz get_projectRagDoc_list result_list:  [(<chatbot_models.Project_rag_doc object at 0x7fa7396fe0d0>, 84, 'item3', '000003', 100, '02', 'https://www.nipa.kr/home/2-1/15252', None, None, 'N', None)]
+====================projectRagDoc_biz get_projectRagDoc_list end==========
+========applyingprojectRagDoc total_cnt :  15
+========applyingprojectRagDoc _projectRagDoc_list :  [(<chatbot_models.Project_rag_doc object at 0x7fa7396fe0d0>, 84, 'item3', '000003', 100, '02', 'https://www.nipa.kr/home/2-1/15252', None, None, 'N', None)]
+========resultRagDoc :  (<chatbot_models.Project_rag_doc object at 0x7fa7396fe0d0>, 84, 'item3', '000003', 100, '02', 'https://www.nipa.kr/home/2-1/15252', None, None, 'N', None)
+========paramRagDoc :  project_rag_doc_id=84 company_id=None project_id=None doc_type_cd=None src_url_addr='https://www.nipa.kr/home/2-1/15252' src_file_name=None src_real_file_name=None applying_yn='N' last_applying_dt=None order_sn=None create_id='admin' modify_id=None
+========applyingprojectRagDoc 수정후 params.project_rag_doc_list:  [ProjectRagDoc_schema(project_rag_doc_id=83, company_id=None, project_id=None, doc_type_cd=None, src_url_addr='https://www.nipa.kr/home/2-2/15197', src_file_name=None, src_real_file_name=None, applying_yn='Y', last_applying_dt=None, order_sn=None, create_id='admin', modify_id=None), ProjectRagDoc_schema(project_rag_doc_id=84, company_id=None, project_id=None, doc_type_cd=None, src_url_addr='https://www.nipa.kr/home/2-1/15252', src_file_name=None, src_real_file_name=None, applying_yn='N', last_applying_dt=None, order_sn=None, create_id='admin', modify_id=None)]
+========applyingprojectRagDoc sllm_nm_cd 101 :  101
+===========biz_rag_save=========== params: company_id='item3' project_id=100 doc_type_cd='02' project_rag_doc_list=[ProjectRagDoc_schema(project_rag_doc_id=83, company_id=None, project_id=None, doc_type_cd=None, src_url_addr='https://www.nipa.kr/home/2-2/15197', src_file_name=None, src_real_file_name=None, applying_yn='Y', last_applying_dt=None, order_sn=None, create_id='admin', modify_id=None), ProjectRagDoc_schema(project_rag_doc_id=84, company_id=None, project_id=None, doc_type_cd=None, src_url_addr='https://www.nipa.kr/home/2-1/15252', src_file_name=None, src_real_file_name=None, applying_yn='N', last_applying_dt=None, order_sn=None, create_id='admin', modify_id=None)]
+========projectRagDoc_biz. params.project_id:  100
+========projectRagDoc_biz. params.company_id:  item3
+============= varRagDBDir: /home/ai/src/wc//ragDBData/item3/000100
+/app/miniconda3/envs/wc/lib/python3.8/site-packages/langchain_core/_api/deprecation.py:117: LangChainDeprecationWarning: The class `langchain_community.embeddings.openai.OpenAIEmbeddings` was deprecated in langchain-community 0.0.9 and will be removed in 0.2.0. An updated version of the class exists in the langchain-openai package and should be used instead. To use it run `pip install -U langchain-openai` and import as `from langchain_openai import OpenAIEmbeddings`.
+  warn_deprecated(
+/app/miniconda3/envs/wc/lib/python3.8/site-packages/langchain_community/embeddings/openai.py:268: UserWarning: WARNING! temperature is not default parameter.
+                    temperature was transferred to model_kwargs.
+                    Please confirm that temperature is what you intended.
+  warnings.warn(
+========projectRagDoc_biz. vectorstore._collection.count 1:  0
+========projectRagDoc_biz. row.project_rag_doc_id:  83
+========projectRagDoc_biz. row.applying_yn:  Y
+========projectRagDoc_biz. row.src_url_addr:  https://www.nipa.kr/home/2-2/15197
+삭제전 컬럼수 :  6
+삭제전 리스트 건수:  0
+데이터 삭제 시작!!!!
+삭제후 컬럼수 :  6
+삭제후 리스트 건수:  0
+========projectRagDoc_biz. row.project_rag_doc_id:  84
+========projectRagDoc_biz. row.applying_yn:  N
+========projectRagDoc_biz. row.src_url_addr:  https://www.nipa.kr/home/2-1/15252
+삭제전 컬럼수 :  6
+삭제전 리스트 건수:  0
+데이터 삭제 시작!!!!
+삭제후 컬럼수 :  6
+삭제후 리스트 건수:  0
+========projectRagDoc_biz. vectorstore._collection.count 2:  0
+========projectRagDoc_biz biz_rag_save arrAtch:  ['https://www.nipa.kr/home/2-2/15197']
+========projectRagDoc_biz biz_rag_save len(arrAtch) :  1
+============= RAG storing 시작 BASE_DIR: /home/ai/src/wc/
+INFO:     192.168.1.31:49309 - "POST /wc/v1/projectRagDoc/storingRagDoc HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/uvicorn/protocols/http/httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/uvicorn/middleware/proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/fastapi/applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/starlette/applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/starlette/middleware/errors.py", line 184, in __call__
+    raise exc
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "mngWc_app.py", line 553, in storingRagDoc
+    chatSubLlmMng101_biz.storingRagDocUrl(params)
+  File "/home/ai/src/ragChatbot/mngChatBot/chatLlmMng101/chatSubLlmMng101_biz.py", line 113, in storingRagDocUrl
+    vectorstore = Chroma.from_documents \
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/langchain_community/vectorstores/chroma.py", line 778, in from_documents
+    return cls.from_texts(
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/langchain_community/vectorstores/chroma.py", line 736, in from_texts
+    chroma_collection.add_texts(
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/langchain_community/vectorstores/chroma.py", line 275, in add_texts
+    embeddings = self._embedding_function.embed_documents(texts)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/langchain_community/embeddings/openai.py", line 668, in embed_documents
+    return self._get_len_safe_embeddings(texts, engine=engine)
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/langchain_community/embeddings/openai.py", line 494, in _get_len_safe_embeddings
+    response = embed_with_retry(
+  File "/app/miniconda3/envs/wc/lib/python3.8/site-packages/langchain_community/embeddings/openai.py", line 116, in embed_with_retry
+    return embeddings.client.create(**kwargs)
+TypeError: create() got an unexpected keyword argument 'temperature'

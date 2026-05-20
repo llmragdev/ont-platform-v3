@@ -1,0 +1,64 @@
+[
+  {
+    "id": "analyst",
+    "email": "analyst@example.com",
+    "name": "Analyst",
+    "company_id": "default",
+    "role": "editor",
+    "project_ids": ["proj-default"],
+    "default_project_id": "proj-default",
+    "password_hash": "dev-only",
+    "permission_override": {},
+    "status": "active"
+  },
+  {
+    "id": "alice",
+    "email": "alice@example.com",
+    "name": "Alice",
+    "company_id": "acme",
+    "role": "editor",
+    "project_ids": ["proj-001"],
+    "default_project_id": "proj-001",
+    "password_hash": "dev-only",
+    "permission_override": {},
+    "status": "active"
+  },
+  {
+    "id": "bob",
+    "email": "bob@example.com",
+    "name": "Bob",
+    "company_id": "acme",
+    "role": "viewer",
+    "project_ids": ["proj-001"],
+    "default_project_id": "proj-001",
+    "password_hash": "dev-only",
+    "permission_override": {},
+    "status": "active"
+  },
+  {
+    "id": "carol",
+    "email": "carol@example.com",
+    "name": "Carol",
+    "company_id": "globex",
+    "role": "admin",
+    "project_ids": ["proj-002"],
+    "default_project_id": "proj-002",
+    "password_hash": "dev-only",
+    "permission_override": {},
+    "status": "active"
+  },
+  {
+    "id": "dave",
+    "email": "dave@example.com",
+    "name": "Dave",
+    "company_id": "globex",
+    "role": "viewer",
+    "project_ids": ["proj-002"],
+    "default_project_id": "proj-002",
+    "password_hash": "dev-only",
+    "permission_override": {
+      "can_upload_doc": true
+    },
+    "status": "active"
+  }
+]

@@ -1,0 +1,64 @@
+
+
+/home/ai/src/chat_api/callbot_api/setenv_dev.sh
+   - 운영팀 db url만 포함 : OP_TEAM_DB_URL
+     export OP_TEAM_DB_URL="mysql+pymysql://eicn:eicnrw@122.49.74.13:3306/eicn"
+
+
+   - 일반적 db정보는 : 
+    /home/ai/src/chat_api/callbot_api/mngCallbot/db_proc_cb.py
+	self.engine = create_engine("mysql+pymysql://" + db_id + ":" + db_passwd + "@"
+                                       + db_ip + ":" + db_port + "/" + db_name , pool_size=20, max_overflow=10, 	pool_recycle=3600  )
+
+         - 14번 챗봇엔진은 237번 서버의 DB 이용
+         - 237번 챗봇엔진: 238번 서버의 DB 이용
+
+
+-       start_ad_adChat.sh -> callMain_app.py -> call_app.py (chat_predict) -> callMain_biz.chatMain_predict (chatMain_predict) ->
+  . process_intent01_list_entity (인텐트 리스트 ) -> callSub_biz.process_intent_row01_ordinary (한 줄씩 ) 
+  . process_intent01_list_entity  -> callSub_biz.process_intent_row01_entity
+  . process_intent_list2
+  .process_intent_list3
+
+   --> 챗봇 대화의 최대 라인수 : 2개 , list3은 폴백처리 
+        . 대화이동의 경우 2개 
+       답변 response : chat_list 
+         ex)    1번:   "response_texts": "안녕하세요 고객님 이아이씨엔 AI 상담웜 입니다.",
+                  2번:  "response_texts": "IP 등록을 위해  ....  이라고말씀해주세요.",
+         
+
+ callSub_biz.process_intent_row01_ordinary
+
+
+      ->  항상 동작시 로그 저장:  insert_log_master_sync
+        get_project_list
+
+        chatbot_engine_version = param.chatbot_engine_version : 버전에 따라 분기하려고 했으나, 
+         동기에서 비동기 호출시 완전한 동시실행이 어려움 - 옵션에 의한 v1 / v2가 아닌 별도의 
+         url로 v2 실행 해야 함 
+
+
+============= 
+callbot_intent_ubiz 테이블의 querys에서 일치하면 인식 
+(단 하이락키일때는 직전 last_intent_cd와 db의 intent_cd가 같아야 함 ) 
+
+api의     "query": "문자", 와 인텐트 테이블의 querys 의 ;으로 분리된 단어와 일치시 인식 
+  (추가로직은 토큰나이징 로직이 추가되었음 ) 
+  ==> project_id = '306' and parent_intent_cd = 1 and querys  = "문자" 
+  0 불용어 등록 가능ㅇ 
+
+의도분류 샘플 : [252] 쇼핑몰챗봇-김옥중 
+
+- 블록에서 LLM 기반, 룰기반 이라는 설명이 있으면 좋겠음 
+
+      paramAction_json_01.url="http://122.49.74.124:8888/api/v1/ner"
+
+
+의도분류 : Z , W: 개체명인식 
+의도분류 Mock 서버: adMockServer_app.py (recognize_intent) 
+/home/ai/src/chat_api/callbot_api/adMockServer/adMockServer_app.py
+
+external_LLM_API_URL = "http://122.49.74.124:8888/api/v1/question"
+
+
+        

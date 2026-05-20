@@ -1,0 +1,23 @@
+{
+  "company_id": "default",
+  "display_name": "Default Company",
+  "status": "active",
+  "limits": {
+    "max_users": 100,
+    "max_projects": 10,
+    "max_documents": 500
+  },
+  "features": {
+    "ontology_editing": true,
+    "hybrid_query": true,
+    "graph_editor": true
+  },
+  "ui": {
+    "theme": "dark",
+    "logo_url": null
+  },
+  "llm": {
+    "provider": "system_default",
+    "prompt_policy": "strict_grounded"
+  }
+}

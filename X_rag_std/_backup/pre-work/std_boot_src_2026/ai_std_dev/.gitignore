@@ -1,0 +1,39 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+.venv/
+venv/
+env/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Generated data and vector stores
+vector_db/
+chroma/
+chroma_db/
+*.sqlite
+*.sqlite3
+*.db
+*.bin
+*.pkl
+*.parquet
+*.csv
+
+# Local git metadata backups
+.git.*.backup/

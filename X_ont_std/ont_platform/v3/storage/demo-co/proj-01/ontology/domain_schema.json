@@ -1,0 +1,117 @@
+{
+  "entity_types": [
+    {
+      "name": "ORDER",
+      "description": "구매 주문",
+      "properties": [
+        "amount",
+        "status",
+        "vendor"
+      ]
+    },
+    {
+      "name": "CUSTOMER",
+      "description": "고객사",
+      "properties": [
+        "industry",
+        "region"
+      ]
+    },
+    {
+      "name": "CONTRACT",
+      "description": "계약서",
+      "properties": [
+        "start_date",
+        "end_date",
+        "value"
+      ]
+    },
+    {
+      "name": "DIVISION",
+      "description": "사업부·부서 단위 (조직 내 하위 부서; 사업 분과는 CATEGORY 사용)",
+      "properties": [
+        "quota_2025",
+        "quota_2024",
+        "target"
+      ]
+    },
+    {
+      "name": "PROGRAM",
+      "description": "사업·프로그램 단위",
+      "properties": [
+        "budget",
+        "year",
+        "quota"
+      ]
+    },
+    {
+      "name": "ORGANIZATION",
+      "description": "기관·기업",
+      "properties": [
+        "role",
+        "type",
+        "full_name"
+      ]
+    },
+    {
+      "name": "CATEGORY",
+      "description": "분과·카테고리",
+      "properties": [
+        "quota_2025",
+        "quota_2024",
+        "target"
+      ]
+    },
+    {
+      "name": "METRIC",
+      "description": "수치 지표",
+      "properties": [
+        "value",
+        "unit",
+        "year"
+      ]
+    },
+    {
+      "name": "EVENT",
+      "description": "일정·이벤트",
+      "properties": [
+        "date",
+        "time",
+        "start",
+        "end"
+      ]
+    }
+  ],
+  "relation_types": [
+    {
+      "name": "BELONGS_TO",
+      "from_type": "ORDER",
+      "to_type": "CUSTOMER"
+    },
+    {
+      "name": "COVERED_BY",
+      "from_type": "ORDER",
+      "to_type": "CONTRACT"
+    },
+    {
+      "name": "MANAGES",
+      "from_type": "ORGANIZATION",
+      "to_type": "PROGRAM"
+    },
+    {
+      "name": "HAS_DIVISION",
+      "from_type": "PROGRAM",
+      "to_type": "CATEGORY"
+    },
+    {
+      "name": "PARTNERS_WITH",
+      "from_type": "ORGANIZATION",
+      "to_type": "ORGANIZATION"
+    },
+    {
+      "name": "RESTRICTS",
+      "from_type": "PROGRAM",
+      "to_type": "ORGANIZATION"
+    }
+  ]
+}

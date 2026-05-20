@@ -250,6 +250,12 @@ class WorkflowService:
                     value = value.replace("{{ user_id }}", ctx.user_id)
                 if "{{ timestamp }}" in value:
                     value = value.replace("{{ timestamp }}", _now_iso())
+                # 파라미터에서 변수 치환 (e.g., {{ new_deadline }})
+                if params:
+                    for param_key, param_value in params.items():
+                        template_var = f"{{{{ {param_key} }}}}"
+                        if template_var in value:
+                            value = value.replace(template_var, str(param_value))
 
             # 필드 설정
             field_parts = field.split(".")

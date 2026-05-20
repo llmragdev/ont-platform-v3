@@ -1,0 +1,15 @@
+{
+  "project_id": "proj-default",
+  "display_name": "Default Project",
+  "ontology_schema_file": "ontology/schema.json",
+  "default_language": "ko",
+  "rag": {
+    "top_k": 5,
+    "chunk_size": 1000,
+    "chunk_overlap": 150
+  },
+  "hybrid_query": {
+    "require_citations": true,
+    "allow_fallback_planner": true
+  }
+}

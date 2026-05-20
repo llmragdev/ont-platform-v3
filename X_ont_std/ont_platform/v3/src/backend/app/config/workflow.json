@@ -82,6 +82,11 @@
           "to_status": "Approved",
           "preconditions": [
             {
+              "field": "properties.manager",
+              "operator": "not_null",
+              "message": "담당자를 배정하세요"
+            },
+            {
               "field": "properties.budget",
               "operator": "gte",
               "value": 10000000,

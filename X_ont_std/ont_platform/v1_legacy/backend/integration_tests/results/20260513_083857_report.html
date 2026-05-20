@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>통합 테스트 결과 — 20260513_083857</title>
+<style>
+  body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 24px; background: #f1f5f9; }
+  h1 { color: #1e293b; margin-bottom: 4px; }
+  .card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px;
+           box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+  .metric { display: inline-block; margin: 8px 16px 8px 0; text-align: center; }
+  .metric .val { font-size: 2rem; font-weight: 700; }
+  .metric .lbl { font-size: 0.8rem; color: #6b7280; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #1e293b; color: #fff; padding: 10px 8px; text-align: left; font-size: 0.85rem; }
+  tr:hover td { background: #f8fafc; }
+</style>
+</head>
+<body>
+<h1>🧪 하이브리드 질의 통합 테스트</h1>
+<p style="color:#6b7280">실행 시각: 20260513_083857</p>
+
+<div class="card">
+  <div class="metric">
+    <div class="val" style="color:#f59e0b">4/15</div>
+    <div class="lbl">PASS / 전체</div>
+  </div>
+  <div class="metric">
+    <div class="val" style="color:#f59e0b">26.7%</div>
+    <div class="lbl">합격률</div>
+  </div>
+  <div class="metric">
+    <div class="val">44.7</div>
+    <div class="lbl">평균 점수</div>
+  </div>
+  <div class="metric">
+    <div class="val">11868ms</div>
+    <div class="lbl">평균 응답 시간</div>
+  </div>
+  <div class="metric">
+    <div class="val" style="color:#ef4444">2</div>
+    <div class="lbl">오류</div>
+  </div>
+</div>
+
+<div style="display:flex;gap:16px">
+  <div class="card" style="flex:1">
+    <h3 style="margin-top:0">유형별 결과</h3>
+    <table>
+      <tr><th>유형</th><th>PASS/전체</th><th>합격률</th></tr>
+      <tr><td style="padding:4px 8px">descriptive</td><td style="padding:4px 8px">4/5</td><td style="padding:4px 8px">80%</td></tr><tr><td style="padding:4px 8px">filter</td><td style="padding:4px 8px">0/3</td><td style="padding:4px 8px">0%</td></tr><tr><td style="padding:4px 8px">compare</td><td style="padding:4px 8px">0/3</td><td style="padding:4px 8px">0%</td></tr><tr><td style="padding:4px 8px">calculate</td><td style="padding:4px 8px">0/2</td><td style="padding:4px 8px">0%</td></tr><tr><td style="padding:4px 8px">hybrid</td><td style="padding:4px 8px">0/2</td><td style="padding:4px 8px">0%</td></tr>
+    </table>
+  </div>
+  <div class="card" style="flex:1">
+    <h3 style="margin-top:0">채점 기준</h3>
+    <table>
+      <tr><th>항목</th><th>배점</th><th>기준</th></tr>
+      <tr><td>query_type 일치</td><td>40점</td><td>기대 유형과 정확히 일치</td></tr>
+      <tr><td>응답 품질</td><td>20점</td><td>answer 100자 이상 (50자↑ 시 10점)</td></tr>
+      <tr><td>데이터 조건</td><td>30점</td><td>시나리오별 check 함수 통과</td></tr>
+      <tr><td>레이턴시</td><td>10점</td><td>15초 미만</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">시나리오별 결과 (행 클릭 시 상세 표시)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>질문</th><th>기대 유형</th><th>실제 유형</th>
+        <th>타입(40)</th><th>응답(20)</th><th>데이터(30)</th><th>레이턴시(10)</th>
+        <th>총점</th><th>응답 시간</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+<tr style="background:#f0fdf4;cursor:pointer"
+    onclick="document.getElementById('detail_S01').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">✅ S01</td>
+  <td style="padding:8px">Snowflake은 언제 설립되었고 언제 상장했나?</td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">40pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 201자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="evidence 5건"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">30pt</span></div></td><td style="padding:8px;vertical-align:top" title="7678ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">100/100</td>
+  <td style="padding:8px;color:#6b7280">7678ms</td>
+</tr>
+<tr id="detail_S01" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> 창업연도(2012)/상장(2020) — PDF p.2에 명시<br>
+    <b>태그:</b> descriptive, rag, history<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "Snowflake의 설립 및 상장 정보는 다음과 같습니다.\n\n*   **설립일:** 2012년\n*   **상장일:** 2020년 9월\n\n**설명:**\nSnowflake는 업계 베테랑들에 의해 2012년에 설립되었습니다. 이후 2020년 9월에 뉴욕 증권 거래소(NYSE)에 상장되었으며, 이는 역사상 가장 큰 미국 소프트웨어 IPO(기업공개) 중 하나였습니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p1",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.2)",
+      "score": 0.5774598121643066,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n스노우플레이크소개\n120개이상의데이터베이스특허를가진업계의베테랑들이2012년회사설립2015년GA\nNYSE\n2020년9월NYSE에상장Largest US software IPO in history\n2021년11월Snowflake 한국지사설립\nBenoit DagevilleLead architect OracleExpert in parallel query executionDozens of patents\nThierry CuranesLead architect OracleExpert in query optimizationDozens of patents\nMarcin Zukowski, VectorwisefounderCreator of vectorized query execution in databases",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p0",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.1)",
+      "score": 0.443428635597229,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\nINTRODUCTION TO SNOWFLAKE 2023",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p6",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.7)",
+      "score": 0.4075740575790405,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n스노우플레이크아키텍쳐",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p3",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.4)",
+      "score": 0.395572304725647,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n분석플랫폼중1위",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p7",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.8)",
+      "score": 0.3900926113128662,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n데이터스토리지\nDATA STORAGE\nCENTRALIZED STORAGE●평균압축률: 80% ●Pass through 비용모델●컬럼형스토리지●자동으로데이터암호화●Encoding 지원●Native Semi-Structured Data 지원●Time Travel / Zero-Copy Cloning \n통합/ 단일데이터저장소및다중실행환경에서동일한데이터에지연없이접속/ 저장비용\nGoogle CloudAWSAzure",
+      "related_objects": []
+    }
+  ],
+  "steps": [
+    {
+      "name": "질문 유형 분류 (LLM)",
+      "status": "ok"
+    },
+    {
+      "name": "Vector Search에서 PDF 청크 검색",
+      "status": "ok"
+    },
+    {
+      "name": "최종 답변 프롬프트 생성",
+      "status": "ok"
+    },
+    {
+      "name": "LLM Gateway 호출 (gemini)",
+      "status": "ok"
+    }
+  ],
+  "latency_ms": 5648
+}</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#f0fdf4;cursor:pointer"
+    onclick="document.getElementById('detail_S02').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">✅ S02</td>
+  <td style="padding:8px">Snowflake 아키텍처의 3계층(Storage·Compute·Cloud Services)을 설명해줘</td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">40pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 3126자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 길이 3126"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">30pt</span></div></td><td style="padding:8px;vertical-align:top" title="12633ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">100/100</td>
+  <td style="padding:8px;color:#6b7280">12633ms</td>
+</tr>
+<tr id="detail_S02" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> 3계층 아키텍처 — PDF p.7 다이어그램 기반<br>
+    <b>태그:</b> descriptive, rag, architecture<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "Snowflake 아키텍처는 데이터 스토리지, 컴퓨팅 엔진, 클라우드 서비스의 세 가지 계층으로 구성되어 있습니다. 각 계층의 설명은 다음과 같습니다.\n\n### Snowflake 3계층 아키텍처\n\n| 계층             | 주요 역할 및 특징                                                                                                                                                                                                                                                              |\n| :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| **1. 데이터 스토리지** | • **중앙 집중형 스토리지(CENTRALIZED STORAGE):** 통합/단일 데이터 저장소로, 다중 실행 환경에서 동일한 데이터에 지연 없이 접속 및 저장합니다.<br>• **평균 압축률 80%:** 효율적인 데이터 저장<br>• **컬럼형 스토리지:** 분석에 최적화된 형태로 데이터를 저장합니다.<br>• **자동 암호화:** 모든 데이터는 자동으로 암호화됩니다.<br>• **Encoding 지원, Native Semi-Structured Data 지원:** 다양한 데이터 형식 처리<br>• **Time Travel / Zero-Copy Cloning:** 데이터 관리 및 복제 기능 제공<br>• **Pass through 비용 모델**                                 |\n| **2. 컴퓨팅 엔진**   | • **온디맨드 가상 웨어하우스(ON-DEMAND VIRTUAL WAREHOUSES):** 고객에게 청구되는 대부분의 Credit 비용이 Virtual Warehouse 사용 시간에 따라 결정됩니다.<br>• **워크로드 유형별 격리된 실행 환경:** 서로 다른 워크로드가 독립적으로 실행됩니다.<br>• **탄력성(Elastic):** 필요에 따라 바로 실행하고, 바로 중지(Suspend)할 수 있습니다.<br>• **스케일 업(Scale up):** 복잡한 쿼리 성능 개선을 위해 컴퓨팅 리소스를 확장할 수 있습니다.<br>• **스케일 아웃(Scale out):** 동시 요청 지원을 위해 컴퓨팅 리소스를 병렬로 확장할 수 있습니다.<br>• **초단위 비용:** 사용한 만큼 초단위로 비용이 청구됩니다. |\n| **3. 클라우드 서비스** | • **글로벌 서비스:** Snowflake Account의 여러 실행 환경에 동일한 서비스를 제공합니다.<br>• **쿼리 최적화:** 최적의 성능을 위한 쿼리 실행 계획을 수립합니다.<br>• **메타정보 관리 및 캐시:** 테이블 스키마, 권한 등 메타정보를 관리하고, 용량 제한 없는 Result 캐시를 제공합니다.<br>• **서버리스(SERVERLESS) 기능:** Materialized view maintenance, Cross-cloud replication, Auto-Clustering, Snowpipe, Search Optimization Service 등 다양한 서버리스 기능이 포함됩니다. (이러한 서버리스 기능에만 과금이 발생합니다.) |\n\n---\n\n**상세 설명:**\n\n1.  **데이터 스토리지 (DATA STORAGE)**\n    데이터 스토리지 계층은 Snowflake의 기반이 되는 통합/단일 데이터 저장소입니다. 모든 데이터는 중앙 집중형으로 저장되며, 평균 80%의 압축률을 보여 효율적인 공간 활용이 가능합니다. 컬럼형 스토리지 방식을 채택하여 분석 쿼리 성능을 최적화하고, 데이터는 자동으로 암호화되어 보안을 강화합니다. 또한, Encoding 및 Native Semi-Structured Data를 지원하여 다양한 형태의 데이터를 유연하게 처리할 수 있습니다. Time Travel 및 Zero-Copy Cloning과 같은 고급 기능은 데이터 관리와 버전 관리를 용이하게 합니다. 이 계층의 비용은 Pass through 모델로 청구됩니다.\n\n2.  **컴퓨팅 엔진 (COMPUTE)**\n    컴퓨팅 엔진 계층은 데이터 처리 및 쿼리 실행을 담당하는 온디맨드 가상 웨어하우스(Virtual Warehouses)로 구성됩니다. 각 웨어하우스는 독립적인 컴퓨팅 리소스를 제공하여 워크로드 유형별로 격리된 실행 환경을 보장합니다. 이 계층은 매우 탄력적(Elastic)으로, 필요할 때 즉시 웨어하우스를 시작하거나 중지(Suspend)할 수 있으며, 복잡한 쿼리를 위해 스케일 업(Scale up)하거나 동시 요청 처리를 위해 스케일 아웃(Scale out)할 수 있습니다. 사용한 만큼 초단위로 비용이 청구되어 효율적인 리소스 관리가 가능하며, Snowflake Credit 비용의 대부분이 이 계층의 사용 시간에 따라 결정됩니다.\n\n3.  **클라우드 서비스 (CLOUD SERVICES)**\n    클라우드 서비스 계층은 Snowflake의 \"뇌\" 역할을 하며, 전체 시스템의 운영과 최적화를 담당합니다. 이 계층은 여러 실행 환경에서 동일한 서비스를 제공하는 글로벌 서비스입니다. 쿼리 최적화, 메타정보 관리(캐시 포함), 용량 제한 없는 Result 캐시 등을 통해 사용자에게 일관되고 최적화된 경험을 제공합니다. 특히 Materialized view maintenance, C</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S03').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S03</td>
+  <td style="padding:8px">Zero Copy Cloning이 스토리지 비용에 미치는 영향은?</td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px">오류</td>
+  <td style="padding:8px;vertical-align:top" title="오류: 요청 타임아웃 (30s)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="오류로 인해 미평가"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="오류로 인해 미평가"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="오류로 인해 미평가"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td>
+  <td style="padding:8px;font-weight:700">0/100</td>
+  <td style="padding:8px;color:#6b7280">30000ms</td>
+</tr>
+<tr id="detail_S03" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> Zero Copy Cloning — PDF p.21<br>
+    <b>태그:</b> descriptive, rag, cost<br>
+    <b>오류:</b> <span style="color:red">요청 타임아웃 (30s)</span><br>
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{}</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#f0fdf4;cursor:pointer"
+    onclick="document.getElementById('detail_S04').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">✅ S04</td>
+  <td style="padding:8px">Snowflake 데이터 공유(Data Sharing)의 3가지 방식을 각각 설명해줘</td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">40pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 1805자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="evidence 5건"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">30pt</span></div></td><td style="padding:8px;vertical-align:top" title="10424ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">100/100</td>
+  <td style="padding:8px;color:#6b7280">10424ms</td>
+</tr>
+<tr id="detail_S04" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> Direct Share / Data Exchange / Marketplace — PDF p.13~14<br>
+    <b>태그:</b> descriptive, rag, data_sharing<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "Snowflake 데이터 공유(Data Sharing)의 3가지 방식은 다음과 같습니다.\n\n### Snowflake 데이터 공유 3가지 방식\n\n1.  **DIRECT SHARE (다이렉트 공유)**\n2.  **데이터 교환 (DATA EXCHANGE)**\n3.  **SNOWFLAKE 데이터 마켓플레이스 (SNOWFLAKE DATA MARKETPLACE)**\n\n---\n\n### 각 방식에 대한 상세 설명\n\n1.  **DIRECT SHARE (다이렉트 공유)**\n    *   **개념:** 공급자와 소비자 간에 1:1로 데이터를 실시간 공유하는 방식입니다. ETL(Extract, Transform, Load) 과정 없이 빠르고 안전하게 데이터를 공유하고 활용할 수 있습니다.\n    *   **특징:**\n        *   **Point-2-point 공유:** 특정 공급자와 특정 소비자 간의 직접적인 연결을 통해 이루어집니다.\n        *   **실시간 공유:** 데이터 동기화 지연 없이 Live 데이터를 활용할 수 있습니다.\n        *   **양방향/단방향:** 데이터를 주고받는 양쪽(Peer) 모두 Snowflake 환경을 사용하는 경우 양방향 공유가 가능합니다. 만약 소비자가 Snowflake 환경을 사용하지 않는 경우, 'Reader Account'를 통해 데이터를 단방향으로 조회만 가능하게 공유할 수 있습니다.\n        *   **운영 환경:** 동일한 리전 및 클라우드 서비스 제공자 내에서는 Data Replication(데이터 복제) 없이 Share 객체 생성을 통해 데이터를 공유합니다. 리전이나 클라우드 서비스 제공자가 다를 경우, 먼저 Data Replication을 수행한 후 해당 데이터에 대한 Share 객체를 생성하여 공유할 수 있습니다.\n\n2.  **데이터 교환 (DATA EXCHANGE)**\n    *   **개념:** 특정 기업 또는 조직의 생태계 내에서 다수의 공급자와 다수의 소비자(n:n)가 데이터를 대규모로 공유할 수 있도록 설계된 Private 데이터 공유 환경입니다.\n    *   **특징:**\n        *   **N:N 데이터 공유 (AT SCALE):** 대규모의 데이터 공유 환경을 제공하여, 여러 공급자와 여러 소비자가 유기적으로 데이터를 공유하고 검색할 수 있습니다.\n        *   **기업 전용 Private 환경:** 기업 내부의 서로 다른 조직 간은 물론, 협력사 및 관계사 간에 안전하게 데이터를 공유하고 검색할 수 있는 맞춤형 환경을 구축할 수 있습니다.\n        *   **제어된 공유:** 특정 그룹 또는 생태계 내에서 공유를 제어하고 관리하기 용이합니다.\n\n3.  **SNOWFLAKE 데이터 마켓플레이스 (SNOWFLAKE DATA MARKETPLACE)**\n    *   **개념:** Snowflake 플랫폼 내에서 다양한 외부 데이터를 발견, 액세스, 구매 또는 판매할 수 있는 공개적인 시장입니다.\n    *   **특징:**\n        *   **데이터 강화:** 스노우플레이크 마켓플레이스에 등록된 다양한 외부 데이터를 활용하여 자체 데이터를 보강하고 분석의 깊이를 더할 수 있습니다. (예: 인구통계 데이터, 금융 데이터 등)\n        *   **데이터 수익화:** 기업이 보유한 데이터를 마켓플레이스에 등록하여 새로운 데이터 기반의 수익 모델을 창출할 수 있습니다. 데이터를 제품처럼 판매하거나 구독 형태로 제공할 수 있습니다.\n        *   **데이터 접근성:** 전 세계의 다양한 데이터 공급자가 제공하는 데이터를 쉽게 검색하고 활용할 수 있는 중앙 집중식 플랫폼입니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p12",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.13)",
+      "score": 0.6591294407844543,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n데이터쉐어링\n이기종환경간의데이터복사및이동필요데이터동기화지연발생: 업무영향도발생데이터동기화파이프라인생성및관리: 비용여러데이터플랫폼과의동기화복잡도증가빈번한장애및에러발생\n단일데이터활용, Live 데이터활용: 아키텍처간소화데이터동기화지연발생안함.동기화파이프라인및작업불필요: 비용절감단일분석환경가능: Data Silo 현상제거안전한데이터공유가능\nTraditional: 데이터동기화방식 Snowflake: Data Sharing\nCDC | ETL | API | Cloud buckets\nSecure Data Sharing",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p13",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.14)",
+      "score": 0.6326030492782593,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n데이터</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#f0fdf4;cursor:pointer"
+    onclick="document.getElementById('detail_S05').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">✅ S05</td>
+  <td style="padding:8px">Virtual Warehouse의 Scale up과 Scale out은 어떻게 다른가?</td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">40pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 1495자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="evidence 5건"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">30pt</span></div></td><td style="padding:8px;vertical-align:top" title="7516ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">100/100</td>
+  <td style="padding:8px;color:#6b7280">7516ms</td>
+</tr>
+<tr id="detail_S05" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> Scale up/out 차이 — PDF p.9<br>
+    <b>태그:</b> descriptive, rag, compute<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "Virtual Warehouse의 Scale up과 Scale out은 다음과 같이 다릅니다.\n\n**주요 차이점**\n\n| 구분       | 목적                       | 특징                                                                                                                                                                                                            |\n|:-----------|:---------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| **Scale up** | 복잡한 쿼리 성능 개선      | 단일 가상 웨어하우스의 컴퓨팅 자원(예: CPU, 메모리)을 늘려 개별 쿼리의 처리 속도를 향상시킵니다. 주로 데이터 양이 많거나 연산이 복잡하여 단일 쿼리 실행 시간이 오래 걸릴 때 효과적입니다. |\n| **Scale out**| 동시 요청 지원             | 여러 개의 가상 웨어하우스를 추가하여 동시에 발생하는 많은 사용자 요청이나 쿼리를 분산 처리합니다. 주로 동시 접속자 수가 많거나 동시에 여러 유형의 워크로드를 처리해야 할 때 유용하며, 전반적인 처리량을 늘립니다.  |\n\n**설명**\n\nSnowflake와 같은 클라우드 데이터 웨어하우스 환경에서 Virtual Warehouse는 워크로드 유형별로 격리된 실행 환경을 제공하며, Elastic하게 자원을 조절할 수 있습니다.\n\n*   **Scale up (수직 확장)**: 하나의 가상 웨어하우스 자체의 크기나 성능을 키우는 것을 의미합니다. 예를 들어, 더 많은 CPU 코어, 더 많은 메모리를 할당하여 **하나의 복잡한 쿼리**가 더 빠르게 실행될 수 있도록 합니다. 이는 마치 작은 트럭을 더 큰 트럭으로 바꾸는 것에 비유할 수 있습니다.\n\n*   **Scale out (수평 확장)**: 기존의 가상 웨어하우스 옆에 동일하거나 다른 크기의 가상 웨어하우스를 **추가**하는 것을 의미합니다. 이는 **동시에 발생하는 여러 쿼리나 요청**을 분산하여 처리할 수 있도록 지원함으로써, 전체 시스템의 처리량을 늘리는 데 목적이 있습니다. 이는 마치 하나의 트럭으로 부족하여 여러 대의 트럭을 추가하는 것에 비유할 수 있습니다.\n\n두 방식 모두 성능을 향상시키는 목적을 가지지만, Scale up은 개별 쿼리 성능에 초점을 맞추고, Scale out은 동시성 및 전체 시스템 처리량에 초점을 맞춘다는 차이가 있습니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p8",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.9)",
+      "score": 0.3253541588783264,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n컴퓨팅엔진\nCOMPUTE\nGoogle CloudAWSAzure\nON-DEMAND VIRTUAL WAREHOUSES●워크로드유형별격리된실행환경제공●Elastic: 바로실행●Scale up: 복잡한쿼리성능개선●Scale out: 동시요청지원●Suspend: 바로중지●초단위비용\n고객에게청구되는대부분이Credit 비용이Virtual Warehouse 사용시간에따라결정",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p23",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.24)",
+      "score": 0.1581457257270813,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n구매관련스케쥴링\n재고현황분석/예측\n리소스플랜\n생산단가분석\n공급업체자재수급안정성분석\nAll type of Data Analysis모든유형의모든데이터를통합하여분석\nElastic Performance고성능분석엔진을필요할때에만사용후초단위과금\nData Sharing주요데이터공급업체및비즈니스파트너사와다양한시장통계및세부비즈니스관련데이터공유\nML workload머신러닝모델을트레이닝할수있는엔진제공머신러닝모델인퍼런싱가능\n시장통계상품가격및가용성물류통계날씨경제지표(유가,금리)공급이벤트배송가능한공급업체(파트너직접공유)공급업체재고현황(직접파트너공유)\nERP Transaction Data: 구매,입고,리드타임,재고,비용Planning Systems세부일정,예측Shop-FloorMES, 품질Master Data공급자,자재,BOM\nINTERN</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S06').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S06</td>
+  <td style="padding:8px">NPS 점수가 40 이상인 회사를 모두 찾아줘</td>
+  <td style="padding:8px"><span style="background:#f59e0b;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">filter</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive (기대: filter)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 168자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="ontology rows 0 < 1"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="7048ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">30/100</td>
+  <td style="padding:8px;color:#6b7280">7048ms</td>
+</tr>
+<tr id="detail_S06" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> ORGANIZATION 엔티티에서 nps_score >= 40 필터 → Snowflake(67), Apple(47), Google(47)<br>
+    <b>태그:</b> filter, ontology, nps<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "NPS 점수가 40 이상인 회사는 다음과 같습니다:\n\n*   **Apple**: 47\n*   **Google**: 47\n\n문서 검색 결과에 따르면, Apple과 Google은 각각 47점의 NPS 점수를 기록하여 40점 이상에 해당합니다. Oracle은 25점, IBM은 27점으로 40점 미만입니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p2",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.3)",
+      "score": 0.18541324138641357,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2022 Snowflake Inc. All Rights Reserved\n21Industry BenchmarkOracle: 25 / IBM: 27 / Apple: 47 /  Google: 47",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p21",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.22)",
+      "score": 0.15887892246246338,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2023 Snowflake Inc. All Rights Reserved\n 22\nPROVEN BY THOUSANDS OF CUSTOMERS(8300+)",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p22",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.23)",
+      "score": 0.1451079249382019,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2020 Snowflake Inc. All Rights Reserved\nPROVEN BY THOUSANDS OF CUSTOMERS\n© 2021 Snowflake Inc. All Rights Reserved\nKorea",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p23",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.24)",
+      "score": 0.1433163285255432,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n구매관련스케쥴링\n재고현황분석/예측\n리소스플랜\n생산단가분석\n공급업체자재수급안정성분석\nAll type of Data Analysis모든유형의모든데이터를통합하여분석\nElastic Performance고성능분석엔진을필요할때에만사용후초단위과금\nData Sharing주요데이터공급업체및비즈니스파트너사와다양한시장통계및세부비즈니스관련데이터공유\nML workload머신러닝모델을트레이닝할수있는엔진제공머신러닝모델인퍼런싱가능\n시장통계상품가격및가용성물류통계날씨경제지표(유가,금리)공급이벤트배송가능한공급업체(파트너직접공유)공급업체재고현황(직접파트너공유)\nERP Transaction Data: 구매,입고,리드타임,재고,비용Planning Systems세부일정,예측Shop-FloorMES, 품질Master Data공급자,자재,BOM\nINTERNALEXTERNAL\n분석결과Snowflake 기능데이터및데이터소스",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p14",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.15)",
+      "score": 0.1373656988143921,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\nPRIVATE EXCHANGE LISTINGS\nATEAM\nATEAM\nB TEAM\nDTEAM\nETEAM\nETEAM",
+      "related_objects": []
+    }
+  ],
+  "steps": [
+    {
+      "name": "질문 유형 분류 (LLM)",
+      "status": "ok"
+    },
+    {
+      "name": "Vector Search에서 PDF 청크 검색",
+      "status": "ok"
+    },
+    {
+      "name": "최종 답변 프롬프트 생성",
+      "status": "ok"
+    },
+    {
+      "name": "LLM Gateway 호출 (gemini)",
+      "status": "ok"
+    }
+  ],
+  "latency_ms": 5005
+}</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S07').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S07</td>
+  <td style="padding:8px">스토리지 압축률이 70% 이상인 제품을 알려줘</td>
+  <td style="padding:8px"><span style="background:#f59e0b;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">filter</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive (기대: filter)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 266자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="ontology rows 0 < 1"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="6664ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">30/100</td>
+  <td style="padding:8px;color:#6b7280">6664ms</td>
+</tr>
+<tr id="detail_S07" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> PRODUCT 엔티티에서 compression_rate >= 70 → Centralized Storage(80%)<br>
+    <b>태그:</b> filter, ontology, storage<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "제공된 문서에 따르면 스토리지 압축률이 70% 이상인 제품은 다음과 같습니다.\n\n*   **제품명:** Snowflake\n*   **평균 압축률:** 80%\n\n---\n\n**설명:**\nSnowflake는 데이터 스토리지에서 평균 80%의 압축률을 제공합니다. 이는 70% 이상의 스토리지 압축률을 요구하는 사용자 질문에 부합합니다. Snowflake의 데이터 스토리지는 중앙 집중식이며, 컬럼형 스토리지, 데이터 자동 암호화, Encoding 지원 등의 특징을 가지고 있습니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p7",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.8)",
+      "score": 0.3088747262954712,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n데이터스토리지\nDATA STORAGE\nCENTRALIZED STORAGE●평균압축률: 80% ●Pass through 비용모델●컬럼형스토리지●자동으로데이터암호화●Encoding 지원●Native Semi-Structured Data 지원●Time Travel / Zero-Copy Cloning \n통합/ 단일데이터저장소및다중실행환경에서동일한데이터에지연없이접속/ 저장비용\nGoogle CloudAWSAzure",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p11",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.12)",
+      "score": 0.1851942539215088,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2022 Snowflake Inc. All Rights Reserved\n지능형인프라AlmostZeroManagementNO InfrastructureNO TuningNO OptimizationNO IndexingNO Storage worries\nNO VacuumingNO PartitioningNO Required sortingNO Workload mgmt.NO Manual backups운영비용은절감되고고객은데이터분석에더욱더집중할수있음",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p8",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.9)",
+      "score": 0.16888201236724854,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n컴퓨팅엔진\nCOMPUTE\nGoogle CloudAWSAzure\nON-DEMAND VIRTUAL WAREHOUSES●워크로드유형별격리된실행환경제공●Elastic: 바로실행●Scale up: 복잡한쿼리성능개선●Scale out: 동시요청지원●Suspend: 바로중지●초단위비용\n고객에게청구되는대부분이Credit 비용이Virtual Warehouse 사용시간에따라결정",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p23",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.24)",
+      "score": 0.15937626361846924,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n구매관련스케쥴링\n재고현황분석/예측\n리소스플랜\n생산단가분석\n공급업체자재수급안정성분석\nAll type of Data Analysis모든유형의모든데이터를통합하여분석\nElastic Performance고성능분석엔진을필요할때에만사용후초단위과금\nData Sharing주요데이터공급업체및비즈니스파트너사와다양한시장통계및세부비즈니스관련데이터공유\nML workload머신러닝모델을트레이닝할수있는엔진제공머신러닝모델인퍼런싱가능\n시장통계상품가격및가용성물류통계날씨경제지표(유가,금리)공급이벤트배송가능한공급업체(파트너직접공유)공급업체재고현황(직접파트너공유)\nERP Transaction Data: 구매,입고,리드타임,재고,비용Planning Systems세부일정,예측Shop-FloorMES, 품질Master Data공급자,자재,BOM\nINTERNALEXTERNAL\n분석결과Snowflake 기능데이터및데이터소스",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p22",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.23)",
+      "score": 0.13591957092285156,
+      "text": "© 2022 Snowflake I</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S08').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S08</td>
+  <td style="padding:8px">compute 카테고리인 제품 목록을 보여줘</td>
+  <td style="padding:8px"><span style="background:#f59e0b;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">filter</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive (기대: filter)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 751자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="ontology rows 0 < 1"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="10761ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">30/100</td>
+  <td style="padding:8px;color:#6b7280">10761ms</td>
+</tr>
+<tr id="detail_S08" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> PRODUCT 엔티티 category=compute → Virtual Warehouse<br>
+    <b>태그:</b> filter, ontology, product<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "제공된 문서를 바탕으로 Snowflake의 compute(컴퓨팅) 카테고리 제품은 다음과 같습니다.\n\n**제품 목록:**\n\n*   **Virtual Warehouses (가상 웨어하우스)**\n\n**설명:**\n\nSnowflake의 컴퓨팅 카테고리에서 핵심적인 제품은 **Virtual Warehouses(가상 웨어하우스)**입니다. 이는 '컴퓨팅 엔진(COMPUTE)'으로 명시되며, 다음과 같은 특징을 가집니다.\n\n*   **온디맨드 (ON-DEMAND):** 필요할 때 즉시 실행하고 중지할 수 있습니다.\n*   **격리된 실행 환경:** 워크로드 유형별로 격리된 실행 환경을 제공합니다.\n*   **탄력성 (Elastic):**\n    *   **Scale up:** 복잡한 쿼리 성능 개선을 위해 컴퓨팅 리소스를 확장할 수 있습니다.\n    *   **Scale out:** 동시 요청을 지원하기 위해 리소스를 확장할 수 있습니다.\n*   **비용 효율성:** 사용하지 않을 때는 바로 중지할 수 있으며, 초 단위로 비용이 청구됩니다. 고객에게 청구되는 대부분의 Credit 비용은 Virtual Warehouse 사용 시간에 따라 결정됩니다.\n*   **다양한 워크로드 지원:** 고성능 분석은 물론, 머신러닝(ML) 워크로드(모델 트레이닝 및 인퍼런싱)를 위한 엔진으로도 활용될 수 있습니다.\n\n문서에 따르면, Virtual Warehouses는 Snowflake 플랫폼 내에서 데이터 분석 및 처리를 위한 주요 컴퓨팅 리소스입니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p8",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.9)",
+      "score": 0.36552107334136963,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n컴퓨팅엔진\nCOMPUTE\nGoogle CloudAWSAzure\nON-DEMAND VIRTUAL WAREHOUSES●워크로드유형별격리된실행환경제공●Elastic: 바로실행●Scale up: 복잡한쿼리성능개선●Scale out: 동시요청지원●Suspend: 바로중지●초단위비용\n고객에게청구되는대부분이Credit 비용이Virtual Warehouse 사용시간에따라결정",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p23",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.24)",
+      "score": 0.296053946018219,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n구매관련스케쥴링\n재고현황분석/예측\n리소스플랜\n생산단가분석\n공급업체자재수급안정성분석\nAll type of Data Analysis모든유형의모든데이터를통합하여분석\nElastic Performance고성능분석엔진을필요할때에만사용후초단위과금\nData Sharing주요데이터공급업체및비즈니스파트너사와다양한시장통계및세부비즈니스관련데이터공유\nML workload머신러닝모델을트레이닝할수있는엔진제공머신러닝모델인퍼런싱가능\n시장통계상품가격및가용성물류통계날씨경제지표(유가,금리)공급이벤트배송가능한공급업체(파트너직접공유)공급업체재고현황(직접파트너공유)\nERP Transaction Data: 구매,입고,리드타임,재고,비용Planning Systems세부일정,예측Shop-FloorMES, 품질Master Data공급자,자재,BOM\nINTERNALEXTERNAL\n분석결과Snowflake 기능데이터및데이터소스",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p10",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.11)",
+      "score": 0.21893197298049927,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n클라우드서비스CLOUD SERVICES\n 여러실행환경에서동일서비스가가능한Global 서비스●쿼리최적화수행●메타정보관리계층: 캐쉬●용량제한없는Result 캐쉬●SERVERLESS 기능:  Materialized view maintenance Cross-cloud replicationAuto-ClusteringSnowpipeSearch Optimization Service\nSnowflake Account 의여러실행환경에게동일한서비스를제공하는계층-Serverless 기능만과금발생\nGoogle CloudAWSAzure",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p24",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S09').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S09</td>
+  <td style="padding:8px">Snowflake와 Oracle의 NPS 점수를 비교해줘</td>
+  <td style="padding:8px"><span style="background:#10b981;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">compare</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive (기대: compare)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 228자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="table rows 0 < 1"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="9604ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">30/100</td>
+  <td style="padding:8px;color:#6b7280">9604ms</td>
+</tr>
+<tr id="detail_S09" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> Snowflake(67) vs Oracle(25) — NPS 비교표<br>
+    <b>태그:</b> compare, ontology, nps<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "제공된 문서를 바탕으로 Snowflake와 Oracle의 NPS 점수는 다음과 같습니다.\n\n*   **Oracle NPS 점수:** 25\n\n주어진 문서에 따르면, Oracle의 NPS(Net Promoter Score)는 **25**입니다.\n\nSnowflake의 구체적인 NPS 점수는 제공된 문서에서 확인할 수 없습니다. 다만, 한 문서에서는 Snowflake가 분석 플랫폼 중 1위라고 언급되어 있습니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p2",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.3)",
+      "score": 0.4072708487510681,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2022 Snowflake Inc. All Rights Reserved\n21Industry BenchmarkOracle: 25 / IBM: 27 / Apple: 47 /  Google: 47",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p1",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.2)",
+      "score": 0.3367024064064026,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n스노우플레이크소개\n120개이상의데이터베이스특허를가진업계의베테랑들이2012년회사설립2015년GA\nNYSE\n2020년9월NYSE에상장Largest US software IPO in history\n2021년11월Snowflake 한국지사설립\nBenoit DagevilleLead architect OracleExpert in parallel query executionDozens of patents\nThierry CuranesLead architect OracleExpert in query optimizationDozens of patents\nMarcin Zukowski, VectorwisefounderCreator of vectorized query execution in databases",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p3",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.4)",
+      "score": 0.3307696580886841,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n분석플랫폼중1위",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p21",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.22)",
+      "score": 0.3044067621231079,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2023 Snowflake Inc. All Rights Reserved\n 22\nPROVEN BY THOUSANDS OF CUSTOMERS(8300+)",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p0",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.1)",
+      "score": 0.3013240694999695,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\nINTRODUCTION TO SNOWFLAKE 2023",
+      "related_objects": []
+    }
+  ],
+  "steps": [
+    {
+      "name": "질문 유형 분류 (LLM)",
+      "status": "ok"
+    },
+    {
+      "name": "Vector Search에서 PDF 청크 검색",
+      "status": "ok"
+    },
+    {
+      "name": "최종 답변 프롬프트 생성",
+      "status": "ok"
+    },
+    {
+      "name": "LLM Gateway 호출 (gemini)",
+      "status": "ok"
+    }
+  ],
+  "latency_ms": 7522
+}</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S10').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S10</td>
+  <td style="padding:8px">Snowflake, IBM, Apple, Google의 NPS 점수를 비교해줘</td>
+  <td style="padding:8px"><span style="background:#10b981;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">compare</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive (기대: compare)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 324자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="table rows 0 < 2"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="5568ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">30/100</td>
+  <td style="padding:8px;color:#6b7280">5568ms</td>
+</tr>
+<tr id="detail_S10" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> 4개 조직 NPS 비교표 — 67/27/47/47<br>
+    <b>태그:</b> compare, ontology, nps, multi<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "제공된 문서에 기반하여 Snowflake, IBM, Apple, Google의 NPS 점수는 다음과 같습니다:\n\n| 회사      | NPS 점수 |\n| :-------- | :------- |\n| Snowflake | 정보 없음  |\n| IBM       | 27       |\n| Apple     | 47       |\n| Google    | 47       |\n\n**설명:**\n제공된 문서에 따르면 IBM의 NPS 점수는 27점이며, Apple과 Google은 각각 47점으로 동일합니다. 하지만 Snowflake의 NPS 점수는 문서에서 명확히 언급되어 있지 않습니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p2",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.3)",
+      "score": 0.5106246769428253,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2022 Snowflake Inc. All Rights Reserved\n21Industry BenchmarkOracle: 25 / IBM: 27 / Apple: 47 /  Google: 47",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p7",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.8)",
+      "score": 0.28522586822509766,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n데이터스토리지\nDATA STORAGE\nCENTRALIZED STORAGE●평균압축률: 80% ●Pass through 비용모델●컬럼형스토리지●자동으로데이터암호화●Encoding 지원●Native Semi-Structured Data 지원●Time Travel / Zero-Copy Cloning \n통합/ 단일데이터저장소및다중실행환경에서동일한데이터에지연없이접속/ 저장비용\nGoogle CloudAWSAzure",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p3",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.4)",
+      "score": 0.2841814160346985,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n분석플랫폼중1위",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p22",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.23)",
+      "score": 0.27120113372802734,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2020 Snowflake Inc. All Rights Reserved\nPROVEN BY THOUSANDS OF CUSTOMERS\n© 2021 Snowflake Inc. All Rights Reserved\nKorea",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p8",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.9)",
+      "score": 0.270801842212677,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n컴퓨팅엔진\nCOMPUTE\nGoogle CloudAWSAzure\nON-DEMAND VIRTUAL WAREHOUSES●워크로드유형별격리된실행환경제공●Elastic: 바로실행●Scale up: 복잡한쿼리성능개선●Scale out: 동시요청지원●Suspend: 바로중지●초단위비용\n고객에게청구되는대부분이Credit 비용이Virtual Warehouse 사용시간에따라결정",
+      "related_objects": []
+    }
+  ],
+  "steps": [
+    {
+      "name": "질문 유형 분류 (LLM)",
+      "status": "ok"
+    },
+    {
+      "name": "Vector Search에서 PDF 청크 검색",
+      "status": "ok"
+    },
+    {
+      "name": "최종 답변 프롬프트 생성",
+      "status": "ok"
+    },
+    {
+      "name": "LLM Gateway 호출 (gemini)",
+      "status": "ok"
+    }
+  ],
+  "latency_ms": 3519
+}</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S11').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S11</td>
+  <td style="padding:8px">Virtual Warehouse와 Centralized Storage의 특성을 비교해줘</td>
+  <td style="padding:8px"><span style="background:#10b981;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">compare</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive (기대: compare)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 2172자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="ontology_result={}"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="14995ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">30/100</td>
+  <td style="padding:8px;color:#6b7280">14995ms</td>
+</tr>
+<tr id="detail_S11" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> PRODUCT 2개 비교 — compute vs storage<br>
+    <b>태그:</b> compare, ontology, product<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "제공된 문서에 따르면, Virtual Warehouse는 컴퓨팅 엔진의 역할을, Centralized Storage는 데이터 스토리지의 역할을 수행하며 서로 다른 특성을 가집니다.\n\n### 비교 요약표\n\n| 특성        | Virtual Warehouse (가상 웨어하우스)        | Centralized Storage (중앙 집중식 스토리지)         |\n| :---------- | :--------------------------------------- | :------------------------------------------- |\n| **주요 기능**   | 컴퓨팅 엔진 / 쿼리 실행 환경               | 데이터 저장소 / 데이터 관리                     |\n| **목적**      | 워크로드별 격리된 실행, 쿼리 처리, 성능 개선, 동시성 지원 | 데이터 저장, 압축, 암호화, 구조화/반정형 데이터 지원 |\n| **확장성**    | Elastic (바로 실행/중지), Scale up (성능 개선), Scale out (동시 요청 지원) | (명시적 확장성 언급은 없으나, 통합/단일 데이터 저장소로서 유연성 제공) |\n| **비용 모델**   | 초단위 비용 (Virtual Warehouse 사용 시간에 따라 크레딧 비용 결정) | Pass through 비용 모델 (저장 비용)             |\n| **주요 특징**   | 워크로드 유형별 격리된 실행 환경, 즉시 실행/중지, 복잡한 쿼리 성능 개선, 동시 요청 지원 | 평균 압축률 80%, 컬럼형 스토리지, 자동 데이터 암호화, Encoding 지원, Native Semi-Structured Data 지원, Time Travel / Zero-Copy Cloning |\n\n### 서술형 설명\n\n**1. Virtual Warehouse (가상 웨어하우스)**\nVirtual Warehouse는 Snowflake 아키텍처에서 **컴퓨팅 엔진**의 역할을 담당합니다. 주로 데이터 처리 및 쿼리 실행을 위한 격리된 실행 환경을 제공합니다.\n\n*   **컴퓨팅 자원 제공**: 사용자의 다양한 워크로드(예: 보고서 생성, 데이터 분석, ETL 작업 등) 유형에 따라 격리된 실행 환경을 제공합니다.\n*   **탄력적 확장성**: `Elastic` 기능을 통해 필요할 때 즉시 실행되고, 사용하지 않을 때는 `Suspend` 기능을 통해 바로 중지될 수 있습니다. 복잡한 쿼리의 성능 개선을 위해 `Scale up`이 가능하며, 동시 요청을 지원하기 위해 `Scale out`도 가능합니다.\n*   **비용 효율성**: 사용한 만큼만 지불하는 `초단위 비용` 모델을 따르며, 고객에게 청구되는 대부분의 크레딧 비용이 Virtual Warehouse 사용 시간에 따라 결정됩니다.\n\n**2. Centralized Storage (중앙 집중식 스토리지)**\nCentralized Storage는 Snowflake 아키텍처에서 **데이터 스토리지**의 핵심 역할을 담당합니다. 모든 데이터를 통합하고 단일 저장소에 보관하며 관리하는 기능을 수행합니다.\n\n*   **통합 데이터 저장소**: 모든 구조화된(컬럼형) 및 반정형 데이터를 통합하여 저장합니다. 다중 실행 환경에서 동일한 데이터에 지연 없이 접속할 수 있도록 지원합니다.\n*   **데이터 효율성 및 관리**: 평균 80%의 높은 압축률을 제공하여 저장 공간을 효율적으로 사용합니다. 데이터는 자동으로 암호화되며, Encoding과 Native Semi-Structured Data를 지원합니다.\n*   **고급 데이터 기능**: `Time Travel` 기능으로 과거 시점의 데이터에 접근하거나 복구할 수 있으며, `Zero-Copy Cloning`을 통해 저장 공간을 추가로 사용하지 않고 데이터 복제본을 생성할 수 있습니다.\n*   **비용 모델**: `Pass through 비용 모델`을 통해 저장 비용이 청구됩니다.\n\n**결론적으로, Virtual Warehouse는 데이터를 처리하고 쿼리를 실행하는 '뇌'와 같은 역할을 하며, Centralized Storage는 처리할 데이터를 저장하고 관리하는 '저장고'와 같은 역할을 합니다. 이 두 구성 요소는 서로 분리되어 독립적으로 확장되면서도 유기적으로 연동되어 Snowflake의 강력한 데이터 처리 및 분석 환경을 제공합니다.**",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p7",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.8)",
+      "score": 0.32927632331848145,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n데이터스토리지\nDATA STORAGE\nCENTRALIZED STORAGE●평균압축률: 80% ●Pass through 비용모델●컬럼형스토리지●자동으로데이터암호화●Encoding 지원●Native Semi-Structured Data 지원●Time Travel / Zero-Copy Cloning \n통합/ 단일데이터저장소및다중실행환경에서동일한데이터에지연없이접속/ 저장비</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S12').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S12</td>
+  <td style="padding:8px">전체 고객 수(total_customers)와 백만달러 고객 수(million_dollar_customers…</td>
+  <td style="padding:8px"><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">calculate</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive (기대: calculate)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 174자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="ontology_result.calc 없음"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="6809ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">30/100</td>
+  <td style="padding:8px;color:#6b7280">6809ms</td>
+</tr>
+<tr id="detail_S12" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> 8537 + 402 = 8939 — METRIC 합산<br>
+    <b>태그:</b> calculate, ontology, customers<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "제공된 문서 검색 결과에 따르면 다음과 같은 정보를 확인할 수 있습니다.\n\n*   **총 고객 수(total_customers):** 8300+\n\n백만 달러 고객 수(million_dollar_customers)에 대한 정보는 제공된 문서에서 찾을 수 없습니다.\n\n따라서, 두 숫자를 더한 값은 알 수 없습니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p21",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.22)",
+      "score": 0.1826033592224121,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2023 Snowflake Inc. All Rights Reserved\n 22\nPROVEN BY THOUSANDS OF CUSTOMERS(8300+)",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p22",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.23)",
+      "score": 0.15425491333007812,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2020 Snowflake Inc. All Rights Reserved\nPROVEN BY THOUSANDS OF CUSTOMERS\n© 2021 Snowflake Inc. All Rights Reserved\nKorea",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p23",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.24)",
+      "score": 0.14089620113372803,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n구매관련스케쥴링\n재고현황분석/예측\n리소스플랜\n생산단가분석\n공급업체자재수급안정성분석\nAll type of Data Analysis모든유형의모든데이터를통합하여분석\nElastic Performance고성능분석엔진을필요할때에만사용후초단위과금\nData Sharing주요데이터공급업체및비즈니스파트너사와다양한시장통계및세부비즈니스관련데이터공유\nML workload머신러닝모델을트레이닝할수있는엔진제공머신러닝모델인퍼런싱가능\n시장통계상품가격및가용성물류통계날씨경제지표(유가,금리)공급이벤트배송가능한공급업체(파트너직접공유)공급업체재고현황(직접파트너공유)\nERP Transaction Data: 구매,입고,리드타임,재고,비용Planning Systems세부일정,예측Shop-FloorMES, 품질Master Data공급자,자재,BOM\nINTERNALEXTERNAL\n분석결과Snowflake 기능데이터및데이터소스",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p11",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.12)",
+      "score": 0.13114440441131592,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2022 Snowflake Inc. All Rights Reserved\n지능형인프라AlmostZeroManagementNO InfrastructureNO TuningNO OptimizationNO IndexingNO Storage worries\nNO VacuumingNO PartitioningNO Required sortingNO Workload mgmt.NO Manual backups운영비용은절감되고고객은데이터분석에더욱더집중할수있음",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p5",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.6)",
+      "score": 0.12163615226745605,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n스노우플레이크클라우드데이터플랫폼\n100% Cloud Stack 기반으로개발된클라우드를위한단일데이터플랫폼\nDATACONSUMERSData Monetization\nOperational Reporting\nAd Hoc Analysis\nReal-time Analytics\nDATASOURCESOLTP DatabasesEnterprise ApplicationsThird-PartyWeb/Log DataIoT\nBatch, Streaming",
+      "related_objects": []
+    }
+  ],
+  "steps": [
+    {
+      "name": "질문 유형 분류 (LLM)",
+</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S13').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S13</td>
+  <td style="padding:8px">Snowflake의 NPS 점수에서 Oracle의 NPS 점수를 빼면 얼마?</td>
+  <td style="padding:8px"><span style="background:#3b82f6;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">calculate</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive (기대: calculate)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 232자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="ontology_result.calc 없음"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="7077ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">30/100</td>
+  <td style="padding:8px;color:#6b7280">7077ms</td>
+</tr>
+<tr id="detail_S13" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> 67 - 25 = 42 — METRIC 차감<br>
+    <b>태그:</b> calculate, ontology, nps<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "제공된 문서를 바탕으로 Snowflake의 NPS 점수는 확인할 수 없으며, Oracle의 NPS 점수는 25입니다.\n\n**NPS 점수:**\n\n*   **Snowflake:** 정보 없음\n*   **Oracle:** 25 (문서 [1] 참고)\n\n**계산 결과:**\nSnowflake의 NPS 점수에 대한 정보가 없으므로, Snowflake의 NPS 점수에서 Oracle의 NPS 점수를 뺀 값은 계산할 수 없습니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p2",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.3)",
+      "score": 0.3999706506729126,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2022 Snowflake Inc. All Rights Reserved\n21Industry BenchmarkOracle: 25 / IBM: 27 / Apple: 47 /  Google: 47",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p1",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.2)",
+      "score": 0.30716216564178467,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n스노우플레이크소개\n120개이상의데이터베이스특허를가진업계의베테랑들이2012년회사설립2015년GA\nNYSE\n2020년9월NYSE에상장Largest US software IPO in history\n2021년11월Snowflake 한국지사설립\nBenoit DagevilleLead architect OracleExpert in parallel query executionDozens of patents\nThierry CuranesLead architect OracleExpert in query optimizationDozens of patents\nMarcin Zukowski, VectorwisefounderCreator of vectorized query execution in databases",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p3",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.4)",
+      "score": 0.3047295808792114,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n분석플랫폼중1위",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p21",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.22)",
+      "score": 0.2921578288078308,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2023 Snowflake Inc. All Rights Reserved\n 22\nPROVEN BY THOUSANDS OF CUSTOMERS(8300+)",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p4",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.5)",
+      "score": 0.2828318476676941,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\nDATA CLOUDin SNOWFLAKE",
+      "related_objects": []
+    }
+  ],
+  "steps": [
+    {
+      "name": "질문 유형 분류 (LLM)",
+      "status": "ok"
+    },
+    {
+      "name": "Vector Search에서 PDF 청크 검색",
+      "status": "ok"
+    },
+    {
+      "name": "최종 답변 프롬프트 생성",
+      "status": "ok"
+    },
+    {
+      "name": "LLM Gateway 호출 (gemini)",
+      "status": "ok"
+    }
+  ],
+  "latency_ms": 5053
+}</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S14').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S14</td>
+  <td style="padding:8px">Snowflake NPS 67점이 경쟁사 대비 어느 정도인지 문서 내용과 함께 설명해줘</td>
+  <td style="padding:8px"><span style="background:#ec4899;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">hybrid</span></td>
+  <td style="padding:8px"><span style="background:#6366f1;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">descriptive</span></td>
+  <td style="padding:8px;vertical-align:top" title="query_type=descriptive (기대: hybrid)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="answer 1210자 ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">20pt</span></div></td><td style="padding:8px;vertical-align:top" title="ontology_result 없음 (evidence는 있음: evidence 5건)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="11244ms < 15000ms ✓"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:100%;background:#10b981;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">10pt</span></div></td>
+  <td style="padding:8px;font-weight:700">30/100</td>
+  <td style="padding:8px;color:#6b7280">11244ms</td>
+</tr>
+<tr id="detail_S14" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> NPS 수치(온톨로지) + 문서 설명(RAG) 혼합<br>
+    <b>태그:</b> hybrid, ontology, rag, nps<br>
+    
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{
+  "answer": "제공된 문서 검색 결과에는 Snowflake의 NPS 점수가 67점이라는 내용이 직접적으로 명시되어 있지 않습니다. 다만, 경쟁사들의 NPS 점수와 Snowflake의 시장 내 위상에 대한 정보는 포함하고 있습니다.\n\n---\n\n**1. 경쟁사 NPS 점수 (문서 내용 기반):**\n\n| 기업명 | NPS 점수 |\n| :----- | :------- |\n| Oracle | 25       |\n| IBM    | 27       |\n| Apple  | 47       |\n| Google | 47       |\n\n**2. 문서 내용 기반 Snowflake의 경쟁 위치:**\n\n*   **분석 플랫폼 중 1위:** 문서 [2]에 따르면 Snowflake는 \"분석 플랫폼 중 1위\"로 언급됩니다. 이는 시장 내에서 강력한 리더십과 높은 고객 만족도를 암시합니다.\n*   **8300+ 고객사:** 문서 [3]에서 8,300개 이상의 고객사가 Snowflake를 사용하고 있다고 명시되어 있으며, 이는 폭넓은 고객 기반과 서비스에 대한 높은 신뢰도를 나타냅니다.\n\n---\n\n**설명:**\n\n제공된 문서 내용만으로는 사용자 질문에서 언급된 Snowflake의 NPS 67점을 직접적으로 확인할 수 없습니다. 따라서 Snowflake 67점과 경쟁사 점수를 문서 내에서 직접 비교하는 것은 불가능합니다.\n\n하지만 문서 [1]은 Oracle(25점), IBM(27점), Apple(47점), Google(47점)과 같은 주요 기업들의 NPS 점수를 산업 벤치마크로 제시하고 있습니다. 만약 Snowflake의 NPS가 실제로 67점이라면, 이는 문서에 제시된 경쟁사들의 NPS 점수(25점, 27점, 47점)보다 훨씬 높은 수치입니다.\n\n또한, 문서 [2]에서 Snowflake가 \"분석 플랫폼 중 1위\"라고 강조하고 있고, 문서 [3]에서 8,300개 이상의 고객사를 보유하고 있다고 언급하는 점은 Snowflake가 시장에서 매우 강력한 경쟁력을 가지고 있으며 높은 고객 만족도를 유지하고 있음을 간접적으로 시사합니다. 이러한 시장 지위와 고객 만족도는 일반적으로 높은 NPS 점수와 연결됩니다.\n\n결론적으로, 제공된 문서 내에서 Snowflake의 NPS 67점을 직접 찾아 비교할 수는 없지만, 문서에 명시된 경쟁사들의 NPS 점수와 Snowflake의 시장 내 압도적인 위치를 고려할 때, 67점이라는 NPS는 경쟁사 대비 매우 우수한 수준으로 판단될 수 있습니다.",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-2.5-flash",
+  "warning": null,
+  "query_type": "descriptive",
+  "classification": {
+    "type": "descriptive",
+    "entities": [],
+    "operation": "explain",
+    "property_key": null,
+    "property_value": null,
+    "entity_type": null
+  },
+  "ontology_result": {},
+  "evidence": [
+    {
+      "document_id": "vec-doc-ff68a066-p2",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.3)",
+      "score": 0.4419158697128296,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2022 Snowflake Inc. All Rights Reserved\n21Industry BenchmarkOracle: 25 / IBM: 27 / Apple: 47 /  Google: 47",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p3",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.4)",
+      "score": 0.39377355575561523,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n© 2022 Snowflake Inc. All Rights Reserved\n분석플랫폼중1위",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p21",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.22)",
+      "score": 0.3887869119644165,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved© 2023 Snowflake Inc. All Rights Reserved\n 22\nPROVEN BY THOUSANDS OF CUSTOMERS(8300+)",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p0",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.1)",
+      "score": 0.37154603004455566,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\nINTRODUCTION TO SNOWFLAKE 2023",
+      "related_objects": []
+    },
+    {
+      "document_id": "vec-doc-ff68a066-p1",
+      "title": "[PDF] Snowflake_소개서_HDC.pdf (p.2)",
+      "score": 0.37133079767227173,
+      "text": "© 2022 Snowflake Inc. All Rights Reserved\n©</pre>
+    </details>
+  </td>
+</tr>
+
+<tr style="background:#fef2f2;cursor:pointer"
+    onclick="document.getElementById('detail_S15').hidden ^= 1">
+  <td style="padding:8px;font-weight:600">❌ S15</td>
+  <td style="padding:8px">Snowflake의 설립 배경과 현재 전체 고객 수를 함께 분석해줘</td>
+  <td style="padding:8px"><span style="background:#ec4899;color:#fff;padding:2px 8px;border-radius:9999px;font-size:0.75rem">hybrid</span></td>
+  <td style="padding:8px">오류</td>
+  <td style="padding:8px;vertical-align:top" title="오류: 요청 타임아웃 (30s)"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="오류로 인해 미평가"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="오류로 인해 미평가"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td><td style="padding:8px;vertical-align:top" title="오류로 인해 미평가"><div style="display:flex;align-items:center;gap:6px"><div style="flex:1;background:#e5e7eb;border-radius:4px;height:8px"><div style="width:0%;background:#ef4444;height:8px;border-radius:4px"></div></div><span style="font-weight:600;min-width:36px">0pt</span></div></td>
+  <td style="padding:8px;font-weight:700">0/100</td>
+  <td style="padding:8px;color:#6b7280">30000ms</td>
+</tr>
+<tr id="detail_S15" hidden>
+  <td colspan="10" style="padding:12px 24px;background:#f8fafc;border-bottom:2px solid #e2e8f0">
+    <b>설명:</b> 창업자 배경(RAG, p.2) + 고객 수 8537(온톨로지) 혼합<br>
+    <b>태그:</b> hybrid, ontology, rag, history<br>
+    <b>오류:</b> <span style="color:red">요청 타임아웃 (30s)</span><br>
+    <details style="margin-top:8px">
+      <summary style="cursor:pointer;color:#6366f1">응답 원문 보기</summary>
+      <pre style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;font-size:0.8rem;margin-top:8px">{}</pre>
+    </details>
+  </td>
+</tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

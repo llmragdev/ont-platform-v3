@@ -1,0 +1,98 @@
+{
+  "$schema_version": "1.0",
+  "description": "claud_통합 온톨로지 스키마. Phase 1에서 외부화됨. 새 객체 타입/관계 타입은 이 파일에 추가하면 코드 수정 없이 적용됩니다.",
+  "object_types": [
+    {
+      "name": "Customer",
+      "display_name": "고객",
+      "id_prefix": "C",
+      "icon": "Users",
+      "properties": [
+        {"name": "name", "type": "string", "required": true, "searchable": true},
+        {"name": "segment", "type": "string", "required": true},
+        {"name": "region", "type": "string", "required": true},
+        {"name": "risk_tier", "type": "string", "required": true, "sensitive": true,
+         "enum_values": ["Low", "Medium", "High"]},
+        {"name": "contract_terms", "type": "string", "sensitive": true},
+        {"name": "owner", "type": "string"}
+      ]
+    },
+    {
+      "name": "Product",
+      "display_name": "제품",
+      "id_prefix": "P",
+      "icon": "Package",
+      "properties": [
+        {"name": "name", "type": "string", "required": true, "searchable": true},
+        {"name": "category", "type": "string", "required": true},
+        {"name": "unit_price", "type": "float", "required": true}
+      ]
+    },
+    {
+      "name": "Order",
+      "display_name": "주문",
+      "id_prefix": "O",
+      "icon": "ShoppingCart",
+      "properties": [
+        {"name": "customer_id", "type": "string", "required": true},
+        {"name": "order_date", "type": "string", "required": true},
+        {"name": "status", "type": "string", "required": true,
+         "enum_values": ["Submitted", "Review", "Approved", "Rejected", "Fulfilled", "Closed"]},
+        {"name": "amount", "type": "float", "required": true},
+        {"name": "product_ids", "type": "list", "required": true}
+      ]
+    }
+  ],
+  "relationship_types": [
+    {
+      "name": "PLACED_ORDER",
+      "display_name": "주문함",
+      "reverse_display_name": "주문 고객",
+      "source_type": "Customer",
+      "target_type": "Order",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "ORDER_CONTAINS_PRODUCT",
+      "display_name": "상품 포함",
+      "reverse_display_name": "포함된 주문",
+      "source_type": "Order",
+      "target_type": "Product",
+      "cardinality": "many_to_many"
+    }
+  ],
+  "action_types": [
+    {
+      "name": "ApproveOrder",
+      "display_name": "주문 승인",
+      "target_type": "Order",
+      "node_type_key": "approve_order",
+      "exposed_as_graph_node": true,
+      "required_role": ["AccountManager", "FinanceManager", "Admin"]
+    },
+    {
+      "name": "RejectOrder",
+      "display_name": "주문 반려",
+      "target_type": "Order",
+      "node_type_key": "reject_order",
+      "exposed_as_graph_node": false,
+      "required_role": ["AccountManager", "FinanceManager", "Admin"]
+    },
+    {
+      "name": "HoldOrder",
+      "display_name": "주문 보류",
+      "target_type": "Order",
+      "node_type_key": "hold_order",
+      "exposed_as_graph_node": false,
+      "required_role": ["AccountManager", "FinanceManager", "Admin"]
+    },
+    {
+      "name": "RiskAssess",
+      "display_name": "리스크 평가",
+      "target_type": "Customer",
+      "node_type_key": "risk_assess",
+      "exposed_as_graph_node": true,
+      "required_role": ["Analyst", "AccountManager", "FinanceManager", "Admin"]
+    }
+  ]
+}

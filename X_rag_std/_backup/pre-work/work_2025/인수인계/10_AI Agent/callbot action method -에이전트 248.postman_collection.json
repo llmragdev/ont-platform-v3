@@ -1,0 +1,1527 @@
+{
+	"info": {
+		"_postman_id": "1aa487d8-617e-41d7-883f-f980d444f74e",
+		"name": "callbot action method -에이전트 248",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11648726"
+	},
+	"item": [
+		{
+			"name": "124-디버 - RAG",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company\": \"ucs100\", \r\n    \"project\": \"19\", \r\n    \"query\": \"가입문의\",\r\n  \"dialog_type\": \"CALL\",\r\n  \"dialog_id\":\"1719470319.85\",\r\n  \"dialog_user_id\":\"01051109819\"   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.124:8080/bot-chat/call/answer",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"124"
+					],
+					"port": "8080",
+					"path": [
+						"bot-chat",
+						"call",
+						"answer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "237_첫인사 (112)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,      \r\n  \"project_id\": \"112\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"aaa\" ,       \r\n  \"chat_user_id\": \"aaa\" ,    \r\n  \"query\": \"첫인사\" ,   \r\n  \"last_intent_cd\": null,  \r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\",  \r\n   \"intent_type_cd\" : \"\",\r\n   \"fallback_type_cd\" : \"\",   \r\n   \"current_intent_cd\" : \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "237 - 첫인사 (295)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,      \r\n  \"project_id\": \"295\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"aaa\" ,       \r\n  \"chat_user_id\": \"aaa\" ,    \r\n  \"query\": \"첫인사\" ,   \r\n  \"last_intent_cd\": null,  \r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\",  \r\n   \"intent_type_cd\" : \"\",\r\n   \"fallback_type_cd\" : \"\",   \r\n   \"current_intent_cd\" : \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "237 - 주문접수 (295)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,      \r\n  \"project_id\": \"295\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"aaa\" ,       \r\n  \"chat_user_id\": \"aaa\" ,    \r\n  \"query\": \"주문접수\" ,   \r\n  \"last_intent_cd\": 2,  \r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\",  \r\n   \"intent_type_cd\" : \"\",\r\n   \"fallback_type_cd\" : \"\",   \r\n   \"current_intent_cd\" : \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "서비스 진단 (119)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"119\" ,      \r\n  \"message_id\": \"dg-202403291201123000\" ,       \r\n  \"dialog_id\": \"dg-202403291201123000\" ,        \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"진단\" ,    \r\n  \"last_intent_cd\": 1,  \r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\",  \r\n   \"intent_type_cd\" : \"\",\r\n   \"fallback_type_cd\" : \"\",  \r\n   \"current_intent_cd\" : \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "서비스 진단 (119) - 미발화",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"119\" ,      \r\n  \"message_id\": \"dg-202403291201123000\" ,       \r\n  \"dialog_id\": \"dg-202403291201123000\" ,        \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"\" ,    \r\n  \"last_intent_cd\": 1,  \r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\",  \r\n   \"intent_type_cd\" : \"\",\r\n   \"fallback_type_cd\" : \"\",  \r\n   \"current_intent_cd\" : \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "서비스 진단 (119)-fallback",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"119\" ,      \r\n  \"message_id\": \"dg-202403291201123000\" ,       \r\n  \"dialog_id\": \"dg-202403291201123000\" ,        \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"진단\" ,    \r\n  \"last_intent_cd\": 5,  \r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\",  \r\n   \"intent_type_cd\" : \"\",\r\n   \"fallback_type_cd\" : \"\",  \r\n   \"current_intent_cd\" : \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "서비스 진단 (119)-에러",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"1192\" ,      \r\n  \"message_id\": \"dg-202403291201123000\" ,       \r\n  \"dialog_id\": \"dg-202403291201123000\" ,        \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"진단\" ,    \r\n  \"last_intent_cd\": \"6\",  \r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\",  \r\n   \"intent_type_cd\" : \"\",\r\n   \"fallback_type_cd\" : \"\",  \r\n   \"current_intent_cd\" : \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock-API-종목가",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"정보_종목명\" : \"삼성전자\" \r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8099/ac/v1/stockPrice/list",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8099",
+					"path": [
+						"ac",
+						"v1",
+						"stockPrice",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock-API-종목가 Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"정보_종목명\" : \"삼성전자\" \r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8099/ac/v1/stockPrice/list",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8099",
+					"path": [
+						"ac",
+						"v1",
+						"stockPrice",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock-API-종목가2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"종목명\" : \"엘지\"  \r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8099/ac/v1/stockPrice/list2",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8099",
+					"path": [
+						"ac",
+						"v1",
+						"stockPrice",
+						"list2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock-API-잔액2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"고객번호\" : \"222222\"   \r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8099/ac/v1/balance/list2",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8099",
+					"path": [
+						"ac",
+						"v1",
+						"balance",
+						"list2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock-API-root",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"고객번호\" : \"222222\"   ,\r\n\"doc_content\" : \" 이 리포트를 요약해야 합니다. 요약할 내용은 다음과 같습니다\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8097/api/document/pre_work",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8097",
+					"path": [
+						"api",
+						"document",
+						"pre_work"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock-API-요약",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"고객번호\" : \"222222\"   ,\r\n\"doc_content\" : \" 안녕하세요 고객님 핸드폰이 고장나서 고치고 싶어요.  어떤 제품인가요\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8097/api/document/summarize",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8097",
+					"path": [
+						"api",
+						"document",
+						"summarize"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock-API-분류",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"고객번호\" : \"222222\"   ,\r\n\"doc_content\" : \" 안녕하세요 고객님 핸드폰이 고장나서 고치고 싶어요.  어떤 제품인가요\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8097/api/document/classify",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8097",
+					"path": [
+						"api",
+						"document",
+						"classify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock-API-제목",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"고객번호\" : \"222222\"   ,\r\n\"doc_content\" : \" 안녕하세요 고객님 핸드폰이 고장나서 고치고 싶어요.  어떤 제품인가요\" \r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8097/api/document/extract_title",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8097",
+					"path": [
+						"api",
+						"document",
+						"extract_title"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock-API-make-report",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"문서분류\" : \"제품문의\"   ,\r\n\"문서요약\" : \" 요약 내용입니다\" , \r\n\"문서제목\" : \" 제목이다 \" \r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8097/api/document/make_report",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8097",
+					"path": [
+						"api",
+						"document",
+						"make_report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "디버 - 테스트",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"292\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,         \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"첫인사\" ,   \r\n  \"last_intent_cd\": 0,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "디버-테스트-묵음",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\",\r\n  \"project_id\": \"292\",\r\n  \"dialog_id\": \"1754381858.79\",\r\n  \"chat_user_id\": \"01064185437\",\r\n  \"message_id\": \"20250805171759878\",\r\n  \"query\": \"\",\r\n  \"last_intent_cd\": 2,\r\n  \"simulation_yn\": \"N\",\r\n  \"entity_LLM_link_yn\": \"Y\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "디버-테스트-배송현황조회",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\",\r\n  \"project_id\": \"292\",\r\n  \"dialog_id\": \"1754381858.79\",\r\n  \"chat_user_id\": \"01064185437\",\r\n  \"message_id\": \"20250805171759878\",\r\n  \"query\": \"배송현황조회\",\r\n  \"last_intent_cd\": 2,\r\n  \"simulation_yn\": \"N\",\r\n  \"entity_LLM_link_yn\": \"Y\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "서비스안내",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,         \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"서비스안내\" ,   \r\n  \"last_intent_cd\": 0,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "첫인사",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,         \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"첫인사\" ,   \r\n  \"last_intent_cd\": 0,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "첫인사 v2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,         \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"첫인사\" ,   \r\n  \"last_intent_cd\": 0,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/ac/v2/chat/predict",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"ac",
+						"v2",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "서비스안내 (ubiz)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,         \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"서비스안내\" ,   \r\n  \"last_intent_cd\": 0,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://115.178.75.61:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"115",
+						"178",
+						"75",
+						"61"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "잔고조회",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,         \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"잔고조회\" ,   \r\n  \"last_intent_cd\": 1,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "잔고조회 v02 동기-비동기",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,         \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"잔고조회\" ,   \r\n  \"last_intent_cd\": 1,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\", \r\n   \"chatbot_engine_version\": \"v02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "잔고조회 v02 비동기 Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ucs100\",\r\n    \"project_id\": 248,\r\n    \"dialog_id\": \"dg-acf75efba6d4\",\r\n    \"message_id\": \"msg-c487c29e9836\",\r\n    \"chat_user_id\": \"simulator_user\",\r\n    \"query\": \"잔고조회\",\r\n    \"last_intent_cd\": 1,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\", \r\n    \"naiveLLM_response_yn\": \"N\",\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": null,\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": \"v02_async\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/ac/v2/chat/predict",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"ac",
+						"v2",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "시세확인",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,         \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"시세확인\" ,   \r\n  \"last_intent_cd\": 1,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "시세확인-종목명 (A)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,          \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"삼성전자\" ,   \r\n  \"last_intent_cd\": 2,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "액션메소드 단건 종목명 (87) Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"87\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,         \r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"삼성전자\" ,   \r\n  \"last_intent_cd\": 3,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "액션 다건 - 잔고 (248) v02 동기",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,       \r\n  \"message_id\": \"aaa12\" ,         \r\n  \"query\": \"123456\" ,   \r\n  \"last_intent_cd\": \"5\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\" , \r\n   \"chatbot_engine_version\" : \"v01\"\r\n   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "액션 다건 - 잔고 (248) v2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,      \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,       \r\n  \"message_id\": \"aaa12\" ,         \r\n  \"query\": \"123456\" ,   \r\n  \"last_intent_cd\": \"5\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\" , \r\n   \"chatbot_engine_version\" : \"v02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "액션 다건 - 잔고 (248) v2 비동기",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,      \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,       \r\n  \"message_id\": \"aaa12\" ,         \r\n  \"query\": \"123456\" ,   \r\n  \"last_intent_cd\": \"5\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\" , \r\n   \"chatbot_engine_version\" : \"v02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/ac/v2/chat/predict",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"ac",
+						"v2",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "액션메소드 다건 - 잔고 Ubiz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,      \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,       \r\n  \"message_id\": \"aaa12\" ,         \r\n  \"query\": \"123456\" ,   \r\n  \"last_intent_cd\": \"5\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://115.178.75.61:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"115",
+						"178",
+						"75",
+						"61"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "A01_액션메소드 다건 - 잔고2 (248)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,       \r\n  \"message_id\": \"aaa12\" ,          \r\n  \"query\": \"123456\" ,    \r\n  \"last_intent_cd\": \"5\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "A02_액션메소드 단건 - 종목가(248)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"dg-202403291201123000\" ,         \r\n    \"last_intent_cd\": \"5\",\r\n  \"chat_user_id\": \"aaa\" ,       \r\n  \"query\": \"삼성전자\" ,   \r\n  \"last_intent_cd\": 2,\r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "A03_액션메소드 다건 -  재잔고조회(일반)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,        \r\n  \"message_id\": \"aaa12\" ,          \r\n  \"query\": \"재잔고조회\" ,    \r\n  \"last_intent_cd\": \"6\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "G01_액션 다건 -  멀티- 동기-비동기-병렬 (v01)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,      \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,        \r\n  \"message_id\": \"aaa12\" ,           \r\n  \"query\": \"상담내용분석병렬\" ,    \r\n  \"last_intent_cd\": \"1\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\" , \r\n   \"doc_content\" : \"안녕하세요 고객님 핸드폰이 고장나서 고치고 싶어요.  어떤 제품인가요? \" , \r\n   \"chatbot_engine_version\" : \"v01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "G02_액션 다건 -  멀티- 동기-비동기-병렬 (v02)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,      \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,        \r\n  \"message_id\": \"aaa12\" ,           \r\n  \"query\": \"상담내용분석병렬\" ,    \r\n  \"last_intent_cd\": \"1\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\" , \r\n   \"doc_content\" : \"안녕하세요 고객님 핸드폰이 고장나서 고치고 싶어요.  어떤 제품인가요? \" , \r\n   \"chatbot_engine_version\" : \"v02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "G03_액션 다건 -  멀티- 동기-비동기-직렬 (v01)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,        \r\n  \"message_id\": \"aaa12\" ,           \r\n  \"query\": \"상담내용분석순차\" ,    \r\n  \"last_intent_cd\": \"1\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\" , \r\n   \"doc_content\" : \"안녕하세요 고객님 핸드폰이 고장나서 고치고 싶어요.  어떤 제품인가요? \" , \r\n      \"chatbot_engine_version\" : \"v01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "G04_액션 다건 -  멀티- 동기-비동기-직렬 (v02)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,        \r\n  \"message_id\": \"aaa12\" ,           \r\n  \"query\": \"상담내용분석순차\" ,    \r\n  \"last_intent_cd\": \"1\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\" , \r\n   \"doc_content\" : \"안녕하세요 고객님 핸드폰이 고장나서 고치고 싶어요.  어떤 제품인가요? \" , \r\n      \"chatbot_engine_version\" : \"v02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.14:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"14"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "G05_액션 다건 -  멀티 - 비동기-비동기-병렬 (v2)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,        \r\n  \"message_id\": \"aaa12\" ,             \r\n  \"query\": \"상담내용분석병렬\" ,    \r\n  \"last_intent_cd\": \"1\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\" , \r\n   \"doc_content\" : \"안녕하세요 고객님 핸드폰이 고장나서 고치고 싶어요.  어떤 제품인가요? \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/ac/v2/chat/predict",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"ac",
+						"v2",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "G06_액션메소드 다건 -  멀티 - 비동기-비동기-  직렬",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,       \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,        \r\n  \"message_id\": \"aaa12\" ,           \r\n  \"query\": \"상담내용분석순차\" ,    \r\n  \"last_intent_cd\": \"1\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\" , \r\n   \"doc_content\" : \"안녕하세요 고객님 핸드폰이 고장나서 고치고 싶어요.  어떤 제품인가요? \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/ac/v2/chat/predict",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"ac",
+						"v2",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "액션메소드 다건 -  멀티에이전트 ubiz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\" ,     \r\n  \"project_id\": \"248\" ,     \r\n  \"dialog_id\": \"dg-2024032912011230001\" ,       \r\n  \"chat_user_id\": \"aaa12\" ,        \r\n  \"message_id\": \"aaa12\" ,          \r\n  \"query\": \"상담내용분석\" ,    \r\n  \"last_intent_cd\": \"1\",\r\n  \"simulation_yn\": \"N\"   , \r\n   \"naiveLLM_response_yn\" : \"N\" , \r\n   \"doc_content\" : \"안녕하세요 고객님 핸드폰이 고장나서 고치고 싶어요.  어떤 제품인가요? \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://115.178.75.61:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"115",
+						"178",
+						"75",
+						"61"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "인텐트 자동 재실행",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ucs100\",\r\n  \"project_id\": 248,\r\n  \"intent_cds\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/ac/v2/chat/run_scenarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"ac",
+						"v2",
+						"chat",
+						"run_scenarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

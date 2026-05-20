@@ -1,0 +1,27 @@
+{
+  "$schema_version": "1.0",
+  "description": "역할별 민감 속성 마스킹 정책. sensitive:true 속성에 적용됩니다.",
+  "masking_rules": [
+    {
+      "comment": "Viewer — 모든 객체 타입의 sensitive 필드 전체 Restricted",
+      "role": "Viewer",
+      "object_type": "*",
+      "mask_all_sensitive": true,
+      "mask_value": "Restricted"
+    },
+    {
+      "comment": "Analyst — Customer의 contract_terms만 부분 마스킹",
+      "role": "Analyst",
+      "object_type": "Customer",
+      "fields": ["contract_terms"],
+      "mask_value": "Custom discount rate: ***"
+    },
+    {
+      "comment": "AccountManager — Customer의 contract_terms만 부분 마스킹",
+      "role": "AccountManager",
+      "object_type": "Customer",
+      "fields": ["contract_terms"],
+      "mask_value": "Custom discount rate: ***"
+    }
+  ]
+}

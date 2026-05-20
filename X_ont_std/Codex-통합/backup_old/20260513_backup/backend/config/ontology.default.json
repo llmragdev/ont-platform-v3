@@ -1,0 +1,75 @@
+{
+  "object_types": [
+    {
+      "name": "Customer",
+      "display_name": "고객",
+      "id_prefix": "C",
+      "properties": [
+        {"name": "name", "type": "string", "required": true, "searchable": true},
+        {"name": "segment", "type": "enum", "values": ["SMB", "Enterprise"], "required": true},
+        {"name": "region", "type": "string", "required": true},
+        {"name": "risk_tier", "type": "enum", "values": ["Low", "Medium", "High"], "required": true, "sensitive": true},
+        {"name": "contract_terms", "type": "string", "sensitive": true},
+        {"name": "owner", "type": "string"}
+      ]
+    },
+    {
+      "name": "Product",
+      "display_name": "상품",
+      "id_prefix": "P",
+      "properties": [
+        {"name": "name", "type": "string", "required": true, "searchable": true},
+        {"name": "category", "type": "string", "required": true},
+        {"name": "unit_price", "type": "number", "required": true}
+      ]
+    },
+    {
+      "name": "Order",
+      "display_name": "주문",
+      "id_prefix": "O",
+      "properties": [
+        {"name": "order_date", "type": "date", "required": true},
+        {"name": "status", "type": "enum", "values": ["Submitted", "Review", "Approved", "Rejected", "Fulfilled", "Closed"], "required": true},
+        {"name": "amount", "type": "number", "required": true}
+      ]
+    }
+  ],
+  "relationship_types": [
+    {
+      "name": "PLACED_ORDER",
+      "display_name": "주문함",
+      "source_type": "Customer",
+      "target_type": "Order",
+      "cardinality": "one_to_many",
+      "reverse_display_name": "주문 고객"
+    },
+    {
+      "name": "ORDER_CONTAINS_PRODUCT",
+      "display_name": "상품 포함",
+      "source_type": "Order",
+      "target_type": "Product",
+      "cardinality": "many_to_many",
+      "reverse_display_name": "포함된 주문",
+      "properties": [
+        {"name": "quantity", "type": "number", "required": true}
+      ]
+    }
+  ],
+  "action_types": [
+    {
+      "name": "ApproveOrder",
+      "display_name": "주문 승인",
+      "target_type": "Order",
+      "description": "정책 조건을 만족하는 주문을 승인합니다.",
+      "exposed_as_graph_node": true
+    },
+    {
+      "name": "RiskAssess",
+      "display_name": "리스크 평가",
+      "target_type": "Customer",
+      "description": "고객의 리스크 등급과 권고를 산출합니다.",
+      "exposed_as_graph_node": true
+    }
+  ]
+}
+

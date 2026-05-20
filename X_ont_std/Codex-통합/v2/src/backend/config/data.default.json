@@ -1,0 +1,72 @@
+{
+  "objects": {
+    "Customer": {
+      "C001": {
+        "name": "Alpha Manufacturing",
+        "segment": "Enterprise",
+        "region": "Seoul",
+        "risk_tier": "Low",
+        "contract_terms": "Standard support terms, custom discount 7%",
+        "owner": "kim.ops@example.com"
+      },
+      "C002": {
+        "name": "Beta Retail",
+        "segment": "SMB",
+        "region": "Busan",
+        "risk_tier": "Medium",
+        "contract_terms": "Standard terms, finance review required over 5000",
+        "owner": "finance.lead@example.com"
+      },
+      "C003": {
+        "name": "Gamma Logistics",
+        "segment": "Enterprise",
+        "region": "Incheon",
+        "risk_tier": "High",
+        "contract_terms": "Restricted due to credit hold",
+        "owner": "kim.ops@example.com"
+      }
+    },
+    "Product": {
+      "P001": {"name": "Industrial Sensor", "category": "Hardware", "unit_price": 270},
+      "P002": {"name": "Analytics License", "category": "Software", "unit_price": 1200},
+      "P003": {"name": "Support Package", "category": "Service", "unit_price": 500}
+    },
+    "Order": {
+      "O001": {"order_date": "2026-04-01", "status": "Submitted", "amount": 3200},
+      "O002": {"order_date": "2026-04-03", "status": "Submitted", "amount": 8200},
+      "O003": {"order_date": "2026-04-05", "status": "Review", "amount": 4440}
+    }
+  },
+  "relationships": [
+    {"id": "R001", "type": "PLACED_ORDER", "source_id": "C001", "target_id": "O001", "properties": {}},
+    {"id": "R002", "type": "PLACED_ORDER", "source_id": "C002", "target_id": "O002", "properties": {}},
+    {"id": "R003", "type": "PLACED_ORDER", "source_id": "C003", "target_id": "O003", "properties": {}},
+    {"id": "R004", "type": "ORDER_CONTAINS_PRODUCT", "source_id": "O001", "target_id": "P001", "properties": {"quantity": 10}},
+    {"id": "R005", "type": "ORDER_CONTAINS_PRODUCT", "source_id": "O001", "target_id": "P003", "properties": {"quantity": 1}},
+    {"id": "R006", "type": "ORDER_CONTAINS_PRODUCT", "source_id": "O002", "target_id": "P002", "properties": {"quantity": 6}},
+    {"id": "R007", "type": "ORDER_CONTAINS_PRODUCT", "source_id": "O002", "target_id": "P003", "properties": {"quantity": 2}},
+    {"id": "R008", "type": "ORDER_CONTAINS_PRODUCT", "source_id": "O003", "target_id": "P001", "properties": {"quantity": 12}},
+    {"id": "R009", "type": "ORDER_CONTAINS_PRODUCT", "source_id": "O003", "target_id": "P002", "properties": {"quantity": 1}}
+  ],
+  "documents": [
+    {
+      "id": "D001",
+      "title": "Order Approval Policy",
+      "related_objects": ["Order", "Customer"],
+      "text": "Orders below 5000 can be approved by the account manager. Orders equal to or above 5000 require finance manager approval."
+    },
+    {
+      "id": "D002",
+      "title": "Enterprise Customer Contract Policy",
+      "related_objects": ["Customer"],
+      "text": "Enterprise customers require contract validation before fulfillment. Standard support terms apply unless a custom contract is registered."
+    },
+    {
+      "id": "D003",
+      "title": "Risk Review Guideline",
+      "related_objects": ["Customer", "Order"],
+      "text": "Low risk customers can proceed through normal approval. Medium or high risk customers require additional review."
+    }
+  ]
+}
+

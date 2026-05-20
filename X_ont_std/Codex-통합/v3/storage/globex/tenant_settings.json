@@ -1,0 +1,22 @@
+{
+  "display_name": "Globex Corp",
+  "status": "active",
+  "limits": {
+    "max_users": 20,
+    "max_projects": 5,
+    "max_documents": 100
+  },
+  "features": {
+    "ontology_editing": true,
+    "hybrid_query": true,
+    "graph_editor": false
+  },
+  "ui": {
+    "theme": "light",
+    "logo_url": null
+  },
+  "llm": {
+    "provider": "system_default",
+    "prompt_policy": "strict_grounded"
+  }
+}

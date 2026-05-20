@@ -1,0 +1,10 @@
+{"query": "Snowflake의 장점은 무엇인가요?", "expected_intent": "descriptive", "expected_answer_contains": ["Snowflake"]}
+{"query": "온톨로지란 무엇인가요?", "expected_intent": "descriptive", "expected_answer_contains": ["온톨로지"]}
+{"query": "클라우드 데이터 웨어하우스를 설명해주세요", "expected_intent": "descriptive", "expected_answer_contains": []}
+{"query": "BigQuery와 Snowflake의 차이는?", "expected_intent": "descriptive", "expected_answer_contains": []}
+{"query": "머신러닝 파이프라인에 대해 설명해줘", "expected_intent": "descriptive", "expected_answer_contains": []}
+{"query": "데이터 레이크란 무엇인가요?", "expected_intent": "descriptive", "expected_answer_contains": []}
+{"query": "ETL 프로세스가 뭔가요?", "expected_intent": "descriptive", "expected_answer_contains": []}
+{"query": "벡터 데이터베이스의 사용 사례를 설명해줘", "expected_intent": "descriptive", "expected_answer_contains": []}
+{"query": "RAG 아키텍처란?", "expected_intent": "descriptive", "expected_answer_contains": []}
+{"query": "API 게이트웨이의 역할은?", "expected_intent": "descriptive", "expected_answer_contains": []}

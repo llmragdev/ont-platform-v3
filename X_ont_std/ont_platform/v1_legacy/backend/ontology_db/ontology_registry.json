@@ -1,0 +1,20 @@
+{
+  "doc-integration-seed": {
+    "doc_id": "doc-integration-seed",
+    "filename": "",
+    "entity_count": 19,
+    "relation_count": 9
+  },
+  "doc-ff68a066": {
+    "doc_id": "doc-ff68a066",
+    "filename": "",
+    "entity_count": 2,
+    "relation_count": 0
+  },
+  "test-doc": {
+    "doc_id": "test-doc",
+    "filename": "",
+    "entity_count": 1,
+    "relation_count": 0
+  }
+}

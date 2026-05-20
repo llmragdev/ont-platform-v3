@@ -1,0 +1,13 @@
+prefix=E:/ontology_edu/X_rag_std/src_agents/llm_gateway/.conda/Library
+exec_prefix=E:/ontology_edu/X_rag_std/src_agents/llm_gateway/.conda/Library
+libdir=E:/ontology_edu/X_rag_std/src_agents/llm_gateway/.conda/Library/lib
+sharedlibdir=E:/ontology_edu/X_rag_std/src_agents/llm_gateway/.conda/Library/lib
+includedir=E:/ontology_edu/X_rag_std/src_agents/llm_gateway/.conda/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.3.1
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

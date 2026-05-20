@@ -1,0 +1,379 @@
+{
+  "doc_id": "ai-voucher-2025",
+  "entities": [
+    {
+      "id": "P001AAA",
+      "type": "PROGRAM",
+      "name": "AI바우처 2025",
+      "properties": {
+        "budget": "276억원",
+        "year": 2025,
+        "quota": 130
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "P002BBB",
+      "type": "PROGRAM",
+      "name": "AI바우처 2024",
+      "properties": {
+        "budget": "425억원",
+        "year": 2024,
+        "quota": 201
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "O001AAA",
+      "type": "ORGANIZATION",
+      "name": "과학기술정보통신부",
+      "properties": {
+        "role": "주관기관",
+        "type": "정부부처"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "O002BBB",
+      "type": "ORGANIZATION",
+      "name": "NIPA",
+      "properties": {
+        "role": "운영기관",
+        "full_name": "정보통신산업진흥원",
+        "type": "공공기관"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "O003CCC",
+      "type": "ORGANIZATION",
+      "name": "리벨리온",
+      "properties": {
+        "type": "AI반도체",
+        "role": "NPU공급사"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "O004DDD",
+      "type": "ORGANIZATION",
+      "name": "퓨리오사AI",
+      "properties": {
+        "type": "AI반도체",
+        "role": "NPU공급사"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "O005EEE",
+      "type": "ORGANIZATION",
+      "name": "KT클라우드",
+      "properties": {
+        "type": "CSP",
+        "role": "클라우드파트너"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "O006FFF",
+      "type": "ORGANIZATION",
+      "name": "NHN클라우드",
+      "properties": {
+        "type": "CSP",
+        "role": "클라우드파트너"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "O007GGG",
+      "type": "ORGANIZATION",
+      "name": "엘리스그룹",
+      "properties": {
+        "type": "CSP",
+        "role": "클라우드파트너"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "O008HHH",
+      "type": "ORGANIZATION",
+      "name": "KOICA",
+      "properties": {
+        "role": "중복금지대상",
+        "full_name": "한국국제협력단"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "O009III",
+      "type": "ORGANIZATION",
+      "name": "KOTRA",
+      "properties": {
+        "role": "중복금지대상",
+        "full_name": "대한무역투자진흥공사"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "C001AAA",
+      "type": "CATEGORY",
+      "name": "일반분과",
+      "properties": {
+        "quota_2025": 60,
+        "quota_2024": 100,
+        "target": "일반기업(의료포함)"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "C002BBB",
+      "type": "CATEGORY",
+      "name": "AI반도체분과",
+      "properties": {
+        "quota_2025": 20,
+        "quota_2024": 30,
+        "target": "AI반도체활용기업"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "C003CCC",
+      "type": "CATEGORY",
+      "name": "소상공인분과",
+      "properties": {
+        "quota_2025": 20,
+        "quota_2024": 21,
+        "target": "소상공인"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "C004DDD",
+      "type": "CATEGORY",
+      "name": "글로벌분과",
+      "properties": {
+        "quota_2025": 30,
+        "quota_2024": 50,
+        "target": "해외진출기업"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "M001AAA",
+      "type": "METRIC",
+      "name": "2025총예산",
+      "properties": {
+        "value": 276,
+        "unit": "억원",
+        "year": 2025
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "M002BBB",
+      "type": "METRIC",
+      "name": "2024총예산",
+      "properties": {
+        "value": 425,
+        "unit": "억원",
+        "year": 2024
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "M003CCC",
+      "type": "METRIC",
+      "name": "과제당최대지원비",
+      "properties": {
+        "value": 2,
+        "unit": "억원"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "M004DDD",
+      "type": "METRIC",
+      "name": "공급기업연간최대과제수",
+      "properties": {
+        "value": 2,
+        "unit": "개",
+        "note": "분과별 1개"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "E001AAA",
+      "type": "EVENT",
+      "name": "일반과제접수마감",
+      "properties": {
+        "date": "2025-03-13",
+        "time": "15:00"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "E002BBB",
+      "type": "EVENT",
+      "name": "AI반도체과제접수마감",
+      "properties": {
+        "date": "2025-03-24",
+        "time": "15:00"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "id": "E003CCC",
+      "type": "EVENT",
+      "name": "과제수행기간",
+      "properties": {
+        "start": "2025-05-01",
+        "end": "2025-11-30"
+      },
+      "created_at": "2026-05-14T09:00:00.000000+00:00",
+      "created_by": "seed",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "R001AAA",
+      "from_id": "O001AAA",
+      "relation": "MANAGES",
+      "to_id": "P001AAA"
+    },
+    {
+      "id": "R002BBB",
+      "from_id": "O002BBB",
+      "relation": "MANAGES",
+      "to_id": "P001AAA"
+    },
+    {
+      "id": "R003CCC",
+      "from_id": "P001AAA",
+      "relation": "HAS_DIVISION",
+      "to_id": "C001AAA"
+    },
+    {
+      "id": "R004DDD",
+      "from_id": "P001AAA",
+      "relation": "HAS_DIVISION",
+      "to_id": "C002BBB"
+    },
+    {
+      "id": "R005EEE",
+      "from_id": "P001AAA",
+      "relation": "HAS_DIVISION",
+      "to_id": "C003CCC"
+    },
+    {
+      "id": "R006FFF",
+      "from_id": "P001AAA",
+      "relation": "HAS_DIVISION",
+      "to_id": "C004DDD"
+    },
+    {
+      "id": "R007GGG",
+      "from_id": "O003CCC",
+      "relation": "PARTNERS_WITH",
+      "to_id": "O005EEE"
+    },
+    {
+      "id": "R008HHH",
+      "from_id": "P001AAA",
+      "relation": "RESTRICTS",
+      "to_id": "O008HHH"
+    },
+    {
+      "id": "R009III",
+      "from_id": "P001AAA",
+      "relation": "RESTRICTS",
+      "to_id": "O009III"
+    }
+  ]
+}

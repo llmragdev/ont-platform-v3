@@ -1,0 +1,108 @@
+회사 메뉴얼 대로 설치
+
+wget https://archive.mariadb.org/mariadb-10.3.18/bintar-linux-x86_64/mariadb-10.3.18-linux-x86_64.tar.gz
+
+(base) [root@localhost local]# cat /etc/passwd | grep mysql
+mysql:x:27:27:MySQL Server:/var/lib/mysql:/bin/bash
+
+
+# 아래 폴더에 my.cnf 업로드 (chown devuser /usr/local/src/ 해야 업로드 가능) 
+/usr/local/src/ 
+
+(base) [root@localhost run]# /etc/init.d/mysqld start  에서 에러 발생 
+Job for mysqld.service failed because a timeout was exceeded. 
+See "systemctl status mysqld.service" and "journalctl -xe" for details.
+
+
+
+(base) [root@localhost data]# systemctl status mysqld.service
+● mysqld.service - SYSV: MySQL database server.
+   Loaded: loaded (/etc/rc.d/init.d/mysqld; bad; vendor preset: disabled)
+   Active: failed (Result: timeout) since 화 2024-03-05 20:43:05 KST; 1min 59s ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 8663 ExecStart=/etc/rc.d/init.d/mysqld start (code=exited, status=0/SUCCESS)
+   CGroup: /system.slice/mysqld.service
+           ├─8834 /bin/sh /usr/local/mysql/bin/mysqld_safe --datadir=/usr/local/mysql/data --pid-file=/usr/local/mysql/...
+           └─9078 /usr/local/mysql/bin/mysqld --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --plugin-dir=/...
+
+ 3월 05 20:38:05 localhost.localdomain systemd[1]: Starting SYSV: MySQL database server....
+ 3월 05 20:38:05 localhost.localdomain mysqld[8663]: Starting MariaDB.240305 20:38:05 mysqld_safe Logging to '/usr...rr'.
+ 3월 05 20:38:05 localhost.localdomain mysqld[8663]: 240305 20:38:05 mysqld_safe Starting mysqld daemon with datab...data
+ 3월 05 20:38:06 localhost.localdomain mysqld[8663]: SUCCESS!
+ 3월 05 20:38:06 localhost.localdomain systemd[1]: PID file /var/run/mysqld/mysqld.pid not readable (yet?) after start.
+ 3월 05 20:43:05 localhost.localdomain systemd[1]: mysqld.service start operation timed out. Terminating.
+ 3월 05 20:43:05 localhost.localdomain systemd[1]: Failed to start SYSV: MySQL database server..
+ 3월 05 20:43:05 localhost.localdomain systemd[1]: Unit mysqld.service entered failed state.
+ 3월 05 20:43:05 localhost.localdomain systemd[1]: mysqld.service failed.
+Hint: Some lines were ellipsized, use -l to show in full.
+
+
+
+
+# 기존에 설치된 불필요한 폴더로 추정되어 삭제
+cd /var/run
+rmdir mysqld/
+
+
+mysql> use mysql
+mysql> update user set password = password('llmrag') where user = 'root';
+Query OK, 4 rows affected (0.00 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+mysql> flush privileges; 
+
+
+
+(base) [root@localhost devuser]# mysql -u root -p
+Enter password:  ==> llmrag
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 5.5.5-10.3.18-MariaDB-log MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+
+mysql> create database wc;
+mysql>grant all on wc.* to 'wc'@'%' identified by 'wc1@#';
+grant all on wc.* to 'wc'@'%' identified by 'wc1!#';
+mysql> select user, host from mysql.user;
++------+-----------------------+
+| user | host                  |
++------+-----------------------+
+| wc   | %                     |
+| root | 127.0.0.1             |
+| root | ::1                   |
+|      | localhost             |
+| root | localhost             |
+|      | localhost.localdomain |
+| root | localhost.localdomain |
++------+-----------------------+
+7 rows in set (0.00 sec)
+
+mysql> flush privileges; 
+mysql> quit; 
+
+
+
+(base) [root@localhost run]# netstat -ntlp
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:3350          0.0.0.0:*               LISTEN      994/xrdp-sesman
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      989/sshd
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      2322/master
+tcp        0      0 127.0.0.1:6010          0.0.0.0:*               LISTEN      2954/sshd: devuser@
+tcp        0      0 127.0.0.1:6011          0.0.0.0:*               LISTEN      12091/sshd: devuser
+tcp        0      0 0.0.0.0:3389            0.0.0.0:*               LISTEN      996/xrdp
+tcp6       0      0 :::3306                 :::*                    LISTEN      11239/mysqld
+tcp6       0      0 :::80                   :::*                    LISTEN      991/httpd
+tcp6       0      0 :::22                   :::*                    LISTEN      989/sshd
+tcp6       0      0 ::1:25                  :::*                    LISTEN      2322/master
+tcp6       0      0 ::1:6010                :::*                    LISTEN      2954/sshd: devuser@
+tcp6       0      0 ::1:6011                :::*                    LISTEN      12091/sshd: devuser
+

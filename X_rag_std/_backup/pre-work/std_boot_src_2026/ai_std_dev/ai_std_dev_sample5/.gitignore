@@ -1,0 +1,41 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+.venv/
+venv/
+env/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Generated data and vector stores
+data/
+vector_db/
+chroma/
+chroma_db/
+*.sqlite
+*.sqlite3
+*.db
+*.bin
+*.pkl
+*.parquet
+*.csv
+
+# Large/raw documents
+*.pdf
+!2025년 AI바우처 사업설명회 발표자료.pdf

@@ -1,0 +1,85 @@
+[
+  {
+    "name": "정상 승인",
+    "description": "analyst + O001 + ApproveOrder → Approved",
+    "passed": true,
+    "expected": {
+      "http": 200,
+      "to_status": "Approved",
+      "available_actions_contains": "ApproveOrder"
+    },
+    "actual": {
+      "http": 200,
+      "to_status": "Approved"
+    },
+    "notes": []
+  },
+  {
+    "name": "고위험 거부",
+    "description": "analyst + O003(High risk) + ApproveOrder → ACTION_NOT_ALLOWED",
+    "passed": true,
+    "expected": {
+      "http": 409,
+      "error.code": "ACTION_NOT_ALLOWED"
+    },
+    "actual": {
+      "http": 409,
+      "error": {
+        "code": "ACTION_NOT_ALLOWED",
+        "message": "현재 상태에서는 이 액션을 실행할 수 없습니다."
+      }
+    },
+    "notes": []
+  },
+  {
+    "name": "금액 임계 분기",
+    "description": "O002(8200원) → analyst 불가 / finance 가능",
+    "passed": true,
+    "expected": {
+      "analyst_can_approve_O002": false,
+      "finance_can_approve_O002": true
+    },
+    "actual": {
+      "analyst_o002": null,
+      "finance_o002": [
+        "ApproveOrder",
+        "RejectOrder",
+        "HoldOrder"
+      ]
+    },
+    "notes": []
+  },
+  {
+    "name": "지역 거부",
+    "description": "viewer(Seoul) → O002(Busan) context 조회 시 403 FORBIDDEN",
+    "passed": true,
+    "expected": {
+      "http": 403,
+      "error.code": "FORBIDDEN"
+    },
+    "actual": {
+      "http": 403,
+      "error": {
+        "code": "FORBIDDEN",
+        "message": "이 정보에 접근할 권한이 없습니다."
+      }
+    },
+    "notes": []
+  },
+  {
+    "name": "속성 마스킹",
+    "description": "viewer→Restricted / analyst→마스킹 / finance→원본",
+    "passed": true,
+    "expected": {
+      "viewer.risk_tier": "Restricted",
+      "analyst.contract_terms_starts_with": "Custom discount rate:",
+      "finance.contract_terms_contains": "discount 7%"
+    },
+    "actual": {
+      "viewer.risk_tier": "Restricted",
+      "analyst.contract_terms": "Custom discount rate: ***",
+      "finance.contract_terms": "Standard support terms, custom discount 7%"
+    },
+    "notes": []
+  }
+]

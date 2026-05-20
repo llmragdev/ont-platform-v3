@@ -1,0 +1,129 @@
+접속 서버 : 
+설치 중인 서버 : 
+  # IP : 210.114.91.91 Port : 22304
+  # 원격 접속 정보	210.114.91.91 Port : 22305
+  # 아이디	eduuser
+  # 비밀번호	hello.edu
+  
+
+참조 블로그: 
+https://change-words.tistory.com/entry/MariaDB-offline-install
+
+[root@localhost local]# pwd
+/usr/local
+
+
+wget https://dlm.mariadb.com/2690820/MariaDB/mariadb-10.10.2/bintar-linux-systemd-x86_64/mariadb-10.10.2-linux-systemd-x86_64.tar.gz
+
+Connecting to storage.googleapis.com (storage.googleapis.com)|142.250.206.251|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 353466727 (337M) [application/gzip]
+Saving to: ‘mariadb-10.10.2-linux-systemd-x86_64.tar.gz’
+
+100%[================================================>] 353,466,727 24.7MB/s   in 14s
+
+2024-03-05 02:08:59 (23.3 MB/s) - ‘mariadb-10.10.2-linux-systemd-x86_64.tar.gz’ saved [353466727/353466727]
+
+
+
+[root@localhost local]# groupadd maria
+[root@localhost local]# useradd -g maria maria
+
+cd /usr/local
+$tar -zxvf mariadb-10.10.2-linux-systemd-x86_64.tar.gz
+       
+$chown -R maria:maria mariadb-10.10.2-linux-systemd-x86_64
+chown -R maria:maria /var/lib/mysql/data
+chown -R maria:maria /var/lib/mysql
+
+ln -s /usr/local/mariadb-10.10.2-linux-systemd-x86_64 /usr/local/mysql
+
+
+6. 마리아DB 환경변수 등록
+# profile에서 마리아DB홈 환경변수를 등록합니다. profile이 아니면 ~./bashrc나 /etc/bashrc 등도 가능합니다.
+
+$vi /etc/profile 
+
+# 추가할 내용
+export MARIADB_HOME=/usr/local/mysql
+export PATH=$PATH:$MARIADB_HOME/bin:.
+
+# 수정 적용
+$source /etc/profile
+
+
+
+7. my.cnf 수정
+본격적으로 설치 바이너리를 실행하기 전 마리아DB 설정값을 세팅합니다.
+
+vi /etc/my.cnf
+# 추가할 내용
+[mysqld]
+#aracter-set-server=utf8mb4
+#collation-server=utf8mb4_bin
+
+init_connect=SET collation_connection = utf8_general_ci
+init_connect=SET NAMES utf8
+character-set-server = utf8
+collation-server = utf8_general_ci
+
+
+basedir=/usr/local/mysql
+datadir=/var/lib/mysql/data
+
+[mysqld_safe]
+log-error=/var/lib/mysql/log/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+
+7.1libaio 설치
+$yum install libaio*
+
+7.2 libtinfo 설치
+$yum install libtinfo*
+
+
+
+8. 마리아DB 설치
+cd /usr/local/mysql/scripts
+# ./mysql_install_db --user=사용자명 --basedir=/usr/local/mysql --datadir=/var/lib/mysql/data
+./mysql_install_db --user=maria --basedir=/usr/local/mysql --datadir=/var/lib/mysql/data
+
+
+[root@localhost scripts]# ./mysql_install_db --user=maria --basedir=/usr/local/mysql --datadir=/var/lib/mysql/data
+    
+    
+
+9. Systemd 서비스 등록
+mariadb.service 설정을 수정합니다.
+
+cd /usr/local/mysql/support-files/systemd
+===> systemd 폴더 없음. 
+
+아래 링크 참조하여 바로 /etc/systemd/system에서 mariadb.service 작성 
+https://bakch92-github-io.vercel.app/blog/db/1.%20MariaDB%20%EB%B0%94%EC%9D%B4%EB%84%88%EB%A6%AC%20%EC%84%A4%EC%B9%98%20%EB%B0%8F%20%EC%84%A4%EC%A0%95
+
+cd /etc/systemd/system
+$vi mariadb.service
+
+[Unit]
+Description=MariaDB Database Server
+After=network.target
+
+[Service]
+Type=forking
+User=mariadb
+Group=mariadb
+ExecStart=/usr/local/mariadb/bin/mysqld_safe --datadir='/var/lib/mysql/data'
+ExecStop=/usr/local/mariadb/bin/mysqladmin shutdown
+
+[Install]
+WantedBy=multi-user.target
+
+10. 마리아DB 서비스 시작
+systemctl start mariadb.service
+==> 에러: Job for mariadb.service failed. See 'systemctl status mariadb.service' and 'journalctl -xn' for details.
+==> 좀 시간이 걸릴 수도 있음. 
+
+
+=>  
+

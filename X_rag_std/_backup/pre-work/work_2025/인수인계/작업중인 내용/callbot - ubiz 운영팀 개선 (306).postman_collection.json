@@ -1,0 +1,690 @@
+{
+	"info": {
+		"_postman_id": "da995a74-7e84-441a-9723-d15822c0e51c",
+		"name": "callbot - ubiz 운영팀 개선 (306)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11648726"
+	},
+	"item": [
+		{
+			"name": "첫인사 (298)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"eicndemo\" ,      \r\n  \"project_id\": \"298\" ,      \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"aaa\" ,       \r\n  \"chat_user_id\": \"aaa\" ,    \r\n  \"query\": \"첫인사\" ,   \r\n  \"last_intent_cd\": null,  \r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\",  \r\n   \"intent_type_cd\" : \"\",\r\n   \"fallback_type_cd\" : \"\",   \r\n   \"current_intent_cd\" : \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://115.178.75.61:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"115",
+						"178",
+						"75",
+						"61"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "첫인사 (298) Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"eicndemo\" ,      \r\n  \"project_id\": \"298\" ,      \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"aaa\" ,       \r\n  \"chat_user_id\": \"aaa\" ,    \r\n  \"query\": \"의도분류신청\" ,   \r\n  \"last_intent_cd\": null,  \r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\",  \r\n   \"intent_type_cd\" : \"\",\r\n   \"fallback_type_cd\" : \"\",   \r\n   \"current_intent_cd\" : \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://115.178.75.61:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"115",
+						"178",
+						"75",
+						"61"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ubiz 첫인사 (304)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ubiz\" ,      \r\n  \"project_id\": \"304\" ,      \r\n  \"dialog_id\": \"dg-202403291201123000\" ,       \r\n  \"message_id\": \"aaa\" ,       \r\n  \"chat_user_id\": \"aaa\" ,    \r\n  \"query\": \"첫인사\" ,   \r\n  \"last_intent_cd\": null,  \r\n  \"simulation_yn\": \"N\"   ,\r\n   \"naiveLLM_response_yn\" : \"N\",  \r\n   \"intent_type_cd\" : \"\",\r\n   \"fallback_type_cd\" : \"\",   \r\n   \"current_intent_cd\" : \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://115.178.75.61:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"115",
+						"178",
+						"75",
+						"61"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 환영인사",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"첫인사\",\r\n    \"last_intent_cd\": null,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 query null last_intent없음",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"첫인사\",\r\n    \"last_intent_cd\": null,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 인사 - 문자",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\", \r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"문자\", \r\n    \"last_intent_cd\": 1,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 인사 - 문자요",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\", \r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"문자\", \r\n    \"last_intent_cd\": 1,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 인사 - 문자 - SMS문구",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"문자\", \r\n    \"last_intent_cd\": 4,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 인증 - 핸드폰번호 입력 (Y) Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"01080097956\", \r\n    \"last_intent_cd\": 3,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 인증 - 핸드폰번호 입력 (N)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"01080097957\", \r\n    \"last_intent_cd\": 3,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 인증 - 인증번호 발송(자동)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534701\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"01080097956\",\r\n    \"last_intent_cd\": null,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 인증 - 인증번호",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534701\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"295984\",\r\n    \"last_intent_cd\": 13,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 인증 - ip입력- 성공",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534702\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"121*111*111*2\",\r\n    \"last_intent_cd\": 7,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 인증 - ip입력- 실패",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ubiz\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534702\",\r\n    \"chat_user_id\": \"01080097956\",   \r\n    \"query\": \"121*111*111*2*2\",\r\n    \"last_intent_cd\": 7,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 분기",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ucs100\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"분기\",\r\n    \"last_intent_cd\": null,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 분기 Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ucs100\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"False\",\r\n    \"last_intent_cd\": 100,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null,\r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 분기 TRUE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ucs100\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"TRUE\",\r\n    \"last_intent_cd\": 100,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null, \r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ucs100 분기 FALSE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ucs100\",\r\n    \"project_id\": 306,\r\n    \"dialog_id\": \"1760340887.845\",\r\n    \"message_id\": \"20251013163534700\",\r\n    \"chat_user_id\": \"01080097956\",  \r\n    \"query\": \"FALSE\",\r\n    \"last_intent_cd\": 100,\r\n    \"last_intent_full_path_cd\": null,\r\n    \"simulation_yn\": \"N\",\r\n    \"naiveLLM_response_yn\": null, \r\n    \"intent_type_cd\": null,\r\n    \"entity_LLM_link_yn\": \"Y\",\r\n    \"fallback_type_cd\": null,\r\n    \"current_intent_cd\": null,\r\n    \"query_token\": null,\r\n    \"doc_content\": null,\r\n    \"chatbot_engine_version\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sms 전송",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"ubiz\",\r\n    \"service\": \"SMS\",\r\n    \"datas\": [\r\n        {\r\n            \"attach_file\": \"\",\r\n            \"callback\": \"16447549\",\r\n            \"phone_number\": \"01080097956\",\r\n            \"title\": \"운영\",\r\n            \"message\": \"메세지\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://1.234.136.46:8300/sendmessage",
+					"protocol": "http",
+					"host": [
+						"1",
+						"234",
+						"136",
+						"46"
+					],
+					"port": "8300",
+					"path": [
+						"sendmessage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "00_1_의도분류-티켓예약 p275 Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_id\": \"ubiz\", \r\n  \"project_id\": \"275\",\r\n  \"dialog_id\": \"b63867b715be\",\r\n  \"chat_user_id\": \"user001\",\r\n  \"message_id\": \"20250401155543907\", \r\n  \"query\": \"레미제라블 공연 티켓을 사고 싶어요\",  \r\n  \"last_intent_cd\": 3,  \r\n  \"simulation_yn\": \"N\",\r\n  \"naiveLLM_response_yn\": \"Y\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://122.49.74.237:8011/ac/v1/chat/predict",
+					"protocol": "http",
+					"host": [
+						"122",
+						"49",
+						"74",
+						"237"
+					],
+					"port": "8011",
+					"path": [
+						"ac",
+						"v1",
+						"chat",
+						"predict"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

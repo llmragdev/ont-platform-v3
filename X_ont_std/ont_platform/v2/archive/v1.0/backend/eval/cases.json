@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "description": "온톨로지 AI 업무 콘솔 RAG/Policy 평가 시나리오. 각 케이스는 질문·사용자·기대 결과를 정의한다.",
+  "cases": [
+    {
+      "id": "C01-approve-low-risk",
+      "user": "analyst",
+      "question": "O001 주문 승인해도 될까?",
+      "expected": {
+        "detected_objects_contains": ["O001"],
+        "evidence_doc_ids_contains": ["D001"],
+        "available_actions_contains": ["ApproveOrder"]
+      }
+    },
+    {
+      "id": "C02-high-risk-blocked",
+      "user": "analyst",
+      "question": "O003 주문 승인 가능한가요?",
+      "expected": {
+        "detected_objects_contains": ["O003"],
+        "evidence_doc_ids_contains": ["D003"],
+        "available_actions_excludes": ["ApproveOrder"]
+      }
+    },
+    {
+      "id": "C03-amount-threshold-analyst-blocked",
+      "user": "analyst",
+      "question": "O002 주문 8200원짜리 승인해도 될까?",
+      "expected": {
+        "detected_objects_contains": ["O002"],
+        "expect_error_code": "FORBIDDEN"
+      }
+    },
+    {
+      "id": "C04-amount-threshold-finance-allowed",
+      "user": "finance",
+      "question": "O002 주문 승인 가능한가?",
+      "expected": {
+        "detected_objects_contains": ["O002"],
+        "evidence_doc_ids_contains": ["D001"],
+        "available_actions_contains": ["ApproveOrder"]
+      }
+    },
+    {
+      "id": "C05-relation-mismatch",
+      "user": "analyst",
+      "question": "C001 고객의 O002 주문 확인해줘",
+      "expected": {
+        "expect_error_code": "RELATION_MISMATCH"
+      }
+    },
+    {
+      "id": "C06-object-not-found",
+      "user": "analyst",
+      "question": "O999 주문 정보 알려줘",
+      "expected": {
+        "expect_error_code": "OBJECT_NOT_FOUND"
+      }
+    },
+    {
+      "id": "C07-enterprise-contract",
+      "user": "analyst",
+      "question": "O001 엔터프라이즈 고객 계약 검증은 어떻게 되나?",
+      "expected": {
+        "detected_objects_contains": ["O001"],
+        "evidence_doc_ids_contains": ["D002"]
+      }
+    },
+    {
+      "id": "C08-risk-review",
+      "user": "analyst",
+      "question": "O001 주문 리스크 등급에 따른 검토 절차는?",
+      "expected": {
+        "detected_objects_contains": ["O001"],
+        "evidence_doc_ids_contains": ["D003"]
+      }
+    },
+    {
+      "id": "C09-finance-only-doc",
+      "user": "finance",
+      "question": "O003 custom pricing 정책 적용되나?",
+      "expected": {
+        "detected_objects_contains": ["O003"],
+        "evidence_doc_ids_contains": ["D004"]
+      }
+    },
+    {
+      "id": "C10-viewer-doc-filter",
+      "user": "viewer",
+      "question": "O001 주문 정책 확인",
+      "expected": {
+        "detected_objects_contains": ["O001"],
+        "evidence_doc_ids_excludes": ["D004"]
+      }
+    }
+  ]
+}

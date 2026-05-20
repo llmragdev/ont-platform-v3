@@ -1,0 +1,61 @@
+"""Dependencies for FastAPI routers."""
+from __future__ import annotations
+
+import os
+from functools import lru_cache
+from fastapi import Depends, Header
+
+from app.models.tenant_context import TenantContext
+from app.services.document import DocumentService
+from app.services.ontology import OntologyService
+from app.services.vector_search import VectorSearchService
+from app.services.query_planner import QueryPlannerService
+
+
+@lru_cache(maxsize=1)
+def get_embeddings():
+    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY1")
+    if not api_key:
+        return None
+    try:
+        from langchain_google_genai import GoogleGenerativeAIEmbeddings
+        return GoogleGenerativeAIEmbeddings(
+            model="models/gemini-embedding-001",
+            google_api_key=api_key,
+        )
+    except Exception:
+        return None
+
+
+def get_document_service() -> DocumentService:
+    return DocumentService(embeddings=get_embeddings())
+
+
+def get_ontology_service() -> OntologyService:
+    return OntologyService()
+
+
+def get_vector_search_service() -> VectorSearchService:
+    return VectorSearchService(embeddings=get_embeddings())
+
+
+def get_tenant_context(
+    x_user_id: str = Header(default="default-user"),
+    x_company_id: str = Header(default="default"),
+    x_project_id: str = Header(default="proj-default"),
+    x_role: str = Header(default="Viewer"),
+) -> TenantContext:
+    return TenantContext(
+        user_id=x_user_id,
+        company_id=x_company_id,
+        project_id=x_project_id,
+        role=x_role,
+        permissions={},
+    )
+
+
+def get_query_planner_service(
+    ont_svc: OntologyService = Depends(get_ontology_service),
+    vec_svc: VectorSearchService = Depends(get_vector_search_service)
+) -> QueryPlannerService:
+    return QueryPlannerService(ontology_svc=ont_svc, vector_svc=vec_svc)

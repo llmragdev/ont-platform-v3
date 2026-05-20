@@ -1,0 +1,6 @@
+name: codex_fe
+channels:
+  - conda-forge
+dependencies:
+  - nodejs=20
+

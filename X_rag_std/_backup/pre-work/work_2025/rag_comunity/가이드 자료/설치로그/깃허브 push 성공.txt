@@ -1,0 +1,31 @@
+(base) [root@localhost ragChatbot]# git config user.name NamkyuChoi
+(base) [root@localhost ragChatbot]# git config user.name
+NamkyuChoi
+(base) [root@localhost ragChatbot]# git config user.email cnam9@naver.com
+(base) [root@localhost ragChatbot]# git config user.email
+cnam9@naver.com
+(base) [root@localhost ragChatbot]# git config --list
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+user.name=NamkyuChoi
+user.email=cnam9@naver.com
+remote.origin.url=https://github.com/llmRagApp/ragChatbot.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+(base) [root@localhost ragChatbot]# git push -u origin main
+Username for 'https://github.com': cnam9@naver.com
+Password for 'https://cnam9@naver.com@github.com':
+fatal: unable to access 'https://github.com/llmRagApp/ragChatbot.git/': The requested URL returned error: 403
+(base) [root@localhost ragChatbot]# git push -u origin main
+Username for 'https://github.com': NamkyuChoi
+Password for 'https://NamkyuChoi@github.com':
+Counting objects: 578, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (555/555), done.
+Writing objects: 100% (578/578), 23.40 MiB | 7.21 MiB/s, done.
+Total 578 (delta 331), reused 0 (delta 0)
+remote: Resolving deltas: 100% (331/331), done.
+remote: To https://github.com/llmRagApp/ragChatbot.git
+ * [new branch]      main -> main
+Branch main set up to track remote branch main from origin.

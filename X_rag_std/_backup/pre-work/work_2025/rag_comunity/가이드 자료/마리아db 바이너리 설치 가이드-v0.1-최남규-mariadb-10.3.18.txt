@@ -1,0 +1,72 @@
+참고블로그: https://da-new.tistory.com/5
+설치 중인 서버 : 
+  # IP : 210.114.91.91 Port : 22304
+  # 원격 접속 정보	210.114.91.91 Port : 22305
+  # 아이디	eduuser
+  # 비밀번호	hello.edu
+
+# 보완 가이드: https://change-words.tistory.com/entry/MariaDB-offline-install
+첫번째 가이드에서는 마리아db 홈 환경변수 누락되어있고
+, my.cnf 작성도 비어있고, systemd 서비스 등록도 누락되어 있네요. 
+
+=========================================
+1. 사전준비
+# System User/group 생성 - mysql
+groupadd mysql
+useradd -g mysql mysql
+
+#원하는 버전의 tar.gz 파일 다운로드
+wget https://archive.mariadb.org/mariadb-10.3.18/bintar-linux-x86_64/mariadb-10.3.18-linux-x86_64.tar.gz --no-check-certificate
+
+
+
+#my.cnf 파일 준비
+vi /etc/my.cnf
+
+  [mysqld]
+  우선 설정 값 없이 빈파일 준비, 기존에 저 위치에 파일이 있는지 확인 후 생성이 필요합니다.
+  빈파일이 아닌 필요 설정을 먼저 정의하여 준비하여도 됩니다.
+
+2. 설치 파일 /usr/local로 이동 및 디렉토리 이동
+cp mariadb-10.3.18-linux-x86_64.tar.gz /usr/local/
+
+cd /usr/local
+
+3. tar 파일 압축 해제
+tar -zxvpf mariadb-10.3.18-linux-x86_64.tar.gz
+# 이동한 위치 /usr/local에 tar파일을 압축 해제 합니다.
+
+4. 심볼릭 링크 | 해당 파일 위치로 이동
+ln -s mariadb-10.3.18-linux-x86_64.tar.gz mysql
+
+cd mysql  (전체경로: /usr/local/mysql )
+5. 설치 스크립트 실행
+./scripts/mysql_install_db --user=mysql
+  # /usr/local/mysql 위치에서 해당 명령어 실행
+
+6. 권한 부여
+chown -R mysql:mysql /usr/local/mariadb-10.3.18-linux-x86_64.tar.gz
+chown -R mysql:mysql /usr/local/mysql
+
+7. my.cnf 파일 정의
+./bin/mysqld_safe --defaults-file=/etc/my.cnf --user=mysql &
+# 정의 해둔 /etc/my.cnf 을 연결합니다.
+
+8. mysql, mysqldump등의 클라이언트 호출을 위한 PATH수정
+export PATH=$PATH:/usr/local/mysql/bin/
+
+9. mysql.server 파일을 올바른 위치에 복사
+cp support-files/mysql.server /etc/init.d/mysql.server
+
+10. 데몬 리로드
+systemctl daemon-reload
+=========> 에러 발생 : 
+[root@localhost mysql]# systemctl enable mysql
+Failed to issue method call: No such file or directory
+
+
+11. mariadb 실행 및 초기 root 설정
+systemctl enable mysql
+systemctl start mysql
+
+/usr/local/mysql/bin/mysqladmin -u root password '비밀번호'

@@ -1,0 +1,245 @@
+{
+  "doc_id": "doc-integration-seed",
+  "entities": [
+    {
+      "type": "METRIC",
+      "name": "product_revenue",
+      "properties": {
+        "value": 640.2,
+        "unit": "M USD",
+        "yoy_growth": 37,
+        "period": "Q2 FY24"
+      },
+      "id": "E5D9B51"
+    },
+    {
+      "type": "METRIC",
+      "name": "total_customers",
+      "properties": {
+        "value": 8537,
+        "unit": "개",
+        "yoy_growth": 25
+      },
+      "id": "E6F0A80"
+    },
+    {
+      "type": "METRIC",
+      "name": "million_dollar_customers",
+      "properties": {
+        "value": 402,
+        "unit": "개",
+        "yoy_growth": 62,
+        "description": "$1M 이상 고객 수"
+      },
+      "id": "E0143C8"
+    },
+    {
+      "type": "METRIC",
+      "name": "marketplace_listings",
+      "properties": {
+        "value": 2149,
+        "unit": "개"
+      },
+      "id": "E7AF553"
+    },
+    {
+      "type": "METRIC",
+      "name": "storage_compression_rate",
+      "properties": {
+        "value": 80,
+        "unit": "%",
+        "description": "Centralized Storage 평균 압축률"
+      },
+      "id": "E53287F"
+    },
+    {
+      "type": "METRIC",
+      "name": "nps_score_snowflake",
+      "properties": {
+        "value": 67,
+        "unit": "점",
+        "description": "Net Promoter Score (as of July 2023)"
+      },
+      "id": "EF4831D"
+    },
+    {
+      "type": "ORGANIZATION",
+      "name": "Snowflake",
+      "properties": {
+        "nps_score": 67,
+        "founded": 2012,
+        "ipo_year": 2020,
+        "db_rank": 11,
+        "headquarters": "USA"
+      },
+      "id": "EB36616"
+    },
+    {
+      "type": "ORGANIZATION",
+      "name": "Oracle",
+      "properties": {
+        "nps_score": 25,
+        "db_rank": 1
+      },
+      "id": "E1F6540"
+    },
+    {
+      "type": "ORGANIZATION",
+      "name": "IBM",
+      "properties": {
+        "nps_score": 27
+      },
+      "id": "E78A249"
+    },
+    {
+      "type": "ORGANIZATION",
+      "name": "Apple",
+      "properties": {
+        "nps_score": 47
+      },
+      "id": "E354714"
+    },
+    {
+      "type": "ORGANIZATION",
+      "name": "Google",
+      "properties": {
+        "nps_score": 47
+      },
+      "id": "E1FDFF9"
+    },
+    {
+      "type": "PRODUCT",
+      "name": "Virtual Warehouse",
+      "properties": {
+        "billing": "second",
+        "scale_up": true,
+        "scale_out": true,
+        "category": "compute"
+      },
+      "id": "E45102C"
+    },
+    {
+      "type": "PRODUCT",
+      "name": "Centralized Storage",
+      "properties": {
+        "compression_rate": 80,
+        "encryption": "automatic",
+        "category": "storage"
+      },
+      "id": "E8FCBEA"
+    },
+    {
+      "type": "PRODUCT",
+      "name": "Data Sharing",
+      "properties": {
+        "modes": "Direct/Exchange/Marketplace",
+        "category": "feature"
+      },
+      "id": "EB2909C"
+    },
+    {
+      "type": "PRODUCT",
+      "name": "Snowpark",
+      "properties": {
+        "languages": "Python/Java/Scala",
+        "category": "developer_framework"
+      },
+      "id": "E743F48"
+    },
+    {
+      "type": "CONCEPT",
+      "name": "Time Travel",
+      "properties": {
+        "mechanism": "MVCC",
+        "description": "과거 특정 시점 데이터 복원"
+      },
+      "id": "EA63EAD"
+    },
+    {
+      "type": "CONCEPT",
+      "name": "Zero Copy Cloning",
+      "properties": {
+        "billing": "incremental",
+        "description": "메타데이터 포인터만 복사, 물리 복사 없음",
+        "storage_saving": true
+      },
+      "id": "E3A438C"
+    },
+    {
+      "type": "PERSON",
+      "name": "Benoit Dageville",
+      "properties": {
+        "role": "Co-founder",
+        "background": "Lead architect Oracle",
+        "expertise": "parallel query execution"
+      },
+      "id": "EA0710D"
+    },
+    {
+      "type": "PERSON",
+      "name": "Thierry Curanes",
+      "properties": {
+        "role": "Co-founder",
+        "background": "Lead architect Oracle",
+        "expertise": "query optimization"
+      },
+      "id": "EBB2B7E"
+    }
+  ],
+  "relationships": [
+    {
+      "from_id": "EB36616",
+      "relation": "HAS_METRIC",
+      "to_id": "E5D9B51",
+      "id": "RA4EBC7"
+    },
+    {
+      "from_id": "EB36616",
+      "relation": "HAS_METRIC",
+      "to_id": "E6F0A80",
+      "id": "RE31C3C"
+    },
+    {
+      "from_id": "EB36616",
+      "relation": "HAS_METRIC",
+      "to_id": "E0143C8",
+      "id": "REBE698"
+    },
+    {
+      "from_id": "EB36616",
+      "relation": "HAS_METRIC",
+      "to_id": "EF4831D",
+      "id": "RF601B0"
+    },
+    {
+      "from_id": "EB36616",
+      "relation": "HAS_PRODUCT",
+      "to_id": "E45102C",
+      "id": "R082185"
+    },
+    {
+      "from_id": "EB36616",
+      "relation": "HAS_PRODUCT",
+      "to_id": "E8FCBEA",
+      "id": "R2EA935"
+    },
+    {
+      "from_id": "EB36616",
+      "relation": "HAS_PRODUCT",
+      "to_id": "EB2909C",
+      "id": "R5B5512"
+    },
+    {
+      "from_id": "EB36616",
+      "relation": "FOUNDED_BY",
+      "to_id": "EA0710D",
+      "id": "R0BC564"
+    },
+    {
+      "from_id": "EB36616",
+      "relation": "FOUNDED_BY",
+      "to_id": "EBB2B7E",
+      "id": "R178A8B"
+    }
+  ]
+}

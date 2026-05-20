@@ -1,0 +1,43 @@
+
+[root@localhost scripts]# ./mysql_install_db --user=maria --basedir=/usr/local/mysql --datadir=/var/lib/mysql/data
+Installing MariaDB/MySQL system tables in '/var/lib/mysql/data' ...
+2024-03-05  2:35:57 0 [ERROR] mysqld: Can't create/write to file '/var/lib/mysql/data/aria_log_control' (Errcode: 13 "Permission denied")
+2024-03-05  2:35:57 0 [ERROR] mysqld: Got error 'Can't create file' when trying to use aria control file '/var/lib/mysql/data/aria_log_control'
+2024-03-05  2:35:57 0 [ERROR] Plugin 'Aria' init function returned error.
+2024-03-05  2:35:57 0 [ERROR] Plugin 'Aria' registration as a STORAGE ENGINE failed.
+2024-03-05  2:35:57 0 [ERROR] InnoDB: The innodb_system data file 'ibdata1' must be writable
+2024-03-05  2:35:57 0 [ERROR] InnoDB: The innodb_system data file 'ibdata1' must be writable
+2024-03-05  2:35:57 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2024-03-05  2:35:57 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2024-03-05  2:35:57 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2024-03-05  2:35:57 0 [ERROR] Aborting
+
+
+Installation of system tables failed!  Examine the logs in
+/var/lib/mysql/data for more information.
+
+The problem could be conflicting information in an external
+my.cnf files. You can ignore these by doing:
+
+    shell> ./mysql_install_db --defaults-file=~/.my.cnf
+
+You can also try to start the mysqld daemon with:
+
+    shell> /usr/local/mysql/bin/mysqld --skip-grant-tables --general-log &
+
+and use the command line tool /usr/local/mysql/bin/mysql
+to connect to the mysql database and look at the grant tables:
+
+    shell> /usr/local/mysql/bin/mysql -u root mysql
+    mysql> show tables;
+
+Try 'mysqld --help' if you have problems with paths.  Using
+--general-log gives you a log in /var/lib/mysql/data that may be helpful.
+
+The latest information about mysql_install_db is available at
+https://mariadb.com/kb/en/installing-system-tables-mysql_install_db
+You can find the latest source at https://downloads.mariadb.org and
+the maria-discuss email list at https://launchpad.net/~maria-discuss
+
+Please check all of the above before submitting a bug report
+at http://mariadb.org/jira

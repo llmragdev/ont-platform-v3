@@ -1,0 +1,22 @@
+{
+  "display_name": "Default Tenant",
+  "status": "active",
+  "limits": {
+    "max_users": 10,
+    "max_projects": 3,
+    "max_documents": 50
+  },
+  "features": {
+    "ontology_editing": true,
+    "hybrid_query": true,
+    "graph_editor": true
+  },
+  "ui": {
+    "theme": "light",
+    "logo_url": null
+  },
+  "llm": {
+    "provider": "system_default",
+    "prompt_policy": "strict_grounded"
+  }
+}

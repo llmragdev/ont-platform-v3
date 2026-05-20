@@ -1,0 +1,17 @@
+[
+  {
+    "id": "default",
+    "name": "Default",
+    "description": "기존 호환용 기본 테넌트 (analyst 사용자 귀속)"
+  },
+  {
+    "id": "acme",
+    "name": "ACME Corp",
+    "description": "데모 기업 A"
+  },
+  {
+    "id": "globex",
+    "name": "Globex Corp",
+    "description": "데모 기업 B"
+  }
+]

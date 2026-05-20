@@ -1,0 +1,131 @@
+-- ac.ac_category definition
+
+CREATE TABLE `ac_category` (
+  `category_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `company_id` varchar(100) NOT NULL,
+  `project_id` varchar(100) NOT NULL,
+  `category_name` varchar(100) NOT NULL,
+  `parent_category_name` varchar(100) DEFAULT NULL,
+  `category_level` int(11) NOT NULL,
+  `leaf_level_yn` char(1) NOT NULL,
+  `order_sn` int(11) DEFAULT NULL,
+  `create_id` varchar(100) NOT NULL,
+  `create_dt` datetime NOT NULL DEFAULT sysdate(),
+  `modify_id` varchar(100) DEFAULT NULL,
+  `modify_dt` datetime DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+
+-- ac.ac_company definition
+
+CREATE TABLE `ac_company` (
+  `company_id` varchar(100) NOT NULL,
+  `company_name` varchar(100) NOT NULL,
+  `summary_svc_yn` char(1) DEFAULT NULL,
+  `ac_svc_yn` char(1) DEFAULT NULL,
+  `callbot_svc_yn` char(1) DEFAULT NULL,
+  `summary_llm_type_cd` char(1) DEFAULT NULL,
+  `ac_llm_type_cd` char(1) DEFAULT NULL,
+  `callbot_llm_type_cd` char(1) DEFAULT NULL,
+  `summary_llm_nm_cd` char(3) DEFAULT NULL,
+  `ac_llm_nm_cd` char(3) DEFAULT NULL,
+  `callbot_llm_nm_cd` char(3) DEFAULT NULL,
+  `rag_db_type_cd` char(2) DEFAULT NULL,
+  `default_dir_path` varchar(300) DEFAULT NULL,
+  `seat_cnt` int(11) NOT NULL,
+  `create_id` varchar(100) DEFAULT NULL,
+  `create_ip` varchar(20) DEFAULT NULL,
+  `create_dt` datetime DEFAULT NULL,
+  `modify_id` varchar(100) DEFAULT sysdate(),
+  `modify_ip` varchar(20) DEFAULT NULL,
+  `modify_dt` datetime DEFAULT NULL,
+  PRIMARY KEY (`company_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- ac.ac_intent definition
+
+CREATE TABLE `ac_intent` (
+  `intent_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `company_id` varchar(100) NOT NULL,
+  `project_id` varchar(100) NOT NULL,
+  `category1_name` varchar(100) DEFAULT NULL,
+  `category2_name` varchar(100) DEFAULT NULL,
+  `category3_name` varchar(100) DEFAULT NULL,
+  `intent_name` varchar(100) NOT NULL,
+  `order_sn` int(11) DEFAULT NULL,
+  `intent_type_cd` char(2) NOT NULL,
+  `parent_msg_mgnt_code` varchar(100) DEFAULT NULL,
+  `intent_level` int(11) NOT NULL,
+  `in_service_yn` char(1) NOT NULL,
+  `required_entity_names` varchar(300) DEFAULT NULL,
+  `exclusive_entity_names` varchar(300) DEFAULT NULL,
+  `querys` varchar(1000) DEFAULT NULL,
+  `answer_type_cd` char(2) NOT NULL,
+  `answer_texts` varchar(1000) DEFAULT NULL,
+  `answer_image_file_names` varchar(300) DEFAULT NULL,
+  `msg_mgnt_code` varchar(100) DEFAULT NULL,
+  `following_action_yn` char(1) NOT NULL,
+  `re_query_msg_mgnt_code` varchar(100) DEFAULT NULL,
+  `create_id` varchar(100) NOT NULL,
+  `create_dt` datetime NOT NULL DEFAULT sysdate(),
+  `modify_id` varchar(100) DEFAULT NULL,
+  `modify_dt` datetime DEFAULT sysdate(),
+  PRIMARY KEY (`intent_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
+
+-- ac.ac_project definition
+
+CREATE TABLE `ac_project` (
+  `project_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `company_id` varchar(100) NOT NULL,
+  `project_code` varchar(10) DEFAULT NULL,
+  `project_name` varchar(100) NOT NULL,
+  `project_detail` varchar(300) NOT NULL,
+  `bot_type_cd` char(2) NOT NULL,
+  `project_type_cd` char(2) NOT NULL,
+  `llm_type_cd` char(1) DEFAULT NULL,
+  `llm_nm_cd` char(3) DEFAULT NULL,
+  `src_type_cd` char(2) NOT NULL,
+  `src_file_path` varchar(300) DEFAULT NULL,
+  `answer_image_path` varchar(300) DEFAULT NULL,
+  `in_service_yn` char(1) NOT NULL,
+  `service_start_dt` date DEFAULT NULL,
+  `service_expire_dt` date DEFAULT NULL,
+  `order_sn` int(11) DEFAULT NULL,
+  `order_field_cd_project` varchar(50) DEFAULT NULL,
+  `order_field_cd_project_atch_doc` varchar(50) DEFAULT NULL,
+  `order_field_cd_category` varchar(50) DEFAULT NULL,
+  `order_field_cd_intent` varchar(50) DEFAULT NULL,
+  `del_yn` char(2) NOT NULL,
+  `create_id` varchar(100) NOT NULL,
+  `create_dt` datetime NOT NULL DEFAULT sysdate(),
+  `modify_id` varchar(100) DEFAULT NULL,
+  `modify_dt` datetime DEFAULT NULL,
+  `delete_id` varchar(100) DEFAULT NULL,
+  `delete_dt` datetime DEFAULT NULL,
+  PRIMARY KEY (`project_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COMMENT='프로젝트';
+
+
+-- ac.ac_project_rag_doc definition
+
+CREATE TABLE `ac_project_rag_doc` (
+  `project_rag_doc_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `company_id` varchar(100) NOT NULL,
+  `project_id` bigint(20) NOT NULL,
+  `doc_type_cd` char(2) NOT NULL,
+  `src_url_addr` varchar(5000) DEFAULT NULL,
+  `src_file_name` varchar(5000) DEFAULT NULL,
+  `src_real_file_name` varchar(1024) DEFAULT NULL,
+  `applying_yn` char(1) NOT NULL,
+  `last_applying_dt` datetime DEFAULT NULL,
+  `order_sn` int(11) DEFAULT NULL,
+  `create_id` varchar(100) NOT NULL,
+  `create_dt` datetime NOT NULL DEFAULT sysdate(),
+  `modify_id` varchar(100) DEFAULT NULL,
+  `modify_dt` datetime DEFAULT NULL,
+  PRIMARY KEY (`project_rag_doc_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;

@@ -1,0 +1,36 @@
+{
+  "doc_id": "demo-orders",
+  "entities": [
+    {
+      "name": "Order O001",
+      "type": "Order",
+      "status": "Submitted",
+      "properties": {
+        "customerId": "C001",
+        "amount": 3200
+      },
+      "id": "EC52554"
+    },
+    {
+      "name": "Order O002",
+      "type": "Order",
+      "status": "Submitted",
+      "properties": {
+        "customerId": "C002",
+        "amount": 8200
+      },
+      "id": "EAB0649"
+    },
+    {
+      "name": "Order O003",
+      "type": "Order",
+      "status": "Approved",
+      "properties": {
+        "customerId": "C001",
+        "amount": 1500
+      },
+      "id": "E1B5E99"
+    }
+  ],
+  "relationships": []
+}

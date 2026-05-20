@@ -1,0 +1,22 @@
+깃서버: 
+122.49.74.5 : git / roqkf@IX 
+
+# push 
+cd /home/ai/src/chat_api
+git add --all
+git commit -m 'delete s3, modified s2'
+git push -u origin master
+
+
+#pull
+git pull
+
+
+=================
+
+수동으로 파이썬 실행시 (ubiz ai 서버 기준) 
+(base) [ubizAI][root@chatbot chat_api]# source /app/miniconda3/bin/activate
+(base) [ubizAI][root@chatbot chat_api]# conda activate corechat
+
+(corechat) [ubizAI][root@chatbot chat_api]# cd callbot_api/
+(corechat) [ubizAI][root@chatbot callbot_api]# python -m adChat.callMain_app

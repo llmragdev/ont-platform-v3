@@ -1,0 +1,202 @@
+
+
+# 1. 바이너리파일 다운로드 / 압축 해제 및 이동
+[root@localhost ~]# cd /usr/local/src
+[root@localhost src]# tar xvfz mariadb-10.3.18-linux-x86_64.tar.gz
+[root@localhost src]# mv mariadb-10.3.18-linux-x86_64 /usr/local/
+[root@localhost src]# cd /usr/local
+[root@localhost local]# mv mariadb-10.3.18-linux-x86_64/ mysql
+
+# 2. CentOS7의 경우 mysql 계정이 생성
+[root@localhost local]# adduser mysql
+[root@localhost local]# cat /etc/passwd | grep mysql
+
+# 3. mysql 디렉토리 소유자 및 그룹사용자 변경
+(/usr/local 경로에서 명령어 입력)
+[root@localhost local]# chown mysql.mysql -R mysql
+
+# 4. my.cnf 업로드 및 복사
+ # 아래 폴더에 my.cnf 업로드 
+ #  해당 폴더 소유자 변경해야업로드 가능
+ # 업로드 위치: /usr/local/src
+ # chown devuser /usr/local/src/
+
+[root@localhost local]# cp /usr/local/src/my.cnf /etc/my.cnf
+
+
+# 5. mysql.server 파일 복사/덮어쓰기 및 각 실행 관련 파일 소유자 및 그룹사용자 변경, 실행 파일 권한 설정
+[root@localhost local]# cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
+[root@localhost local]# chown mysql.mysql /etc/init.d/mysqld
+[root@localhost local]# chown mysql.mysql /etc/my.cnf
+[root@localhost local]# chmod 750 /etc/init.d/mysqld
+
+#6. my.cnf 확인
+[root@localhost local]# vi /etc/my.cnf  - (확인)
+
+[mysqld]
+datadir=/usr/local/mysql/data
+
+밑에 아래의 부분 추가
+init_connect=SET collation_connection = utf8_general_ci
+init_connect=SET NAMES utf8
+character-set-server = utf8
+collation-server = utf8_general_ci
+
+# 7.  mysql 실행 파일 수정 및 저장 (basedir 및 datadir 수정)
+# 첨부파일 참조: mysqld
+[root@localhost local]# vi /etc/init.d/mysqld
+(아래와 같이 수정)
+basedir=/usr/local/mysql
+datadir=/usr/local/mysql/data
+
+
+# 8. mysql datadir 소유자 및 그룹사용자 변경
+[root@localhost local]# chown mysql.mysql -R /usr/local/mysql/data
+
+# 9. libaio 패키지 설치
+[root@localhost local]# yum install libaio*
+[root@localhost local]# yum install libtinfo*
+
+# 10. mysql (mariadb) install 작업
+[root@localhost local]# cd /usr/local/mysql/scripts
+[root@localhost local]# ./mysql_install_db --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data --defaults-file=/etc/my.cnf
+
+설치 시 Error가 발생하면 안되며, 아래와 같이 install이 진행됨
+ 
+Installing MariaDB/MySQL system tables in '/usr/local/mysql/data' ...
+2019-08-02 19:35:02 140074480691072 [Note] /usr/local/mysql//bin/mysqld (mysqld 10.1.41-MariaDB) starting as process 23055 ...
+OK
+Filling help tables...
+2019-08-02 19:35:07 140654689015680 [Note] /usr/local/mysql//bin/mysqld (mysqld 10.1.41-MariaDB) starting as process 23085 ...
+OK
+Creating OpenGIS required SP-s...
+2019-08-02 19:35:10 140486240294784 [Note] /usr/local/mysql//bin/mysqld (mysqld 10.1.41-MariaDB) starting as process 23116 ...
+OK
+ 
+To start mysqld at boot time you have to copy
+support-files/mysql.server to the right place for your system
+ 
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MariaDB root USER !
+To do so, start the server, then issue the following commands:
+ 
+'/usr/local/mysql//bin/mysqladmin' -u root password 'new-password'
+'/usr/local/mysql//bin/mysqladmin' -u root -h centostest2 password 'new-password'
+ 
+Alternatively you can run:
+'/usr/local/mysql//bin/mysql_secure_installation'
+ 
+which will also give you the option of removing the test
+databases and anonymous user created by default.  This is
+strongly recommended for production servers.
+ 
+See the MariaDB Knowledgebase at http://mariadb.com/kb or the
+MySQL manual for more instructions.
+ 
+You can start the MariaDB daemon with:
+cd '/usr/local/mysql/' ; /usr/local/mysql//bin/mysqld_safe --datadir='/usr/local/mysql/data'
+ 
+You can test the MariaDB daemon with mysql-test-run.pl
+cd '/usr/local/mysql//mysql-test' ; perl mysql-test-run.pl
+ 
+Please report any problems at http://mariadb.org/jira
+ 
+The latest information about MariaDB is available at http://mariadb.org/.
+You can find additional information about the MySQL part at:
+http://dev.mysql.com
+Consider joining MariaDB's strong and vibrant community:
+https://mariadb.org/get-involved/
+
+
+# 11. mysql 부분 환경변수 설정
+[root@localhost local]# vi /etc/profile
+ 
+(export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL 밑에 아래의 내용 추가)
+ 
+PATH=$PATH:/usr/local/mysql/bin
+PATH=$PATH:/usr/local/mysql/scripts
+
+# 12. 설정내용 적용 
+[root@localhost local]# source /etc/profile
+
+# 13. ld.so.conf 파일 수정/ 적용
+[root@localhost mysql-5.6.10]# vi /etc/ld.so.conf
+include ld.so.conf.d/*.conf
+/usr/local/mysql/lib/
+/usr/local/lib/
+[root@localhost mysql-5.6.10]# ldconfig
+
+# 14. data 폴더내 파일 / 폴더 소유자 변경
+[root@localhost data]# cd /usr/local/mysql/data
+[root@localhost data]# chown mysql.mysql -R *
+[root@localhost data]# chown mysql.root -R 호스트명.err (해당 err log 파일)
+
+# 15. 마리아db 실행 
+[root@localhost mysql-5.6.10]# /etc/init.d/mysqld start
+
+# 15-1. 패스워드 추가전에는 mysql로도 실행 됨. 
+[root@localhost mysql-5.6.10]# mysql
+
+mysql> use mysql
+mysql> update user set password = password('llmrag') where user = 'root';
+(위의 Query 안될 시)
+MariaDB [mysql]> set PASSWORD for 'root'@'localhost' = PASSWORD('llmrag');
+
+mysql> flush privileges; 
+mysql> quit
+
+# 15-2 /var/run/mysqld 관련 에러 발생시 해당 폴더 삭제 후 재실행
+  # 정상동작시 무시함. 
+  # 기존에 설치된 mysql관련 불필요한 폴더로 추정됨. 
+$ cd /var/run
+$ rmdir mysqld/
+
+
+
+
+16. 설정한 비밀번호로 재 접속 
+
+(base) [root@localhost devuser]# mysql -u root -p
+Enter password:  ==> llmrag
+
+17. 데이터 베이스 추가 / 사용자 추가
+17-1 데이터 베이스 추가
+mysql> create database wc;
+
+17-2 사용자 추가 및 접속 권한 부여 (%대신 ip입력시 해당 ip에서만 접속가능함 )
+mysql>grant all on wc.* to 'wc'@'%' identified by 'wc1@#';
+mysql> select user, host from mysql.user;
++------+-----------------------+
+| user | host                  |
++------+-----------------------+
+| wc   | %                     |
+| root | 127.0.0.1             |
+| root | ::1                   |
+|      | localhost             |
+| root | localhost             |
+|      | localhost.localdomain |
+| root | localhost.localdomain |
++------+-----------------------+
+7 rows in set (0.00 sec)
+
+mysql> flush privileges; 
+mysql> quit; 
+
+# 18. DB 가용 ip 확인 : 3306 
+  # 빅데이터센터 담당자에게 3306과 할당된 3개의 서비스 포트 중 하나와 포트포워딩 신청
+
+(base) [root@localhost run]# netstat -ntlp
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:3350          0.0.0.0:*               LISTEN      994/xrdp-sesman
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      989/sshd
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      2322/master
+tcp        0      0 127.0.0.1:6010          0.0.0.0:*               LISTEN      2954/sshd: devuser@
+tcp        0      0 127.0.0.1:6011          0.0.0.0:*               LISTEN      12091/sshd: devuser
+tcp        0      0 0.0.0.0:3389            0.0.0.0:*               LISTEN      996/xrdp
+tcp6       0      0 :::3306                 :::*                    LISTEN      11239/mysqld
+tcp6       0      0 :::80                   :::*                    LISTEN      991/httpd
+tcp6       0      0 :::22                   :::*                    LISTEN      989/sshd
+tcp6       0      0 ::1:25                  :::*                    LISTEN      2322/master
+tcp6       0      0 ::1:6010                :::*                    LISTEN      2954/sshd: devuser@
+tcp6       0      0 ::1:6011                :::*                    LISTEN      12091/sshd: devuser
+

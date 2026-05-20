@@ -1,0 +1,112 @@
+  630  yum install git
+  631  echo "# ragChatbot" >> README.md
+  632  git init
+  633  git add README.md
+  634  git add .
+  635  git add --all
+  636  git status
+  637  ls
+  638  vi .gitignore
+  639  history
+(base) [root@localhost ragChatbot]# git commit -m 'first commit'
+[master 332a1c2] first commit
+ 96 files changed, 331 insertions(+), 2810 deletions(-)
+ create mode 100644 README.md
+ delete mode 100644 acChat/chatLlm202/chatSubLlmPredict202_biz.py
+ delete mode 100644 acChat/chatLlm_101/chatSubLlmPredict101_biz_bak2.py
+ delete mode 100644 acChat/chatLlm_102/chatSubLlmPredict102_biz.py
+ delete mode 100644 "files/item2/000002/202402071612556f387d91fbe8178751a836d92fd693e9AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240125.pptx"
+ delete mode 100644 "files/item2/000002/20240207161255b4ffbad98b0791894dab11c01fc84edeAC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.5_20240123.xlsx"
+ delete mode 100644 "files/item3/000002/20240208202139b2363c10f86267375d89143f2c295f66AC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.5_20240123.xlsx"
+ delete mode 100644 "files/item3/000002/20240208202139cdbb6e5d20ed437886db0cef2e073c88AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240125.pptx"
+ delete mode 100644 "files/item3/000002/202402082027594691a9336f188145efb3257915bc54e6AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240125.pptx"
+ delete mode 100644 "files/item3/000002/20240208202759df4567164fd0af5397eaa3e44e0e09f3AC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.5_20240123.xlsx"
+ delete mode 100644 "files/item3/000002/2024020820300709a312f301e498f367842a180deba633AC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.5_20240123.xlsx"
+ delete mode 100644 "files/item3/000002/20240208203007fccfa1d14bf18d4dd91dad2dd8d27a8fAC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240125.pptx"
+ delete mode 100644 "files/item3/000002/20240213165219697d8817c4fa0f5584cc97e44553ae50AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/20240213165524ed40c496e13455a724b3142ad3b041d2AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/202402131659114787940251a58889c14a55f5bdf970cdAC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/20240213170105cf6d19acbd777ee670aa73299a473ba1AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/202402131702005972f823b0d0cb9f5fa05b727c194b49AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/20240213170449df73b8f9a2cd507df1b0a692b4cd4bfaAC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/20240213170844e2de71784e477c508bfdc6002959f731AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/20240213171217088ea5c94c09e40c4a865f968645f21fAC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/20240213171710072c2e7cf26008f192a71cb2ba9d5d53AC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.5_20240205.xlsx"
+ delete mode 100644 "files/item3/000002/2024021317171027e153ae6e63f5e8615527a4e1d35b76AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/202402131816442a302c134f8e0c38a4f16e11c9c0b201AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/202402131816444b1f99d11bfa2ce4ccdebe2bda14dbeeAC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.5_20240205.xlsx"
+ delete mode 100644 "files/item3/000002/2024021318165231d648e84542182e46b0f77b722643d2AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/202402131816524503d479cac1d1f980fd131a542b09adAC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.5_20240205.xlsx"
+ delete mode 100644 "files/item3/000002/202402132132049df1e959d97f184b005b413da67970bcAC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000002/20240213213204ce44ead297e6bbaebb67019911e9c57eAC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.5_20240205.xlsx"
+ delete mode 100644 "files/item3/000003/AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000003/AC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.5_20240205.xlsx"
+ delete mode 100644 "files/item3/000003/AC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.6_20240220.xlsx"
+ delete mode 100644 "files/item3/000003/download/202402221102163c68ef54681307791c59da0007200f70_AC_\352\260\234\353\260\234 \352\260\200\354\235\264\353\223\234_20240130.pptx"
+ delete mode 100644 "files/item3/000003/download/202402221102163fdc13f2a16949a05ce9705ac57717a2_AC_\354\235\270\355\204\260\355\216\230\354\235\264\354\212\244\353\252\205\354\204\270\354\204\234_v0.6_20240220.xlsx"
+ delete mode 100644 files/item36/000036/Premium_IPCC.pdf
+ delete mode 100644 files/readme.txt
+ delete mode 100644 files/test.txt
+ rename mngChatBot/{db_proc_ac.py => db_proc_wc.py} (89%)
+ delete mode 100644 mngChatBot/mngAc_app.py_20231221
+ delete mode 100644 "mngChatBot/mngAc_app.py_20231221_intent\352\271\214\354\247\200\354\204\261\352\263\265"
+ delete mode 100644 mngChatBot/mngAc_app_bak_0130.py
+ rename mngChatBot/{mngAc_app.py => mngWc_app.py} (91%)
+ delete mode 100644 mngChatBot/projDocFile_biz.py
+ delete mode 100644 mngChatBot/projDocFile_schema.py
+ delete mode 100644 mngChatBot/projDoc_biz.py
+ delete mode 100644 mngChatBot/projDoc_schema.py
+ delete mode 100644 ragDBData/item/000002/2ca99bdc-417e-480c-b6b0-12f742cdfc23/data_level0.bin
+ delete mode 100644 ragDBData/item/000002/2ca99bdc-417e-480c-b6b0-12f742cdfc23/header.bin
+ delete mode 100644 ragDBData/item/000002/2ca99bdc-417e-480c-b6b0-12f742cdfc23/length.bin
+ delete mode 100644 ragDBData/item/000002/2ca99bdc-417e-480c-b6b0-12f742cdfc23/link_lists.bin
+ delete mode 100644 ragDBData/item/000002/chroma.sqlite3
+ create mode 100644 shell/.wc_mngChatBot.out.swp
+ delete mode 100644 shell/ac_chat.out
+ delete mode 100644 shell/ac_summary.out
+ delete mode 100644 shell/ac_sysAdmin.out
+ rewrite shell/setenv_dev.sh (79%)
+ delete mode 100755 shell/start_ac_acChat.sh
+ delete mode 100755 shell/start_ac_acSummary.sh
+ delete mode 100755 shell/start_ac_sysAcAdmin.sh
+ rename shell/{start_ac_mngChatBot.sh => start_wc_mngChatBot.sh} (62%)
+ create mode 100755 shell/start_wc_sysWcAdmin.sh
+ create mode 100755 shell/start_wc_wcChat.sh
+ create mode 100755 shell/start_wc_wcSummary.sh
+ delete mode 100755 shell/stop_ac_acChat.sh
+ delete mode 100755 shell/stop_ac_acSummary.sh
+ delete mode 100755 shell/stop_ac_sysAcAdmin.sh
+ rename shell/{stop_ac_mngChatBot.sh => stop_wc_mngChatBot.sh} (70%)
+ create mode 100755 shell/stop_wc_sysWcAdmin.sh
+ create mode 100755 shell/stop_wc_wcChat.sh
+ create mode 100755 shell/stop_wc_wcSummary.sh
+ delete mode 100644 sysAcAdmin/sysAcAdminMain_biz.py
+ delete mode 100644 sysAcAdmin/sysAdminMain_app_bak_20240123-1.py
+ rename {sysAcAdmin => sysWcAdmin}/company_biz.py (93%)
+ rename {sysAcAdmin => sysWcAdmin}/company_schema.py (100%)
+ rename sysAcAdmin/sysAcAdmin_app.py => sysWcAdmin/sysWcAdmin_app.py (100%)
+ rename sysAcAdmin/sysAcAdmin_models.py => sysWcAdmin/sysWcAdmin_models.py (100%)
+ rename {acChat => wcChat}/chatLlm_101/chatSubLlmPredict101_biz.py (89%)
+ create mode 100644 wcChat/chatLlm_102/chatSubLlmPredict102_biz.py
+ rename {acChat => wcChat}/chatLlm_201/chatSubLlmPredict201_biz.py (100%)
+ rename {acChat => wcChat}/chatMain_biz.py (100%)
+ rename {acChat => wcChat}/chatMain_schema.py (100%)
+ rename {acChat => wcChat}/simular_biz.py (93%)
+ rename acChat/acChat_app.py => wcChat/wcChat_app.py (98%)
+ rename {acSummary => wcSummary}/acSummary_app.py (100%)
+ rename {acSummary => wcSummary}/summaryMain_biz.py (100%)
+ rename {acSummary => wcSummary}/summaryMain_schema.py (100%)
+ rename ac_origin_conda_requirements.txt => wc_origin_conda_requirements.txt (100%)
+ rename ac_sed_conda_pip_requirements.txt => wc_sed_conda_pip_requirements.txt (100%)
+(base) [root@localhost ragChatbot]# git branch -M main
+(base) [root@localhost ragChatbot]# add origin git@github.com:llmRagApp/ragChatbot.git
+bash: add: command not found
+(base) [root@localhost ragChatbot]# git remote add origin git@github.com:llmRagApp/ragChatbot.git
+fatal: remote origin already exists.
+(base) [root@localhost ragChatbot]# git push -u origin main
+ssh: connect to host 122.49.74.5 port 22: Connection timed out
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+(base) [root@localhost ragChatbot]#

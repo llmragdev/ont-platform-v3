@@ -1,0 +1,46 @@
+{
+  "admin": {
+    "can_read": true,
+    "can_edit_schema": true,
+    "can_edit_object": true,
+    "can_edit_relationship": true,
+    "can_upload_doc": true,
+    "can_delete_doc": true,
+    "can_run_query": true,
+    "can_view_audit": true,
+    "can_manage_users": true
+  },
+  "editor": {
+    "can_read": true,
+    "can_edit_schema": false,
+    "can_edit_object": true,
+    "can_edit_relationship": true,
+    "can_upload_doc": true,
+    "can_delete_doc": false,
+    "can_run_query": true,
+    "can_view_audit": false,
+    "can_manage_users": false
+  },
+  "viewer": {
+    "can_read": true,
+    "can_edit_schema": false,
+    "can_edit_object": false,
+    "can_edit_relationship": false,
+    "can_upload_doc": false,
+    "can_delete_doc": false,
+    "can_run_query": true,
+    "can_view_audit": false,
+    "can_manage_users": false
+  },
+  "auditor": {
+    "can_read": true,
+    "can_edit_schema": false,
+    "can_edit_object": false,
+    "can_edit_relationship": false,
+    "can_upload_doc": false,
+    "can_delete_doc": false,
+    "can_run_query": false,
+    "can_view_audit": true,
+    "can_manage_users": false
+  }
+}

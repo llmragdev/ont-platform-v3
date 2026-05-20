@@ -1,0 +1,90 @@
+(base) [ubizAI][root@chatbot chat_api]# git pull
+git@122.49.74.5's password: 
+remote: Counting objects: 122, done.
+remote: Compressing objects: 100% (93/93), done.
+remote: Total 94 (delta 54), reused 0 (delta 0)
+오브젝트 묶음 푸는 중: 100% (94/94), 87.57 KiB | 433.00 KiB/s, 완료.
+122.49.74.5:/opt/git/chat_api URL에서
+   43c81a7..b7c2c62  master     -> origin/master
+업데이트 중 43c81a7..b7c2c62
+Fast-forward
+ callbot_api/adChat/callMain_biz.py                                               |  151 ++++-
+ callbot_api/adChat/callMain_schema.py                                            |    2 +-
+ callbot_api/adChat/callSub_biz.py                                                |  789 ++++++++++++++++-------
+ callbot_api/adChat/call_app.py                                                   |   10 +-
+ callbot_api/adMockServer/adMockServer_app.py                                     |   23 +
+ callbot_api/chatEngine/coreChat/callMain_async_v2_biz.py                         |   29 +-
+ callbot_api/chatEngine/coreChat/callMain_v2_biz.py                               |   10 +-
+ .../coreChat/callMain_v2_biz_20250807_1_\354\204\261\352\263\265_bak copy.py"    | 1270 --------------------------------------
+ callbot_api/chatEngine/coreChat/callSub_async_v2_biz.py                          |    4 +-
+ callbot_api/chatEngine/coreChat/callSub_v2_biz.py                                |   24 +-
+ callbot_api/chatEngine/coreChat/call_v2_app.py                                   |  847 ++++++++++++++++++++++++-
+ callbot_api/chatEngine/coreChat/call_v2_app_exec_01_makeScenarioFromIntent.py    |   36 ++
+ callbot_api/chatEngine/coreChat/call_v2_app_exec_02_makeScenarioFromMsgLog.py    |   83 +++
+ callbot_api/chatEngine/coreChat/call_v2_app_exec_03_runScenario.py               |   25 +
+ callbot_api/chatEngine/coreChat/call_v2_app_exec_04_runMakeScenarioFromMsgLog.py |   27 +
+ callbot_api/chatEngine/{coreChat => mngChat/biz}/action_method_biz.py            |    0
+ callbot_api/chatEngine/mngChat/biz/auto_run_info_async_biz.py                    |   67 ++
+ callbot_api/chatEngine/mngChat/biz/botMessageLogHist_async_biz.py                |    3 +
+ callbot_api/chatEngine/mngChat/biz/botMessageLogHist_sync_biz.py                 |    3 +
+ callbot_api/chatEngine/mngChat/biz/botMessageLogMaster_async_biz.py              |    9 +
+ callbot_api/chatEngine/mngChat/biz/botMessageLogMaster_sync_biz.py               |    5 +
+ callbot_api/chatEngine/{coreChat => mngChat/schema}/action_method_schema.py      |    0
+ callbot_api/chatEngine/mngChat/schema/auto_run_info_schema.py                    |   41 ++
+ callbot_api/mcpApi/mcpClientHttpSample.py                                        |   49 ++
+ callbot_api/mcpApi/mcpClientSseSample_hybrid.py                                  |   55 ++
+ callbot_api/mcpApi/mcpServerHttpApp.py                                           |   58 ++
+ callbot_api/mcpApi/mcpServerSseApp.py                                            |   86 +++
+ callbot_api/mcpApi/readme.txt                                                    |    6 +
+ callbot_api/mcpNode/readme.txt                                                   |    2 +
+ callbot_api/mngCallbot/botMessageLogHist_schema.py                               |    1 +
+ callbot_api/mngCallbot/botMessageLogMaster_schema.py                             |    1 +
+ callbot_api/mngCallbot/bot_models.py                                             |   26 +
+ callbot_api/mngCallbot/entityConst_biz.py                                        |    9 +-
+ callbot_api/mngCallbot/entityVarStatus_biz.py                                    |   62 +-
+ callbot_api/mngCallbot/entityVarStatus_schema.py                                 |    7 +-
+ callbot_api/opTeam/db_proc_opTeam.py                                             |   34 +
+ callbot_api/opTeam/opTeamApp.py                                                  |  589 ++++++++++++++++++
+ callbot_api/run_01_makeScenarioFromIntent.sh                                     |   25 +
+ callbot_api/run_02_makeScenarioFromMsgLog.sh                                     |   26 +
+ callbot_api/run_03_runScenario.sh                                                |   25 +
+ callbot_api/run_04_runMakeScenarioFromMsgLog.sh                                  |   25 +
+ callbot_api/run_make_intent_scenario.sh                                          |   25 +
+ callbot_api/start_mcp_sse_server.sh                                              |   50 ++
+ callbot_api/start_mcp_streamable_server.sh                                       |   37 ++
+ callbot_api/start_opTeam_app.sh                                                  |   20 +
+ callbot_api/stop_mcp_sse_server.sh                                               |   30 +
+ callbot_api/stop_mcp_streamable_server.sh                                        |   13 +
+ callbot_api/stop_opTeam_app.sh                                                   |   16 +
+ requirements_ac_20251023.txt                                                     |  143 +++++
+ 49 files changed, 3293 insertions(+), 1585 deletions(-)
+ delete mode 100644 "callbot_api/chatEngine/coreChat/callMain_v2_biz_20250807_1_\354\204\261\352\263\265_bak copy.py"
+ create mode 100644 callbot_api/chatEngine/coreChat/call_v2_app_exec_01_makeScenarioFromIntent.py
+ create mode 100644 callbot_api/chatEngine/coreChat/call_v2_app_exec_02_makeScenarioFromMsgLog.py
+ create mode 100644 callbot_api/chatEngine/coreChat/call_v2_app_exec_03_runScenario.py
+ create mode 100644 callbot_api/chatEngine/coreChat/call_v2_app_exec_04_runMakeScenarioFromMsgLog.py
+ rename callbot_api/chatEngine/{coreChat => mngChat/biz}/action_method_biz.py (100%)
+ create mode 100644 callbot_api/chatEngine/mngChat/biz/auto_run_info_async_biz.py
+ rename callbot_api/chatEngine/{coreChat => mngChat/schema}/action_method_schema.py (100%)
+ create mode 100644 callbot_api/chatEngine/mngChat/schema/auto_run_info_schema.py
+ create mode 100644 callbot_api/mcpApi/mcpClientHttpSample.py
+ create mode 100644 callbot_api/mcpApi/mcpClientSseSample_hybrid.py
+ create mode 100644 callbot_api/mcpApi/mcpServerHttpApp.py
+ create mode 100644 callbot_api/mcpApi/mcpServerSseApp.py
+ create mode 100644 callbot_api/mcpApi/readme.txt
+ create mode 100644 callbot_api/mcpNode/readme.txt
+ create mode 100644 callbot_api/opTeam/db_proc_opTeam.py
+ create mode 100644 callbot_api/opTeam/opTeamApp.py
+ create mode 100644 callbot_api/run_01_makeScenarioFromIntent.sh
+ create mode 100644 callbot_api/run_02_makeScenarioFromMsgLog.sh
+ create mode 100644 callbot_api/run_03_runScenario.sh
+ create mode 100644 callbot_api/run_04_runMakeScenarioFromMsgLog.sh
+ create mode 100644 callbot_api/run_make_intent_scenario.sh
+ create mode 100755 callbot_api/start_mcp_sse_server.sh
+ create mode 100755 callbot_api/start_mcp_streamable_server.sh
+ create mode 100755 callbot_api/start_opTeam_app.sh
+ create mode 100755 callbot_api/stop_mcp_sse_server.sh
+ create mode 100755 callbot_api/stop_mcp_streamable_server.sh
+ create mode 100755 callbot_api/stop_opTeam_app.sh
+ create mode 100644 requirements_ac_20251023.txt
+(base) [ubizAI][root@chatbot chat_api]# 

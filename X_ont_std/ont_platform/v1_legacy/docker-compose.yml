@@ -1,0 +1,53 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: claud-be
+    ports:
+      - "8000:8000"
+    environment:
+      PYTHONIOENCODING: utf-8
+      # 다음 중 하나에 Gemini 키를 두면 LLM Gateway가 사용
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_API_KEY1: ${GEMINI_API_KEY1:-}
+      GEMINI_API_KEY2: ${GEMINI_API_KEY2:-}
+      GEMINI_API_KEY3: ${GEMINI_API_KEY3:-}
+      GEMINI_API_KEY4: ${GEMINI_API_KEY4:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.0-flash-001}
+      # PostgreSQL 영속화를 켜려면 DATABASE_URL 설정 (NEXT_STEPS #6 도입 후)
+      DATABASE_URL: ${DATABASE_URL:-}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: claud-fe
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_BASE: ${NEXT_PUBLIC_API_BASE:-http://localhost:8000}
+
+  # 선택: PostgreSQL (NEXT_STEPS #6 활성화 후 사용)
+  # 사용하려면 `docker compose --profile db up` 으로 실행
+  postgres:
+    image: postgres:16-alpine
+    profiles: ["db"]
+    container_name: claud-db
+    environment:
+      POSTGRES_USER: ontology
+      POSTGRES_PASSWORD: ontology
+      POSTGRES_DB: ontology
+    ports:
+      - "5432:5432"
+    volumes:
+      - claud-db-data:/var/lib/postgresql/data
+
+volumes:
+  claud-db-data:

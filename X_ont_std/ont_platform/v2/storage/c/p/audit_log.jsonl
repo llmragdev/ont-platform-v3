@@ -1,0 +1,1 @@
+{"event_id": "audit-c3ab01b2cf6c", "timestamp": "2026-05-13T04:37:40.415063+00:00", "company_id": "c", "project_id": "p", "user_id": "u", "role": "Admin", "action": "GENERATE_QUERY_PLAN", "resource_type": "query", "resource_id": "planner", "details": {"query": "location: Seoul인 엔티티 찾아줘", "intent": "filter"}}

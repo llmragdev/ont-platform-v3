@@ -1,0 +1,10 @@
+﻿Eval_Round,Team_Suffix,Project_ID,Session_ID,No,Question,AI_Answer,Latency(s)
+Interim_Eval,1,project_1,SESS_B6287A3A,1,국방 지휘통제 데이터 통합을 위한 온톨로지 연구의 핵심 내용은?,참조 지식 없음,0
+Interim_Eval,1,project_1,SESS_B6287A3A,2,방금 질문한 연구의 기대효과를 요약해줘.,참조 지식 없음,0
+Interim_Eval,1,project_1,SESS_B6287A3A,3,해외 군사 온톨로지 개발 현황에 대해 설명해줘.,참조 지식 없음,0
+Interim_Eval,2,project_2,SESS_EB07FAA0,1,국방 지휘통제 데이터 통합을 위한 온톨로지 연구의 핵심 내용은?,참조 지식 없음,0
+Interim_Eval,2,project_2,SESS_EB07FAA0,2,방금 질문한 연구의 기대효과를 요약해줘.,참조 지식 없음,0
+Interim_Eval,2,project_2,SESS_EB07FAA0,3,해외 군사 온톨로지 개발 현황에 대해 설명해줘.,참조 지식 없음,0
+Interim_Eval,3,project_3,SESS_2C2F314E,1,국방 지휘통제 데이터 통합을 위한 온톨로지 연구의 핵심 내용은?,참조 지식 없음,0
+Interim_Eval,3,project_3,SESS_2C2F314E,2,방금 질문한 연구의 기대효과를 요약해줘.,참조 지식 없음,0
+Interim_Eval,3,project_3,SESS_2C2F314E,3,해외 군사 온톨로지 개발 현황에 대해 설명해줘.,참조 지식 없음,0

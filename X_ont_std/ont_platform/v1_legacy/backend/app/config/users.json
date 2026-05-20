@@ -1,0 +1,40 @@
+[
+  {
+    "id": "analyst",
+    "name": "Analyst",
+    "company_id": "default",
+    "role": "editor",
+    "project_ids": ["proj-default"]
+  },
+  {
+    "id": "alice",
+    "name": "Alice",
+    "company_id": "acme",
+    "role": "editor",
+    "project_ids": ["proj-001"]
+  },
+  {
+    "id": "bob",
+    "name": "Bob",
+    "company_id": "acme",
+    "role": "viewer",
+    "project_ids": ["proj-001"]
+  },
+  {
+    "id": "carol",
+    "name": "Carol",
+    "company_id": "globex",
+    "role": "admin",
+    "project_ids": ["proj-002"]
+  },
+  {
+    "id": "dave",
+    "name": "Dave",
+    "company_id": "globex",
+    "role": "viewer",
+    "project_ids": ["proj-002"],
+    "permission_override": {
+      "can_upload_doc": true
+    }
+  }
+]

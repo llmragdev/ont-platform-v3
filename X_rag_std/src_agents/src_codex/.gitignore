@@ -1,0 +1,8 @@
+.conda/
+__pycache__/
+*.pyc
+.pytest_cache/
+storage/*.db
+storage/raw_documents/
+storage/processed/
+storage/vector_store/

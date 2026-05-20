@@ -1,0 +1,126 @@
+{
+  "doc_id": "demo-orders",
+  "entities": [
+    {
+      "id": "E0AA303",
+      "type": "ORDER",
+      "name": "노트북 50대 구매",
+      "properties": {
+        "amount": 5000000,
+        "status": "Submitted",
+        "vendor": "삼성"
+      },
+      "created_at": "2026-05-14T00:44:21.267431+00:00",
+      "created_by": "demo-user",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T00:44:21.267431+00:00"
+    },
+    {
+      "id": "EAFA080",
+      "type": "ORDER",
+      "name": "서버 인프라 확장",
+      "properties": {
+        "amount": 12000000,
+        "status": "Approved",
+        "vendor": "LG전자"
+      },
+      "created_at": "2026-05-14T00:44:21.303214+00:00",
+      "created_by": "demo-user",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T00:44:21.303214+00:00"
+    },
+    {
+      "id": "EAB289E",
+      "type": "CUSTOMER",
+      "name": "ABC Corp",
+      "properties": {
+        "industry": "IT",
+        "region": "서울"
+      },
+      "created_at": "2026-05-14T00:44:21.330000+00:00",
+      "created_by": "demo-user",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T00:44:21.330000+00:00"
+    },
+    {
+      "id": "E8A38EB",
+      "type": "CUSTOMER",
+      "name": "XYZ Manufacturing",
+      "properties": {
+        "industry": "제조",
+        "region": "경기"
+      },
+      "created_at": "2026-05-14T00:44:21.360000+00:00",
+      "created_by": "demo-user",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T00:44:21.360000+00:00"
+    },
+    {
+      "id": "E129F75",
+      "type": "PERSON",
+      "name": "김구매",
+      "properties": {
+        "role": "구매담당자",
+        "department": "구매팀"
+      },
+      "created_at": "2026-05-14T00:44:21.390000+00:00",
+      "created_by": "demo-user",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T00:44:21.390000+00:00"
+    },
+    {
+      "id": "EB5574E",
+      "type": "PERSON",
+      "name": "이재무",
+      "properties": {
+        "role": "재무팀장",
+        "department": "재무팀"
+      },
+      "created_at": "2026-05-14T00:44:21.410000+00:00",
+      "created_by": "demo-user",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T00:44:21.410000+00:00"
+    },
+    {
+      "id": "EF87873",
+      "type": "CONTRACT",
+      "name": "삼성 공급계약 2024",
+      "properties": {
+        "value": 50000000,
+        "start_date": "2024-01-01",
+        "end_date": "2024-12-31"
+      },
+      "created_at": "2026-05-14T00:44:21.430000+00:00",
+      "created_by": "demo-user",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-05-14T00:44:21.430000+00:00"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "R2B9B3E",
+      "from_id": "E0AA303",
+      "relation": "BELONGS_TO",
+      "to_id": "EAB289E"
+    },
+    {
+      "id": "RF442B0",
+      "from_id": "EAFA080",
+      "relation": "BELONGS_TO",
+      "to_id": "E8A38EB"
+    },
+    {
+      "id": "R0234DD",
+      "from_id": "E0AA303",
+      "relation": "COVERED_BY",
+      "to_id": "EF87873"
+    }
+  ]
+}

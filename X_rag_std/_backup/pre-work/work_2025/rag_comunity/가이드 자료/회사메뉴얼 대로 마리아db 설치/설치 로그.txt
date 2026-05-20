@@ -1,0 +1,344 @@
+(base) [root@localhost local]# yum install libaio*
+Loaded plugins: fastestmirror
+Repodata is over 2 weeks old. Install yum-cron? Or run: yum makecache fast
+base                                                                                               | 3.6 kB  00:00:00
+epel/x86_64/metalink                                                                               | 8.0 kB  00:00:00
+epel                                                                                               | 4.7 kB  00:00:00
+extras                                                                                             | 2.9 kB  00:00:00
+mysql56-community                                                                                  | 2.9 kB  00:00:00
+https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/repodata/repomd.xml: [Errno 14] HTTPS Error 404 - Not Found
+Trying other mirror.
+To address this issue please refer to the below knowledge base article
+
+https://access.redhat.com/articles/1320623
+
+If above article doesn't help to resolve this issue please create a bug on https://bugs.centos.org/
+
+http://rpms.adiscon.com/v7-stable/epel-7/x86_64/repodata/repomd.xml: [Errno 14] HTTP Error 404 - Not Found
+Trying other mirror.
+updates                                                                                            | 2.9 kB  00:00:00
+(1/7): base/7/x86_64/group_gz                                                                      | 153 kB  00:00:00
+(2/7): base/7/x86_64/primary_db                                                                    | 6.1 MB  00:00:00
+(3/7): epel/x86_64/group_gz                                                                        | 100 kB  00:00:00
+(4/7): epel/x86_64/updateinfo                                                                      | 1.0 MB  00:00:00
+(5/7): extras/7/x86_64/primary_db                                                                  | 250 kB  00:00:00
+(6/7): epel/x86_64/primary_db                                                                      | 7.0 MB  00:00:00
+(7/7): updates/7/x86_64/primary_db                                                                 |  25 MB  00:00:01
+Determining fastest mirrors
+ * base: ftp.kaist.ac.kr
+ * epel: ftp.kaist.ac.kr
+ * extras: ftp.kaist.ac.kr
+ * updates: ftp.kaist.ac.kr
+Package libaio-0.3.109-13.el7.x86_64 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package libaio-devel.x86_64 0:0.3.109-13.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+==========================================================================================================================
+ Package                        Arch                     Version                             Repository              Size
+==========================================================================================================================
+Installing:
+ libaio-devel                   x86_64                   0.3.109-13.el7                      base                    13 k
+
+Transaction Summary
+==========================================================================================================================
+Install  1 Package
+
+Total download size: 13 k
+Installed size: 7.8 k
+Is this ok [y/d/N]: y
+Downloading packages:
+libaio-devel-0.3.109-13.el7.x86_64.rpm                                                             |  13 kB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libaio-devel-0.3.109-13.el7.x86_64                                                                     1/1
+  Verifying  : libaio-devel-0.3.109-13.el7.x86_64                                                                     1/1
+
+Installed:
+  libaio-devel.x86_64 0:0.3.109-13.el7
+
+Complete!
+
+
+(base) [root@localhost local]# yum install libtinfo*
+Loaded plugins: fastestmirror
+https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/repodata/repomd.xml: [Errno 14] HTTPS Error 404 - Not Found
+Trying other mirror.
+To address this issue please refer to the below knowledge base article
+
+https://access.redhat.com/articles/1320623
+
+If above article doesn't help to resolve this issue please create a bug on https://bugs.centos.org/
+
+http://rpms.adiscon.com/v7-stable/epel-7/x86_64/repodata/repomd.xml: [Errno 14] HTTP Error 404 - Not Found
+Trying other mirror.
+Loading mirror speeds from cached hostfile
+ * base: ftp.kaist.ac.kr
+ * epel: ftp.kaist.ac.kr
+ * extras: ftp.kaist.ac.kr
+ * updates: ftp.kaist.ac.kr
+Resolving Dependencies
+--> Running transaction check
+---> Package ncurses-libs.x86_64 0:5.9-13.20130511.el7 will be updated
+--> Processing Dependency: ncurses-libs(x86-64) = 5.9-13.20130511.el7 for package: ncurses-5.9-13.20130511.el7.x86_64
+---> Package ncurses-libs.x86_64 0:5.9-14.20130511.el7_4 will be an update
+--> Processing Dependency: ncurses-base = 5.9-14.20130511.el7_4 for package: ncurses-libs-5.9-14.20130511.el7_4.x86_64
+--> Running transaction check
+---> Package ncurses.x86_64 0:5.9-13.20130511.el7 will be updated
+---> Package ncurses.x86_64 0:5.9-14.20130511.el7_4 will be an update
+---> Package ncurses-base.noarch 0:5.9-13.20130511.el7 will be updated
+---> Package ncurses-base.noarch 0:5.9-14.20130511.el7_4 will be an update
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+==========================================================================================================================
+ Package                       Arch                    Version                                Repository             Size
+==========================================================================================================================
+Updating:
+ ncurses-libs                  x86_64                  5.9-14.20130511.el7_4                  base                  316 k
+Updating for dependencies:
+ ncurses                       x86_64                  5.9-14.20130511.el7_4                  base                  304 k
+ ncurses-base                  noarch                  5.9-14.20130511.el7_4                  base                   68 k
+
+Transaction Summary
+==========================================================================================================================
+Upgrade  1 Package (+2 Dependent packages)
+
+Total download size: 688 k
+Is this ok [y/d/N]: y
+Downloading packages:
+Delta RPMs disabled because /usr/bin/applydeltarpm not installed.
+(1/3): ncurses-base-5.9-14.20130511.el7_4.noarch.rpm                                               |  68 kB  00:00:00
+(2/3): ncurses-libs-5.9-14.20130511.el7_4.x86_64.rpm                                               | 316 kB  00:00:00
+(3/3): ncurses-5.9-14.20130511.el7_4.x86_64.rpm                                                    | 304 kB  00:00:00
+--------------------------------------------------------------------------------------------------------------------------
+Total                                                                                     2.9 MB/s | 688 kB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Updating   : ncurses-base-5.9-14.20130511.el7_4.noarch                                                              1/6
+  Updating   : ncurses-libs-5.9-14.20130511.el7_4.x86_64                                                              2/6
+  Updating   : ncurses-5.9-14.20130511.el7_4.x86_64                                                                   3/6
+  Cleanup    : ncurses-5.9-13.20130511.el7.x86_64                                                                     4/6
+  Cleanup    : ncurses-libs-5.9-13.20130511.el7.x86_64                                                                5/6
+  Cleanup    : ncurses-base-5.9-13.20130511.el7.noarch                                                                6/6
+  Verifying  : ncurses-libs-5.9-14.20130511.el7_4.x86_64                                                              1/6
+  Verifying  : ncurses-5.9-14.20130511.el7_4.x86_64                                                                   2/6
+  Verifying  : ncurses-base-5.9-14.20130511.el7_4.noarch                                                              3/6
+  Verifying  : ncurses-5.9-13.20130511.el7.x86_64                                                                     4/6
+  Verifying  : ncurses-libs-5.9-13.20130511.el7.x86_64                                                                5/6
+  Verifying  : ncurses-base-5.9-13.20130511.el7.noarch                                                                6/6
+
+Updated:
+  ncurses-libs.x86_64 0:5.9-14.20130511.el7_4
+
+Dependency Updated:
+  ncurses.x86_64 0:5.9-14.20130511.el7_4                    ncurses-base.noarch 0:5.9-14.20130511.el7_4
+
+Complete!
+
+
+
+================================
+(base) [root@localhost scripts]# ./mysql_install_db --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data --defaults-file=/etc/my.cnf
+Installing MariaDB/MySQL system tables in '/usr/local/mysql/data' ...
+2024-03-05 20:18:27 0 [Warning] 'THREAD_CONCURRENCY' is deprecated and will be removed in a future release.
+2024-03-05 20:18:28 6 [Warning] Failed to load slave replication state from table mysql.gtid_slave_pos: 1017: Can't find file: './mysql/' (errno: 2 "No such file or directory")
+OK
+
+To start mysqld at boot time you have to copy
+support-files/mysql.server to the right place for your system
+
+
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MariaDB root USER !
+To do so, start the server, then issue the following commands:
+
+'/usr/local/mysql//bin/mysqladmin' -u root password 'new-password'
+'/usr/local/mysql//bin/mysqladmin' -u root -h localhost.localdomain password 'new-password'
+
+Alternatively you can run:
+'/usr/local/mysql//bin/mysql_secure_installation'
+
+which will also give you the option of removing the test
+databases and anonymous user created by default.  This is
+strongly recommended for production servers.
+
+See the MariaDB Knowledgebase at http://mariadb.com/kb or the
+MySQL manual for more instructions.
+
+You can start the MariaDB daemon with:
+cd '/usr/local/mysql/' ; /usr/local/mysql//bin/mysqld_safe --datadir='/usr/local/mysql/data'
+
+You can test the MariaDB daemon with mysql-test-run.pl
+cd '/usr/local/mysql//mysql-test' ; perl mysql-test-run.pl
+
+Please report any problems at http://mariadb.org/jira
+
+The latest information about MariaDB is available at http://mariadb.org/.
+You can find additional information about the MySQL part at:
+http://dev.mysql.com
+Consider joining MariaDB's strong and vibrant community:
+https://mariadb.org/get-involved/
+
+(base) [root@localhost scripts]#
+
+
+
+======================
+Job for mysqld.service failed because a timeout was exceeded. See "systemctl status mysqld.service" and "journalctl -xe" for details.
+                                                           [실패]
+(base) [root@localhost data]# systemctl
+  UNIT                                            LOAD   ACTIVE SUB       DESCRIPTION
+  proc-sys-fs-binfmt_misc.automount               loaded active running   Arbitrary Executable File Formats File System Au
+  sys-devices-pci0000:00-0000:00:01.1-ata2-host1-target1:0:1-1:0:1:0-block-sr0.device loaded active plugged   QEMU_DVD-ROM
+  sys-devices-platform-serial8250-tty-ttyS1.device loaded active plugged   /sys/devices/platform/serial8250/tty/ttyS1
+  sys-devices-platform-serial8250-tty-ttyS2.device loaded active plugged   /sys/devices/platform/serial8250/tty/ttyS2
+  sys-devices-platform-serial8250-tty-ttyS3.device loaded active plugged   /sys/devices/platform/serial8250/tty/ttyS3
+  sys-devices-pnp0-00:06-tty-ttyS0.device         loaded active plugged   /sys/devices/pnp0/00:06/tty/ttyS0
+  sys-devices-vbd\x2d768-block-xvda-xvda1.device  loaded active plugged   /sys/devices/vbd-768/block/xvda/xvda1
+  sys-devices-vbd\x2d768-block-xvda-xvda2.device  loaded active plugged   LVM PV Fmka3S-KNSk-xMJH-Alls-8e3Y-NwZ7-V52izN on
+  sys-devices-vbd\x2d768-block-xvda.device        loaded active plugged   /sys/devices/vbd-768/block/xvda
+  sys-devices-vif\x2d0-net-eth0.device            loaded active plugged   /sys/devices/vif-0/net/eth0
+  sys-devices-virtual-block-dm\x2d0.device        loaded active plugged   /sys/devices/virtual/block/dm-0
+  sys-devices-virtual-block-dm\x2d1.device        loaded active plugged   /sys/devices/virtual/block/dm-1
+  sys-devices-virtual-block-dm\x2d2.device        loaded active plugged   /sys/devices/virtual/block/dm-2
+  sys-devices-virtual-tty-hvc0.device             loaded active plugged   /sys/devices/virtual/tty/hvc0
+  sys-devices-virtual-tty-hvc1.device             loaded active plugged   /sys/devices/virtual/tty/hvc1
+  sys-devices-virtual-tty-hvc2.device             loaded active plugged   /sys/devices/virtual/tty/hvc2
+  sys-devices-virtual-tty-hvc3.device             loaded active plugged   /sys/devices/virtual/tty/hvc3
+  sys-devices-virtual-tty-hvc4.device             loaded active plugged   /sys/devices/virtual/tty/hvc4
+  sys-devices-virtual-tty-hvc5.device             loaded active plugged   /sys/devices/virtual/tty/hvc5
+  sys-devices-virtual-tty-hvc6.device             loaded active plugged   /sys/devices/virtual/tty/hvc6
+  sys-devices-virtual-tty-hvc7.device             loaded active plugged   /sys/devices/virtual/tty/hvc7
+  sys-module-configfs.device                      loaded active plugged   /sys/module/configfs
+  sys-subsystem-net-devices-eth0.device           loaded active plugged   /sys/subsystem/net/devices/eth0
+  -.mount                                         loaded active mounted   /
+  boot.mount                                      loaded active mounted   /boot
+  dev-hugepages.mount                             loaded active mounted   Huge Pages File System
+  dev-mqueue.mount                                loaded active mounted   POSIX Message Queue File System
+  home.mount                                      loaded active mounted   /home
+  proc-sys-fs-binfmt_misc.mount                   loaded active mounted   Arbitrary Executable File Formats File System
+  proc-xen.mount                                  loaded active mounted   /proc/xen
+  run-user-1000.mount                             loaded active mounted   /run/user/1000
+  sys-kernel-config.mount                         loaded active mounted   Configuration File System
+  sys-kernel-debug.mount                          loaded active mounted   Debug File System
+  brandbot.path                                   loaded active waiting   Flexible branding
+  systemd-ask-password-plymouth.path              loaded active waiting   Forward Password Requests to Plymouth Directory
+  systemd-ask-password-wall.path                  loaded active waiting   Forward Password Requests to Wall Directory Watc
+  session-381.scope                               loaded active running   Session 381 of user devuser
+  session-382.scope                               loaded active running   Session 382 of user devuser
+  auditd.service                                  loaded active running   Security Auditing Service
+  avahi-daemon.service                            loaded active running   Avahi mDNS/DNS-SD Stack
+  crond.service                                   loaded active running   Command Scheduler
+  dbus.service                                    loaded active running   D-Bus System Message Bus
+  getty@tty1.service                              loaded active running   Getty on tty1
+  hosts.service                                   loaded active exited    (null)
+  httpd.service                                   loaded active running   The Apache HTTP Server
+  irqbalance.service                              loaded active running   irqbalance daemon
+  kdump.service                                   loaded active exited    Crash recovery kernel arming
+  kmod-static-nodes.service                       loaded active exited    Create list of required static device nodes for
+  lvm2-lvmetad.service                            loaded active running   LVM2 metadata daemon
+  lvm2-monitor.service                            loaded active exited    Monitoring of LVM2 mirrors, snapshots etc. using
+  lvm2-pvscan@202:2.service                       loaded active exited    LVM2 PV scan on device 202:2
+● mysqld.service                                  loaded failed failed    SYSV: MySQL database server.
+  network.service                                 loaded active exited    LSB: Bring up/down networking
+  NetworkManager-wait-online.service              loaded active exited    Network Manager Wait Online
+  NetworkManager.service                          loaded active running   Network Manager
+  polkit.service                                  loaded active running   Authorization Manager
+  postfix.service                                 loaded active running   Postfix Mail Transport Agent
+  rc-local.service                                loaded active exited    /etc/rc.d/rc.local Compatibility
+  rhel-dmesg.service                              loaded active exited    Dump dmesg to /var/log/dmesg
+  rhel-import-state.service                       loaded active exited    Import network configuration from initramfs
+  rhel-readonly.service                           loaded active exited    Configure read-only root support
+  rsyslog.service                                 loaded active running   System Logging Service
+  serial-getty@hvc0.service                       loaded active running   Serial Getty on hvc0
+  sshd.service                                    loaded active running   OpenSSH server daemon
+  staticip.service                                loaded active exited    (null)
+  systemd-fsck-root.service                       loaded active exited    File System Check on Root Device
+  systemd-fsck@dev-disk-by\x2duuid-fa69efc8\x2d9a83\x2d43f2\x2d88fb\x2daf9e1166473b.service loaded active exited    File S
+  systemd-fsck@dev-mapper-centos\x2dhome.service  loaded active exited    File System Check on /dev/mapper/centos-home
+  systemd-hwdb-update.service                     loaded active exited    Rebuild Hardware Database
+  systemd-journal-catalog-update.service          loaded active exited    Rebuild Journal Catalog
+  systemd-journal-flush.service                   loaded active exited    Flush Journal to Persistent Storage
+  systemd-journald.service                        loaded active running   Journal Service
+  systemd-logind.service                          loaded active running   Login Service
+  systemd-random-seed.service                     loaded active exited    Load/Save Random Seed
+  systemd-remount-fs.service                      loaded active exited    Remount Root and Kernel File Systems
+  systemd-sysctl.service                          loaded active exited    Apply Kernel Variables
+  systemd-tmpfiles-setup-dev.service              loaded active exited    Create Static Device Nodes in /dev
+  systemd-tmpfiles-setup.service                  loaded active exited    Create Volatile Files and Directories
+  systemd-udev-trigger.service                    loaded active exited    udev Coldplug all Devices
+  systemd-udevd.service                           loaded active running   udev Kernel Device Manager
+  systemd-update-done.service                     loaded active exited    Update is Completed
+  systemd-update-utmp.service                     loaded active exited    Update UTMP about System Boot/Shutdown
+  systemd-user-sessions.service                   loaded active exited    Permit User Sessions
+  systemd-vconsole-setup.service                  loaded active exited    Setup Virtual Console
+  tuned.service                                   loaded active running   Dynamic System Tuning Daemon
+  xe-linux-distribution.service                   loaded active running   LSB: XenServer Virtual Machine daemon providing
+  xrdp-sesman.service                             loaded active running   xrdp session manager
+  xrdp.service                                    loaded active running   xrdp daemon
+  -.slice                                         loaded active active    Root Slice
+  system-getty.slice                              loaded active active    system-getty.slice
+  system-lvm2\x2dpvscan.slice                     loaded active active    system-lvm2\x2dpvscan.slice
+  system-selinux\x2dpolicy\x2dmigrate\x2dlocal\x2dchanges.slice loaded active active    system-selinux\x2dpolicy\x2dmigrat
+  system-serial\x2dgetty.slice                    loaded active active    system-serial\x2dgetty.slice
+  system-systemd\x2dfsck.slice                    loaded active active    system-systemd\x2dfsck.slice
+  system.slice                                    loaded active active    System Slice
+  user-1000.slice                                 loaded active active    User Slice of devuser
+  user.slice                                      loaded active active    User and Session Slice
+  avahi-daemon.socket                             loaded active running   Avahi mDNS/DNS-SD Stack Activation Socket
+  dbus.socket                                     loaded active running   D-Bus System Message Bus Socket
+  dm-event.socket                                 loaded active listening Device-mapper event daemon FIFOs
+  lvm2-lvmetad.socket                             loaded active running   LVM2 metadata daemon socket
+  lvm2-lvmpolld.socket                            loaded active listening LVM2 poll daemon socket
+  systemd-initctl.socket                          loaded active listening /dev/initctl Compatibility Named Pipe
+  systemd-journald.socket                         loaded active running   Journal Socket
+  systemd-shutdownd.socket                        loaded active listening Delayed Shutdown Socket
+  systemd-udevd-control.socket                    loaded active running   udev Control Socket
+  systemd-udevd-kernel.socket                     loaded active running   udev Kernel Socket
+  dev-mapper-centos\x2dswap.swap                  loaded active active    /dev/mapper/centos-swap
+  basic.target                                    loaded active active    Basic System
+  cryptsetup.target                               loaded active active    Encrypted Volumes
+  getty.target                                    loaded active active    Login Prompts
+  local-fs-pre.target                             loaded active active    Local File Systems (Pre)
+  local-fs.target                                 loaded active active    Local File Systems
+  multi-user.target                               loaded active active    Multi-User System
+  network-online.target                           loaded active active    Network is Online
+  network.target                                  loaded active active    Network
+  nss-lookup.target                               loaded active active    Host and Network Name Lookups
+  nss-user-lookup.target                          loaded active active    User and Group Name Lookups
+  paths.target                                    loaded active active    Paths
+  remote-fs.target                                loaded active active    Remote File Systems
+  slices.target                                   loaded active active    Slices
+  sockets.target                                  loaded active active    Sockets
+  swap.target                                     loaded active active    Swap
+  sysinit.target                                  loaded active active    System Initialization
+  timers.target                                   loaded active active    Timers
+  systemd-tmpfiles-clean.timer                    loaded active waiting   Daily Cleanup of Temporary Directories
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+
+126 loaded units listed. Pass --all to see loaded but inactive units, too.
+To show all installed unit files use 'systemctl list-unit-files'.
+lines 83-134/134 (END)
+
+
+
+(base) [root@localhost run]# ps -ef | grep sql
+root      8834     1  0 20:38 ?        00:00:00 /bin/sh /usr/local/mysql/bin/mysqld_safe --datadir=/usr/local/mysql/data -                                                                                    -pid-file=/usr/local/mysql/data/localhost.localdomain.pid
+mysql     9078  8834  0 20:38 ?        00:00:01 /usr/local/mysql/bin/mysqld --basedir=/usr/local/mysql --datadir=/usr/loca                                                                                    l/mysql/data --plugin-dir=/usr/local/mysql/lib/plugin --user=mysql --log-error=/usr/local/mysql/data/localhost.localdomain                                                                                    .err --open-files-limit=8192 --pid-file=/usr/local/mysql/data/localhost.localdomain.pid --socket=/tmp/mysql.sock --port=33                                                                                    06
+root     10736  3149  0 20:56 pts/0    00:00:00 grep --color=auto sql
+(base) [root@localhost run]# kill -9 8834
+(base) [root@localhost run]# ps -ef | grep sql
+mysql     9078     1  0 20:38 ?        00:00:01 /usr/local/mysql/bin/mysqld --basedir=/usr/local/mysql --datadir=/usr/loca                                                                                    l/mysql/data --plugin-dir=/usr/local/mysql/lib/plugin --user=mysql --log-error=/usr/local/mysql/data/localhost.localdomain                                                                                    .err --open-files-limit=8192 --pid-file=/usr/local/mysql/data/localhost.localdomain.pid --socket=/tmp/mysql.sock --port=33                                                                                    06
+root     10790  3149  0 20:56 pts/0    00:00:00 grep --color=auto sql
+(base) [root@localhost run]# kill -9 9078

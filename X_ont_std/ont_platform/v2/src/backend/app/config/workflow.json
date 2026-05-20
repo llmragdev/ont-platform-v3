@@ -1,0 +1,31 @@
+{
+  "object_type": "Order",
+  "statuses": ["Submitted", "Review", "Approved", "Rejected", "Fulfilled", "Closed"],
+  "actions": {
+    "ApproveOrder": {
+      "from_statuses": ["Submitted", "Review"],
+      "to_status": "Approved",
+      "allowed_roles": ["Admin", "FinanceManager"]
+    },
+    "RejectOrder": {
+      "from_statuses": ["Submitted", "Review"],
+      "to_status": "Rejected",
+      "allowed_roles": ["Admin", "FinanceManager", "AccountManager"]
+    },
+    "HoldOrder": {
+      "from_statuses": ["Submitted"],
+      "to_status": "Review",
+      "allowed_roles": ["Admin", "FinanceManager", "AccountManager"]
+    },
+    "FulfillOrder": {
+      "from_statuses": ["Approved"],
+      "to_status": "Fulfilled",
+      "allowed_roles": ["Admin", "FinanceManager"]
+    },
+    "CloseOrder": {
+      "from_statuses": ["Fulfilled"],
+      "to_status": "Closed",
+      "allowed_roles": ["Admin", "FinanceManager"]
+    }
+  }
+}
