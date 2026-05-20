@@ -21,9 +21,9 @@
 
 ### 전체 진행도
 ```
-▓▓▓▓▓▓▓▓░░░░░░░░░░░░ 48%
+▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░ 52%
 ```
-**완성도**: ~48% (Phase 2 + Phase 3 Week 1 완료)
+**완성도**: ~52% (Phase 2 + Phase 3 Week 1-2 완료)
 
 ---
 
@@ -39,9 +39,9 @@
 - [ ] 엣지 케이스 처리
 - [ ] 실패 케이스 분석 및 고속 수정
 
-### Phase 3 (진행 중)
-**시작**: 2026-05-20 (Week 1 완료)  
-**현재**: Week 1 완료, Week 2 준비 (2026-05-27)  
+### Phase 3 (진행 중: Week 1-2 완료, Week 3 시작 대기)
+**시작**: 2026-05-20 (Week 1-2 완료)  
+**현재**: Week 2 완료, Week 3 준비 (2026-06-03)  
 **마감**: 2026-07-31
 
 **Week 1 (2026-05-20 완료)** ✅
@@ -57,13 +57,23 @@
 - ✅ 조건부 권한 완벽 (금액별 역할 제어)
 - ✅ Template variable 치환 (user_id, timestamp, params)
 
-**Week 2 (2026-05-27 시작)** ⏳
-- [ ] API 엔드포인트 통합 테스트 (15개)
-- [ ] Swagger/OpenAPI 문서
-- [ ] 권한 검증 고급 시나리오
+**Week 2 (2026-05-20 완료)** ✅
+- ✅ API 엔드포인트 통합 테스트 25개 (목표 15개 초과 달성)
+  - Queue API: 4개 테스트
+  - Execute API: 12개 테스트
+  - 조건부 권한: 2개 테스트
+  - 응답 구조: 4개 테스트
+  - 엣지 케이스: 3개 테스트
+- ✅ Swagger/OpenAPI 자동 문서화
+  - /docs 에서 Swagger UI 접근 가능
+  - /openapi.json 스키마 자동 생성
+  - 모든 엔드포인트 설명 추가
+- ✅ 권한 검증 고급 시나리오 완료
 
 **Week 3-4 계획**:
-- [ ] Changelog + WriteBackQueue (Week 3)
+- [ ] Changelog + WriteBackQueue 구현 (Week 3)
+- [ ] WriteBackWorker 백그라운드 (재시도 로직)
+- [ ] SAP API Mock 구현
 - [ ] Frontend ActionButton + Audit (Week 4)
 - [ ] e2e 통합 테스트 (15개)
 
