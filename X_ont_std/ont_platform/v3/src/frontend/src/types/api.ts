@@ -182,6 +182,20 @@ export interface SparqlQueryResponse {
   warnings?: string[];
   cache_hit?: boolean;
   source?: "sql_translator" | "rdflib" | "demo" | "error";
+  entity_id?: string;
+  entity_type?: string;
+  current_status?: string;
+  available_actions?: Array<{
+    name: string;
+    display: string;
+    required_params: string[];
+  }>;
+  answer?: string;
+  quality_metrics?: {
+    relevance?: number;
+    completeness?: number;
+    [key: string]: unknown;
+  };
 }
 
 export interface SparqlHistoryItem {

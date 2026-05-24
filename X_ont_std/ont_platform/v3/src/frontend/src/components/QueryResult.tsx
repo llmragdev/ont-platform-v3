@@ -2,6 +2,7 @@
 
 import { AlertTriangle, Braces, CheckCircle2, Database, Table2 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { ActionButton } from "@/components/ActionButton";
 import { EntityGraph } from "@/components/EntityGraph";
 import type { SparqlBindingValue, SparqlQueryResponse } from "@/types/api";
 
@@ -62,6 +63,7 @@ export function QueryResult({
     result?.source === "sql_translator" ? "SQL Translator" :
     result?.source === "rdflib" ? "rdflib Fallback" :
     result?.source === "demo" ? "Demo" : "Unknown";
+  const hasActions = Boolean(result?.entity_id && result?.available_actions?.length);
 
   return (
     <section data-testid="query-result" className="panel min-h-[420px]">
@@ -123,6 +125,29 @@ export function QueryResult({
           <div className="mb-3 flex items-start gap-2 rounded-md border border-blue-200 bg-blue-50 px-3 py-2 text-sm text-blue-800">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
             <div>{result?.warning ?? result?.warnings?.join(" ")}</div>
+          </div>
+        )}
+
+        {hasActions && (
+          <div className="mb-4 rounded-md border border-blue-100 bg-blue-50 p-3">
+            <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <div className="text-sm font-semibold text-slate-900">Recommended actions</div>
+                <div className="text-xs text-slate-500">
+                  {result?.entity_type ?? "entity"} {result?.entity_id}
+                </div>
+              </div>
+              {result?.current_status && <span className="badge badge-medium">{result.current_status}</span>}
+            </div>
+            <ActionButton
+              entityId={result!.entity_id!}
+              entityType={result?.entity_type ?? "entity"}
+              currentStatus={result?.current_status}
+              availableActions={result?.available_actions ?? []}
+              onSuccess={() => {
+                window.dispatchEvent(new CustomEvent("query-result-action-success", { detail: result?.entity_id }));
+              }}
+            />
           </div>
         )}
 

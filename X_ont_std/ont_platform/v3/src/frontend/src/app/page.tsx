@@ -14,7 +14,7 @@ import { OntologySchemaManager } from "@/components/OntologySchemaManager";
 import { OntologyInstanceEditor } from "@/components/OntologyInstanceEditor";
 import { OntologyGraphEditor } from "@/components/OntologyGraphEditor";
 import { OntologyExplorerCanvas } from "@/components/OntologyExplorerCanvas";
-import { Audit } from "@/components/Audit";
+import { AuditDashboard } from "@/components/AuditDashboard";
 import { IntegrationTestRunner } from "@/components/IntegrationTestRunner";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ThemeContextProvider } from "@/context/ThemeContext";
@@ -84,7 +84,7 @@ function AppContent() {
           {view === "ontology-instance"  && <OntologyInstanceEditor />}
           {view === "ontology-graph-edit"&& <OntologyGraphEditor />}
           {view === "ontology-graph"     && <OntologyExplorerCanvas />}
-          {view === "audit"              && <Audit />}
+          {view === "audit"              && <AuditDashboard />}
           {view === "integration-test"  && <IntegrationTestRunner />}
         </main>
       </div>
