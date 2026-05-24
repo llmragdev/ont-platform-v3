@@ -150,6 +150,43 @@ export interface HybridAskResponse {
   latency_ms?: number;
 }
 
+// ── SPARQL Workbench ─────────────────────────────────────────────────────────
+
+export interface SparqlBindingValue {
+  type?: "uri" | "literal" | "bnode" | string;
+  value: string | null;
+  datatype?: string;
+  lang?: string;
+}
+
+export interface SparqlQueryResponse {
+  type?: "SELECT" | "ASK" | "CONSTRUCT" | "DESCRIBE" | string;
+  head?: { vars?: string[] };
+  results?: Array<Record<string, SparqlBindingValue | string | number | boolean | null>>;
+  bindings?: Array<Record<string, SparqlBindingValue>>;
+  triples?: Array<{ subject: string; predicate: string; object: string }>;
+  boolean?: boolean;
+  count?: number;
+  query_time_ms?: number;
+  execution_time_ms?: number;
+  translator_used?: boolean;
+  sql_generated?: string;
+  explain?: string;
+  error?: string;
+  warning?: string;
+  source?: "api" | "demo";
+}
+
+export interface SparqlHistoryItem {
+  id: string;
+  query: string;
+  timestamp: string;
+  durationMs: number;
+  rowCount: number;
+  status: "success" | "error";
+  queryType: string;
+}
+
 // ── WorkflowGraph ────────────────────────────────────────────────────────────
 
 export type GraphNodeKind =

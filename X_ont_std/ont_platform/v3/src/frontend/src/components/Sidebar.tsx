@@ -6,6 +6,7 @@ export type ViewKey =
   | "explorer"
   | "ontology-graph"
   | "ai-query"
+  | "sparql-query"
   | "rag-query"
   | "hybrid-query"
   | "workflow"
@@ -28,6 +29,7 @@ const GROUPS: SidebarGroup[] = [
       { key: "dashboard",    label: "대시보드",       description: "승인 대기 및 주요 지표" },
       { key: "explorer",     label: "객체 탐색",      description: "온톨로지 엔티티 조회" },
       { key: "ai-query",     label: "온톨로지 질의",  description: "AI 하이브리드 질의" },
+      { key: "sparql-query", label: "SPARQL 콘솔",    description: "표준 쿼리 실행·성능 확인" },
       { key: "rag-query",    label: "문서 RAG 질의",  description: "PDF 업로드 + 질문 답변" },
       { key: "hybrid-query", label: "통합 질의",      description: "온톨로지 + RAG 복합 분석" },
     ],
@@ -67,13 +69,13 @@ export function Sidebar({
   const { user, setUser, presets } = useUserContext();
 
   return (
-    <aside className="w-64 shrink-0 border-r border-slate-200 bg-white flex flex-col">
-      <div className="px-4 py-5 border-b border-slate-200">
-        <h1 className="text-lg font-bold text-slate-900">Ontology Console</h1>
-        <p className="text-xs text-slate-500 mt-0.5">v2.0 · AI 업무 의사결정 플랫폼</p>
+    <aside className="w-full shrink-0 border-b border-slate-200 bg-white flex flex-col dark:bg-slate-900 dark:border-slate-800 md:h-screen md:w-64 md:border-b-0 md:border-r">
+      <div className="px-4 py-4 border-b border-slate-200 dark:border-slate-800 md:py-5">
+        <h1 className="text-lg font-bold text-slate-900 dark:text-slate-100">Ontology Console</h1>
+        <p className="text-xs text-slate-500 mt-0.5 dark:text-slate-400">v2.0 · AI 업무 의사결정 플랫폼</p>
         <div className="mt-2">
           <select
-            className="w-full border border-slate-200 rounded px-2 py-1 text-xs"
+            className="w-full border border-slate-200 rounded px-2 py-1 text-xs dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200"
             value={user.userId}
             onChange={(e) => {
               const preset = presets.find((p) => p.userId === e.target.value);
@@ -89,7 +91,7 @@ export function Sidebar({
           <div className="text-[10px] text-slate-400 mt-1">{user.companyId} / {user.projectId}</div>
         </div>
       </div>
-      <nav className="flex-1 overflow-y-auto p-2 space-y-3">
+      <nav className="max-h-52 flex-1 overflow-y-auto p-2 space-y-3 md:max-h-none">
         {GROUPS.map((group) => (
           <div key={group.title}>
             <div className="px-3 py-1 text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
@@ -101,11 +103,13 @@ export function Sidebar({
                 type="button"
                 onClick={() => onSelect(item.key)}
                 className={`w-full text-left rounded-md px-3 py-2 transition ${
-                  current === item.key ? "bg-blue-50 text-blue-700" : "hover:bg-slate-50 text-slate-700"
+                  current === item.key
+                    ? "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-200"
+                    : "hover:bg-slate-50 text-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
                 }`}
               >
                 <div className="text-sm font-medium">{item.label}</div>
-                <div className="text-xs text-slate-500 mt-0.5">{item.description}</div>
+                <div className="text-xs text-slate-500 mt-0.5 dark:text-slate-400">{item.description}</div>
               </button>
             ))}
           </div>

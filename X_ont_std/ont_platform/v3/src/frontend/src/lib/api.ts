@@ -15,6 +15,7 @@ import type {
   WorkflowGraph,
   WorkflowQueueRow,
   WorkflowRun,
+  SparqlQueryResponse,
 } from "@/types/api";
 
 // ── Global tenant state ───────────────────────────────────────────────────────
@@ -267,6 +268,17 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ question, doc_ids: docIds ?? null }),
     }),
+
+  // ── SPARQL Workbench ──────────────────────────────────────────────────────
+
+  sparql: {
+    query: (query: string, signal?: AbortSignal) =>
+      request<SparqlQueryResponse>("/api/sparql/query", {
+        method: "POST",
+        body: JSON.stringify({ query }),
+        signal,
+      }),
+  },
 
   // ── RAG vector search ─────────────────────────────────────────────────────
 

@@ -422,3 +422,415 @@ class TestSPARQLTranslator:
         translator.translate(query)
         # After translation, should track variable bindings
         assert hasattr(translator, "variable_bindings")
+
+    # ────────────────────────────────────────────────────────────────────────
+    # Pattern #23: 1-Hop Simple Relation
+    # ────────────────────────────────────────────────────────────────────────
+
+    def test_23_simple_relation_parsing(self, translator):
+        """Test 23a: Simple 1-hop relation - SPARQL parsing"""
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?block
+        WHERE {
+            ex:ship1 ex:has_block ?block
+        }
+        """
+
+        where_clause = translator._extract_where_clause(query)
+        patterns = translator._extract_triple_patterns(where_clause)
+
+        assert len(patterns) > 0
+        assert any("has_block" in p for p in patterns)
+
+    def test_23_simple_relation_sql_generation(self, db_session: Session, translator):
+        """Test 23b: Simple 1-hop relation - SQL generation"""
+        # Create entities and relationship
+        ship = Entity(id="http://example.org/ship1", entity_type="Ship", domain_id="test_domain", properties={})
+        block1 = Entity(id="http://example.org/block1", entity_type="Block", domain_id="test_domain", properties={})
+        block2 = Entity(id="http://example.org/block2", entity_type="Block", domain_id="test_domain", properties={})
+        db_session.add_all([ship, block1, block2])
+
+        rel1 = Relationship(
+            id="rel1", from_entity_id="http://example.org/ship1", to_entity_id="http://example.org/block1",
+            relation_type="http://example.org/has_block"
+        )
+        rel2 = Relationship(
+            id="rel2", from_entity_id="http://example.org/ship1", to_entity_id="http://example.org/block2",
+            relation_type="http://example.org/has_block"
+        )
+        db_session.add_all([rel1, rel2])
+        db_session.commit()
+
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?block
+        WHERE {
+            ex:ship1 ex:has_block ?block
+        }
+        """
+
+        result = translator.execute(query)
+        assert result["query_type"] == "SELECT"
+
+    def test_23_simple_relation_performance(self, db_session: Session, translator):
+        """Test 23c: Simple 1-hop relation - Performance target <30ms"""
+        # Create entities
+        from_entity = Entity(id="http://example.org/supplier1", entity_type="Supplier", domain_id="test_domain", properties={})
+        db_session.add(from_entity)
+        db_session.commit()
+
+        # Create 100 target entities and relationships
+        for i in range(100):
+            entity = Entity(id=f"http://example.org/part{i}", entity_type="Part", domain_id="test_domain", properties={})
+            db_session.add(entity)
+        db_session.commit()
+
+        for i in range(100):
+            rel = Relationship(
+                id=f"rel{i}", from_entity_id="http://example.org/supplier1",
+                to_entity_id=f"http://example.org/part{i}",
+                relation_type="http://example.org/supplies",
+            )
+            db_session.add(rel)
+        db_session.commit()
+
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?part
+        WHERE {
+            ex:supplier1 ex:supplies ?part
+        }
+        """
+
+        start = time.time()
+        result = translator.execute(query)
+        elapsed = (time.time() - start) * 1000
+
+        assert elapsed < 30, f"Query took {elapsed}ms, target <30ms"
+
+    # ────────────────────────────────────────────────────────────────────────
+    # Pattern #24: 1-Hop + Filter
+    # ────────────────────────────────────────────────────────────────────────
+
+    def test_24_one_hop_with_filter_parsing(self, translator):
+        """Test 24a: 1-hop + filter - SPARQL parsing"""
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?part ?cost
+        WHERE {
+            ex:supplier1 ex:supplies ?part .
+            ?part ex:cost ?cost
+            FILTER (?cost > 700)
+        }
+        """
+
+        where_clause = translator._extract_where_clause(query)
+        patterns = translator._extract_triple_patterns(where_clause)
+
+        assert len(patterns) >= 2, "Should have at least 2 patterns"
+
+    def test_24_one_hop_with_filter_sql_generation(self, db_session: Session, translator):
+        """Test 24b: 1-hop + filter - SQL generation"""
+        supplier = Entity(id="http://example.org/supplier1", entity_type="Supplier", domain_id="test_domain", properties={})
+        db_session.add(supplier)
+        db_session.commit()
+
+        for i in range(5):
+            part = Entity(
+                id=f"http://example.org/part{i}",
+                entity_type="Part",
+                domain_id="test_domain",
+                properties={"cost": 600 + (i * 100)}
+            )
+            db_session.add(part)
+        db_session.commit()
+
+        for i in range(5):
+            rel = Relationship(
+                id=f"rel{i}",
+                from_entity_id="http://example.org/supplier1",
+                to_entity_id=f"http://example.org/part{i}",
+                relation_type="http://example.org/supplies",
+            )
+            db_session.add(rel)
+        db_session.commit()
+
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?part ?cost
+        WHERE {
+            ex:supplier1 ex:supplies ?part .
+            ?part ex:cost ?cost
+            FILTER (?cost > 700)
+        }
+        """
+
+        result = translator.execute(query)
+        assert result["query_type"] == "SELECT"
+
+    def test_24_one_hop_with_filter_performance(self, db_session: Session, translator):
+        """Test 24c: 1-hop + filter - Performance target <100ms"""
+        supplier = Entity(id="http://example.org/supplier1", entity_type="Supplier", domain_id="test_domain", properties={})
+        db_session.add(supplier)
+        db_session.commit()
+
+        # Create 1000 parts
+        for i in range(1000):
+            part = Entity(
+                id=f"http://example.org/part{i}",
+                entity_type="Part",
+                domain_id="test_domain",
+                properties={"cost": 500 + (i % 1000)}
+            )
+            db_session.add(part)
+        db_session.commit()
+
+        # Create 1000 relationships
+        for i in range(1000):
+            rel = Relationship(
+                id=f"rel{i}",
+                from_entity_id="http://example.org/supplier1",
+                to_entity_id=f"http://example.org/part{i}",
+                relation_type="http://example.org/supplies",
+            )
+            db_session.add(rel)
+        db_session.commit()
+
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?part ?cost
+        WHERE {
+            ex:supplier1 ex:supplies ?part .
+            ?part ex:cost ?cost
+            FILTER (?cost > 700)
+        }
+        """
+
+        start = time.time()
+        result = translator.execute(query)
+        elapsed = (time.time() - start) * 1000
+
+        assert elapsed < 100, f"Query took {elapsed}ms, target <100ms"
+
+    # ────────────────────────────────────────────────────────────────────────
+    # Pattern #25: 2-Hop Relation
+    # ────────────────────────────────────────────────────────────────────────
+
+    def test_25_two_hop_relation_parsing(self, translator):
+        """Test 25a: 2-hop relation - SPARQL parsing"""
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?part
+        WHERE {
+            ex:ship1 ex:has_block ?block .
+            ?block ex:has_part ?part
+        }
+        """
+
+        where_clause = translator._extract_where_clause(query)
+        patterns = translator._extract_triple_patterns(where_clause)
+
+        assert len(patterns) >= 2, "Should have at least 2 patterns for 2-hop"
+
+    def test_25_two_hop_relation_sql_generation(self, db_session: Session, translator):
+        """Test 25b: 2-hop relation - SQL generation"""
+        ship = Entity(id="http://example.org/ship1", entity_type="Ship", domain_id="test_domain", properties={})
+        block = Entity(id="http://example.org/block1", entity_type="Block", domain_id="test_domain", properties={})
+        part = Entity(id="http://example.org/part1", entity_type="Part", domain_id="test_domain", properties={})
+        db_session.add_all([ship, block, part])
+
+        rel1 = Relationship(
+            id="rel1", from_entity_id="http://example.org/ship1",
+            to_entity_id="http://example.org/block1",
+            relation_type="http://example.org/has_block",
+        )
+        rel2 = Relationship(
+            id="rel2", from_entity_id="http://example.org/block1",
+            to_entity_id="http://example.org/part1",
+            relation_type="http://example.org/has_part",
+        )
+        db_session.add_all([rel1, rel2])
+        db_session.commit()
+
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?part
+        WHERE {
+            ex:ship1 ex:has_block ?block .
+            ?block ex:has_part ?part
+        }
+        """
+
+        result = translator.execute(query)
+        assert result["query_type"] == "SELECT"
+
+    def test_25_two_hop_relation_performance(self, db_session: Session, translator):
+        """Test 25c: 2-hop relation - Performance target <200ms"""
+        # Setup: ship → blocks (100) → parts (10 per block)
+        ship = Entity(id="http://example.org/ship1", entity_type="Ship", domain_id="test_domain", properties={})
+        db_session.add(ship)
+        db_session.commit()
+
+        for i in range(100):
+            block = Entity(id=f"http://example.org/block{i}", entity_type="Block", domain_id="test_domain", properties={})
+            db_session.add(block)
+        db_session.commit()
+
+        for i in range(100):
+            rel = Relationship(
+                id=f"rel1_{i}", from_entity_id="http://example.org/ship1",
+                to_entity_id=f"http://example.org/block{i}",
+                relation_type="http://example.org/has_block",
+            )
+            db_session.add(rel)
+        db_session.commit()
+
+        for i in range(100):
+            for j in range(10):
+                part = Entity(id=f"http://example.org/part{i}_{j}", entity_type="Part", domain_id="test_domain", properties={})
+                db_session.add(part)
+        db_session.commit()
+
+        for i in range(100):
+            for j in range(10):
+                rel = Relationship(
+                    id=f"rel2_{i}_{j}", from_entity_id=f"http://example.org/block{i}",
+                    to_entity_id=f"http://example.org/part{i}_{j}",
+                    relation_type="http://example.org/has_part",
+                )
+                db_session.add(rel)
+        db_session.commit()
+
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?part
+        WHERE {
+            ex:ship1 ex:has_block ?block .
+            ?block ex:has_part ?part
+        }
+        """
+
+        start = time.time()
+        result = translator.execute(query)
+        elapsed = (time.time() - start) * 1000
+
+        assert elapsed < 200, f"Query took {elapsed}ms, target <200ms"
+
+    # ────────────────────────────────────────────────────────────────────────
+    # Pattern #26: 2-Hop + Filter
+    # ────────────────────────────────────────────────────────────────────────
+
+    def test_26_two_hop_with_filter_parsing(self, translator):
+        """Test 26a: 2-hop + filter - SPARQL parsing"""
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?part
+        WHERE {
+            ex:project1 ex:involves_supplier ?supplier .
+            ?supplier ex:provides_part ?part .
+            ?part ex:quality_rating ?rating
+            FILTER (?rating >= 8)
+        }
+        """
+
+        where_clause = translator._extract_where_clause(query)
+        patterns = translator._extract_triple_patterns(where_clause)
+
+        assert len(patterns) >= 3, "Should have at least 3 patterns"
+
+    def test_26_two_hop_with_filter_sql_generation(self, db_session: Session, translator):
+        """Test 26b: 2-hop + filter - SQL generation"""
+        project = Entity(id="http://example.org/project1", entity_type="Project", domain_id="test_domain", properties={})
+        supplier = Entity(id="http://example.org/supplier1", entity_type="Supplier", domain_id="test_domain", properties={})
+        part = Entity(id="http://example.org/part1", entity_type="Part", domain_id="test_domain", properties={"quality_rating": 9})
+        db_session.add_all([project, supplier, part])
+
+        rel1 = Relationship(
+            id="rel1", from_entity_id="http://example.org/project1",
+            to_entity_id="http://example.org/supplier1",
+            relation_type="http://example.org/involves_supplier",
+        )
+        rel2 = Relationship(
+            id="rel2", from_entity_id="http://example.org/supplier1",
+            to_entity_id="http://example.org/part1",
+            relation_type="http://example.org/provides_part",
+        )
+        db_session.add_all([rel1, rel2])
+        db_session.commit()
+
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?part
+        WHERE {
+            ex:project1 ex:involves_supplier ?supplier .
+            ?supplier ex:provides_part ?part .
+            ?part ex:quality_rating ?rating
+            FILTER (?rating >= 8)
+        }
+        """
+
+        result = translator.execute(query)
+        assert result["query_type"] == "SELECT"
+
+    def test_26_two_hop_with_filter_performance(self, db_session: Session, translator):
+        """Test 26c: 2-hop + filter - Performance target <300ms"""
+        project = Entity(id="http://example.org/project1", entity_type="Project", domain_id="test_domain", properties={})
+        db_session.add(project)
+        db_session.commit()
+
+        # Create 50 suppliers
+        for i in range(50):
+            supplier = Entity(id=f"http://example.org/supplier{i}", entity_type="Supplier", domain_id="test_domain", properties={})
+            db_session.add(supplier)
+        db_session.commit()
+
+        # Create relationships from project to suppliers
+        for i in range(50):
+            rel = Relationship(
+                id=f"rel1_{i}", from_entity_id="http://example.org/project1",
+                to_entity_id=f"http://example.org/supplier{i}",
+                relation_type="http://example.org/involves_supplier",
+            )
+            db_session.add(rel)
+        db_session.commit()
+
+        # Create 500 parts
+        for i in range(500):
+            part = Entity(
+                id=f"http://example.org/part{i}",
+                entity_type="Part",
+                domain_id="test_domain",
+                properties={"quality_rating": 5 + (i % 6)}  # 5-10 rating
+            )
+            db_session.add(part)
+        db_session.commit()
+
+        # Create relationships from suppliers to parts
+        for i in range(50):
+            for j in range(10):
+                rel = Relationship(
+                    id=f"rel2_{i}_{j}",
+                    from_entity_id=f"http://example.org/supplier{i}",
+                    to_entity_id=f"http://example.org/part{i*10+j}",
+                    relation_type="http://example.org/provides_part",
+                )
+                db_session.add(rel)
+        db_session.commit()
+
+        query = """
+        PREFIX ex: <http://example.org/>
+        SELECT ?part
+        WHERE {
+            ex:project1 ex:involves_supplier ?supplier .
+            ?supplier ex:provides_part ?part .
+            ?part ex:quality_rating ?rating
+            FILTER (?rating >= 8)
+        }
+        """
+
+        start = time.time()
+        result = translator.execute(query)
+        elapsed = (time.time() - start) * 1000
+
+        assert elapsed < 300, f"Query took {elapsed}ms, target <300ms"
