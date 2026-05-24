@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import sys
+import time
 from pathlib import Path
 
 logging.basicConfig(
@@ -15,15 +16,20 @@ logging.basicConfig(
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-# .env 로드 (없어도 무시)
+# .env 로드 (프로젝트 루트에서, 없어도 무시)
 try:
     from dotenv import load_dotenv
-    load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+    # 프로젝트 루트의 .env를 읽음 (v3/.env)
+    project_root = Path(__file__).resolve().parents[3]  # src/backend/app/main.py → v3/
+    env_file = project_root / ".env"
+    if env_file.exists():
+        load_dotenv(env_file)
 except ImportError:
     pass
 
 from fastapi import Depends, FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app.models.tenant_context import TenantContext
 from app.services.document import DocumentService
@@ -36,6 +42,7 @@ from app.dependencies import (
     get_vector_search_service,
     get_query_planner_service,
     get_tenant_context,
+    get_sparql_translator_service,
 )
 
 app = FastAPI(title="ont_platform v3.0", version="3.0.0")
@@ -335,6 +342,10 @@ app.include_router(wfg_router)
 from app.api.metrics import router as metrics_router
 app.include_router(metrics_router)
 
+# Phase 3: Actions API
+from app.api.actions import router as actions_router
+app.include_router(actions_router)
+
 
 # ── /api/ontology/sparql ──────────────────────────────────────────────────────
 
@@ -348,18 +359,182 @@ def get_sparql_service() -> SPARQLServiceV2:
     return _sparql_service
 
 
+def _detect_sparql_query_type(query: str) -> str:
+    normalized = _re.sub(r"#[^\n\r]*", " ", query).upper()
+    for keyword in ("SELECT", "ASK", "CONSTRUCT", "DESCRIBE"):
+        if keyword in normalized:
+            return keyword
+    return "UNKNOWN"
+
+
+def _select_vars_for_contract(raw_vars) -> list[str]:
+    return [var if str(var).startswith("?") else f"?{var}" for var in (raw_vars or [])]
+
+
+def _sparql_error_response(
+    *,
+    status_code: int,
+    code: str,
+    message: str,
+    query: str,
+    source: str = "error",
+    sql_generated: str | None = None,
+    error_type: str | None = None,
+):
+    return JSONResponse(
+        status_code=status_code,
+        content={
+            "source": source,
+            "query_type": _detect_sparql_query_type(query),
+            "select_vars": [],
+            "patterns": 0,
+            "pattern_ids": [],
+            "results": [],
+            "result_count": 0,
+            "execution_time_ms": 0,
+            "sql_generated": sql_generated,
+            "cache_hit": False,
+            "warnings": [],
+            "error": {
+                "code": code,
+                "message": message,
+                "type": error_type,
+            },
+        },
+    )
+
+
+@app.post("/api/sparql/query")
 @app.post("/api/ontology/sparql")
-def execute_sparql_query(
+def execute_sparql_query_contract(
     body: dict,
+    tenant: TenantContext = Depends(get_tenant_context),
+    translator_svc = Depends(get_sparql_translator_service),
     svc: SPARQLService = Depends(get_sparql_service),
 ):
-    """SPARQL 쿼리 실행"""
     query_string = body.get("query", "").strip()
+    limit = body.get("limit", 1000)
+
+    if not query_string:
+        return _sparql_error_response(
+            status_code=400,
+            code="SPARQL_QUERY_REQUIRED",
+            message="SPARQL query is required.",
+            query=query_string,
+        )
+
+    try:
+        result = translator_svc.execute_sparql(
+            query_string,
+            domain_id=tenant.project_id,
+            limit=limit,
+        )
+        if "error" not in result:
+            patterns = result.get("patterns", [])
+            select_vars = result.get("select_vars", [])
+            return {
+                "source": "sql_translator",
+                "type": result.get("query_type"),
+                "query_type": result.get("query_type"),
+                "select_vars": select_vars,
+                "head": {"vars": [v.lstrip("?") for v in select_vars]},
+                "patterns": len(patterns),
+                "pattern_ids": result.get("pattern_ids", []),
+                "results": result.get("results", []),
+                "result_count": result.get("result_count", 0),
+                "execution_time_ms": result.get("execution_time_ms"),
+                "sql_generated": result.get("sql_generated"),
+                "cache_hit": False,
+                "warnings": [],
+                "translator_used": True,
+            }
+    except Exception as e:
+        import logging
+        logging.warning(f"SQL translation failed: {str(e)}")
+
+    fallback_started = time.time()
+    result = svc.query(query_string)
+    fallback_execution_time_ms = round((time.time() - fallback_started) * 1000, 2)
+    if "error" in result:
+        return _sparql_error_response(
+            status_code=400,
+            code="SPARQL_EXECUTION_ERROR",
+            message=result.get("error", "SPARQL execution failed."),
+            query=query_string,
+            source="rdflib",
+            error_type="RdflibExecutionError",
+        )
+
+    query_type = result.get("type", _detect_sparql_query_type(query_string))
+    result_rows = result.get("results", [])
+    select_vars = _select_vars_for_contract(result_rows[0].keys() if result_rows else [])
+    result_count = result.get("count")
+    if result_count is None:
+        result_count = 1 if "boolean" in result else len(result.get("results", result.get("triples", [])))
+    return {
+        "source": "rdflib",
+        "type": query_type,
+        "query_type": query_type,
+        "select_vars": select_vars,
+        "head": {"vars": [v.lstrip("?") for v in select_vars]},
+        "patterns": 0,
+        "pattern_ids": [],
+        "results": result.get("results", []),
+        "triples": result.get("triples", []),
+        "boolean": result.get("boolean"),
+        "result_count": result_count,
+        "execution_time_ms": result.get("execution_time_ms", fallback_execution_time_ms),
+        "sql_generated": None,
+        "cache_hit": False,
+        "warnings": ["SQL translator did not support this query; rdflib fallback was used."],
+        "translator_used": False,
+    }
+
+
+@app.post("/api/legacy/sparql/query")
+@app.post("/api/legacy/ontology/sparql")
+def execute_sparql_query(
+    body: dict,
+    tenant: TenantContext = Depends(get_tenant_context),
+    translator_svc = Depends(get_sparql_translator_service),
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """SPARQL 쿼리 실행 - SQL 경로 우선, 실패 시 rdflib 폴백"""
+    return execute_sparql_query_contract(body, tenant, translator_svc, svc)
+
+    query_string = body.get("query", "").strip()
+    limit = body.get("limit", 1000)
+
     if not query_string:
         raise HTTPException(status_code=400, detail="SPARQL 쿼리가 필요합니다.")
 
+    try:
+        # Try fast SQL translation path for hot-path patterns
+        result = translator_svc.execute_sparql(
+            query_string,
+            domain_id=tenant.project_id,
+            limit=limit
+        )
+
+        # If SQL translation succeeded (no error), return results
+        if "error" not in result:
+            return {
+                "source": "sql_translator",
+                "query_type": result.get("query_type"),
+                "select_vars": result.get("select_vars"),
+                "results": result.get("results", []),
+                "result_count": result.get("result_count", 0),
+                "execution_time_ms": result.get("execution_time_ms"),
+            }
+    except Exception as e:
+        # Log SQL path error but continue to fallback
+        import logging
+        logging.warning(f"SQL translation failed: {str(e)}")
+
+    # Fallback to rdflib for unsupported patterns
     result = svc.execute_sparql_query(query_string)
     return {
+        "source": "rdflib",
         "query_id": result.query_id,
         "variables": result.variables,
         "results": result.results,

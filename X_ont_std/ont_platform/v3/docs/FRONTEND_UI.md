@@ -10,9 +10,9 @@
 - Added reusable query execution hook: `src/hooks/useSparqlQuery.ts`.
 - Added `QueryResult` with table, JSON, and debug tabs.
 - Added lightweight `PerformanceChart` without new chart dependencies.
-- Added `api.sparql.query()` client method for `POST /api/sparql/query`.
+- Added `api.sparql.query()` client method for `POST /api/ontology/sparql`.
 - Added local query history with duration, status, row count, and query type.
-- Added demo fallback response when the backend SPARQL endpoint is not ready.
+- Demo fallback is disabled by default so API failures remain visible to E2E.
 
 ## Files
 
@@ -32,7 +32,7 @@ src/app/page.tsx
 The UI calls:
 
 ```http
-POST /api/sparql/query
+POST /api/ontology/sparql
 Content-Type: application/json
 
 { "query": "SELECT ?entity WHERE { ... }" }
@@ -42,31 +42,44 @@ Expected response shape is intentionally tolerant:
 
 ```json
 {
+  "source": "sql_translator",
   "type": "SELECT",
+  "query_type": "SELECT",
+  "select_vars": ["?entity"],
   "results": [],
-  "query_time_ms": 45,
+  "result_count": 0,
+  "execution_time_ms": 45,
   "translator_used": true,
   "sql_generated": "SELECT ...",
-  "explain": "..."
+  "warnings": []
 }
 ```
 
-If the endpoint is unavailable, the UI shows a demo response and preserves the error message for debugging.
+If the endpoint is unavailable, the UI records an error result. Local demos can opt in to frontend-only demo data with `NEXT_PUBLIC_ENABLE_SPARQL_DEMO_FALLBACK=true`.
 
 ## Verification
 
-Attempted:
+Build passed with the `claud_fe` conda environment:
 
 ```bash
+$env:PATH='C:\Users\nkchoi2\anaconda3\envs\claud_fe;' + $env:PATH
 npm run build
 ```
 
-Result: not run in the current shell because `npm` is not available on PATH.
+Result:
+
+```text
+✓ Compiled successfully
+✓ Generating static pages (4/4)
+Route / First Load JS: 168 kB
+```
+
+Lint was attempted, but `next lint` opened the interactive ESLint setup prompt because ESLint is not configured yet.
 
 ## Remaining
 
 - Replace textarea with Monaco Editor if dependency budget allows.
 - Wire graph tab after Claude's result shape stabilizes.
 - Add Cypress tests in Week 4.
-- Validate in browser once `npm` is available.
-
+- Add non-interactive ESLint config.
+- Validate in browser screenshot flow.

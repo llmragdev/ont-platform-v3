@@ -57,15 +57,22 @@ export function QueryResult({
   const rows = useMemo(() => normalizeRows(result), [result]);
   const columns = useMemo(() => Array.from(new Set(rows.flatMap((row) => Object.keys(row)))), [rows]);
   const displayMs = result?.query_time_ms ?? result?.execution_time_ms ?? durationMs ?? undefined;
+  const queryType = result?.query_type ?? result?.type ?? "UNKNOWN";
+  const sourceLabel =
+    result?.source === "sql_translator" ? "SQL Translator" :
+    result?.source === "rdflib" ? "rdflib Fallback" :
+    result?.source === "demo" ? "Demo" : "Unknown";
 
   return (
-    <section className="panel min-h-[420px]">
+    <section data-testid="query-result" className="panel min-h-[420px]">
       <div className="panel-header">
         <div className="flex items-center gap-2">
           <Table2 className="h-4 w-4 text-slate-500" />
           <h3 className="text-sm font-semibold">쿼리 결과</h3>
         </div>
         <div className="flex items-center gap-2">
+          {result?.source === "sql_translator" && <span className="badge badge-low">SQL</span>}
+          {result?.source === "rdflib" && <span className="badge badge-medium">RDFLIB</span>}
           {result?.source === "demo" && <span className="badge badge-medium">DEMO</span>}
           {typeof displayMs === "number" && (
             <span className={`badge ${durationTone(displayMs)}`}>{displayMs}ms</span>
@@ -87,6 +94,7 @@ export function QueryResult({
               <button
                 key={item.key}
                 type="button"
+                data-testid={`result-tab-${item.key}`}
                 onClick={() => setTab(item.key)}
                 className={`inline-flex items-center gap-1.5 rounded-t-md px-3 py-2 text-xs font-semibold ${
                   tab === item.key ? "bg-slate-900 text-white" : "text-slate-500 hover:bg-slate-100"
@@ -111,15 +119,15 @@ export function QueryResult({
           </div>
         )}
 
-        {result?.warning && (
+        {(result?.warning || (result?.warnings?.length ?? 0) > 0) && (
           <div className="mb-3 flex items-start gap-2 rounded-md border border-blue-200 bg-blue-50 px-3 py-2 text-sm text-blue-800">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
-            <div>{result.warning}</div>
+            <div>{result?.warning ?? result?.warnings?.join(" ")}</div>
           </div>
         )}
 
         {tab === "table" && (
-          <div className="overflow-auto rounded-md border border-slate-200">
+          <div data-testid="result-table-view" className="overflow-auto rounded-md border border-slate-200">
             {rows.length === 0 ? (
               <div className="p-8 text-center text-sm text-slate-400">아직 표시할 결과가 없습니다.</div>
             ) : (
@@ -144,23 +152,23 @@ export function QueryResult({
         )}
 
         {tab === "json" && (
-          <pre className="max-h-[520px] overflow-auto rounded-md bg-slate-950 p-4 text-xs text-slate-100">
+          <pre data-testid="result-json-view" className="max-h-[520px] overflow-auto rounded-md bg-slate-950 p-4 text-xs text-slate-100">
             {JSON.stringify(result ?? {}, null, 2)}
           </pre>
         )}
 
-        {tab === "graph" && <EntityGraph result={result} />}
+        {tab === "graph" && <div data-testid="result-graph-view"><EntityGraph result={result} /></div>}
 
         {tab === "debug" && (
-          <div className="space-y-3 text-sm">
+          <div data-testid="result-debug-view" className="space-y-3 text-sm">
             <div className="grid grid-cols-2 gap-2">
               <div className="rounded-md bg-slate-50 px-3 py-2">
                 <div className="text-xs text-slate-500">Query Type</div>
-                <div className="font-semibold">{result?.type ?? "UNKNOWN"}</div>
+                <div className="font-semibold">{queryType}</div>
               </div>
               <div className="rounded-md bg-slate-50 px-3 py-2">
-                <div className="text-xs text-slate-500">Translator</div>
-                <div className="font-semibold">{result?.translator_used ? "SQL" : "Fallback/Demo"}</div>
+                <div className="text-xs text-slate-500">Source</div>
+                <div className="font-semibold">{sourceLabel}</div>
               </div>
             </div>
             <div>

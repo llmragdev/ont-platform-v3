@@ -76,8 +76,10 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   try { data = text ? (JSON.parse(text) as Record<string, unknown>) : null; } catch { /* non-JSON response */ }
   if (!response.ok) {
     const err = data?.error as Record<string, unknown> | undefined;
+    const detail = data?.detail as Record<string, unknown> | string | undefined;
+    const detailError = typeof detail === "object" ? (detail.error as Record<string, unknown> | undefined) : undefined;
     const code = (err?.code ?? "UNKNOWN") as string;
-    const message = (err?.message ?? data?.detail ?? text ?? response.statusText) as string;
+    const message = (err?.message ?? detailError?.message ?? (typeof detail === "string" ? detail : undefined) ?? text ?? response.statusText) as string;
     throw new ApiClientError(code, message, response.status);
   }
   return data as T;
@@ -273,7 +275,7 @@ export const api = {
 
   sparql: {
     query: (query: string, signal?: AbortSignal) =>
-      request<SparqlQueryResponse>("/api/sparql/query", {
+      request<SparqlQueryResponse>("/api/ontology/sparql", {
         method: "POST",
         body: JSON.stringify({ query }),
         signal,

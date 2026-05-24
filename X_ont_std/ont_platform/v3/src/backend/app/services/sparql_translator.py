@@ -2,11 +2,12 @@
 from __future__ import annotations
 
 import re
+import time
 from typing import Any, Dict, List, Optional, Tuple
 from enum import Enum
 from dataclasses import dataclass
 
-from sqlalchemy import select, and_, or_, func, cast, String
+from sqlalchemy import select, and_, or_, func, cast, String, text
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import Select
 
@@ -105,7 +106,9 @@ class PatternMatcher:
 
         # Determine pattern type
         if is_uri(subject) and is_uri(predicate) and is_variable(obj):
-            # entity_lookup: <uri> <uri> ?var OR ex:uri ex:pred ?var
+            # Constant subject with URI predicate and variable object
+            # Could be entity_lookup (property) or relation from constant entity
+            # We'll treat as ENTITY_LOOKUP and let caller distinguish
             return PatternType.ENTITY_LOOKUP, {
                 "subject": extract_uri(subject),
                 "predicate": extract_uri(predicate),
@@ -357,9 +360,13 @@ class SPARQLTranslator:
                 elif pattern.pattern_type == PatternType.PROPERTY_FILTER:
                     return self._generate_property_filter_sql(pattern)
 
-                # Pattern #23-26: Relationship join (variable subject + relation + variable object)
+                # Pattern #23: Simple 1-hop relation (variable subject + relation + variable object)
                 elif pattern.pattern_type == PatternType.RELATION:
                     return self._generate_relation_sql(pattern)
+
+            elif len(self.triple_patterns) >= 2:
+                # Pattern #24-26: Multi-pattern relationships with JOINs
+                return self._generate_multi_pattern_sql()
 
             return None
 
@@ -374,12 +381,13 @@ class SPARQLTranslator:
         entity_id = pattern.subject
         property_name = pattern.predicate.split("/")[-1]
         object_var = pattern.obj
+        alias = object_var.lstrip("?") if object_var.startswith("?") else object_var
 
         # Query: SELECT (properties->>'property') FROM entities WHERE id = ?
         self.variable_bindings[object_var] = f"properties->'{property_name}'"
 
         return f"""
-        SELECT (properties->'{property_name}') as {object_var}
+        SELECT (properties->'{property_name}') as {alias}
         FROM entities
         WHERE id = '{entity_id}'
         AND domain_id = '{self.domain_id}'
@@ -390,10 +398,11 @@ class SPARQLTranslator:
         subject_var = pattern.subject
         property_name = pattern.predicate.split("/")[-1]
         obj = pattern.obj
+        alias = subject_var.lstrip("?") if subject_var.startswith("?") else subject_var
 
         # Start with base query
         sql = f"""
-        SELECT id, (properties->'{property_name}') as {subject_var}
+        SELECT id, (properties->'{property_name}') as {alias}
         FROM entities
         WHERE domain_id = '{self.domain_id}'
         """
@@ -413,20 +422,209 @@ class SPARQLTranslator:
         return sql
 
     def _generate_relation_sql(self, pattern: TriplePattern) -> Optional[str]:
-        """Generate SQL for Patterns #23-26: Relationship joins"""
+        """Generate SQL for Pattern #23: Simple 1-hop relation"""
         from_var = pattern.subject
         relation_type = pattern.predicate.split("/")[-1]
         to_var = pattern.obj
+        alias = to_var.lstrip("?") if to_var.startswith("?") else to_var
 
-        # Pattern #23-24: Simple 1-hop relation
+        # Pattern #23: Simple 1-hop relation
         sql = f"""
-        SELECT r.to_entity_id as {to_var}
+        SELECT r.to_entity_id as {alias}
         FROM relationships r
         WHERE r.from_entity_id IN (
             SELECT id FROM entities WHERE domain_id = '{self.domain_id}'
         )
         AND r.relation_type = '{relation_type}'
         """
+
+        return sql
+
+    def _generate_multi_pattern_sql(self) -> Optional[str]:
+        """Generate SQL for Patterns #24-26: Multi-pattern relationships with JOINs"""
+        # Analyze pattern types - ENTITY_LOOKUP with constant subject is also a relation query
+        relation_patterns = []
+        property_patterns = []
+
+        for i, p in enumerate(self.triple_patterns):
+            if p.pattern_type == PatternType.RELATION:
+                # Check if this is actually a property reference for filtering
+                # In Pattern #26: last pattern is "?part ex:quality_rating ?rating" used in FILTER
+                # Heuristic: if it's the last pattern and filter_clause exists, treat as property_filter
+                if i == len(self.triple_patterns) - 1 and self.filter_clause and p.obj.startswith("?"):
+                    property_patterns.append(p)
+                else:
+                    relation_patterns.append(p)
+            elif p.pattern_type == PatternType.ENTITY_LOOKUP and p.subject and not p.subject.startswith("?"):
+                # ENTITY_LOOKUP with constant subject is a relation query
+                relation_patterns.append(p)
+            elif p.pattern_type == PatternType.PROPERTY_FILTER:
+                property_patterns.append(p)
+
+        if len(relation_patterns) == 2 and len(property_patterns) == 0:
+            # Pattern #25: 2-hop relation (r1 JOIN r2)
+            return self._generate_2hop_relation_sql(relation_patterns)
+
+        elif len(relation_patterns) == 1 and len(property_patterns) == 1:
+            # Pattern #24: 1-hop relation + filter (r JOIN e with filter)
+            return self._generate_1hop_relation_filter_sql(relation_patterns, property_patterns)
+
+        elif len(relation_patterns) == 2 and len(property_patterns) == 1:
+            # Pattern #26: 2-hop + filter (r1 JOIN r2 JOIN e with filter)
+            return self._generate_2hop_relation_filter_sql(relation_patterns, property_patterns)
+
+        return None
+
+    def _generate_1hop_relation_filter_sql(self, relation_patterns, property_patterns) -> Optional[str]:
+        """Generate SQL for Pattern #24: 1-hop relation + property filter"""
+        relation_pat = relation_patterns[0]
+        property_pat = property_patterns[0]
+
+        # Handle both variable and constant subject
+        from_entity = relation_pat.subject
+        relation_type = relation_pat.predicate.split("/")[-1]
+        to_var = relation_pat.obj
+
+        # Property filter details
+        filter_property = property_pat.predicate.split("/")[-1]
+        filter_obj = property_pat.obj
+
+        # Build WHERE condition for relation source
+        if from_entity.startswith("?"):
+            # Variable subject: FROM any entity
+            from_condition = f"""r.from_entity_id IN (
+                SELECT id FROM entities WHERE domain_id = '{self.domain_id}'
+            )"""
+        else:
+            # Constant subject: FROM specific entity
+            from_condition = f"r.from_entity_id = '{from_entity}'"
+
+        # Pattern #24: 1-hop relation + filter
+        sql = f"""
+        SELECT e.id as {to_var}, (e.properties->'{filter_property}')::numeric as {to_var}_value
+        FROM relationships r
+        JOIN entities e ON r.to_entity_id = e.id
+        WHERE {from_condition}
+        AND r.relation_type = '{relation_type}'
+        AND e.domain_id = '{self.domain_id}'
+        """
+
+        # Apply filter if present (FILTER clause)
+        if self.filter_clause:
+            sql = self._apply_multi_pattern_filter(sql, filter_property)
+
+        return sql
+
+    def _generate_2hop_relation_sql(self, relation_patterns) -> Optional[str]:
+        """Generate SQL for Pattern #25: 2-hop relation"""
+        # First relation: ?x ex:rel1 ?y or ex:x ex:rel1 ?y
+        r1 = relation_patterns[0]
+        from_entity = r1.subject
+        rel1_type = r1.predicate.split("/")[-1]
+        mid_var = r1.obj
+
+        # Second relation: ?y ex:rel2 ?z
+        r2 = relation_patterns[1]
+        rel2_type = r2.predicate.split("/")[-1]
+        to_var = r2.obj
+
+        # Build WHERE condition for first relation
+        if from_entity.startswith("?"):
+            # Variable subject: FROM any entity
+            from_condition = f"""r1.from_entity_id IN (
+                SELECT id FROM entities WHERE domain_id = '{self.domain_id}'
+            )"""
+        else:
+            # Constant subject: FROM specific entity
+            from_condition = f"r1.from_entity_id = '{from_entity}'"
+
+        # Pattern #25: 2-hop join
+        sql = f"""
+        SELECT r2.to_entity_id as {to_var}
+        FROM relationships r1
+        JOIN relationships r2 ON r1.to_entity_id = r2.from_entity_id
+        WHERE {from_condition}
+        AND r1.relation_type = '{rel1_type}'
+        AND r2.relation_type = '{rel2_type}'
+        """
+
+        return sql
+
+    def _generate_2hop_relation_filter_sql(self, relation_patterns, property_patterns) -> Optional[str]:
+        """Generate SQL for Pattern #26: 2-hop relation + property filter"""
+        property_pat = property_patterns[0]
+
+        # First relation: ?x ex:rel1 ?y or ex:x ex:rel1 ?y
+        r1 = relation_patterns[0]
+        from_entity = r1.subject
+        rel1_type = r1.predicate.split("/")[-1]
+        mid_var = r1.obj
+
+        # Second relation: ?y ex:rel2 ?z
+        r2 = relation_patterns[1]
+        rel2_type = r2.predicate.split("/")[-1]
+        to_var = r2.obj
+
+        # Property filter details
+        filter_property = property_pat.predicate.split("/")[-1]
+        filter_obj = property_pat.obj
+
+        # Build WHERE condition for first relation
+        if from_entity.startswith("?"):
+            # Variable subject: FROM any entity
+            from_condition = f"""r1.from_entity_id IN (
+                SELECT id FROM entities WHERE domain_id = '{self.domain_id}'
+            )"""
+        else:
+            # Constant subject: FROM specific entity
+            from_condition = f"r1.from_entity_id = '{from_entity}'"
+
+        # Pattern #26: 2-hop join with final entity filter
+        sql = f"""
+        SELECT r2.to_entity_id as {to_var}, (e.properties->'{filter_property}')::numeric as {to_var}_value
+        FROM relationships r1
+        JOIN relationships r2 ON r1.to_entity_id = r2.from_entity_id
+        JOIN entities e ON r2.to_entity_id = e.id
+        WHERE {from_condition}
+        AND r1.relation_type = '{rel1_type}'
+        AND r2.relation_type = '{rel2_type}'
+        AND e.domain_id = '{self.domain_id}'
+        """
+
+        # Apply filter if present
+        if self.filter_clause:
+            sql = self._apply_multi_pattern_filter(sql, filter_property)
+
+        return sql
+
+    def _apply_multi_pattern_filter(self, sql: str, property_name: str) -> str:
+        """Apply FILTER clause to multi-pattern SQL query"""
+        if not self.filter_clause:
+            return sql
+
+        filter_clause = self.filter_clause
+
+        # Numeric comparison (> < >= <=)
+        if ">=" in filter_clause:
+            match = re.search(r'>=\s*(\d+(\.\d+)?)', filter_clause)
+            if match:
+                value = match.group(1)
+                sql += f" AND (e.properties->'{property_name}')::numeric >= {value}"
+        elif ">" in filter_clause:
+            match = re.search(r'>\s*(\d+(\.\d+)?)', filter_clause)
+            if match:
+                value = match.group(1)
+                sql += f" AND (e.properties->'{property_name}')::numeric > {value}"
+        elif "<=" in filter_clause:
+            match = re.search(r'<=\s*(\d+(\.\d+)?)', filter_clause)
+            if match:
+                value = match.group(1)
+                sql += f" AND (e.properties->'{property_name}')::numeric <= {value}"
+        elif "<" in filter_clause:
+            match = re.search(r'<\s*(\d+(\.\d+)?)', filter_clause)
+            if match:
+                value = match.group(1)
+                sql += f" AND (e.properties->'{property_name}')::numeric < {value}"
 
         return sql
 
@@ -504,11 +702,32 @@ class SPARQLTranslator:
         if not sql:
             return {"error": "Translation failed", "query": sparql_query}
 
-        # Phase 1: Skeleton - actual execution in Phase 2
-        return {
-            "query_type": self.query_type.value,
-            "select_vars": self.select_vars,
-            "patterns": [str(p) for p in self.triple_patterns],
-            "bindings": self.variable_bindings,
-            "sql_skeleton": sql,
-        }
+        try:
+            start_time = time.time()
+
+            # Execute SQL on PostgreSQL
+            result = self.session.execute(text(sql)).fetchall()
+
+            # Format results as list of dicts
+            results_list = [dict(row._mapping) if hasattr(row, '_mapping') else dict(row)
+                          for row in result[:limit]]
+
+            execution_time_ms = (time.time() - start_time) * 1000
+
+            return {
+                "query_type": self.query_type.value,
+                "select_vars": self.select_vars,
+                "results": results_list,
+                "result_count": len(results_list),
+                "execution_time_ms": round(execution_time_ms, 2),
+                "sql_generated": sql,
+                "patterns": [str(p) for p in self.triple_patterns],
+                "bindings": self.variable_bindings,
+            }
+        except Exception as e:
+            return {
+                "error": str(e),
+                "error_type": type(e).__name__,
+                "query": sparql_query,
+                "sql_attempted": sql,
+            }

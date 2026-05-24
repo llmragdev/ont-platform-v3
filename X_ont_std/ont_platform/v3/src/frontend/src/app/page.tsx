@@ -53,7 +53,7 @@ function AppContent() {
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top bar */}
         <header className="shrink-0 bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between dark:bg-slate-900 dark:border-slate-800 md:px-6">
-          <h1 className="text-base font-bold text-slate-900 dark:text-slate-100">{VIEW_TITLES[view]}</h1>
+          <h1 data-testid="view-title" className="text-base font-bold text-slate-900 dark:text-slate-100">{VIEW_TITLES[view]}</h1>
           <div className="flex items-center gap-3">
             {backendStatus === "checking" && (
               <span className="text-xs text-slate-400 animate-pulse">연결 확인 중…</span>
@@ -71,7 +71,7 @@ function AppContent() {
         </header>
 
         {/* Main scroll area */}
-        <main className="flex-1 overflow-y-auto p-3 md:p-6">
+        <main data-testid="app-main" className="flex-1 overflow-y-auto p-3 md:p-6">
           {view === "dashboard"          && <Dashboard />}
           {view === "explorer"           && <Explorer />}
           {view === "ai-query"           && <AIQuery />}

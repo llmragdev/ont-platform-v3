@@ -37,15 +37,23 @@ npm pkg set scripts.cypress:run="cypress run"
 - React Flow remains available for ontology management screens.
 - Cypress `.ts` files were not left under `src/frontend` because the project `tsconfig.json` includes `**/*.ts`; without Cypress installed, those files would break type checking.
 
-## Verification Blocker
+## Verification
 
-The local shell cannot find `npm`, `node`, `pnpm`, or `yarn`, so the following commands were not executed:
+Build passed with the `claud_fe` conda environment:
 
 ```bash
-npm install
+$env:PATH='C:\Users\nkchoi2\anaconda3\envs\claud_fe;' + $env:PATH
 npm run build
-npm run cypress:run
 ```
+
+Result:
+
+```text
+✓ Compiled successfully
+✓ Generating static pages (4/4)
+```
+
+`npm run lint` was attempted, but `next lint` opened the interactive ESLint setup prompt because this project has no ESLint configuration yet.
 
 ## Completion Checklist
 
@@ -57,6 +65,6 @@ npm run cypress:run
 - [x] Dark mode
 - [x] Responsive shell layout
 - [x] E2E scenario definitions
-- [ ] Dependency install and lockfile regeneration
-- [ ] Build verification
+- [x] Build verification
+- [ ] Non-interactive ESLint configuration
 - [ ] Browser screenshot verification

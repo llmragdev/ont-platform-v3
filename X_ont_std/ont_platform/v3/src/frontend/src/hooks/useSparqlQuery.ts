@@ -5,6 +5,7 @@ import { api } from "@/lib/api";
 import type { SparqlHistoryItem, SparqlQueryResponse } from "@/types/api";
 
 const HISTORY_KEY = "ont_platform_sparql_history_v1";
+const ENABLE_DEMO_FALLBACK = process.env.NEXT_PUBLIC_ENABLE_SPARQL_DEMO_FALLBACK === "true";
 
 function detectQueryType(query: string): string {
   const normalized = query
@@ -21,6 +22,7 @@ function countRows(result: SparqlQueryResponse | null): number {
   if (Array.isArray(result.results)) return result.results.length;
   if (Array.isArray(result.bindings)) return result.bindings.length;
   if (Array.isArray(result.triples)) return result.triples.length;
+  if (typeof result.result_count === "number") return result.result_count;
   if (typeof result.count === "number") return result.count;
   if (typeof result.boolean === "boolean") return 1;
   return 0;
@@ -126,9 +128,9 @@ export function useSparqlQuery() {
         return;
       }
       const elapsed = Math.round(performance.now() - startedAt);
-      response = demoResponse(trimmed, elapsed);
       setError(err instanceof Error ? err.message : String(err));
       status = "error";
+      response = ENABLE_DEMO_FALLBACK ? demoResponse(trimmed, elapsed) : null;
     } finally {
       const elapsed = Math.round(performance.now() - startedAt);
       const finalResponse = response ? { ...response, query_time_ms: response.query_time_ms ?? elapsed } : null;

@@ -54,6 +54,79 @@
       "created_at": "2026-05-14T00:09:45.665709Z",
       "updated_at": "2026-05-14T00:09:45.665709Z",
       "created_by": "demo-user"
+    },
+    "wfg-96254a880be0": {
+      "id": "wfg-96254a880be0",
+      "name": "첫 테스트",
+      "nodes": [
+        {
+          "id": "n-d6z3m3",
+          "type": "start",
+          "position": {
+            "x": 197.63844648154986,
+            "y": 133.7087971885757
+          },
+          "data": {
+            "label": "Start d6z"
+          }
+        },
+        {
+          "id": "n-l0fvr5",
+          "type": "llm",
+          "position": {
+            "x": 182.13356664115014,
+            "y": 184.99033181427455
+          },
+          "data": {
+            "label": "LLM l0f",
+            "prompt": "대한민국의 수도는? "
+          }
+        },
+        {
+          "id": "n-o7kyb7",
+          "type": "end",
+          "position": {
+            "x": 174.9069991430252,
+            "y": 293.3030789304514
+          },
+          "data": {
+            "label": "End o7k"
+          }
+        },
+        {
+          "id": "n-wddhlj",
+          "type": "http",
+          "position": {
+            "x": 183.4574999597595,
+            "y": 238.66133040041007
+          },
+          "data": {
+            "label": "HTTP wdd",
+            "url": "http://127.0.0.1:8010/api/v1/health",
+            "method": "GET"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-ghtld4",
+          "source": "n-d6z3m3",
+          "target": "n-l0fvr5"
+        },
+        {
+          "id": "e-lyv372",
+          "source": "n-l0fvr5",
+          "target": "n-wddhlj"
+        },
+        {
+          "id": "e-rttmvm",
+          "source": "n-wddhlj",
+          "target": "n-o7kyb7"
+        }
+      ],
+      "created_at": "2026-05-24T14:11:15.390506Z",
+      "updated_at": "2026-05-24T14:11:27.644092Z",
+      "created_by": "demo-user"
     }
   }
 }

@@ -37,6 +37,7 @@ class Relationship(Base):
     relation_type = Column(String, nullable=False, index=True)
     weight = Column(Float, default=1.0)
     properties = Column(JSON, default={})
+    domain_id = Column(String, nullable=False, index=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -78,3 +79,79 @@ class OntologyMetadata(Base):
     last_sync = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class ActionExecution(Base):
+    __tablename__ = "action_executions"
+
+    id = Column(String, primary_key=True)
+    action_id = Column(String, nullable=False, index=True)
+    entity_id = Column(String, ForeignKey("entities.id"), nullable=False, index=True)
+    domain_id = Column(String, nullable=False, index=True)
+    status = Column(String, nullable=False, index=True)  # PENDING, APPROVED, EXECUTED, FAILED
+    requested_by = Column(String, nullable=False)
+    executed_by = Column(String, nullable=True)
+    result = Column(JSON, nullable=True)
+    error_message = Column(Text, nullable=True)
+    requested_at = Column(DateTime, default=datetime.utcnow, index=True)
+    executed_at = Column(DateTime, nullable=True)
+
+    entity = relationship("Entity", foreign_keys=[entity_id])
+
+    __table_args__ = (
+        CheckConstraint("status IN ('PENDING', 'APPROVED', 'EXECUTED', 'FAILED')", name="valid_action_status"),
+    )
+
+class WriteBackQueue(Base):
+    __tablename__ = "writeback_queue"
+
+    id = Column(String, primary_key=True)
+    action_execution_id = Column(String, ForeignKey("action_executions.id"), nullable=False, index=True)
+    target_system = Column(String, nullable=False, index=True)  # SAP, ERP, JIRA
+    payload = Column(JSON, nullable=False)
+    status = Column(String, nullable=False, index=True)  # PENDING, SENT, CONFIRMED, FAILED
+    retry_count = Column(Integer, default=0)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    sent_at = Column(DateTime, nullable=True)
+    error_message = Column(Text, nullable=True)
+    last_error_at = Column(DateTime, nullable=True)
+
+    action_execution = relationship("ActionExecution", foreign_keys=[action_execution_id])
+
+    __table_args__ = (
+        CheckConstraint("status IN ('PENDING', 'SENT', 'CONFIRMED', 'FAILED')", name="valid_writeback_status"),
+    )
+
+class ChangeLog(Base):
+    """액션 실행 이력 추적"""
+    __tablename__ = "changelog"
+
+    id = Column(String, primary_key=True)
+
+    # Entity 정보
+    entity_id = Column(String, ForeignKey("entities.id"), nullable=False, index=True)
+    entity_type = Column(String, nullable=False, index=True)
+    domain_id = Column(String, nullable=False, index=True)
+
+    # Action 정보
+    action_type = Column(String, nullable=False, index=True)
+    actor = Column(String, nullable=False)
+    source = Column(String, nullable=False)
+    timestamp = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+
+    # 상태 변화
+    old_status = Column(String, nullable=True)
+    new_status = Column(String, nullable=True)
+
+    # Write-back 추적
+    sync_status = Column(String, default="PENDING", nullable=False, index=True)
+    target_system = Column(String, nullable=True)
+    sync_timestamp = Column(DateTime, nullable=True)
+    retry_count = Column(Integer, default=0)
+    error_message = Column(Text, nullable=True)
+
+    # Relationships
+    entity = relationship("Entity", foreign_keys=[entity_id])
+
+    __table_args__ = (
+        CheckConstraint("sync_status IN ('PENDING', 'SYNCED', 'FAILED')", name="valid_changelog_sync_status"),
+    )

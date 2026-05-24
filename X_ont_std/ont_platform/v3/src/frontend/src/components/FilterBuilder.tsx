@@ -70,13 +70,13 @@ export function FilterBuilder({
   }
 
   return (
-    <section className="panel">
+    <section data-testid="filter-builder" className="panel">
       <div className="panel-header">
         <div className="flex items-center gap-2">
           <Wand2 className="h-4 w-4 text-slate-500" />
           <h3 className="text-sm font-semibold">필터 빌더</h3>
         </div>
-        <button type="button" className="btn btn-primary py-1 text-xs gap-1" onClick={() => onApply(`FILTER (${snippet})`)}>
+        <button type="button" data-testid="filter-apply-button" className="btn btn-primary py-1 text-xs gap-1" onClick={() => onApply(`FILTER (${snippet})`)}>
           <Plus className="h-3.5 w-3.5" />
           Apply
         </button>
@@ -96,12 +96,14 @@ export function FilterBuilder({
             </select>
             <input
               list="sparql-filter-properties"
+              data-testid="filter-property-input"
               className="rounded-md border border-slate-200 px-2 py-1.5 text-xs"
               value={rule.property}
               onChange={(event) => updateRule(rule.id, { property: event.target.value })}
               aria-label="property"
             />
             <select
+              data-testid="filter-operator-select"
               className="rounded-md border border-slate-200 px-2 py-1.5 text-xs"
               value={rule.operator}
               onChange={(event) => updateRule(rule.id, { operator: event.target.value as Operator })}
@@ -112,6 +114,7 @@ export function FilterBuilder({
               ))}
             </select>
             <input
+              data-testid="filter-value-input"
               className="rounded-md border border-slate-200 px-2 py-1.5 text-xs"
               value={rule.value}
               onChange={(event) => updateRule(rule.id, { value: event.target.value })}
@@ -144,7 +147,7 @@ export function FilterBuilder({
           </button>
         </div>
 
-        <pre className="overflow-auto rounded-md bg-slate-100 p-3 text-xs text-slate-700">
+        <pre data-testid="filter-preview" className="overflow-auto rounded-md bg-slate-100 p-3 text-xs text-slate-700">
           {snippet ? `FILTER (${snippet})` : "FILTER (...)"}
         </pre>
       </div>

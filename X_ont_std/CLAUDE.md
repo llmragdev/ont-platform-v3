@@ -1,213 +1,199 @@
-# ont_platform v3 프로젝트 컨텍스트
+﻿# ont_platform v3 ?꾨줈?앺듃 而⑦뀓?ㅽ듃
 
-> Claude Code가 이 폴더를 열 때마다 자동으로 읽는 파일입니다.
-> **항상 이 파일을 먼저 읽고 작업을 시작하세요.**
-
----
-
-## 🎯 프로젝트 정체성
-
-**ont_platform v3** — 온톨로지 기반 통합 의사결정 시템
-
-- 팔란티어(Foundry)의 경량화 특화 버전
-- 조선/제조/건설 산업 타겟
-- 핵심 기능: 데이터 → 의미(Ontology) → 영향도 분석 → **의사결정 → 액션 → 감사 추적**
+> Claude Code媛 ???대뜑瑜????뚮쭏???먮룞?쇰줈 ?쎈뒗 ?뚯씪?낅땲??
+> **??긽 ???뚯씪??癒쇱? ?쎄퀬 ?묒뾽???쒖옉?섏꽭??**
 
 ---
 
-## 🗂️ 폴더 구조
+## ?렞 ?꾨줈?앺듃 ?뺤껜??
+**ont_platform v3** ???⑦넧濡쒖? 湲곕컲 ?듯빀 ?섏궗寃곗젙 ?쒗뀥
+
+- ?붾??곗뼱(Foundry)??寃쎈웾???뱁솕 踰꾩쟾
+- 議곗꽑/?쒖“/嫄댁꽕 ?곗뾽 ?寃?- ?듭떖 湲곕뒫: ?곗씠?????섎?(Ontology) ???곹뼢??遺꾩꽍 ??**?섏궗寃곗젙 ???≪뀡 ??媛먯궗 異붿쟻**
+
+---
+
+## ?뾺截??대뜑 援ъ“
 
 ```
 E:\ontology_edu\X_ont_std\
-├── CLAUDE.md              ← 이 파일
-├── requirements\          ← 요건 문서 (팔란티어 분석/추적도)
-│   ├── 분석/
-│   ├── 추적도/
-│   ├── 교육자료/
-│   └── 평가/
-├── task_logs\             ← 작업 로그 (모든 세션의 기록)
-│   └── claude/
-│       ├── YYYYMMDD_HHMM_작업명.md
-│       └── ...
-├── cross-source-comparison\  ← 🔄 플랫폼 비교 분석 (향후 비교 시 활용)
-│   ├── 01_Antigravity_통합 평가.md
-│   ├── 01_Claude_플랫폼통합평가.md
-│   ├── 01_Codex_통합 평가.md
-│   └── (새로운 비교 분석 추가)
-├── references\            ← 참고 자료 및 프로토타입
-│   ├── old/               ← 이전 비교 검증 파일 (아카이브)
-│   │   ├── claud에 대한 총평/     ← 2026-05-12~14 Claude 통합 검증
-│   │   ├── src_codex/             ← 온톨로지 초기 프로토타입
-│   │   ├── src_nextjs/            ← Next.js 초기 버전
-│   │   └── src_sql/               ← DB 스키마 참고
-│   ├── app.js, index.html, style.css  ← 웹 인터페이스 예제
-│   └── README.md
-└── ont_platform\
-    ├── v1_legacy\         ← v1 원본 (policy, telemetry, workflow_graph_engine 참조용)
-    ├── v2\                ← 구조화 버전
-    └── v3\                ← 현재 개발 버전 (FastAPI + Next.js)
-        ├── src/
-        │   ├── backend/   ← FastAPI 백엔드 (포트 8001)
-        │   ├── frontend/  ← Next.js 프론트엔드 (포트 3001)
-        │   └── tests/integration/
-        ├── ARCHITECTURE.md
-        └── ROADMAP.md
+?쒋?? CLAUDE.md              ?????뚯씪
+?쒋?? requirements\          ???붽굔 臾몄꽌 (?붾??곗뼱 遺꾩꽍/異붿쟻??
+??  ?쒋?? 遺꾩꽍/
+??  ?쒋?? 異붿쟻??
+??  ?쒋?? 援먯쑁?먮즺/
+??  ?붴?? ?됯?/
+?쒋?? task_logs\             ???묒뾽 濡쒓렇 (紐⑤뱺 ?몄뀡??湲곕줉)
+??  ?붴?? claude/
+??      ?쒋?? YYYYMMDD_HHMM_?묒뾽紐?md
+??      ?붴?? ...
+?쒋?? cross-source-comparison\  ???봽 ?뚮옯??鍮꾧탳 遺꾩꽍 (?ν썑 鍮꾧탳 ???쒖슜)
+??  ?쒋?? 01_Antigravity_?듯빀 ?됯?.md
+??  ?쒋?? 01_Claude_?뚮옯?쇳넻?⑺룊媛.md
+??  ?쒋?? 01_Codex_?듯빀 ?됯?.md
+??  ?붴?? (?덈줈??鍮꾧탳 遺꾩꽍 異붽?)
+?쒋?? references\            ??李멸퀬 ?먮즺 諛??꾨줈?좏?????  ?쒋?? old/               ???댁쟾 鍮꾧탳 寃利??뚯씪 (?꾩뭅?대툕)
+??  ??  ?쒋?? claud?????珥앺룊/     ??2026-05-12~14 Claude ?듯빀 寃利???  ??  ?쒋?? src_codex/             ???⑦넧濡쒖? 珥덇린 ?꾨줈?좏?????  ??  ?쒋?? src_nextjs/            ??Next.js 珥덇린 踰꾩쟾
+??  ??  ?붴?? src_sql/               ??DB ?ㅽ궎留?李멸퀬
+??  ?쒋?? app.js, index.html, style.css  ?????명꽣?섏씠???덉젣
+??  ?붴?? README.md
+?붴?? ont_platform\
+    ?쒋?? v1_legacy\         ??v1 ?먮낯 (policy, telemetry, workflow_graph_engine 李몄“??
+    ?쒋?? v2\                ??援ъ“??踰꾩쟾
+    ?붴?? v3\                ???꾩옱 媛쒕컻 踰꾩쟾 (FastAPI + Next.js)
+        ?쒋?? src/
+        ??  ?쒋?? backend/   ??FastAPI 諛깆뿏??(?ы듃 8001)
+        ??  ?쒋?? frontend/  ??Next.js ?꾨줎?몄뿏??(?ы듃 3001)
+        ??  ?붴?? tests/integration/
+        ?쒋?? docs/          ???덉씠?? 媛귀똿, ?┈ㅻ쟾, ???쇨낊 (DOCUMENT_NAMING_CONVENTION.md)
+        ?쒋?? ARCHITECTURE.md
+        ?붴?? ROADMAP.md
 ```
 
 ---
 
-## 🚦 현재 상태
+## ?슗 ?꾩옱 ?곹깭
 
 **Phase 2.5 Parallel Development (2026-06-03 ~ 06-21)**
 
-**상태 추적**: [PHASE2_5_STATUS.md](./PHASE2_5_STATUS.md) ← **3 에이전트 협업 상태**
+**?곹깭 異붿쟻**: [PHASE2_5_Project_Status_20260524.md](./PHASE2_5_Project_Status_20260524.md) ??**3 ?먯씠?꾪듃 ?묒뾽 ?곹깭**
 
-- 🔴 **Claude** (SPARQL→SQL): **✅ Week 2 COMPLETE** (27/30 tests passing)
-- 🟠 **Codex** (Frontend UI): 🟡 IN PROGRESS (Week 2)
-- 🟢 **Antigravity** (Performance): 🟡 IN PROGRESS (Week 2)
+- ?뵶 **Claude** (SPARQL?뭆QL): **??Week 2 COMPLETE** (27/30 tests passing)
+- ?윝 **Codex** (Frontend UI): ?윞 IN PROGRESS (Week 2)
+- ?윟 **Antigravity** (Performance): ?윞 IN PROGRESS (Week 2)
 
-**Week 2 마감**: 2026-06-07 (금요일 5시)  
-**전체 완성도**: ~50% (Phase 2.5 진행 중)
+**Week 2 留덇컧**: 2026-06-07 (湲덉슂??5??  
+**?꾩껜 ?꾩꽦??*: ~50% (Phase 2.5 吏꾪뻾 以?
 
 ---
 
-## 🔴 지금 당장 해야 할 것
+## ?뵶 吏湲??뱀옣 ?댁빞 ??寃?
+### Phase 2 留덈Т由?(留덇컧: 2026-05-19)
 
-### Phase 2 마무리 (마감: 2026-05-19)
-
-**목표**: 통합 테스트 1/25 → **20/25** 달성
+**紐⑺몴**: ?듯빀 ?뚯뒪??1/25 ??**20/25** ?ъ꽦
 
 ```bash
-# 테스트 실행
+# ?뚯뒪???ㅽ뻾
 cd E:\ontology_edu\X_ont_std\ont_platform\v3\src\backend
 pytest tests/integration/ -v --tb=short
+        ?쒋?? docs/          ???덉씠?? 媛귀똿, ?┈ㅻ쟾, ???쇨낊 (DOCUMENT_NAMING_CONVENTION.md)
 ```
 
-**실패 원인 추정**:
-- 온톨로지 데이터 매칭 최적화 미완
-- 벡터 검색 성능 이슈
+**?ㅽ뙣 ?먯씤 異붿젙**:
+- ?⑦넧濡쒖? ?곗씠??留ㅼ묶 理쒖쟻??誘몄셿
+- 踰≫꽣 寃???깅뒫 ?댁뒋
 
-**작업 순서**:
-1. 실패 케이스 목록 확인
-2. 빠르게 고칠 수 있는 것 우선 처리
-3. 20/25 달성 후 Phase 2 완료 선언
+**?묒뾽 ?쒖꽌**:
+1. ?ㅽ뙣 耳?댁뒪 紐⑸줉 ?뺤씤
+2. 鍮좊Ⅴ寃?怨좎튌 ???덈뒗 寃??곗꽑 泥섎━
+3. 20/25 ?ъ꽦 ??Phase 2 ?꾨즺 ?좎뼵
 
 ---
 
-## ⚙️ 실행 명령
+## ?숋툘 ?ㅽ뻾 紐낅졊
 
 ```bash
-# 백엔드
-conda activate claud_be
+# 諛깆뿏??conda activate claud_be
 cd E:\ontology_edu\X_ont_std\ont_platform\v3\src\backend
 uvicorn main:app --reload --port 8001
 
-# 프론트엔드
-conda activate claud_fe
+# ?꾨줎?몄뿏??conda activate claud_fe
 cd E:\ontology_edu\X_ont_std\ont_platform\v3\src\frontend
 npm run dev
 ```
 
 ---
 
-## 📍 핵심 파일 위치
+## ?뱧 ?듭떖 ?뚯씪 ?꾩튂
 
 ```
-v3 백엔드:      E:\ontology_edu\X_ont_std\ont_platform\v3\src\backend\
-v3 프론트:      E:\ontology_edu\X_ont_std\ont_platform\v3\src\frontend\
-통합 테스트:    E:\ontology_edu\X_ont_std\ont_platform\v3\src\backend\tests\integration\
-아키텍처:       E:\ontology_edu\X_ont_std\ont_platform\v3\ARCHITECTURE.md
-로드맵:         E:\ontology_edu\X_ont_std\ont_platform\v3\ROADMAP.md
-상세 현황:      E:\ontology_edu\X_ont_std\task_logs\claude\20260519_종합현황_단계별계획.md
-요건 문서:      E:\ontology_edu\X_ont_std\requirements\분석\, \추적도\
-플랫폼 비교:    E:\ontology_edu\X_ont_std\cross-source-comparison\
+v3 諛깆뿏??      E:\ontology_edu\X_ont_std\ont_platform\v3\src\backend\
+v3 ?꾨줎??      E:\ontology_edu\X_ont_std\ont_platform\v3\src\frontend\
+?듯빀 ?뚯뒪??    E:\ontology_edu\X_ont_std\ont_platform\v3\src\backend\tests\integration\
+?꾪궎?띿쿂:       E:\ontology_edu\X_ont_std\ont_platform\v3\ARCHITECTURE.md
+濡쒕뱶留?         E:\ontology_edu\X_ont_std\ont_platform\v3\ROADMAP.md
+명명 규칙:       E:\ontology_edu\X_ont_std\ont_platform\v3\docs\DOCUMENT_NAMING_CONVENTION.md
+?곸꽭 ?꾪솴:      E:\ontology_edu\X_ont_std\task_logs\claude\20260519_醫낇빀?꾪솴_?④퀎蹂꾧퀎??md
+?붽굔 臾몄꽌:      E:\ontology_edu\X_ont_std\requirements\遺꾩꽍\, \異붿쟻??
+?뚮옯??鍮꾧탳:    E:\ontology_edu\X_ont_std\cross-source-comparison\
 ```
 
 ---
 
-## 🟡 Phase 3 (비즈니스 액션)
+## ?윞 Phase 3 (鍮꾩쫰?덉뒪 ?≪뀡)
 
-**기간**: 2026-05-27 ~ 2026-07-31 (10주)  
-**상태**: 📋 계획 완료, 🔴 구현 시작 예정 (5월 27일)
+**湲곌컙**: 2026-05-27 ~ 2026-07-31 (10二?  
+**?곹깭**: ?뱥 怨꾪쉷 ?꾨즺, ?뵶 援ы쁽 ?쒖옉 ?덉젙 (5??27??
 
-### 📅 4주 단계별 계획
+### ?뱟 4二??④퀎蹂?怨꾪쉷
 
-**[→ PHASE3_IMPLEMENTATION_PLAN.md 에서 상세 확인](./ont_platform/v3/PHASE3_IMPLEMENTATION_PLAN.md)**
+**[??PHASE3_IMPLEMENTATION_PLAN.md ?먯꽌 ?곸꽭 ?뺤씤](./ont_platform/v3/PHASE3_IMPLEMENTATION_PLAN.md)**
 
-#### Week 1 (05-27 ~ 05-31): ActionDefinition 모델 + 6개 액션
-- [ ] ActionDefinition 모델 구현
-- [ ] 6개 액션 코드 작성 (ApproveProject, RejectProject, ChangeDeadline, RequestMoreInfo, StartPayment, CompleteProject)
-- [ ] 단위 테스트 30개 이상
-- **목표**: 테스트 통과율 ≥ 90%
+#### Week 1 (05-27 ~ 05-31): ActionDefinition 紐⑤뜽 + 6媛??≪뀡
+- [ ] ActionDefinition 紐⑤뜽 援ы쁽
+- [ ] 6媛??≪뀡 肄붾뱶 ?묒꽦 (ApproveProject, RejectProject, ChangeDeadline, RequestMoreInfo, StartPayment, CompleteProject)
+- [ ] ?⑥쐞 ?뚯뒪??30媛??댁긽
+- **紐⑺몴**: ?뚯뒪???듦낵????90%
 
-#### Week 2 (06-03 ~ 06-07): 권한 검증 + API 통합
-- [ ] 조건부 권한 검증 완벽화 (금액별)
-- [ ] API 엔드포인트 통합 테스트
-- [ ] Swagger/OpenAPI 문서 작성
-- **목표**: API 통합 테스트 ≥ 15개
-
+#### Week 2 (06-03 ~ 06-07): 沅뚰븳 寃利?+ API ?듯빀
+- [ ] 議곌굔遺 沅뚰븳 寃利??꾨꼍??(湲덉븸蹂?
+- [ ] API ?붾뱶?ъ씤???듯빀 ?뚯뒪??- [ ] Swagger/OpenAPI 臾몄꽌 ?묒꽦
+- **紐⑺몴**: API ?듯빀 ?뚯뒪????15媛?
 #### Week 3 (06-10 ~ 06-14): Changelog + Write-back + Worker
-- [ ] Changelog 저장소 구현 (JSONL)
-- [ ] WriteBackQueue 모델 구현
-- [ ] WriteBackWorker 백그라운드 구현 (재시도 로직 포함)
-- [ ] SAP API Mock 구현
-- **목표**: Write-back 성공률 ≥ 95%
+- [ ] Changelog ??μ냼 援ы쁽 (JSONL)
+- [ ] WriteBackQueue 紐⑤뜽 援ы쁽
+- [ ] WriteBackWorker 諛깃렇?쇱슫??援ы쁽 (?ъ떆??濡쒖쭅 ?ы븿)
+- [ ] SAP API Mock 援ы쁽
+- **紐⑺몴**: Write-back ?깃났瑜???95%
 
-#### Week 4 (06-17 ~ 06-21): Frontend + 최종 통합 테스트
-- [ ] ActionButton 컴포넌트 구현 (React)
-- [ ] QueryResult + 액션 버튼 통합
-- [ ] Audit 대시보드 (액션 이력 조회)
-- [ ] e2e 통합 테스트 15개 이상
-- **목표**: 최종 통과율 ≥ 85%
+#### Week 4 (06-17 ~ 06-21): Frontend + 理쒖쥌 ?듯빀 ?뚯뒪??- [ ] ActionButton 而댄룷?뚰듃 援ы쁽 (React)
+- [ ] QueryResult + ?≪뀡 踰꾪듉 ?듯빀
+- [ ] Audit ??쒕낫??(?≪뀡 ?대젰 議고쉶)
+- [ ] e2e ?듯빀 ?뚯뒪??15媛??댁긽
+- **紐⑺몴**: 理쒖쥌 ?듦낵????85%
 
-#### Week 5-8 (06-24 ~ 07-21): 버그 수정 + PoC 준비
-- [ ] 성능 최적화
-- [ ] 버그 수정
-- [ ] 고객 PoC 준비
+#### Week 5-8 (06-24 ~ 07-21): 踰꾧렇 ?섏젙 + PoC 以鍮?- [ ] ?깅뒫 理쒖쟻??- [ ] 踰꾧렇 ?섏젙
+- [ ] 怨좉컼 PoC 以鍮?
+### ?뱥 ?ㅺ퀎 臾몄꽌
 
-### 📋 설계 문서
+- **[PHASE3_ACTION_DEFINITION.md](./ont_platform/v3/PHASE3_ACTION_DEFINITION.md)** ??6媛??≪뀡 ?곸꽭 ?뺤쓽
+- **[PHASE3_STATE_MACHINE.md](./ont_platform/v3/PHASE3_STATE_MACHINE.md)** ???곹깭 湲곌퀎 + Write-back
+- **[PHASE3_IMPLEMENTATION_PLAN.md](./ont_platform/v3/PHASE3_IMPLEMENTATION_PLAN.md)** ??狩?**Week蹂??곸꽭 怨꾪쉷 + ?곗텧臾?*
 
-- **[PHASE3_ACTION_DEFINITION.md](./ont_platform/v3/PHASE3_ACTION_DEFINITION.md)** — 6개 액션 상세 정의
-- **[PHASE3_STATE_MACHINE.md](./ont_platform/v3/PHASE3_STATE_MACHINE.md)** — 상태 기계 + Write-back
-- **[PHASE3_IMPLEMENTATION_PLAN.md](./ont_platform/v3/PHASE3_IMPLEMENTATION_PLAN.md)** — ⭐ **Week별 상세 계획 + 산출물**
-
-### 🎯 Success Criteria
+### ?렞 Success Criteria
 
 ```
-Code:     6개 액션 모두 구현 + 테스트 통과
-Testing:  단위(30+) + 통합(40+) + e2e(15+) 테스트
-Quality:  코드 커버리지 ≥ 80%
-Funcional: Write-back 성공률 ≥ 95%
-Frontend: ActionButton + Audit 대시보드
-```
+Code:     6媛??≪뀡 紐⑤몢 援ы쁽 + ?뚯뒪???듦낵
+Testing:  ?⑥쐞(30+) + ?듯빀(40+) + e2e(15+) ?뚯뒪??Quality:  肄붾뱶 而ㅻ쾭由ъ? ??80%
+Funcional: Write-back ?깃났瑜???95%
+Frontend: ActionButton + Audit ??쒕낫??```
 
 ---
 
-## 🟢 7월 말 ~ 9월 (Phase 3 완료 후)
+## ?윟 7??留?~ 9??(Phase 3 ?꾨즺 ??
 
-### Phase 4: 온톨로지 데이터 모델링 다양성 지원
+### Phase 4: ?⑦넧濡쒖? ?곗씠??紐⑤뜽留??ㅼ뼇??吏??
+**湲곌컙**: 2026-07-21 ~ 2026-09-30 (10二?  
+**洹쇨굅**: 2026-05-20 ?ъ슜???댁뒋 ?쒓린 ("?⑦넧濡쒖? ?ㅼ뼇???ㅽ???吏???꾩슂")
 
-**기간**: 2026-07-21 ~ 2026-09-30 (10주)  
-**근거**: 2026-05-20 사용자 이슈 제기 ("온톨로지 다양한 스타일 지원 필요")
-
-**주요 목표**:
-- 5가지 온톨로지 스타일 지원 (Document, RDF Triple, Property Graph, Semantic Web, Hierarchical)
-- 메타데이터 + 감시 시스템 (버전, 감사, 혈통)
-- 외부 온톨로지 통합 (DBpedia, Wikidata)
-- SPARQL 엔드포인트
-
-**[→ PHASE4_ONTOLOGY_EXTENSIBILITY.md 에서 상세 확인](./ont_platform/v3/PHASE4_ONTOLOGY_EXTENSIBILITY.md)**
+**二쇱슂 紐⑺몴**:
+- 5媛吏 ?⑦넧濡쒖? ?ㅽ???吏??(Document, RDF Triple, Property Graph, Semantic Web, Hierarchical)
+- 硫뷀??곗씠??+ 媛먯떆 ?쒖뒪??(踰꾩쟾, 媛먯궗, ?덊넻)
+- ?몃? ?⑦넧濡쒖? ?듯빀 (DBpedia, Wikidata)
+- SPARQL ?붾뱶?ъ씤??
+**[??PHASE4_ONTOLOGY_EXTENSIBILITY.md ?먯꽌 ?곸꽭 ?뺤씤](./ont_platform/v3/PHASE4_ONTOLOGY_EXTENSIBILITY.md)**
 
 ---
 
-## 🔗 참고 문서
+## ?뵕 李멸퀬 臾몄꽌
 
-- **팔란티어 분석**: 확장 제안, 회의록 정리 (E 드라이브)
-- **RAG 표준**: 별도 워크스페이스 (rag_standards)에서 관리
-
+- **?붾??곗뼱 遺꾩꽍**: ?뺤옣 ?쒖븞, ?뚯쓽濡??뺣━ (E ?쒕씪?대툕)
+- **RAG ?쒖?**: 蹂꾨룄 ?뚰겕?ㅽ럹?댁뒪 (rag_standards)?먯꽌 愿由?
 ---
 
-## 📌 작업 규칙
+## ?뱦 ?묒뾽 洹쒖튃
 
-- 작업 로그는 `E:\ontology_edu\AI_TASK_CONTROL\claude\YYYYMMDD_HHMM_작업명.md` 에 기록
-- 이 파일은 세션 시작 시 상태 변화가 있으면 업데이트
+- ?묒뾽 濡쒓렇??`E:\ontology_edu\AI_TASK_CONTROL\claude\YYYYMMDD_HHMM_?묒뾽紐?md` ??湲곕줉
+- ???뚯씪? ?몄뀡 ?쒖옉 ???곹깭 蹂?붽? ?덉쑝硫??낅뜲?댄듃
+
+

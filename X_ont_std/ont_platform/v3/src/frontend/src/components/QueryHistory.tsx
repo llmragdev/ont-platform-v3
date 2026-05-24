@@ -13,7 +13,7 @@ export function QueryHistory({
   onClear: () => void;
 }) {
   return (
-    <section className="panel">
+    <section data-testid="query-history" className="panel">
       <div className="panel-header">
         <h3 className="text-sm font-semibold">쿼리 히스토리</h3>
         <button type="button" className="btn btn-ghost py-1 text-xs gap-1" onClick={onClear}>
@@ -30,6 +30,7 @@ export function QueryHistory({
               <button
                 key={item.id}
                 type="button"
+                data-testid="history-item"
                 className="block w-full px-4 py-3 text-left hover:bg-slate-50"
                 onClick={() => onSelect(item.query)}
               >

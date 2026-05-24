@@ -101,6 +101,7 @@ export function Sidebar({
               <button
                 key={item.key}
                 type="button"
+                data-testid={`nav-${item.key}`}
                 onClick={() => onSelect(item.key)}
                 className={`w-full text-left rounded-md px-3 py-2 transition ${
                   current === item.key

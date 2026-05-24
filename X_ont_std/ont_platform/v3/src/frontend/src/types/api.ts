@@ -161,20 +161,27 @@ export interface SparqlBindingValue {
 
 export interface SparqlQueryResponse {
   type?: "SELECT" | "ASK" | "CONSTRUCT" | "DESCRIBE" | string;
+  query_type?: "SELECT" | "ASK" | "CONSTRUCT" | "DESCRIBE" | string;
   head?: { vars?: string[] };
+  select_vars?: string[];
+  patterns?: number;
+  pattern_ids?: Array<number | string>;
   results?: Array<Record<string, SparqlBindingValue | string | number | boolean | null>>;
   bindings?: Array<Record<string, SparqlBindingValue>>;
   triples?: Array<{ subject: string; predicate: string; object: string }>;
   boolean?: boolean;
   count?: number;
+  result_count?: number;
   query_time_ms?: number;
   execution_time_ms?: number;
   translator_used?: boolean;
   sql_generated?: string;
   explain?: string;
-  error?: string;
+  error?: string | { code?: string; message: string; type?: string | null };
   warning?: string;
-  source?: "api" | "demo";
+  warnings?: string[];
+  cache_hit?: boolean;
+  source?: "sql_translator" | "rdflib" | "demo" | "error";
 }
 
 export interface SparqlHistoryItem {

@@ -23,7 +23,7 @@ export function PerformanceChart({ history }: { history: SparqlHistoryItem[] }) 
     : 0;
 
   return (
-    <section className="panel">
+    <section data-testid="performance-chart" className="panel">
       <div className="panel-header">
         <h3 className="text-sm font-semibold">응답 시간</h3>
         <span className="text-xs text-slate-500">최근 {items.length}개 평균 {averageMs}ms</span>

@@ -69,7 +69,7 @@ export function SPARQLWorkbench() {
   }
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[minmax(420px,0.95fr)_minmax(520px,1.2fr)] gap-4">
+    <div data-testid="sparql-workbench" className="grid grid-cols-1 xl:grid-cols-[minmax(420px,0.95fr)_minmax(520px,1.2fr)] gap-4">
       <div className="space-y-4">
         <section className="panel">
           <div className="panel-header">
@@ -95,6 +95,7 @@ export function SPARQLWorkbench() {
             </div>
 
             <textarea
+              data-testid="sparql-input"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               spellCheck={false}
@@ -105,6 +106,7 @@ export function SPARQLWorkbench() {
               <div className="flex gap-2">
                 <button
                   type="button"
+                  data-testid="execute-button"
                   className="btn btn-primary gap-1.5"
                   onClick={() => void execute(query)}
                   disabled={loading || !query.trim()}
@@ -112,11 +114,11 @@ export function SPARQLWorkbench() {
                   <Play className="h-4 w-4" />
                   {loading ? "실행 중" : "Execute"}
                 </button>
-                <button type="button" className="btn btn-ghost gap-1.5" onClick={cancel} disabled={!loading}>
+                <button type="button" data-testid="cancel-button" className="btn btn-ghost gap-1.5" onClick={cancel} disabled={!loading}>
                   <Square className="h-4 w-4" />
                   Cancel
                 </button>
-                <button type="button" className="btn btn-ghost gap-1.5" onClick={() => setQuery("")} disabled={loading}>
+                <button type="button" data-testid="clear-query-button" className="btn btn-ghost gap-1.5" onClick={() => setQuery("")} disabled={loading}>
                   <Eraser className="h-4 w-4" />
                   Clear
                 </button>

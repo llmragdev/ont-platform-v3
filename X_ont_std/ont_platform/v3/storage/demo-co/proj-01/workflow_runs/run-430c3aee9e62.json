@@ -1,0 +1,76 @@
+{
+  "run_id": "run-430c3aee9e62",
+  "graph_id": "wfg-96254a880be0",
+  "status": "succeeded",
+  "triggered_by": "demo-user",
+  "started_at": "2026-05-24T14:12:14.619770Z",
+  "finished_at": "2026-05-24T14:12:15.855406Z",
+  "steps": [
+    {
+      "step_id": "step-9a9ce394",
+      "node_id": "n-d6z3m3",
+      "node_type": "start",
+      "status": "succeeded",
+      "started_at": "2026-05-24T14:12:14.619770Z",
+      "finished_at": "2026-05-24T14:12:14.938261Z",
+      "input": {},
+      "output": {
+        "result": "[start] executed"
+      },
+      "error": null
+    },
+    {
+      "step_id": "step-ca69c0a1",
+      "node_id": "n-l0fvr5",
+      "node_type": "llm",
+      "status": "succeeded",
+      "started_at": "2026-05-24T14:12:14.938261Z",
+      "finished_at": "2026-05-24T14:12:15.227621Z",
+      "input": {},
+      "output": {
+        "result": "[llm] executed"
+      },
+      "error": null
+    },
+    {
+      "step_id": "step-3a1e3733",
+      "node_id": "n-o7kyb7",
+      "node_type": "end",
+      "status": "succeeded",
+      "started_at": "2026-05-24T14:12:15.227621Z",
+      "finished_at": "2026-05-24T14:12:15.549754Z",
+      "input": {},
+      "output": {
+        "result": "[end] executed"
+      },
+      "error": null
+    },
+    {
+      "step_id": "step-cbb57b45",
+      "node_id": "n-wddhlj",
+      "node_type": "http",
+      "status": "succeeded",
+      "started_at": "2026-05-24T14:12:15.549754Z",
+      "finished_at": "2026-05-24T14:12:15.855406Z",
+      "input": {},
+      "output": {
+        "result": "[http] executed"
+      },
+      "error": null
+    }
+  ],
+  "user_trace": [
+    "Start d6z 완료",
+    "LLM l0f 완료",
+    "End o7k 완료",
+    "HTTP wdd 완료"
+  ],
+  "tech_trace": [
+    "run_id=run-430c3aee9e62",
+    "graph_id=wfg-96254a880be0",
+    "node=n-d6z3m3 type=start duration_ms=300",
+    "node=n-l0fvr5 type=llm duration_ms=300",
+    "node=n-o7kyb7 type=end duration_ms=300",
+    "node=n-wddhlj type=http duration_ms=300"
+  ]
+}
