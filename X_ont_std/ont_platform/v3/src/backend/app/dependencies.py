@@ -4,12 +4,15 @@ from __future__ import annotations
 import os
 from functools import lru_cache
 from fastapi import Depends, Header
+from sqlalchemy.orm import Session
 
+from app.db.database import get_db
 from app.models.tenant_context import TenantContext
 from app.services.document import DocumentService
 from app.services.llm_client import LlmClient
 from app.services.ontology import OntologyService
 from app.services.query_planner import QueryPlannerService
+from app.services.sparql_translator_service import SPARQLTranslatorService
 from app.services.vector_search import VectorSearchService
 from app.services.embedding_service import CachedEmbeddings
 from app.services.cache_service import QueryCacheService
@@ -76,3 +79,9 @@ def get_query_planner_service(
     llm: LlmClient = Depends(get_llm_client),
 ) -> QueryPlannerService:
     return QueryPlannerService(ontology_svc=ont_svc, vector_svc=vec_svc, llm_client=llm)
+
+
+def get_sparql_translator_service(
+    db: Session = Depends(get_db),
+) -> SPARQLTranslatorService:
+    return SPARQLTranslatorService(db)
