@@ -1,0 +1,10 @@
+{
+  "doc_id": "doc_B",
+  "entities": [
+    {
+      "entity_id": "eB1",
+      "type": "Organization"
+    }
+  ],
+  "relationships": []
+}

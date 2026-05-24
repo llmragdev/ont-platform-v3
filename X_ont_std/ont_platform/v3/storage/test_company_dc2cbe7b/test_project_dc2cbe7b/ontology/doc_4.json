@@ -1,0 +1,24 @@
+{
+  "doc_id": "doc_4",
+  "entities": [
+    {
+      "entity_id": "p1",
+      "type": "Person"
+    },
+    {
+      "entity_id": "o1",
+      "type": "Organization"
+    }
+  ],
+  "relationships": [
+    {
+      "relation_id": "r1",
+      "from_entity_id": "p1",
+      "to_entity_id": "o1",
+      "type": "WorksAt",
+      "properties": {
+        "since": 2020
+      }
+    }
+  ]
+}

@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import json
 import logging
+import os
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -35,9 +37,33 @@ class BaseRepository:
             return default if default is not None else {}
 
     def _save_json(self, path: Path, data: Any) -> None:
+        """Save JSON file atomically using rename pattern (safe for concurrent writes)"""
         path.parent.mkdir(parents=True, exist_ok=True)
+        tmp_path = None
         try:
-            path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+            # Priority 3: Atomic Rename pattern
+            # Write to temporary file, then atomic rename
+            with tempfile.NamedTemporaryFile(
+                mode='w',
+                dir=path.parent,
+                delete=False,
+                suffix='.tmp',
+                encoding='utf-8'
+            ) as tmp_file:
+                json.dump(data, tmp_file, ensure_ascii=False, indent=2)
+                tmp_path = tmp_file.name
+
+            # Atomic rename (race-condition safe on both Unix and Windows)
+            # On Windows, must remove target first if it exists
+            if path.exists():
+                path.unlink()
+            os.replace(tmp_path, path)
         except Exception as e:
+            # Clean up temp file if rename fails
+            try:
+                if tmp_path and Path(tmp_path).exists():
+                    os.unlink(tmp_path)
+            except:
+                pass
             logger.error("Failed to save JSON to %s: %s", path, e)
             raise

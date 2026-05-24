@@ -1,6 +1,7 @@
-"""Phase 4 Week 4: SPARQL API 서비스"""
+"""Phase 4 Week 4: SPARQL API 서비스 (Priority 1: TripleStore 통합)"""
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 from app.models.rdf_model import (
     SPARQLQuery, SPARQLResult, RDFTriple, ExternalOntologySource
@@ -9,16 +10,23 @@ from app.services.sparql_engine import SPARQLEngine
 from app.services.rdf_converter import RDFConverter
 from app.services.ontology_importer import OntologyImporter
 from app.models.ontology_schema import DomainSchema
+from storage_config import STORAGE_ROOT
 
 
 class SPARQLService:
-    """SPARQL 쿼리 서비스"""
+    """SPARQL 쿼리 서비스 (TripleStore 기반 영속성)"""
 
-    def __init__(self):
-        self.engine = SPARQLEngine()
+    def __init__(self, domain_id: str = "default"):
+        # Priority 1: TripleStore 저장 경로
+        store_path = STORAGE_ROOT / "ontology" / f"{domain_id}_triples.jsonl"
+        self.engine = SPARQLEngine(store_path=store_path)
         self.converter = RDFConverter()
         self.importer = OntologyImporter()
         self.domain_schema: Optional[DomainSchema] = None
+        self.domain_id = domain_id
+
+        # 서버 시작 시 기존 트리플 로드
+        self.engine.load_triples()
 
     def set_domain_schema(self, schema: DomainSchema) -> None:
         """도메인 스키마 설정"""
@@ -46,6 +54,7 @@ class SPARQLService:
             properties=properties
         )
         self.engine.add_triples(triples)
+        self.engine.save_triples()  # Priority 1: 자동 저장
         return triples
 
     def add_relationship_rdf(
@@ -70,6 +79,7 @@ class SPARQLService:
             relation_props=relation_props
         )
         self.engine.add_triples(triples)
+        self.engine.save_triples()  # Priority 1: 자동 저장
         return triples
 
     def explore_ontology(self, entity_uri: Optional[str] = None) -> Dict[str, Any]:

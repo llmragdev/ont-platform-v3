@@ -57,9 +57,19 @@
 
 ---
 
-## 2. 저장소 구조 (Storage Layer)
+## 2. 저장소 구조 (Storage Layer) — 진화 경로
 
-### 2-1. 물리 저장 구조
+### 2-0. 현재 상태 vs 목표 상태
+
+| 계층 | 현재 (Phase 1-2) | 목표 (Phase 2.5+) | 마이그레이션 |
+|------|-----------------|-------------------|------------|
+| **쓰기/읽기** | JSON 파일 (원자적 rename) | PostgreSQL (JSONB) | ✅ Phase 2.5 |
+| **성능 한계** | ~10K 엔티티 (테스트 중심) | 100K-1M 엔티티 | 100배 확장 |
+| **SPARQL** | Mock (정규식) | rdflib 실제 구현 | ✅ Phase 2.5 |
+| **동시성** | Atomic Rename (파일 잠금) | PostgreSQL Tx (격리 레벨) | ✅ Phase 2.5 |
+| **보안** | 헤더 기반 (위조 가능) | JWT 기반 (암호화) | ✅ Phase 3 초 |
+
+### 2-1. Phase 1-2: JSON 파일 기반 (현재)
 
 ```
 storage/
@@ -83,6 +93,66 @@ storage/
         └── audit/
             └── {domain_name}_audit.jsonl   # 모든 액션 이력
 ```
+
+**⚠️ 한계**:
+- O(N) 풀 스캔 병목 (100K+ 엔티티에서 급격히 악화)
+- 레이스 컨디션 위험 (다중 프로세스 동시 쓰기)
+- 메모리 누적 (서버 재시작 시 데이터 손실)
+
+### 2-2. Phase 2.5+: PostgreSQL 하이브리드 (목표)
+
+```
+┌─────────────────────────────────────────────────────────┐
+│ PostgreSQL (Primary Storage)                            │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│ entities (JSONB + 인덱싱)                               │
+│ ├─ id (PK), entity_type, domain_id                     │
+│ ├─ properties (JSONB) — GIN 인덱스                    │
+│ ├─ version, created_at, updated_at                     │
+│ └─ tenant_id (FK → tenants)                            │
+│                                                          │
+│ relationships (JSONB + 인덱싱)                         │
+│ ├─ id (PK), from_entity_id (FK), to_entity_id (FK)   │
+│ ├─ relation_type, properties (JSONB)                  │
+│ └─ version, created_at, updated_at                     │
+│                                                          │
+│ audit_log (완전 추적)                                  │
+│ ├─ id (PK), entity_id (FK), operation                 │
+│ ├─ old_state, new_state (JSONB)                       │
+│ ├─ actor, timestamp, reason                           │
+│ └─ sync_status (pending/synced)                        │
+│                                                          │
+│ write_back_queue (동기화 대기)                          │
+│ ├─ id (PK), entity_id (FK)                            │
+│ ├─ action_type, target_system                         │
+│ ├─ payload (JSONB), retry_count                       │
+│ └─ status (pending/synced/failed)                     │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+           ↓ (SPARQL → SQL 번역)
+┌─────────────────────────────────────────────────────────┐
+│ SPARQL Query Layer (호환성 인터페이스)                 │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│ rdflib in-memory 그래프 (작업 영역)                    │
+│ ├─ SELECT / CONSTRUCT / DESCRIBE / ASK 지원           │
+│ ├─ PREFIX, FILTER, OPTIONAL 지원                      │
+│ └─ Property Path (foaf:knows+ 등) 지원               │
+│                                                          │
+│ SPARQL → SQL 변환 레이어 (성능 최적화)               │
+│ ├─ Supported: SELECT * WHERE { ?s ?p ?o }            │
+│ ├─ Fallback: 복잡한 쿼리 → rdflib 실행               │
+│ └─ Unsupported: 지원 불가 케이스 명시               │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+**✅ 이점**:
+- 100배 성능 향상 (100K-1M 엔티티 지원)
+- 트랜잭션 격리 (동시 쓰기 안전)
+- 영속성 보장 (서버 재시작 안전)
+- 표준 SPARQL 호환 (외부 연동 가능)
 
 ### 2-2. 논리 vs 물리 레이어
 

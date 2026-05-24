@@ -11,6 +11,8 @@ cross-source-comparison/
 ├── 01_Antigravity_통합 평가.md
 ├── 01_Claude_플랫폼통합평가.md
 ├── 01_Codex_통합 평가.md
+├── 03_안티그래피티_ont_platform_분석.md
+├── 04_온톨로지_표준_아키텍처_심층분석.md
 └── README.md (이 파일)
 ```
 
@@ -18,11 +20,13 @@ cross-source-comparison/
 
 ## 📊 비교 대상
 
-| 플랫폼 | 문서 | 평가 날짜 |
-|--------|------|---------|
-| **Antigravity** | `01_Antigravity_통합 평가.md` | 2026-05-16 |
-| **Claude** | `01_Claude_플랫폼통합평가.md` | 2026-05-16 |
-| **Codex** | `01_Codex_통합 평가.md` | 2026-05-16 |
+| 플랫폼 | 문서 | 평가 날짜 | 비고 |
+|--------|------|---------|-----|
+| **Antigravity** | `01_Antigravity_통합 평가.md` | 2026-05-16 | 정적 분석 평가 |
+| **Claude** | `01_Claude_플랫폼통합평가.md` | 2026-05-16 | 아키텍처 통합 평가 |
+| **Codex** | `01_Codex_통합 평가.md` | 2026-05-16 | Palantir 실무원칙 평가 |
+| **ont_platform** | [03_안티그래피티_ont_platform_분석.md](./03_안티그래피티_ont_platform_분석.md) | 2026-05-24 | ont_platform v3 상세 한계 및 취약점 분석 |
+| **온톨로지 표준** | [04_온톨로지_표준_아키텍처_심층분석.md](./04_온톨로지_표준_아키텍처_심층분석.md) | 2026-05-24 | RDF/SPARQL vs LPG 온톨로지 표준 아키텍처 분석 |
 
 ---
 
@@ -80,6 +84,7 @@ cross-source-comparison/
 
 ## 📌 최근 업데이트
 
+- **2026-05-24**: RDF/SPARQL vs LPG 온톨로지 표준 아키텍처 분석 추가 (`04_온톨로지_표준_아키텍처_심층분석.md`)
+- **2026-05-24**: ont_platform v3 핵심 기술 및 취약점 분석 추가 (`03_안티그래피티_ont_platform_분석.md`)
 - **2026-05-19**: README 작성 및 구조화
 - **2026-05-16**: 3대 플랫폼 종합 평가 완료
-

@@ -1,0 +1,30 @@
+{
+  "doc_id": "doc_1",
+  "entities": [
+    {
+      "entity_id": "e1",
+      "type": "Person",
+      "name": "Alice",
+      "properties": {
+        "age": 30
+      }
+    },
+    {
+      "entity_id": "e2",
+      "type": "Person",
+      "name": "Bob",
+      "properties": {
+        "age": 25
+      }
+    },
+    {
+      "entity_id": "e3",
+      "type": "Organization",
+      "name": "Corp A",
+      "properties": {
+        "size": "large"
+      }
+    }
+  ],
+  "relationships": []
+}

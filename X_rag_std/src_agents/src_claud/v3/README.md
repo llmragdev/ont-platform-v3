@@ -168,6 +168,17 @@ org_id=""로 저장 → 모든 조직에서 검색 가능
 
 ## 테스트
 
+### AI Lab 6개 PDF 업로드 자동화
+
+QA 통합테스트 전 사전 준비로 `E:\ai_lab_SIT\target_doc`의 NLP PDF 6개를 v3 RAG 서버에 업로드할 수 있다.
+
+```bash
+cd E:\ontology_edu\X_rag_std\src_agents\src_claud\v3
+python upload_automation_target6.py
+```
+
+자세한 절차는 `upload_automation_target6.md`를 참고한다.
+
 ### 단위 테스트 (자동 실행)
 
 서버 기동 불필요 — TestClient + 인메모리 DB + hash/mock 프로바이더로 독립 실행.

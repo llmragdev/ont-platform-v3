@@ -58,6 +58,10 @@ Phase 5: 운영형 하드닝 (Operational Hardening)  📅 장기 계획
 
 ## 3. Phase 2 — 지능형 하이브리드 (현재 진행 중)
 
+> **기술 검증**: Antigravity(04_1) 분석 결과, 파일 기반 구조는 100K 엔티티에서 성능 벽에 부딪침.
+> **해결 방향**: PostgreSQL 마이그레이션으로 1/10 구현 난이도, 100배 확장성 확보.
+> **Kodex 가드레일** 적용: SPARQL 범위 제한, 인덱스 전략, 트랜잭션 설계
+
 ### 3-1. 목표
 LLM 기반 의도 분류 + 온톨로지 + 벡터 검색 + 합성
 
@@ -115,6 +119,78 @@ HybridSynthesizer:
   - 키워드 매칭 로직 (match_mode any/all)
   - 증거 데이터 추출
 ```
+
+### 3-3. 성공 기준 (목표 2026-05-18)
+
+---
+
+## 3.5. Phase 2.5 — 데이터 마이그레이션 & 보안 강화 (5월 말~6월 초)
+
+> **필수 단계**: Phase 3 시작 전에 구현 기반을 정리하는 기술 부채 정산
+> **기반**: Kodex(04_2, 04_3, 04_4) + Antigravity(03) 분석 반영
+> **일정**: 2주 (병렬 작업)
+
+### 3.5-1. PostgreSQL 마이그레이션
+
+**목표**: 파일 기반 → PostgreSQL로 전환, 성능 100배 향상
+
+| 항목 | 현재 (JSON) | 목표 (PostgreSQL) | 효과 |
+|------|-----------|-----------------|------|
+| 엔티티 조회 | O(N) 풀 스캔 | O(log N) 인덱스 | 100배 빠름 |
+| 동시 쓰기 | 레이스 컨디션 | TX 격리 레벨 | 안전함 |
+| 메모리 | 휘발성 | 영속성 | 서버 안전 |
+| SPARQL | Mock (정규식) | rdflib 실제 | 표준 준수 |
+
+**구현 단계** (2주):
+
+```
+Week 1:
+  □ PostgreSQL 스키마 생성 (entities, relationships, audit_log)
+  □ JSON ↔ PostgreSQL 매핑 레이어 작성
+  □ GIN 인덱스 (JSONB properties) 설정
+  □ Atomic 트랜잭션 테스트
+
+Week 2:
+  □ 기존 JSON 데이터 → PostgreSQL 일괄 마이그레이션
+  □ 저장소 추상화 (BaseRepository) 업그레이드
+  □ 통합 테스트 다시 실행 (20/25 유지)
+  □ 마이그레이션 검증 + 문서화
+```
+
+**Kodex 가드레일 반영**:
+- ✅ SPARQL 범위 명시화 (Supported/Fallback/Unsupported)
+- ✅ GIN 인덱스 사용 (GiST 대신)
+- ✅ SAVEPOINT 트랜잭션 설계
+- ✅ UUID 기반 안정적 ID 생성
+
+### 3.5-2. 보안 강화
+
+**목표**: JWT 기반 인증, 헤더 위조 차단
+
+| 취약점 | 현재 | 목표 | 구현 |
+|-------|------|------|------|
+| 테넌트 격리 | Header (위조 가능) | JWT 서명 | ✅ HMAC-SHA256 |
+| 권한 제어 | Role 문자열 | JWT claims | ✅ token.sub/role |
+| 감사 추적 | 부분 | 완전 | ✅ audit_log 필수 |
+
+**구현**:
+- JWT 발급 엔드포인트 (login)
+- JWT 검증 미들웨어 (all endpoints)
+- X-Company-Id → jwt.sub 강제
+- 권한 체크: @require_role('manager')
+
+### 3.5-3. Phase 2.5 성공 기준
+
+```
+□ PostgreSQL 마이그레이션 완료
+□ 통합 테스트 20/25 이상 유지
+□ 성능: 응답 시간 100K 엔티티 < 200ms
+□ JWT 인증 적용 + 테스트
+□ 감사 로그 100% 추적
+□ 문서화 완료 (마이그레이션 가이드)
+```
+
+---
 
 ### 3-3. 성공 기준 (목표 2026-05-18)
 ```

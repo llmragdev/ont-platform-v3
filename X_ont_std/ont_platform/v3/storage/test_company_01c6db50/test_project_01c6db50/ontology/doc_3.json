@@ -1,0 +1,27 @@
+{
+  "doc_id": "doc_3",
+  "entities": [
+    {
+      "entity_id": "e1",
+      "type": "Person",
+      "properties": {
+        "dept": "Engineering"
+      }
+    },
+    {
+      "entity_id": "e2",
+      "type": "Person",
+      "properties": {
+        "dept": "Sales"
+      }
+    },
+    {
+      "entity_id": "e3",
+      "type": "Person",
+      "properties": {
+        "dept": "Engineering"
+      }
+    }
+  ],
+  "relationships": []
+}

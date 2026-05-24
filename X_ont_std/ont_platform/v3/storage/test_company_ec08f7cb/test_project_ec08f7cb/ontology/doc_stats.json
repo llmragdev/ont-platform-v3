@@ -1,0 +1,1007 @@
+{
+  "doc_id": "doc_stats",
+  "entities": [
+    {
+      "entity_id": "e0",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e1",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e2",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e3",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e4",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e5",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e6",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e7",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e8",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e9",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e10",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e11",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e12",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e13",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e14",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e15",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e16",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e17",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e18",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e19",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e20",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e21",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e22",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e23",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e24",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e25",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e26",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e27",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e28",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e29",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e30",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e31",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e32",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e33",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e34",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e35",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e36",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e37",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e38",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e39",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e40",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e41",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e42",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e43",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e44",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e45",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e46",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e47",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e48",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e49",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e50",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e51",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e52",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e53",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e54",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e55",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e56",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e57",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e58",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e59",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e60",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e61",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e62",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e63",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e64",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e65",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e66",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e67",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e68",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e69",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e70",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e71",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e72",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e73",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e74",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e75",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e76",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e77",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e78",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e79",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e80",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e81",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e82",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e83",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e84",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e85",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e86",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e87",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e88",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e89",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e90",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e91",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e92",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e93",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e94",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e95",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e96",
+      "type": "Type_0"
+    },
+    {
+      "entity_id": "e97",
+      "type": "Type_1"
+    },
+    {
+      "entity_id": "e98",
+      "type": "Type_2"
+    },
+    {
+      "entity_id": "e99",
+      "type": "Type_0"
+    }
+  ],
+  "relationships": [
+    {
+      "relation_id": "r0",
+      "from_entity_id": "e0",
+      "to_entity_id": "e1",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r1",
+      "from_entity_id": "e1",
+      "to_entity_id": "e2",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r2",
+      "from_entity_id": "e2",
+      "to_entity_id": "e3",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r3",
+      "from_entity_id": "e3",
+      "to_entity_id": "e4",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r4",
+      "from_entity_id": "e4",
+      "to_entity_id": "e5",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r5",
+      "from_entity_id": "e5",
+      "to_entity_id": "e6",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r6",
+      "from_entity_id": "e6",
+      "to_entity_id": "e7",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r7",
+      "from_entity_id": "e7",
+      "to_entity_id": "e8",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r8",
+      "from_entity_id": "e8",
+      "to_entity_id": "e9",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r9",
+      "from_entity_id": "e9",
+      "to_entity_id": "e10",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r10",
+      "from_entity_id": "e10",
+      "to_entity_id": "e11",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r11",
+      "from_entity_id": "e11",
+      "to_entity_id": "e12",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r12",
+      "from_entity_id": "e12",
+      "to_entity_id": "e13",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r13",
+      "from_entity_id": "e13",
+      "to_entity_id": "e14",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r14",
+      "from_entity_id": "e14",
+      "to_entity_id": "e15",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r15",
+      "from_entity_id": "e15",
+      "to_entity_id": "e16",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r16",
+      "from_entity_id": "e16",
+      "to_entity_id": "e17",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r17",
+      "from_entity_id": "e17",
+      "to_entity_id": "e18",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r18",
+      "from_entity_id": "e18",
+      "to_entity_id": "e19",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r19",
+      "from_entity_id": "e19",
+      "to_entity_id": "e20",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r20",
+      "from_entity_id": "e20",
+      "to_entity_id": "e21",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r21",
+      "from_entity_id": "e21",
+      "to_entity_id": "e22",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r22",
+      "from_entity_id": "e22",
+      "to_entity_id": "e23",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r23",
+      "from_entity_id": "e23",
+      "to_entity_id": "e24",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r24",
+      "from_entity_id": "e24",
+      "to_entity_id": "e25",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r25",
+      "from_entity_id": "e25",
+      "to_entity_id": "e26",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r26",
+      "from_entity_id": "e26",
+      "to_entity_id": "e27",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r27",
+      "from_entity_id": "e27",
+      "to_entity_id": "e28",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r28",
+      "from_entity_id": "e28",
+      "to_entity_id": "e29",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r29",
+      "from_entity_id": "e29",
+      "to_entity_id": "e30",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r30",
+      "from_entity_id": "e30",
+      "to_entity_id": "e31",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r31",
+      "from_entity_id": "e31",
+      "to_entity_id": "e32",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r32",
+      "from_entity_id": "e32",
+      "to_entity_id": "e33",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r33",
+      "from_entity_id": "e33",
+      "to_entity_id": "e34",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r34",
+      "from_entity_id": "e34",
+      "to_entity_id": "e35",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r35",
+      "from_entity_id": "e35",
+      "to_entity_id": "e36",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r36",
+      "from_entity_id": "e36",
+      "to_entity_id": "e37",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r37",
+      "from_entity_id": "e37",
+      "to_entity_id": "e38",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r38",
+      "from_entity_id": "e38",
+      "to_entity_id": "e39",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r39",
+      "from_entity_id": "e39",
+      "to_entity_id": "e40",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r40",
+      "from_entity_id": "e40",
+      "to_entity_id": "e41",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r41",
+      "from_entity_id": "e41",
+      "to_entity_id": "e42",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r42",
+      "from_entity_id": "e42",
+      "to_entity_id": "e43",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r43",
+      "from_entity_id": "e43",
+      "to_entity_id": "e44",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r44",
+      "from_entity_id": "e44",
+      "to_entity_id": "e45",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r45",
+      "from_entity_id": "e45",
+      "to_entity_id": "e46",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r46",
+      "from_entity_id": "e46",
+      "to_entity_id": "e47",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r47",
+      "from_entity_id": "e47",
+      "to_entity_id": "e48",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r48",
+      "from_entity_id": "e48",
+      "to_entity_id": "e49",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r49",
+      "from_entity_id": "e49",
+      "to_entity_id": "e50",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r50",
+      "from_entity_id": "e50",
+      "to_entity_id": "e51",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r51",
+      "from_entity_id": "e51",
+      "to_entity_id": "e52",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r52",
+      "from_entity_id": "e52",
+      "to_entity_id": "e53",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r53",
+      "from_entity_id": "e53",
+      "to_entity_id": "e54",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r54",
+      "from_entity_id": "e54",
+      "to_entity_id": "e55",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r55",
+      "from_entity_id": "e55",
+      "to_entity_id": "e56",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r56",
+      "from_entity_id": "e56",
+      "to_entity_id": "e57",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r57",
+      "from_entity_id": "e57",
+      "to_entity_id": "e58",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r58",
+      "from_entity_id": "e58",
+      "to_entity_id": "e59",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r59",
+      "from_entity_id": "e59",
+      "to_entity_id": "e60",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r60",
+      "from_entity_id": "e60",
+      "to_entity_id": "e61",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r61",
+      "from_entity_id": "e61",
+      "to_entity_id": "e62",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r62",
+      "from_entity_id": "e62",
+      "to_entity_id": "e63",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r63",
+      "from_entity_id": "e63",
+      "to_entity_id": "e64",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r64",
+      "from_entity_id": "e64",
+      "to_entity_id": "e65",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r65",
+      "from_entity_id": "e65",
+      "to_entity_id": "e66",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r66",
+      "from_entity_id": "e66",
+      "to_entity_id": "e67",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r67",
+      "from_entity_id": "e67",
+      "to_entity_id": "e68",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r68",
+      "from_entity_id": "e68",
+      "to_entity_id": "e69",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r69",
+      "from_entity_id": "e69",
+      "to_entity_id": "e70",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r70",
+      "from_entity_id": "e70",
+      "to_entity_id": "e71",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r71",
+      "from_entity_id": "e71",
+      "to_entity_id": "e72",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r72",
+      "from_entity_id": "e72",
+      "to_entity_id": "e73",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r73",
+      "from_entity_id": "e73",
+      "to_entity_id": "e74",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r74",
+      "from_entity_id": "e74",
+      "to_entity_id": "e75",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r75",
+      "from_entity_id": "e75",
+      "to_entity_id": "e76",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r76",
+      "from_entity_id": "e76",
+      "to_entity_id": "e77",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r77",
+      "from_entity_id": "e77",
+      "to_entity_id": "e78",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r78",
+      "from_entity_id": "e78",
+      "to_entity_id": "e79",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r79",
+      "from_entity_id": "e79",
+      "to_entity_id": "e80",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r80",
+      "from_entity_id": "e80",
+      "to_entity_id": "e81",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r81",
+      "from_entity_id": "e81",
+      "to_entity_id": "e82",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r82",
+      "from_entity_id": "e82",
+      "to_entity_id": "e83",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r83",
+      "from_entity_id": "e83",
+      "to_entity_id": "e84",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r84",
+      "from_entity_id": "e84",
+      "to_entity_id": "e85",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r85",
+      "from_entity_id": "e85",
+      "to_entity_id": "e86",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r86",
+      "from_entity_id": "e86",
+      "to_entity_id": "e87",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r87",
+      "from_entity_id": "e87",
+      "to_entity_id": "e88",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r88",
+      "from_entity_id": "e88",
+      "to_entity_id": "e89",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r89",
+      "from_entity_id": "e89",
+      "to_entity_id": "e90",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r90",
+      "from_entity_id": "e90",
+      "to_entity_id": "e91",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r91",
+      "from_entity_id": "e91",
+      "to_entity_id": "e92",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r92",
+      "from_entity_id": "e92",
+      "to_entity_id": "e93",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r93",
+      "from_entity_id": "e93",
+      "to_entity_id": "e94",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r94",
+      "from_entity_id": "e94",
+      "to_entity_id": "e95",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r95",
+      "from_entity_id": "e95",
+      "to_entity_id": "e96",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r96",
+      "from_entity_id": "e96",
+      "to_entity_id": "e97",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r97",
+      "from_entity_id": "e97",
+      "to_entity_id": "e98",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r98",
+      "from_entity_id": "e98",
+      "to_entity_id": "e99",
+      "type": "LinksTo"
+    },
+    {
+      "relation_id": "r99",
+      "from_entity_id": "e99",
+      "to_entity_id": "e0",
+      "type": "LinksTo"
+    }
+  ]
+}

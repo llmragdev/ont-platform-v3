@@ -338,13 +338,13 @@ app.include_router(metrics_router)
 
 # ── /api/ontology/sparql ──────────────────────────────────────────────────────
 
-from app.services.sparql_service import SPARQLService
+from app.services.sparql_service_v2 import SPARQLServiceV2
 
-# Singleton 인스턴스
-_sparql_service = SPARQLService()
+# Singleton 인스턴스 (rdflib 기반 표준 SPARQL)
+_sparql_service = SPARQLServiceV2()
 
-def get_sparql_service() -> SPARQLService:
-    """SPARQL 서비스 주입"""
+def get_sparql_service() -> SPARQLServiceV2:
+    """SPARQL 서비스 주입 (rdflib 기반, W3C 표준 호환)"""
     return _sparql_service
 
 

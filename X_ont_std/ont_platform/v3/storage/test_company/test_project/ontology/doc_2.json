@@ -1,0 +1,16 @@
+{
+  "doc_id": "doc_2",
+  "entities": [
+    {
+      "entity_id": "e_2_1",
+      "type": "Person",
+      "name": "Person 2"
+    },
+    {
+      "entity_id": "e_2_2",
+      "type": "Organization",
+      "name": "Org 2"
+    }
+  ],
+  "relationships": []
+}

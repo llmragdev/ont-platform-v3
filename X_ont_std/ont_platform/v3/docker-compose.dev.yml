@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: ont_platform_postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ontology}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ontology123}
+      POSTGRES_DB: ${POSTGRES_DB:-ont_platform}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init_schema.sql:/docker-entrypoint-initdb.d/init_schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ontology} -d ${POSTGRES_DB:-ont_platform}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ont_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  ont_network:
+    driver: bridge

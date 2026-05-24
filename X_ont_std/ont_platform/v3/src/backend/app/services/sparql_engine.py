@@ -1,24 +1,31 @@
-"""Phase 4 Week 3: SPARQL 엔진 및 엔드포인트"""
+"""Phase 4 Week 3: SPARQL 엔진 및 엔드포인트 (Priority 1: TripleStore 통합)"""
 from __future__ import annotations
 
 import re
 import time
-from datetime import datetime
+from datetime import datetime, UTC
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from app.models.rdf_model import SPARQLQuery, SPARQLResult, RDFTriple
+from app.services.triple_store import TripleStore
 
 
 class SPARQLEngine:
-    """간단한 SPARQL 쿼리 엔진 (시뮬레이션)"""
+    """SPARQL 쿼리 엔진 (TripleStore 기반 영속성)"""
 
-    def __init__(self):
-        self.triples: List[RDFTriple] = []
+    def __init__(self, store_path: Optional[Path] = None):
+        """
+        Args:
+            store_path: JSONL 트리플 저장 경로. None이면 메모리만 사용.
+        """
+        self.store = TripleStore(store_path)
         self.query_history: List[SPARQLResult] = []
 
     def add_triples(self, triples: List[RDFTriple]) -> None:
         """트리플 추가"""
-        self.triples.extend(triples)
+        for triple in triples:
+            self.store.add_triple(triple.subject, triple.predicate, triple.obj)
 
     def execute_query(self, query: SPARQLQuery) -> SPARQLResult:
         """SPARQL 쿼리 실행"""
@@ -48,7 +55,7 @@ class SPARQLEngine:
                 results=results,
                 result_count=len(results),
                 execution_time_ms=execution_time,
-                query_timestamp=datetime.utcnow()
+                query_timestamp=datetime.now(UTC)
             )
 
             self.query_history.append(result)
@@ -62,7 +69,7 @@ class SPARQLEngine:
                 results=[{"error": str(e)}],
                 result_count=0,
                 execution_time_ms=execution_time,
-                query_timestamp=datetime.utcnow()
+                query_timestamp=datetime.now(UTC)
             )
 
     def _detect_query_type(self, query_string: str) -> str:
@@ -101,7 +108,7 @@ class SPARQLEngine:
             return results
 
         # 트리플 매칭
-        for triple in self.triples:
+        for triple in self.store.get_all_triples():
             match = self._match_pattern(pattern, triple)
             if match:
                 result_row = {}
@@ -148,7 +155,7 @@ class SPARQLEngine:
         variables = self._extract_variables(query.query_string)
 
         for var in variables:
-            for triple in self.triples:
+            for triple in self.store.get_all_triples():
                 if triple.subject == var or (var.startswith("?") and triple.subject.endswith(var[1:])):
                     results.append({
                         "subject": triple.subject,
@@ -232,8 +239,16 @@ class SPARQLEngine:
 
     def clear_triples(self) -> None:
         """모든 트리플 제거"""
-        self.triples.clear()
+        self.store.clear()
 
     def get_triple_count(self) -> int:
         """트리플 개수"""
-        return len(self.triples)
+        return self.store.get_triple_count()
+
+    def save_triples(self) -> None:
+        """트리플을 파일에 저장 (Priority 1)"""
+        self.store.save_to_jsonl()
+
+    def load_triples(self) -> int:
+        """파일에서 트리플 로드 (Priority 1)"""
+        return self.store.load_from_jsonl()
