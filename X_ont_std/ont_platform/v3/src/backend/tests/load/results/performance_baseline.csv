@@ -1,0 +1,4 @@
+ScenarioId,Category,Concurrency,TotalRequests,RPS,P50_ms,P90_ms,SLA_Status
+scenario_simple_lookup,simple,10,50,180.5,8.0,22.0,PASS
+scenario_one_hop,one-hop,10,50,95.2,28.0,98.0,PASS
+scenario_two_hop,two-hop,10,50,35.4,85.0,240.0,PASS
