@@ -58,10 +58,16 @@ E:\ontology_edu\X_ont_std\
 
 ## 🚦 현재 상태
 
-**[→ STATUS.md 에서 최신 상태 확인](./STATUS.md)**
+**Phase 2.5 Parallel Development (2026-06-03 ~ 06-21)**
 
-**요약**: 전체 완성도 ~42% (조회 기능 완성, 실행/액션 미완성)  
-**현재 집중**: Phase 2 마무리 — 통합 테스트 목표 80% 달성
+**상태 추적**: [PHASE2_5_STATUS.md](./PHASE2_5_STATUS.md) ← **3 에이전트 협업 상태**
+
+- 🔴 **Claude** (SPARQL→SQL): **✅ Week 2 COMPLETE** (27/30 tests passing)
+- 🟠 **Codex** (Frontend UI): 🟡 IN PROGRESS (Week 2)
+- 🟢 **Antigravity** (Performance): 🟡 IN PROGRESS (Week 2)
+
+**Week 2 마감**: 2026-06-07 (금요일 5시)  
+**전체 완성도**: ~50% (Phase 2.5 진행 중)
 
 ---
 
