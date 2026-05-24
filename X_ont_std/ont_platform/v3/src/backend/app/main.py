@@ -43,7 +43,13 @@ from app.dependencies import (
     get_query_planner_service,
     get_tenant_context,
     get_sparql_translator_service,
+    get_db,
 )
+from app.db.models import ChangeLog, WriteBackQueue
+from sqlalchemy import and_
+from sqlalchemy.orm import Session
+from datetime import datetime
+from typing import Optional
 
 app = FastAPI(title="ont_platform v3.0", version="3.0.0")
 
@@ -654,6 +660,161 @@ def get_ontology_stats(
     return {
         "total_triples": svc.get_triple_count(),
         "last_updated": None
+    }
+
+
+# ── /api/changelog ────────────────────────────────────────────────────────────
+
+@app.get("/api/changelog/history")
+def get_changelog_history(
+    entity_id: Optional[str] = None,
+    domain_id: Optional[str] = None,
+    action_type: Optional[str] = None,
+    sync_status: Optional[str] = None,
+    date_from: Optional[str] = None,
+    date_to: Optional[str] = None,
+    page: int = 1,
+    page_size: int = 50,
+    db: Session = Depends(get_db),
+):
+    """
+    Changelog 조회
+
+    **필터**:
+    - entity_id: 엔티티 ID
+    - domain_id: 도메인 ID
+    - action_type: 액션 유형
+    - sync_status: 동기화 상태 (PENDING, SYNCED, FAILED)
+    - date_from: 시작 날짜 (ISO8601)
+    - date_to: 종료 날짜 (ISO8601)
+
+    **페이징**:
+    - page: 페이지 번호 (기본값: 1)
+    - page_size: 페이지당 항목 수 (기본값: 50)
+    """
+    query = db.query(ChangeLog)
+
+    if entity_id:
+        query = query.filter(ChangeLog.entity_id == entity_id)
+    if domain_id:
+        query = query.filter(ChangeLog.domain_id == domain_id)
+    if action_type:
+        query = query.filter(ChangeLog.action_type == action_type)
+    if sync_status:
+        query = query.filter(ChangeLog.sync_status == sync_status)
+    if date_from:
+        query = query.filter(ChangeLog.timestamp >= datetime.fromisoformat(date_from))
+    if date_to:
+        query = query.filter(ChangeLog.timestamp <= datetime.fromisoformat(date_to))
+
+    total = query.count()
+    items = query.order_by(ChangeLog.timestamp.desc())\
+                 .offset((page - 1) * page_size)\
+                 .limit(page_size)\
+                 .all()
+
+    return {
+        "items": [
+            {
+                "id": item.id,
+                "entity_id": item.entity_id,
+                "entity_type": item.entity_type,
+                "domain_id": item.domain_id,
+                "action_type": item.action_type,
+                "actor": item.actor,
+                "old_status": item.old_status,
+                "new_status": item.new_status,
+                "timestamp": item.timestamp.isoformat(),
+                "sync_status": item.sync_status,
+                "target_system": item.target_system,
+                "sync_timestamp": item.sync_timestamp.isoformat() if item.sync_timestamp else None,
+                "error_message": item.error_message,
+            }
+            for item in items
+        ],
+        "total": total,
+        "page": page,
+        "page_size": page_size,
+    }
+
+
+# ── /api/writeback ────────────────────────────────────────────────────────────
+
+@app.get("/api/writeback/queue")
+def get_writeback_queue(
+    status: Optional[str] = None,
+    domain_id: Optional[str] = None,
+    limit: int = 100,
+    db: Session = Depends(get_db),
+):
+    """
+    WriteBack 큐 상태 조회
+
+    **필터**:
+    - status: 상태 (PENDING, SENT, CONFIRMED, FAILED)
+    - domain_id: 도메인 ID (옵션)
+    - limit: 반환할 최대 항목 수 (기본값: 100)
+    """
+    query = db.query(WriteBackQueue)
+
+    if status:
+        query = query.filter(WriteBackQueue.status == status)
+
+    total = query.count()
+    items = query.limit(limit).all()
+
+    pending = db.query(WriteBackQueue).filter(WriteBackQueue.status == "PENDING").count()
+    confirmed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "CONFIRMED").count()
+    failed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "FAILED").count()
+
+    return {
+        "pending": pending,
+        "confirmed": confirmed,
+        "failed": failed,
+        "items": [
+            {
+                "id": item.id,
+                "action_execution_id": item.action_execution_id,
+                "target_system": item.target_system,
+                "status": item.status,
+                "retry_count": item.retry_count,
+                "created_at": item.created_at.isoformat(),
+                "sent_at": item.sent_at.isoformat() if item.sent_at else None,
+                "error_message": item.error_message,
+            }
+            for item in items
+        ],
+    }
+
+
+@app.get("/api/writeback/statistics")
+def get_writeback_statistics(db: Session = Depends(get_db)):
+    """
+    WriteBack 통계 조회
+    """
+    total = db.query(WriteBackQueue).count()
+    confirmed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "CONFIRMED").count()
+    failed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "FAILED").count()
+    pending = total - confirmed - failed
+
+    success_rate = (confirmed / total) if total > 0 else 0
+
+    avg_retry = 0
+    if total > 0:
+        retry_sum = sum(item.retry_count for item in db.query(WriteBackQueue).all())
+        avg_retry = retry_sum / total
+
+    last_sync = db.query(WriteBackQueue).filter(
+        WriteBackQueue.status == "CONFIRMED"
+    ).order_by(WriteBackQueue.sent_at.desc()).first()
+
+    return {
+        "total_processed": total,
+        "success_rate": round(success_rate, 4),
+        "failure_count": failed,
+        "pending_count": pending,
+        "avg_retry_attempts": round(avg_retry, 2),
+        "last_sync_time": last_sync.sent_at.isoformat() if last_sync and last_sync.sent_at else None,
     }
 
 
