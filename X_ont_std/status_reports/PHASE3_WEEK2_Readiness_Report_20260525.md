@@ -57,7 +57,7 @@ $ pytest tests/test_api_integration.py -v
 
 ### 吏?쒖꽌 ?꾩튂
 
-**臾몄꽌**: `PHASE3_WEEK2_Instructions_20260525.md` (?뱀뀡: Codex)
+**臾몄꽌**: [[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)](../week_instructions/[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)) (?뱀뀡: Codex)
 
 ### ????(泥댄겕由ъ뒪??
 
@@ -96,7 +96,7 @@ mkdir -p cypress/e2e cypress/fixtures
 
 ### 吏?쒖꽌 ?꾩튂
 
-**臾몄꽌**: `PHASE3_WEEK2_Instructions_20260525.md` (?뱀뀡: Antigravity)
+**臾몄꽌**: [[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)](../week_instructions/[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)) (?뱀뀡: Antigravity)
 
 ### ????(泥댄겕由ъ뒪??
 
@@ -168,7 +168,7 @@ pytest tests/load/test_live_api_performance.py -v
 
 **Friday Review**
 - 5:00 PM: 二쇨컙 ?꾨즺 ?곹깭 ?뺤씤
-- PHASE3_WEEK2_Instructions_20260525.md ?곹깭 ?낅뜲?댄듃
+- [PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md) ?곹깭 ?낅뜲?댄듃
 
 ---
 
@@ -177,11 +177,11 @@ pytest tests/load/test_live_api_performance.py -v
 ### Claude ??- 吏?쒖꽌: ???쒓났??- 肄붾뱶: ???묒꽦??- ?뚯뒪?? ???꾨즺??- 由ы룷?? ???묒꽦??- **?곹깭**: Ready (?ъ떎 ?대? ?꾨즺??
 
 ### Codex ?뱥
-- 吏?쒖꽌: ??`PHASE3_WEEK2_Instructions_20260525.md` ?쒓났??- 肄붾뱶 ?쒗뵆由? ???쒓났??- ?섏〈?? ??Claude ?꾨즺
+- 吏?쒖꽌: ??[[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)](../week_instructions/[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)) ?쒓났??- 肄붾뱶 ?쒗뵆由? ???쒓났??- ?섏〈?? ??Claude ?꾨즺
 - **?곹깭**: Ready to execute (2026-06-03 Monday)
 
 ### Antigravity ?뱥
-- 吏?쒖꽌: ??`PHASE3_WEEK2_Instructions_20260525.md` ?쒓났??- ?뚯뒪???쒗뵆由? ???쒓났??- ?섏〈?? ??Claude API 寃利앸맖
+- 吏?쒖꽌: ??[[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)](../week_instructions/[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)) ?쒓났??- ?뚯뒪???쒗뵆由? ???쒓났??- ?섏〈?? ??Claude API 寃利앸맖
 - **?곹깭**: Ready to execute (2026-06-03 Monday)
 
 ---
@@ -190,10 +190,10 @@ pytest tests/load/test_live_api_performance.py -v
 
 | 臾몄꽌 | ?꾩튂 | ?곹깭 |
 |------|------|------|
-| Week 2 吏?쒖꽌 | `PHASE3_WEEK2_Instructions_20260525.md` | ??Complete |
+| Week 2 吏?쒖꽌 | [[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)](../week_instructions/[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)) | ??Complete |
 | Claude 由ы룷??| `task_logs/claude/PHASE3_WEEK2_Claude_Integration_Tests_Complete_20260525.md` | ??Complete |
-| Codex 吏?쒖꽌 | `PHASE3_WEEK2_Instructions_20260525.md` (Codex section) | ??Ready |
-| Antigravity 吏?쒖꽌 | `PHASE3_WEEK2_Instructions_20260525.md` (Antigravity section) | ??Ready |
+| Codex 吏?쒖꽌 | [[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)](../week_instructions/[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)) (Codex section) | ??Ready |
+| Antigravity 吏?쒖꽌 | [[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)](../week_instructions/[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)) (Antigravity section) | ??Ready |
 
 ---
 
@@ -221,11 +221,11 @@ pytest tests/load/test_live_api_performance.py -v
 ### For User
 1. **Codex ? ?쒖옉**: Monday 2026-06-03 10:00 AM
    - Cypress ?ㅼ튂 ?ㅽ뻾
-   - `PHASE3_WEEK2_Instructions_20260525.md` (Codex section) 李몄“
+   - [[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)](../week_instructions/[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)) (Codex section) 李몄“
 
 2. **Antigravity ? ?쒖옉**: Monday 2026-06-03 10:00 AM
    - Load test ?ㅽ겕由쏀듃 ?묒꽦 ?쒖옉
-   - `PHASE3_WEEK2_Instructions_20260525.md` (Antigravity section) 李몄“
+   - [[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)](../week_instructions/[PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md)) (Antigravity section) 李몄“
 
 ### For All Teams
 - ?쇱씪 吏꾪뻾 ?곹솴 怨듭쑀 (10:00 AM)
@@ -251,3 +251,4 @@ Codex Week 2 frontend E2E ?먮룞?붽? ?꾨즺?섏뿀?듬땲??
 - 由ы룷?? `task_logs/claude/PHASE3_WEEK2_Codex_E2E_Complete_20260607.md`
 
 二쇱쓽: ?꾩옱 E2E??`/api/ontology/sparql` ?묐떟??Cypress intercept fixture濡?怨좎젙??frontend contract E2E?낅땲?? Live FastAPI + PostgreSQL full-stack E2E??蹂꾨룄 寃利?寃뚯씠?몃줈 ?⑥븘 ?덉뒿?덈떎.
+

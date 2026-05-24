@@ -293,7 +293,7 @@ Antigravity (Week 2 Live Test)
 ## ?쒖옉: ?붿슂??2026-06-03 10:00 AM
 
 ### Task 1: Cypress ?ㅼ튂 (?? 30遺?
-- 李멸퀬: PHASE3_WEEK2_Instructions_20260525.md (Codex ?뱀뀡)
+- 李멸퀬: [PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md) (Codex ?뱀뀡)
 - npm install -D cypress
 - npm pkg set scripts.cypress:open="cypress open"
 - npm pkg set scripts.cypress:run="cypress run"
@@ -335,7 +335,7 @@ Antigravity (Week 2 Live Test)
 ## ?쒖옉: ?붿슂??2026-06-03 10:00 AM
 
 ### Task 1: Load Test ?ㅽ겕由쏀듃 ?묒꽦 (?? 1?쒓컙)
-- 李멸퀬: PHASE3_WEEK2_Instructions_20260525.md (Antigravity ?뱀뀡)
+- 李멸퀬: [PHASE3_WEEK2_Instructions_20260525.md](../week_instructions/PHASE3_WEEK2_Instructions_20260525.md) (Antigravity ?뱀뀡)
 - ?뚯씪: tests/load/test_live_api_performance.py
 - ?뚯뒪??4媛?
   1. 沅뚰븳 ?뺤씤 P95 <50ms
@@ -423,4 +423,5 @@ pytest tests/load/test_live_api_performance.py -v
 **?섏〈??*: ??**?놁쓬**  
 **3? ?숈떆 吏꾪뻾**: ??**媛??*  
 **?곕???媛쒖닔**: 4媛?(Claude 1, Codex 1, Antigravity 2)
+
 
