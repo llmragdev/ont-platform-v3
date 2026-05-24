@@ -11,6 +11,8 @@ from app.services.llm_client import LlmClient
 from app.services.ontology import OntologyService
 from app.services.query_planner import QueryPlannerService
 from app.services.vector_search import VectorSearchService
+from app.services.embedding_service import CachedEmbeddings
+from app.services.cache_service import QueryCacheService
 
 
 @lru_cache(maxsize=1)
@@ -25,12 +27,20 @@ def get_embeddings():
         return None
     try:
         from langchain_google_genai import GoogleGenerativeAIEmbeddings
-        return GoogleGenerativeAIEmbeddings(
+        base_embeddings = GoogleGenerativeAIEmbeddings(
             model="models/gemini-embedding-001",
             google_api_key=api_key,
         )
+        redis_url = os.getenv("REDIS_URL")
+        return CachedEmbeddings(base_embeddings=base_embeddings, redis_url=redis_url)
     except Exception:
         return None
+
+
+@lru_cache(maxsize=1)
+def get_query_cache_service() -> QueryCacheService:
+    redis_url = os.getenv("REDIS_URL")
+    return QueryCacheService(redis_url=redis_url)
 
 
 def get_document_service() -> DocumentService:
