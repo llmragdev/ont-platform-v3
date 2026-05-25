@@ -82,22 +82,26 @@ class TestRDFMemoryOptimization:
         
         tracemalloc.start()
         gc.collect()
+        mem_before = tracemalloc.get_traced_memory()[0]
         
-        # 10개 그래프 병합 (각 10K 트리플)
+        # 10개 그래프 생성 (각 10K 트리플)
         graphs = [self._load_test_graph(10000) for _ in range(10)]
+        gc.collect()
+        mem_after_graphs = tracemalloc.get_traced_memory()[0]
         
-        # 원본 개별 그래프의 가상 사이즈 계산 (바이트 단위)
-        # sys.getsizeof()나 __sizeof__()를 이용
-        single_graph_size = sys.getsizeof(graphs[0])
-        total_original = single_graph_size * 10
+        # 원본 그래프들이 차지한 실질 메모리 총량
+        total_original_memory = mem_after_graphs - mem_before
         
+        # 병합 중 발생하는 추가 peak 메모리 측정
+        tracemalloc.reset_peak()
         merged = converter.merge_graphs(graphs)
+        gc.collect()
         
-        peak = tracemalloc.get_traced_memory()[1]
+        peak_during_merge = tracemalloc.get_traced_memory()[1] - mem_after_graphs
         tracemalloc.stop()
         
-        # 병합 작업 중 최대 메모리 증가폭이 원본 메모리 합계의 1.5배 이내여야 함
-        assert peak < total_original * 1.5
+        # 병합 과정에서의 추가 메모리 사용량이 원본 합계의 150% 이하 여야 함
+        assert peak_during_merge < total_original_memory * 1.5
 
     def test_lru_cache_memory_bounds(self):
         """LRU 캐시 메모리 경계"""
