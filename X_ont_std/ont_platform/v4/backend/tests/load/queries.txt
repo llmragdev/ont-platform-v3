@@ -1,0 +1,11 @@
+# 1. Simple Lookup Queries
+SELECT ?x WHERE { ?x <property:status> "active" }
+SELECT ?x WHERE { ?x <property:name> "Project_Alpha" }
+
+# 2. One-Hop Queries
+SELECT ?y WHERE { ?x <relation:works_at> ?y . ?x <property:name> "Employee_50" }
+SELECT ?y WHERE { ?x <relation:member_of> ?y . ?x <property:status> "active" }
+
+# 3. Two-Hop Queries
+SELECT ?z WHERE { ?x <relation:works_at> ?y . ?y <relation:subsidiary_of> ?z . ?x <property:name> "Employee_100" }
+SELECT ?z WHERE { ?x <relation:member_of> ?y . ?y <relation:managed_by> ?z . ?x <property:status> "active" }

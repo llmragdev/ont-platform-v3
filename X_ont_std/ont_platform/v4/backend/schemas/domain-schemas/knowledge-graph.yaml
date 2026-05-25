@@ -1,0 +1,159 @@
+domain_id: knowledge-graph
+ontology_style: semantic_web
+display_name: Knowledge Graph
+description: 시맨틱 웹 기반 지식 그래프
+
+entity_types:
+  CONCEPT:
+    name: CONCEPT
+    display_name: Concept
+    description: 개념
+    properties:
+      uri:
+        name: uri
+        display_name: URI
+        property_type: uri
+        required: true
+        unique: true
+      label:
+        name: label
+        display_name: Label
+        property_type: string
+        required: true
+      description:
+        name: description
+        display_name: Description
+        property_type: string
+      definition:
+        name: definition
+        display_name: Definition
+        property_type: string
+
+  CLASS:
+    name: CLASS
+    display_name: Class
+    description: 클래스
+    parent_types:
+      - CONCEPT
+    properties:
+      uri:
+        name: uri
+        display_name: Class URI
+        property_type: uri
+        required: true
+      label:
+        name: label
+        display_name: Class Label
+        property_type: string
+        required: true
+      subclass_of:
+        name: subclass_of
+        display_name: Subclass Of
+        property_type: uri
+
+  PROPERTY:
+    name: PROPERTY
+    display_name: Property
+    description: 속성
+    parent_types:
+      - CONCEPT
+    properties:
+      uri:
+        name: uri
+        display_name: Property URI
+        property_type: uri
+        required: true
+      label:
+        name: label
+        display_name: Property Label
+        property_type: string
+        required: true
+      domain:
+        name: domain
+        display_name: Domain
+        property_type: uri
+      range:
+        name: range
+        display_name: Range
+        property_type: uri
+
+  INDIVIDUAL:
+    name: INDIVIDUAL
+    display_name: Individual
+    description: 개별 개체
+    properties:
+      uri:
+        name: uri
+        display_name: Individual URI
+        property_type: uri
+        required: true
+        unique: true
+      label:
+        name: label
+        display_name: Label
+        property_type: string
+      type:
+        name: type
+        display_name: Type
+        property_type: uri
+      source:
+        name: source
+        display_name: Source
+        property_type: string
+
+rdf_namespaces:
+  - prefix: kg
+    uri: "http://example.org/knowledge-graph#"
+    description: Knowledge Graph Ontology
+  - prefix: rdfs
+    uri: "http://www.w3.org/2000/01/rdf-schema#"
+    description: RDF Schema
+  - prefix: owl
+    uri: "http://www.w3.org/2002/07/owl#"
+    description: OWL Ontology Language
+
+relation_types:
+  subclass_of:
+    name: subclass_of
+    display_name: Subclass Of
+    description: 클래스 상속
+    from_type: CLASS
+    to_type: CLASS
+    cardinality: N:M
+    directed: true
+
+  has_property:
+    name: has_property
+    display_name: Has Property
+    description: 속성 소유
+    from_type: CLASS
+    to_type: PROPERTY
+    cardinality: N:M
+    directed: true
+
+  instance_of:
+    name: instance_of
+    display_name: Instance Of
+    description: 클래스 인스턴스
+    from_type: INDIVIDUAL
+    to_type: CLASS
+    cardinality: N:1
+    directed: true
+
+  related_to:
+    name: related_to
+    display_name: Related To
+    description: 개체 관계
+    from_type: INDIVIDUAL
+    to_type: INDIVIDUAL
+    cardinality: N:M
+    directed: true
+    properties:
+      predicate:
+        name: predicate
+        display_name: Predicate
+        property_type: uri
+        required: true
+
+version: "1.0"
+created_by: knowledge_team

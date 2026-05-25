@@ -1,0 +1,3 @@
+action,user,time,sync_status,transition,entity_id,entity_type,target_system
+"APPROVE_PROJECT","pm@example.com","2026. 6. 20. 오후 11:30:45","SYNCED","UnderReview -> Approved","project-001","Project","SAP"
+"REJECT_PROJECT","reviewer@example.com","2026. 6. 20. 오후 10:20:15","FAILED","UnderReview -> Rejected","project-002","Project","SAP"
