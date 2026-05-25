@@ -818,8 +818,146 @@ def get_writeback_statistics(db: Session = Depends(get_db)):
     }
 
 
+# ── /api/changelog / /api/writeback ─────────────────────────────────────────────
+
+@app.get("/api/changelog/history", tags=["monitoring"])
+def get_changelog_history(
+    entity_id: str | None = None,
+    domain_id: str | None = None,
+    action_type: str | None = None,
+    sync_status: str | None = None,
+    date_from: str | None = None,
+    date_to: str | None = None,
+    page: int = 1,
+    page_size: int = 50,
+    db = Depends(get_db)
+):
+    from app.db.models import ChangeLog
+    from datetime import datetime
+
+    query = db.query(ChangeLog)
+    
+    if entity_id:
+        query = query.filter(ChangeLog.entity_id == entity_id)
+    if domain_id:
+        query = query.filter(ChangeLog.domain_id == domain_id)
+    if action_type:
+        query = query.filter(ChangeLog.action_type == action_type)
+    if sync_status:
+        query = query.filter(ChangeLog.sync_status == sync_status)
+    if date_from:
+        try:
+            query = query.filter(ChangeLog.timestamp >= datetime.fromisoformat(date_from.replace('Z', '+00:00')))
+        except ValueError:
+            pass
+    if date_to:
+        try:
+            query = query.filter(ChangeLog.timestamp <= datetime.fromisoformat(date_to.replace('Z', '+00:00')))
+        except ValueError:
+            pass
+
+    total = query.count()
+    items = query.order_by(ChangeLog.timestamp.desc())\
+                 .offset((page - 1) * page_size)\
+                 .limit(page_size)\
+                 .all()
+
+    formatted_items = []
+    for item in items:
+        formatted_items.append({
+            "id": item.id,
+            "entity_id": item.entity_id,
+            "entity_type": item.entity_type,
+            "domain_id": item.domain_id,
+            "action_type": item.action_type,
+            "actor": item.actor,
+            "source": item.source,
+            "timestamp": item.timestamp.isoformat() if item.timestamp else None,
+            "sync_status": item.sync_status,
+            "target_system": item.target_system,
+            "error_message": item.error_message
+        })
+
+    return {
+        "items": formatted_items,
+        "total": total,
+        "page": page,
+        "page_size": page_size
+    }
+
+
+@app.get("/api/writeback/queue", tags=["monitoring"])
+def get_writeback_queue(
+    status: str | None = None,
+    domain_id: str | None = None,
+    limit: int = 100,
+    db = Depends(get_db)
+):
+    from app.db.models import WriteBackQueue, ActionExecution
+
+    pending = db.query(WriteBackQueue).filter(WriteBackQueue.status == "PENDING").count()
+    confirmed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "CONFIRMED").count()
+    failed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "FAILED").count()
+
+    query = db.query(WriteBackQueue)
+    if status:
+        query = query.filter(WriteBackQueue.status == status)
+    if domain_id:
+        query = query.join(ActionExecution).filter(ActionExecution.domain_id == domain_id)
+
+    items = query.order_by(WriteBackQueue.created_at.desc()).limit(limit).all()
+
+    formatted_items = []
+    for item in items:
+        formatted_items.append({
+            "id": item.id,
+            "action_execution_id": item.action_execution_id,
+            "target_system": item.target_system,
+            "status": item.status,
+            "retry_count": item.retry_count,
+            "created_at": item.created_at.isoformat() if item.created_at else None,
+            "sent_at": item.sent_at.isoformat() if item.sent_at else None,
+            "error_message": item.error_message
+        })
+
+    return {
+        "pending": pending,
+        "confirmed": confirmed,
+        "failed": failed,
+        "items": formatted_items
+    }
+
+
+@app.get("/api/writeback/statistics", tags=["monitoring"])
+def get_writeback_statistics(db = Depends(get_db)):
+    from app.db.models import WriteBackQueue
+    from sqlalchemy import func
+
+    total = db.query(WriteBackQueue).count()
+    confirmed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "CONFIRMED").count()
+    failed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "FAILED").count()
+
+    success_rate = confirmed / total if total > 0 else 0.0
+
+    avg_retry = db.query(func.avg(WriteBackQueue.retry_count)).scalar() or 0.0
+    avg_retry = float(avg_retry)
+
+    last_sync = db.query(func.max(WriteBackQueue.sent_at)).scalar()
+    last_sync_time = last_sync.isoformat() if last_sync else None
+
+    return {
+        "total_processed": total,
+        "success_rate": round(success_rate, 4),
+        "failure_count": failed,
+        "avg_retry_attempts": round(avg_retry, 2),
+        "last_sync_time": last_sync_time
+    }
+
+
+
 # ── /api/health ───────────────────────────────────────────────────────────────
 
 @app.get("/api/health")
 def health():
     return {"status": "ok", "version": "3.0.0"}
+

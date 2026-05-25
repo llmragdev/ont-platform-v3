@@ -1,0 +1,63 @@
+{
+  "routing_rules": [
+    {
+      "vector_db_id": "vdb_hr_recruit_01",
+      "target_category_mid": [
+        "채용",
+        "recruitment"
+      ],
+      "engine_type": "local_json",
+      "connection": {
+        "collection_name": "hr_recruit_docs"
+      }
+    },
+    {
+      "vector_db_id": "vdb_hr_payroll_01",
+      "target_category_mid": [
+        "급여",
+        "payroll"
+      ],
+      "engine_type": "local_json",
+      "connection": {
+        "collection_name": "hr_payroll_docs"
+      }
+    },
+    {
+      "vector_db_id": "vdb_policy_01",
+      "target_category_mid": [
+        "취업규칙",
+        "규정",
+        "지침",
+        "매뉴얼",
+        "policy"
+      ],
+      "engine_type": "local_json",
+      "connection": {
+        "collection_name": "policy_docs"
+      }
+    },
+    {
+      "vector_db_id": "vdb_ontology_01",
+      "target_category_mid": [
+        "ontology",
+        "기술",
+        "tech"
+      ],
+      "engine_type": "local_json",
+      "connection": {
+        "collection_name": "ontology_docs"
+      }
+    },
+    {
+      "vector_db_id": "vdb_default_01",
+      "target_category_mid": [
+        "default",
+        "일반"
+      ],
+      "engine_type": "local_json",
+      "connection": {
+        "collection_name": "default_docs"
+      }
+    }
+  ]
+}

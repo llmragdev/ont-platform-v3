@@ -168,5 +168,94 @@ class SchemaRepository:
             "created_by": schema.created_by,
             "created_at": schema.created_at.isoformat(),
             "updated_by": schema.updated_by,
-            "updated_at": schema.updated_at.isoformat()
+            "updated_at": schema.updated_at.isoformat() if schema.updated_at else None
         }]
+
+    def validate_entity_against_schema(self, domain_id: str, entity: Dict) -> SchemaValidationResult:
+        """엔티티가 스키마를 준수하는지 검증"""
+        schema = self.get_schema(domain_id)
+        if not schema:
+            return SchemaValidationResult(
+                is_valid=False,
+                errors=[f"도메인 '{domain_id}'을 찾을 수 없습니다."]
+            )
+
+        errors = []
+        warnings = []
+        entity_type = entity.get("type")
+
+        # 엔티티 타입 검증
+        if not entity_type:
+            errors.append("entity 타입이 지정되지 않았습니다.")
+            return SchemaValidationResult(is_valid=False, errors=errors)
+
+        if entity_type not in schema.entity_types:
+            errors.append(f"엔티티 타입 '{entity_type}'이 스키마에 존재하지 않습니다.")
+            return SchemaValidationResult(is_valid=False, errors=errors)
+
+        # 엔티티 타입 정의
+        entity_type_def = schema.entity_types[entity_type]
+
+        # 필수 속성 검증
+        for prop_name, prop_def in entity_type_def.properties.items():
+            if prop_def.required and prop_name not in entity:
+                errors.append(f"필수 속성 '{prop_name}'이 없습니다.")
+
+        # 속성 타입 검증
+        for prop_name, prop_value in entity.items():
+            if prop_name in entity_type_def.properties:
+                prop_def = entity_type_def.properties[prop_name]
+                # 기본 타입 검증 (향후 확장 가능)
+                if prop_def.property_type.value == "integer" and not isinstance(prop_value, (int, type(None))):
+                    warnings.append(f"속성 '{prop_name}'의 타입이 일치하지 않습니다. (기대: integer, 실제: {type(prop_value).__name__})")
+
+        return SchemaValidationResult(
+            is_valid=len(errors) == 0,
+            errors=errors,
+            warnings=warnings
+        )
+
+    def validate_relationship_against_schema(self, domain_id: str, relationship: Dict) -> SchemaValidationResult:
+        """관계가 스키마를 준수하는지 검증"""
+        schema = self.get_schema(domain_id)
+        if not schema:
+            return SchemaValidationResult(
+                is_valid=False,
+                errors=[f"도메인 '{domain_id}'을 찾을 수 없습니다."]
+            )
+
+        errors = []
+        warnings = []
+        rel_type = relationship.get("type")
+
+        # 관계 타입 검증
+        if not rel_type:
+            errors.append("relationship 타입이 지정되지 않았습니다.")
+            return SchemaValidationResult(is_valid=False, errors=errors)
+
+        if rel_type not in schema.relation_types:
+            errors.append(f"관계 타입 '{rel_type}'이 스키마에 존재하지 않습니다.")
+            return SchemaValidationResult(is_valid=False, errors=errors)
+
+        # 관계 타입 정의
+        rel_type_def = schema.relation_types[rel_type]
+
+        # from_type, to_type 검증
+        from_type = relationship.get("from_type")
+        to_type = relationship.get("to_type")
+
+        if not from_type:
+            errors.append("from_type이 지정되지 않았습니다.")
+        elif from_type != rel_type_def.from_type:
+            errors.append(f"from_type이 일치하지 않습니다. (기대: {rel_type_def.from_type}, 실제: {from_type})")
+
+        if not to_type:
+            errors.append("to_type이 지정되지 않았습니다.")
+        elif to_type != rel_type_def.to_type:
+            errors.append(f"to_type이 일치하지 않습니다. (기대: {rel_type_def.to_type}, 실제: {to_type})")
+
+        return SchemaValidationResult(
+            is_valid=len(errors) == 0,
+            errors=errors,
+            warnings=warnings
+        )

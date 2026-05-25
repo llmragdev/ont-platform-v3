@@ -1,0 +1,197 @@
+domain_id: order-tracking
+ontology_style: rdf_triple
+display_name: Order Tracking System
+description: RDF 삼중쌍 기반 주문 추적 시스템
+
+entity_types:
+  ORDER:
+    name: ORDER
+    display_name: Order
+    description: 주문
+    properties:
+      order_id:
+        name: order_id
+        display_name: Order ID
+        property_type: string
+        required: true
+        unique: true
+        indexed: true
+      subject:
+        name: subject
+        display_name: Subject (RDF Subject)
+        property_type: uri
+        required: true
+      order_date:
+        name: order_date
+        display_name: Order Date
+        property_type: datetime
+        required: true
+      total_amount:
+        name: total_amount
+        display_name: Total Amount
+        property_type: float
+
+  SHIPMENT:
+    name: SHIPMENT
+    display_name: Shipment
+    description: 배송
+    properties:
+      shipment_id:
+        name: shipment_id
+        display_name: Shipment ID
+        property_type: string
+        required: true
+        unique: true
+      subject:
+        name: subject
+        display_name: Subject (RDF Subject)
+        property_type: uri
+        required: true
+      status:
+        name: status
+        display_name: Status
+        property_type: string
+        required: true
+      tracking_number:
+        name: tracking_number
+        display_name: Tracking Number
+        property_type: string
+
+  ITEM:
+    name: ITEM
+    display_name: Item
+    description: 품목
+    properties:
+      item_id:
+        name: item_id
+        display_name: Item ID
+        property_type: string
+        required: true
+      subject:
+        name: subject
+        display_name: Subject (RDF Subject)
+        property_type: uri
+        required: true
+      product_name:
+        name: product_name
+        display_name: Product Name
+        property_type: string
+        required: true
+      quantity:
+        name: quantity
+        display_name: Quantity
+        property_type: integer
+        required: true
+      unit_price:
+        name: unit_price
+        display_name: Unit Price
+        property_type: float
+
+  CUSTOMER:
+    name: CUSTOMER
+    display_name: Customer
+    description: 고객
+    properties:
+      customer_id:
+        name: customer_id
+        display_name: Customer ID
+        property_type: string
+        required: true
+        unique: true
+      subject:
+        name: subject
+        display_name: Subject (RDF Subject)
+        property_type: uri
+        required: true
+      name:
+        name: name
+        display_name: Customer Name
+        property_type: string
+        required: true
+      email:
+        name: email
+        display_name: Email
+        property_type: string
+        required: true
+
+rdf_namespaces:
+  - prefix: ot
+    uri: "http://example.org/order-tracking#"
+    description: Order Tracking Ontology
+  - prefix: rdf
+    uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    description: RDF Namespace
+  - prefix: rdfs
+    uri: "http://www.w3.org/2000/01/rdf-schema#"
+    description: RDF Schema
+  - prefix: xsd
+    uri: "http://www.w3.org/2001/XMLSchema#"
+    description: XML Schema
+
+relation_types:
+  placed_by:
+    name: placed_by
+    display_name: Placed By
+    description: "RDF 주어-술어-목적어: Order - PlacedBy - Customer"
+    from_type: ORDER
+    to_type: CUSTOMER
+    cardinality: "N:1"
+    directed: true
+    properties:
+      predicate:
+        name: predicate
+        display_name: RDF Predicate
+        property_type: uri
+        default_value: "http://example.org/order-tracking#placedBy"
+
+  contains:
+    name: contains
+    display_name: Contains
+    description: "RDF 주어-술어-목적어: Order - Contains - Item"
+    from_type: ORDER
+    to_type: ITEM
+    cardinality: "1:N"
+    directed: true
+    properties:
+      predicate:
+        name: predicate
+        display_name: RDF Predicate
+        property_type: uri
+        default_value: "http://example.org/order-tracking#contains"
+
+  shipped_via:
+    name: shipped_via
+    display_name: Shipped Via
+    description: "RDF 주어-술어-목적어: Order - ShippedVia - Shipment"
+    from_type: ORDER
+    to_type: SHIPMENT
+    cardinality: "1:N"
+    directed: true
+    properties:
+      predicate:
+        name: predicate
+        display_name: RDF Predicate
+        property_type: uri
+        default_value: "http://example.org/order-tracking#shippedVia"
+      shipping_date:
+        name: shipping_date
+        display_name: Shipping Date
+        property_type: datetime
+
+  has_status:
+    name: has_status
+    display_name: Has Status
+    description: "RDF 주어-술어-목적어: Shipment - HasStatus - Status"
+    from_type: SHIPMENT
+    to_type: ITEM
+    cardinality: "1:N"
+    directed: true
+    properties:
+      predicate:
+        name: predicate
+        display_name: RDF Predicate
+        property_type: uri
+        default_value: "http://example.org/order-tracking#hasStatus"
+
+version: "1.0"
+created_by: logistics_team

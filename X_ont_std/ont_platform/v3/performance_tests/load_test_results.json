@@ -1,0 +1,140 @@
+{
+  "Scenario_A_RampUp": {
+    "/api/changelog/history?page=1&page_size=50": {
+      "requests": 446,
+      "failures": 0,
+      "median_latency": 32.0,
+      "p95_latency": 2100.0,
+      "p99_latency": 2100.0,
+      "avg_latency": 167.1325677128197,
+      "min_latency": 6.596899998839945,
+      "max_latency": 2130.312799999956,
+      "rps": 24.29336946808241
+    },
+    "/api/workflow/execute": {
+      "requests": 300,
+      "failures": 105,
+      "median_latency": 120.0,
+      "p95_latency": 2100.0,
+      "p99_latency": 2200.0,
+      "avg_latency": 323.5394606666038,
+      "min_latency": 19.331900010001846,
+      "max_latency": 2251.627499994356,
+      "rps": 16.340831480772923
+    },
+    "/api/writeback/statistics": {
+      "requests": 151,
+      "failures": 0,
+      "median_latency": 44.0,
+      "p95_latency": 2000.0,
+      "p99_latency": 2100.0,
+      "avg_latency": 182.67418807935255,
+      "min_latency": 8.830899998429231,
+      "max_latency": 2132.0626999950036,
+      "rps": 8.224885178655704
+    },
+    "Total": {
+      "requests": 897,
+      "failures": 105,
+      "median_latency": 51.0,
+      "p95_latency": 2100.0,
+      "p99_latency": 2200.0,
+      "avg_latency": 222.05882474903117,
+      "min_latency": 6.596899998839945,
+      "max_latency": 2251.627499994356,
+      "rps": 48.859086127511034
+    }
+  },
+  "Scenario_B_Constant": {
+    "/api/changelog/history?page=1&page_size=50": {
+      "requests": 348,
+      "failures": 0,
+      "median_latency": 210.0,
+      "p95_latency": 2400.0,
+      "p99_latency": 2900.0,
+      "avg_latency": 459.7389175284463,
+      "min_latency": 18.291700005647726,
+      "max_latency": 2958.7365000043064,
+      "rps": 19.469243518665664
+    },
+    "/api/workflow/execute": {
+      "requests": 288,
+      "failures": 129,
+      "median_latency": 540.0,
+      "p95_latency": 2800.0,
+      "p99_latency": 3100.0,
+      "avg_latency": 749.3803802076905,
+      "min_latency": 210.9199999977136,
+      "max_latency": 3194.75959999545,
+      "rps": 16.11247739475779
+    },
+    "/api/writeback/statistics": {
+      "requests": 101,
+      "failures": 0,
+      "median_latency": 240.0,
+      "p95_latency": 2300.0,
+      "p99_latency": 2900.0,
+      "avg_latency": 397.39413663403747,
+      "min_latency": 76.49639999726787,
+      "max_latency": 2912.282799996319,
+      "rps": 5.650556308578253
+    },
+    "Total": {
+      "requests": 737,
+      "failures": 129,
+      "median_latency": 330.0,
+      "p95_latency": 2500.0,
+      "p99_latency": 3000.0,
+      "avg_latency": 564.379240976597,
+      "min_latency": 18.291700005647726,
+      "max_latency": 3194.75959999545,
+      "rps": 41.232277222001706
+    }
+  },
+  "Scenario_C_Peak": {
+    "/api/changelog/history?page=1&page_size=50": {
+      "requests": 179,
+      "failures": 0,
+      "median_latency": 2900.0,
+      "p95_latency": 8100.0,
+      "p99_latency": 11000.0,
+      "avg_latency": 3215.001507262669,
+      "min_latency": 406.4461000089068,
+      "max_latency": 10971.758700005012,
+      "rps": 14.431179603636583
+    },
+    "/api/workflow/execute": {
+      "requests": 110,
+      "failures": 50,
+      "median_latency": 4000.0,
+      "p95_latency": 11000.0,
+      "p99_latency": 11000.0,
+      "avg_latency": 4393.141641818379,
+      "min_latency": 1088.6562999949092,
+      "max_latency": 11020.827300002566,
+      "rps": 8.868322661452648
+    },
+    "/api/writeback/statistics": {
+      "requests": 60,
+      "failures": 0,
+      "median_latency": 2600.0,
+      "p95_latency": 11000.0,
+      "p99_latency": 11000.0,
+      "avg_latency": 3704.6427783338004,
+      "min_latency": 665.5835999990813,
+      "max_latency": 11002.687100000912,
+      "rps": 4.837266906246899
+    },
+    "Total": {
+      "requests": 349,
+      "failures": 50,
+      "median_latency": 3100.0,
+      "p95_latency": 11000.0,
+      "p99_latency": 11000.0,
+      "avg_latency": 3670.5140891119404,
+      "min_latency": 406.4461000089068,
+      "max_latency": 11020.827300002566,
+      "rps": 28.13676917133613
+    }
+  }
+}

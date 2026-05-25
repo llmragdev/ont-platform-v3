@@ -1,0 +1,139 @@
+domain_id: manufacturing
+ontology_style: hierarchical
+display_name: Manufacturing System
+description: 계층적 제조 시스템
+
+entity_types:
+  PRODUCT:
+    name: PRODUCT
+    display_name: Product
+    description: 제품 (최상위)
+    properties:
+      code:
+        name: code
+        display_name: Product Code
+        property_type: string
+        required: true
+        unique: true
+        indexed: true
+      name:
+        name: name
+        display_name: Product Name
+        property_type: string
+        required: true
+      description:
+        name: description
+        display_name: Description
+        property_type: string
+
+  CATEGORY:
+    name: CATEGORY
+    display_name: Category
+    description: 제품 분류
+    parent_types:
+      - PRODUCT
+    properties:
+      name:
+        name: name
+        display_name: Category Name
+        property_type: string
+        required: true
+      description:
+        name: description
+        display_name: Description
+        property_type: string
+
+  SUBCATEGORY:
+    name: SUBCATEGORY
+    display_name: Subcategory
+    description: 세부 분류
+    parent_types:
+      - CATEGORY
+    properties:
+      name:
+        name: name
+        display_name: Subcategory Name
+        property_type: string
+        required: true
+      code:
+        name: code
+        display_name: Subcategory Code
+        property_type: string
+        required: true
+
+  COMPONENT:
+    name: COMPONENT
+    display_name: Component
+    description: 부품
+    parent_types:
+      - SUBCATEGORY
+    properties:
+      name:
+        name: name
+        display_name: Component Name
+        property_type: string
+        required: true
+      part_number:
+        name: part_number
+        display_name: Part Number
+        property_type: string
+        required: true
+        unique: true
+      supplier:
+        name: supplier
+        display_name: Supplier
+        property_type: string
+
+  MATERIAL:
+    name: MATERIAL
+    display_name: Material
+    description: 원자재
+    parent_types:
+      - PRODUCT
+    properties:
+      name:
+        name: name
+        display_name: Material Name
+        property_type: string
+        required: true
+      type:
+        name: type
+        display_name: Material Type
+        property_type: string
+        required: true
+      unit:
+        name: unit
+        display_name: Unit of Measure
+        property_type: string
+
+relation_types:
+  composed_of:
+    name: composed_of
+    display_name: Composed Of
+    description: 구성 요소
+    from_type: COMPONENT
+    to_type: MATERIAL
+    cardinality: N:M
+    directed: true
+    properties:
+      quantity:
+        name: quantity
+        display_name: Quantity
+        property_type: float
+        required: true
+      unit:
+        name: unit
+        display_name: Unit
+        property_type: string
+
+  produced_in:
+    name: produced_in
+    display_name: Produced In
+    description: 생산 위치
+    from_type: COMPONENT
+    to_type: MATERIAL
+    cardinality: N:1
+    directed: true
+
+version: "1.0"
+created_by: manufacturing_team

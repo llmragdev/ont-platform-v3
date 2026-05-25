@@ -57,31 +57,37 @@ class SchemaConstraint(BaseModel):
     condition: Dict[str, Any]  # 제약 조건 상세
 
 
-class RelationType(BaseModel):
+class RelationTypeDefinition(BaseModel):
     """관계 타입 정의"""
-    name: str
+    name: str                                       # e.g., "leads"
     display_name: str
     description: str = ""
-    from_type: str  # 출발 엔티티 타입
-    to_type: str    # 도착 엔티티 타입
+    from_type: str                                  # 출발 엔티티 타입
+    to_type: str                                    # 도착 엔티티 타입
     cardinality: Cardinality = Cardinality.ONE_TO_MANY
     directed: bool = True
     properties: Dict[str, PropertyDefinition] = Field(default_factory=dict)
-    is_inheritance: bool = False  # 상속 관계 여부
+    constraints: List[SchemaConstraint] = Field(default_factory=list)
+    is_inheritance: bool = False                    # 상속 관계 여부
 
 
-class EntityType(BaseModel):
+class EntityTypeDefinition(BaseModel):
     """엔티티 타입 정의"""
-    name: str  # e.g., "PROJECT"
+    name: str                                       # e.g., "PROJECT"
     display_name: str
     description: str = ""
     properties: Dict[str, PropertyDefinition]
-    parent_types: List[str] = []  # 상속 지원 (다중 상속 가능)
+    parent_types: List[str] = Field(default_factory=list)  # 상속 지원 (다중 상속 가능)
     metadata_fields: List[str] = Field(default_factory=lambda: [
         "created_by", "created_at", "updated_by", "updated_at", "version"
     ])
-    icon: Optional[str] = None  # UI 아이콘
-    color: Optional[str] = None  # UI 색상
+    supports_multi_typing: bool = False             # 다중 타입 지원 여부
+    style_specific_config: Optional[Dict[str, Any]] = None  # 스타일별 설정
+
+
+# 하위호환성을 위한 별칭
+EntityType = EntityTypeDefinition
+RelationType = RelationTypeDefinition
 
 
 class RDFNamespace(BaseModel):
@@ -99,22 +105,22 @@ class DomainSchema(BaseModel):
     description: str = ""
 
     # 구조
-    entity_types: Dict[str, EntityType]  # entity_name → EntityType
-    relation_types: Dict[str, RelationType]  # relation_name → RelationType
-    constraints: List[SchemaConstraint] = []
+    entity_types: Dict[str, EntityTypeDefinition]       # entity_name → EntityTypeDefinition
+    relation_types: Dict[str, RelationTypeDefinition]   # relation_name → RelationTypeDefinition
+    constraints: List[SchemaConstraint] = Field(default_factory=list)
 
     # RDF 지원
-    rdf_namespaces: List[RDFNamespace] = []
+    rdf_namespaces: List[RDFNamespace] = Field(default_factory=list)
 
     # 메타정보
     version: str = "1.0"
     created_by: str = ""
     created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_by: str = ""
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_by: Optional[str] = None
+    updated_at: Optional[datetime] = None
 
     # 추가 설정
-    tags: List[str] = []
+    tags: List[str] = Field(default_factory=list)
     metadata: Dict[str, Any] = Field(default_factory=dict)
 
 
