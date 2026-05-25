@@ -4,7 +4,8 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
-from typing import Any, Optional, Dict
+import time
+from typing import Any, Optional, Dict, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -14,7 +15,7 @@ class QueryCacheService:
     def __init__(self, redis_url: Optional[str] = None, cache_name: str = "query_cache"):
         self.redis_url = redis_url
         self.cache_name = cache_name
-        self.memory_cache: Dict[str, str] = {}
+        self.memory_cache: Dict[str, Tuple[str, float]] = {}
         
         # Redis Connection Setup
         self.redis_client = None
@@ -50,9 +51,12 @@ class QueryCacheService:
                 logger.error("Redis read error in cache service: %s", e)
         
         if key in self.memory_cache:
-            self.hits += 1
-            return json.loads(self.memory_cache[key])
-            
+            serialized, expires_at = self.memory_cache[key]
+            if expires_at >= time.time():
+                self.hits += 1
+                return json.loads(serialized)
+            del self.memory_cache[key]
+
         self.misses += 1
         return None
 
@@ -60,8 +64,8 @@ class QueryCacheService:
         """Cache query result with specified TTL."""
         key = self._get_cache_key(query, tenant_domain)
         serialized = json.dumps(result, ensure_ascii=False)
-        
-        self.memory_cache[key] = serialized
+        expiration = time.time() + ttl_seconds
+        self.memory_cache[key] = (serialized, expiration)
         
         if self.redis_client:
             try:

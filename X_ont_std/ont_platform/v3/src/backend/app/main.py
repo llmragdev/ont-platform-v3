@@ -225,6 +225,10 @@ def search(
 from app.api import hybrid
 app.include_router(hybrid.router)
 
+# ── /api/rdf ─────────────────────────────────────────────────────────────────
+
+from app.api import optimized_api
+app.include_router(optimized_api.router)
 
 # ── /api/integration-test ─────────────────────────────────────────────────────
 

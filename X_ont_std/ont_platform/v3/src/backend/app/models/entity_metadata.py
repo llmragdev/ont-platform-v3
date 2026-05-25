@@ -36,6 +36,14 @@ class EntityStatus(str, Enum):
     DRAFT = "draft"                    # 초안
 
 
+class PropertyChange(BaseModel):
+    """속성 변경 기록"""
+    property_name: str
+    old_value: Optional[Any] = None
+    new_value: Optional[Any] = None
+    change_type: str = "modified"      # modified, added, removed
+
+
 class Transformation(BaseModel):
     """데이터 변환 기록"""
     transformation_id: str
@@ -47,6 +55,7 @@ class Transformation(BaseModel):
     output_id: str                     # 결과 엔티티 ID
     parameters: Dict[str, Any]         # 변환 파라미터
     status: str = "completed"          # completed, failed, pending
+    property_changes: List[PropertyChange] = []  # 변환으로 인한 속성 변경
 
 
 class ImportMetadata(BaseModel):
