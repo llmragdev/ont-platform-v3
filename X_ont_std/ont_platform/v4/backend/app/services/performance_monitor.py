@@ -1,4 +1,5 @@
 from typing import Dict, Any, List
+from datetime import datetime
 import numpy as np
 
 class PerformanceMonitor:
@@ -69,3 +70,106 @@ class PerformanceMonitor:
             'db_query_count': total_db,
             'avg_db_time': avg_db
         }
+
+from dataclasses import dataclass
+from prometheus_client import Histogram, Counter
+
+# Prometheus Histograms & Counters
+sparql_query_duration = Histogram(
+    'sparql_query_duration_seconds',
+    'SPARQL query duration in seconds',
+    buckets=[0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0]
+)
+db_query_duration = Histogram(
+    'db_query_duration_seconds',
+    'Database query duration in seconds',
+    buckets=[0.01, 0.05, 0.1, 0.25, 0.5, 1.0]
+)
+cache_hit_counter = Counter(
+    'cache_hits_total',
+    'Total cache hits',
+    ['cache_level']
+)
+cache_miss_counter = Counter(
+    'cache_misses_total',
+    'Total cache misses'
+)
+
+@dataclass
+class PerformanceMetric:
+    """성능 메트릭 자료구조"""
+    name: str
+    value: float  # ms
+    timestamp: datetime
+    tags: Dict[str, str] = None
+
+class PerformanceCollector:
+    """성능 데이터 수집 및 시계열 분석기"""
+
+    def __init__(self, redis: Any = None):
+        self.redis = redis
+        self.metrics: List[PerformanceMetric] = []
+
+    def record_metric(self, name: str, value: float, tags: Dict[str, str] = None):
+        """메트릭 기록 및 Prometheus/Redis 연동"""
+        metric = PerformanceMetric(
+            name=name,
+            value=value,
+            timestamp=datetime.utcnow(),
+            tags=tags or {}
+        )
+        self.metrics.append(metric)
+
+        # Prometheus 히스토그램 관측
+        if name == 'sparql_query_time':
+            sparql_query_duration.observe(value / 1000.0)
+        elif name == 'db_query_time':
+            db_query_duration.observe(value / 1000.0)
+            
+        # Cache hits counters
+        if name == 'cache_hit':
+            lvl = (tags or {}).get('cache_level', 'L1')
+            cache_hit_counter.labels(cache_level=lvl).inc()
+        elif name == 'cache_miss':
+            cache_miss_counter.inc()
+
+        # Redis에 시계열 적재
+        if self.redis:
+            try:
+                import json
+                key = f"metric:{name}:{datetime.utcnow().timestamp()}"
+                self.redis.setex(key, 3600, json.dumps({
+                    'value': value,
+                    'tags': tags
+                }, ensure_ascii=False))
+            except Exception as e:
+                # 로컬에 경고 로그만 남김
+                pass
+
+    def get_statistics(self, metric_name: str) -> Dict[str, Any]:
+        """지정된 메트릭의 P95, P99 통계 분석"""
+        values = [m.value for m in self.metrics if m.name == metric_name]
+        if not values:
+            return {
+                'count': 0,
+                'min': 0.0,
+                'max': 0.0,
+                'avg': 0.0,
+                'p95': 0.0,
+                'p99': 0.0
+            }
+        
+        sorted_vals = sorted(values)
+        n = len(sorted_vals)
+        p95 = sorted_vals[int(n * 0.95)] if n > 0 else 0.0
+        p99 = sorted_vals[int(n * 0.99)] if n > 0 else 0.0
+        
+        return {
+            'count': len(values),
+            'min': min(values),
+            'max': max(values),
+            'avg': sum(values) / len(values),
+            'p95': p95,
+            'p99': p99
+        }
+
