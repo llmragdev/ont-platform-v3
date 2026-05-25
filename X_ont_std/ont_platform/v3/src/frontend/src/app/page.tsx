@@ -16,6 +16,7 @@ import { OntologyGraphEditor } from "@/components/OntologyGraphEditor";
 import { OntologyExplorerCanvas } from "@/components/OntologyExplorerCanvas";
 import { AuditDashboard } from "@/components/AuditDashboard";
 import { IntegrationTestRunner } from "@/components/IntegrationTestRunner";
+import { MetadataWorkspace } from "@/components/MetadataWorkspace";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ThemeContextProvider } from "@/context/ThemeContext";
 import { UserContextProvider } from "@/context/UserContext";
@@ -36,6 +37,7 @@ const VIEW_TITLES: Record<ViewKey, string> = {
   "ontology-instance":  "인스턴스 편집",
   "ontology-graph-edit":"관계 그래프 편집",
   "ontology-graph":     "온톨로지 그래프",
+  "metadata":           "메타데이터",
 };
 
 function AppContent() {
@@ -83,6 +85,7 @@ function AppContent() {
           {view === "ontology-schema"    && <OntologySchemaManager />}
           {view === "ontology-instance"  && <OntologyInstanceEditor />}
           {view === "ontology-graph-edit"&& <OntologyGraphEditor />}
+          {view === "metadata"           && <MetadataWorkspace />}
           {view === "ontology-graph"     && <OntologyExplorerCanvas />}
           {view === "audit"              && <AuditDashboard />}
           {view === "integration-test"  && <IntegrationTestRunner />}

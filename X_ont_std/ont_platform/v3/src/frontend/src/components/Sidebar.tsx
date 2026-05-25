@@ -15,7 +15,8 @@ export type ViewKey =
   | "integration-test"
   | "ontology-schema"
   | "ontology-instance"
-  | "ontology-graph-edit";
+  | "ontology-graph-edit"
+  | "metadata";
 
 type SidebarGroup = {
   title: string;
@@ -40,6 +41,7 @@ const GROUPS: SidebarGroup[] = [
       { key: "ontology-schema",     label: "스키마 정의",      description: "엔티티·관계 유형 관리" },
       { key: "ontology-instance",   label: "인스턴스 편집",    description: "엔티티 수정·추가" },
       { key: "ontology-graph-edit", label: "관계 그래프 편집", description: "React Flow 노드·엣지 편집" },
+      { key: "metadata",            label: "메타데이터",       description: "계보·품질·감사 추적" },
       { key: "ontology-graph",      label: "온톨로지 그래프",  description: "객체-관계 시각화" },
     ],
   },
