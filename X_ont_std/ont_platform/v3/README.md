@@ -1,6 +1,18 @@
 # ont_platform v3.0
 
-상태: ✅ 개발 완료 (2026-05-14)
+**상태**: ✅ Phase 3 완료 (2026-05-25) | 🚀 Phase 4 준비 중
+
+---
+
+## 📚 문서 네비게이션
+
+모든 프로젝트 문서는 **`docs/` 디렉토리**에서 일괄 관리됩니다.
+
+**시작하기**:
+- 🆕 **신규 개발자**: [docs/_INDEX.md](docs/_INDEX.md) 읽기
+- 📖 **프로젝트 개요**: [ROADMAP.md](ROADMAP.md)
+- 🏗️ **시스템 아키텍처**: [docs/guides/ARCHITECTURE.md](docs/guides/ARCHITECTURE.md)
+- 📋 **Phase 4 지시서**: [docs/phases/phase4/AGENT_INSTRUCTIONS.md](docs/phases/phase4/AGENT_INSTRUCTIONS.md)
 
 ---
 
