@@ -1,0 +1,78 @@
+{
+  "entity_types": [
+    {
+      "name": "PERSON",
+      "description": "인물, 직책, 역할"
+    },
+    {
+      "name": "ORGANIZATION",
+      "description": "회사, 기관"
+    },
+    {
+      "name": "PRODUCT",
+      "description": "제품, 서비스"
+    },
+    {
+      "name": "METRIC",
+      "description": "수치, 지표",
+      "properties": [
+        "value",
+        "unit",
+        "period"
+      ]
+    },
+    {
+      "name": "CONCEPT",
+      "description": "개념, 방법론"
+    },
+    {
+      "name": "CATEGORY",
+      "description": "분류, 그룹"
+    },
+    {
+      "name": "EVENT",
+      "description": "사건, 일정",
+      "properties": [
+        "date"
+      ]
+    },
+    {
+      "name": "LOCATION",
+      "description": "지역, 리전"
+    },
+    {
+      "name": "Order",
+      "description": "주문 객체",
+      "properties": [
+        "status",
+        "amount",
+        "customer_id"
+      ]
+    },
+    {
+      "name": "Customer",
+      "description": "고객 객체",
+      "properties": [
+        "risk_tier",
+        "region"
+      ]
+    },
+    {
+      "name": "Product",
+      "description": "제품 객체 (Order 도메인)",
+      "properties": [
+        "price",
+        "category"
+      ]
+    },
+    {
+      "name": "CONTRACT",
+      "description": "계약서",
+      "properties": [
+        "start_date",
+        "end_date",
+        "content"
+      ]
+    }
+  ]
+}
