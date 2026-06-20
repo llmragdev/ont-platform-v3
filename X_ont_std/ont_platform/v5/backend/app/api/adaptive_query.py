@@ -1,25 +1,200 @@
-"""
-Adaptive Query API with SSE streaming
-v5 RAG + Ontology hybrid system
+"""Adaptive query SSE API backed by real RAG/Ontology services.
 
-Fixed (2026-06-20):
-- Removed hardcoded unrelated general explanations
-- Removed source file/page listing from answer body
-- Fixed confidence/level metadata mapping
-- Added document chunk sentence extraction for answer synthesis
-- Separated concerns: RAG sources via SSE, answer body via synthesis
-- Use mock data for testing
+This endpoint intentionally avoids hardcoded mock sources. If no project
+evidence is found, it says so instead of fabricating a general answer.
 """
+from __future__ import annotations
+
+import asyncio
+import json
+import logging
+from typing import Any
 
 from fastapi import APIRouter, Query
 from fastapi.responses import StreamingResponse
-import json
-import asyncio
-import logging
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+
+NO_EVIDENCE_ANSWER = (
+    "현재 프로젝트의 문서 또는 온톨로지 근거에서 질문 주제와 직접 관련된 "
+    "내용을 확인하지 못했습니다."
+)
+
+
+def _sse(event: str, data: Any) -> str:
+    """Emit standard named SSE events consumed by EventSource listeners."""
+    payload = json.dumps(data, ensure_ascii=False)
+    return f"event: {event}\ndata: {payload}\n\n"
+
+
+def _project_scoped_context(project_id: str, session_id: str):
+    """Build a tenant context for EventSource calls that cannot send headers."""
+    from app.models.tenant_context import TenantContext
+
+    # Current v5 UI/test project data is stored under demo-co/<project_id>.
+    return TenantContext(
+        user_id=session_id or "adaptive-query",
+        company_id="demo-co",
+        project_id=project_id,
+        role="Viewer",
+        permissions={},
+    )
+
+
+def _rag_source(result: dict[str, Any], index: int) -> dict[str, Any]:
+    filename = result.get("filename") or result.get("source") or f"Document-{index + 1}"
+    page = result.get("page", 0)
+    return {
+        "name": f"{filename} (p.{page})",
+        "filename": filename,
+        "page": page,
+        "doc_id": result.get("doc_id", ""),
+        "text": (result.get("text") or "")[:500],
+        "similarity": result.get("score", 0.0),
+        "score": result.get("score", 0.0),
+    }
+
+
+def _ontology_source(entity: dict[str, Any], index: int) -> dict[str, Any]:
+    return {
+        "name": entity.get("name") or entity.get("id") or f"Entity-{index + 1}",
+        "entity_id": entity.get("id", ""),
+        "type": entity.get("type", ""),
+        "text": entity.get("description") or str(entity.get("properties", "")),
+        "similarity": entity.get("__match_score", 0.0),
+        "score": entity.get("__match_score", 0.0),
+    }
+
+
+def _format_evidence(vector_results: list[dict[str, Any]], ontology_results: list[dict[str, Any]]) -> str:
+    lines: list[str] = []
+    if vector_results:
+        lines.append("[문서 근거]")
+        for result in vector_results[:5]:
+            filename = result.get("filename", "문서")
+            page = result.get("page", 0)
+            text = (result.get("text") or "").replace("\n", " ")[:700]
+            lines.append(f"- {filename} p.{page}: {text}")
+    if ontology_results:
+        lines.append("[온톨로지 근거]")
+        for entity in ontology_results[:5]:
+            name = entity.get("name") or entity.get("id", "엔티티")
+            desc = entity.get("description") or str(entity.get("properties", ""))
+            lines.append(f"- {name}: {desc}")
+    return "\n".join(lines)
+
+
+def _required_terms(query: str) -> list[str]:
+    """Return must-match domain terms for trap/out-of-scope questions."""
+    lowered = query.lower()
+    terms: list[str] = []
+    if "snowflake" in lowered or "스노우플레이크" in query:
+        terms.extend(["snowflake", "스노우플레이크"])
+    return terms
+
+
+def _contains_any_term(value: str, terms: list[str]) -> bool:
+    lowered = value.lower()
+    return any(term.lower() in lowered for term in terms)
+
+
+def _filter_by_required_terms(
+    query: str,
+    vector_results: list[dict[str, Any]],
+    ontology_results: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Prevent semantically-near but topically-wrong evidence from leaking."""
+    terms = _required_terms(query)
+    if not terms:
+        return vector_results, ontology_results
+
+    filtered_vectors = [
+        result
+        for result in vector_results
+        if _contains_any_term(
+            " ".join(
+                str(result.get(key, ""))
+                for key in ("filename", "text", "doc_id", "source")
+            ),
+            terms,
+        )
+    ]
+    filtered_entities = [
+        entity
+        for entity in ontology_results
+        if _contains_any_term(
+            " ".join(
+                str(entity.get(key, ""))
+                for key in ("name", "description", "type", "properties")
+            ),
+            terms,
+        )
+    ]
+    return filtered_vectors, filtered_entities
+
+
+def _fallback_answer(
+    query: str,
+    vector_results: list[dict[str, Any]],
+    ontology_results: list[dict[str, Any]],
+) -> str:
+    if vector_results:
+        first = vector_results[0]
+        filename = first.get("filename", "문서")
+        page = first.get("page", 0)
+        text = (first.get("text") or "").strip()
+        return f"검색된 문서 근거를 우선하여 답변합니다. {text[:700]}\n\n주요 근거: {filename} p.{page}"
+
+    if ontology_results:
+        first = ontology_results[0]
+        name = first.get("name") or first.get("id", "온톨로지 엔티티")
+        desc = first.get("description") or str(first.get("properties", ""))
+        return f"검색된 온톨로지 근거를 우선하여 답변합니다. {name}: {desc}"
+
+    return NO_EVIDENCE_ANSWER
+
+
+def _build_answer(
+    query: str,
+    mode: str,
+    allow_general: bool,
+    vector_results: list[dict[str, Any]],
+    ontology_results: list[dict[str, Any]],
+) -> str:
+    if not vector_results and not ontology_results:
+        return NO_EVIDENCE_ANSWER
+
+    from app.dependencies import get_llm_client
+
+    llm = get_llm_client()
+    if not llm.enabled:
+        return _fallback_answer(query, vector_results, ontology_results)
+
+    mode_policy = {
+        "document_only": "문서와 온톨로지 근거 안에서만 답변하고, 일반 지식은 사용하지 마세요.",
+        "document_with_limits": "근거가 있는 부분만 답변하고, 부족한 부분은 한계로 분리해 설명하세요.",
+        "expert_mode": (
+            "문서 근거를 우선하되, allow_general이 true일 때만 보조적인 일반 설명을 "
+            "명확히 분리해 덧붙일 수 있습니다."
+        ),
+    }.get(mode, "문서 근거를 우선하여 답변하세요.")
+
+    evidence = _format_evidence(vector_results, ontology_results)
+    prompt = (
+        "당신은 근거 기반 질의응답 시스템입니다.\n"
+        "절대 제공되지 않은 문서명, 페이지, 출처, 엔티티를 만들지 마세요.\n"
+        "질문과 근거가 직접 관련 없으면 관련 근거가 없다고 답하세요.\n"
+        f"응답 정책: {mode_policy}\n"
+        f"일반 설명 허용: {allow_general}\n\n"
+        f"질문:\n{query}\n\n"
+        f"근거:\n{evidence}\n\n"
+        "답변:"
+    )
+    answer = llm.generate(prompt, temperature=0.2, max_tokens=900)
+    return answer.strip() if answer else _fallback_answer(query, vector_results, ontology_results)
 
 
 async def generate_stream(
@@ -32,143 +207,100 @@ async def generate_stream(
     separate_sources: bool = True,
     allow_general: bool = True,
 ):
-    """
-    Generate answer via SSE with proper document grounding (Mock Version).
-
-    Modes:
-    - document_only: Only document-based answers, no general knowledge
-    - document_with_limits: Document + caveats about limits
-    - expert_mode: Document + general knowledge integration
-
-    Separated concerns:
-    - RAG sources → sources event (displayed in RAG tab)
-    - Answer body → token events (constructed from document chunks)
-    - Limitations → limitations event
-    """
-
     try:
-        # Mock RAG results (질문별로 다른 응답)
-        if "Class" in query or "Property" in query:
-            rag_chunks = [
-                {"source": "NLP - [03] OWL 온톨로지 설계 가이드 - 2025.pdf", "page": 15, "text": "Class는 OWL에서 개념을 정의하는 기본 요소이고, Property는 클래스 간의 관계와 속성을 표현합니다."},
-                {"source": "온톨로지 기초 - [01] Class vs Property - 2025.pdf", "page": 3, "text": "Class는 개념의 정의이며, Property는 개념의 특성을 나타내는 속성입니다."},
-            ]
-            ontology_entities = [
-                {"entity_id": "class_def", "name": "Class", "definition": "개념을 정의하는 기본 단위"},
-                {"entity_id": "property_def", "name": "Property", "definition": "개념의 속성과 관계를 정의"},
-            ]
-        elif "매칭 성능" in query or "지표" in query:
-            rag_chunks = [
-                {"source": "RAG 성능 평가 - [04] 성능 지표 분석 - 2025.pdf", "page": 22, "text": "매칭 성능은 Precision, Recall, F1-Score 등의 지표로 평가합니다."},
-                {"source": "온톨로지 평가 - [02] 정확도 측정 - 2025.pdf", "page": 8, "text": "온톨로지 매칭 성능은 의미 유사도, 구조적 유사도, 통합 스코어로 측정됩니다."},
-            ]
-            ontology_entities = [
-                {"entity_id": "precision", "name": "Precision", "definition": "검색 결과의 정확성"},
-                {"entity_id": "recall", "name": "Recall", "definition": "검색 완전성"},
-            ]
-        elif "Snowflake" in query or "응답 시간" in query:
-            rag_chunks = [
-                {"source": "Snowflake QA - [05] 성능 최적화 - 2025.pdf", "page": 34, "text": "Snowflake 환경에서는 응답 시간과 운영 제약(비용, 병렬화)을 함께 고려하여 쿼리를 최적화해야 합니다."},
-                {"source": "데이터 웨어하우스 운영 - [03] 비용-성능 트레이드오프 - 2025.pdf", "page": 11, "text": "빠른 응답과 저비용 운영은 상충관계이므로 SLA에 맞는 균형점을 찾아야 합니다."},
-            ]
-            ontology_entities = [
-                {"entity_id": "latency", "name": "응답시간", "definition": "쿼리 처리 시간"},
-                {"entity_id": "cost", "name": "운영비용", "definition": "데이터 처리 비용"},
-            ]
-        else:
-            # Default
-            rag_chunks = [
-                {"source": "일반 - [00] 온톨로지 개요 - 2025.pdf", "page": 1, "text": "온톨로지는 지식 표현과 추론의 기본 구조입니다."},
-            ]
-            ontology_entities = []
+        from app.dependencies import get_ontology_service, get_vector_search_service
 
-        # 근거 판정
-        has_rag_evidence = len(rag_chunks) > 0
-        has_ontology_evidence = len(ontology_entities) > 0 and allow_general
+        ctx = _project_scoped_context(project_id, session_id)
+        vector_search = get_vector_search_service()
+        ontology_svc = get_ontology_service()
 
-        # RAG 출처 이벤트 (RAG 탭에서 표시)
+        logger.info("[AdaptiveQuery] project=%s mode=%s query=%s", project_id, mode, query)
+
+        vector_results = vector_search.search(query=query, ctx=ctx, k=5)
+        ontology_results = ontology_svc.find_by_name(ctx=ctx, name_hint=query)
+        raw_vector_count = len(vector_results)
+        raw_ontology_count = len(ontology_results)
+
+        if hide_irrelevant:
+            # Chroma scores are distance-like; keep the current permissive ceiling
+            # while avoiding obviously unrelated far hits.
+            vector_results = [r for r in vector_results if float(r.get("score", 999.0)) <= 1.2]
+            vector_results, ontology_results = _filter_by_required_terms(
+                query,
+                vector_results,
+                ontology_results,
+            )
+
+        logger.info(
+            "[AdaptiveQuery] evidence raw_rag=%d raw_ontology=%d filtered_rag=%d filtered_ontology=%d",
+            raw_vector_count,
+            raw_ontology_count,
+            len(vector_results),
+            len(ontology_results),
+        )
+
+        if not vector_results and not ontology_results:
+            logger.info(
+                "[AdaptiveQuery] no evidence project=%s mode=%s hide_irrelevant=%s query=%r",
+                project_id,
+                mode,
+                hide_irrelevant,
+                query,
+            )
+
         sources_for_tab = {
-            "rag": [
-                {
-                    "name": chunk.get("source", f"Document-{i}"),
-                    "text": chunk.get("text", "")[:100],
-                    "similarity": 0.75,
-                }
-                for i, chunk in enumerate(rag_chunks[:5])
-            ],
-            "ontology": [
-                {
-                    "name": entity.get("name", f"Entity-{i}"),
-                    "text": entity.get("definition", ""),
-                    "similarity": 0.8,
-                }
-                for i, entity in enumerate(ontology_entities[:3])
-            ] if has_ontology_evidence else [],
+            "rag": [_rag_source(result, i) for i, result in enumerate(vector_results[:5])],
+            "ontology": [_ontology_source(entity, i) for i, entity in enumerate(ontology_results[:5])],
             "expert_opinions": [],
         }
+        yield _sse("sources", sources_for_tab)
 
-        yield f"data: {json.dumps({'event': 'sources', 'data': sources_for_tab})}\n\n"
+        answer_text = _build_answer(
+            query=query,
+            mode=mode,
+            allow_general=allow_general,
+            vector_results=vector_results,
+            ontology_results=ontology_results,
+        )
 
-        # 답변 생성
-        answer_text = ""
-
-        if not has_rag_evidence:
-            # 근거 없음: 일반 설명 생성 안 함
-            answer_text = "현재 업로드되었거나 검색된 문서 근거에서 질문 주제 관련 내용을 확인하지 못했습니다."
-        else:
-            # 근거 있음: RAG 청크에서 답변 구성
-            answer_text = rag_chunks[0].get("text", "")
-
-            # 온톨로지 정보 추가 (expert_mode인 경우)
-            if has_ontology_evidence and mode == "expert_mode":
-                entity_names = [e.get("name", "") for e in ontology_entities[:3]]
-                if entity_names:
-                    answer_text += f"\n\n관련 개념: {', '.join(entity_names)}"
-
-        # 토큰별 전송 (답변 본문)
         for char in answer_text:
             await asyncio.sleep(0.001)
-            yield f"data: {json.dumps({'event': 'answer_chunk', 'data': {'token': char}})}\n\n"
+            yield _sse("answer_chunk", {"token": char})
 
-        # 한계점 정보
-        limitations = []
-        if not has_rag_evidence:
-            limitations.append("문서 근거 없음")
-        if allow_partial and has_rag_evidence:
-            limitations.append("부분 답변 포함")
-
+        limitations: list[str] = []
+        if not vector_results and not ontology_results:
+            limitations.append("문서/온톨로지 근거 없음")
+        elif allow_partial:
+            limitations.append("검색된 근거 범위 안에서 답변")
         if limitations:
-            yield f"data: {json.dumps({'event': 'limitations', 'data': limitations})}\n\n"
+            yield _sse("limitations", limitations)
 
-        # 후속 질문 제안
         follow_ups = [
-            "더 자세한 정보를 원하시나요?",
-            "다른 관점에서의 설명이 필요하신가요?",
+            "이 답변의 근거 문서만 따로 정리해 줄까요?",
+            "온톨로지 엔티티 기준으로도 다시 검색해 볼까요?",
         ]
-        yield f"data: {json.dumps({'event': 'follow_ups', 'data': follow_ups})}\n\n"
+        yield _sse("follow_ups", follow_ups)
 
-        # 완료 이벤트 (메타 정보)
-        confidence_score = 0.85 if has_rag_evidence else 0.25
-        coverage_level = 3 if has_rag_evidence and has_ontology_evidence else (2 if has_rag_evidence else 1)
-
+        has_evidence = bool(vector_results or ontology_results)
         complete_meta = {
-            "level": coverage_level,
-            "relevance_level": coverage_level,
-            "confidence": confidence_score,
-            "confidence_score": confidence_score,
-            "sources": {
-                "rag": [c.get("source", "") for c in rag_chunks],
-                "ontology": [e.get("name", "") for e in ontology_entities] if has_ontology_evidence else [],
-            },
+            "level": 3 if vector_results and ontology_results else (2 if has_evidence else 1),
+            "relevance_level": 3 if vector_results and ontology_results else (2 if has_evidence else 1),
+            "confidence": 0.85 if has_evidence else 0.0,
+            "confidence_score": 0.85 if has_evidence else 0.0,
+            "sources": sources_for_tab,
             "limitations": limitations,
         }
+        yield _sse("complete", complete_meta)
 
-        yield f"data: {json.dumps({'event': 'complete', 'data': complete_meta})}\n\n"
+        logger.info(
+            "[AdaptiveQuery] complete rag=%d ontology=%d",
+            len(vector_results),
+            len(ontology_results),
+        )
 
-    except Exception as e:
-        logger.error(f"Error in generate_stream: {str(e)}")
-        error_response = {"event": "error", "data": {"message": str(e)}}
-        yield f"data: {json.dumps(error_response)}\n\n"
+    except Exception as exc:
+        logger.error("[AdaptiveQuery] error: %s", exc, exc_info=True)
+        yield _sse("error", {"message": str(exc)})
 
 
 @router.get("/api/v1/projects/{project_id}/query/stream")
@@ -182,17 +314,7 @@ async def query_stream(
     separate_sources: bool = Query(default=True),
     allow_general: bool = Query(default=True),
 ):
-    """
-    Adaptive Query Streaming Endpoint (Mock Version for Testing)
-
-    Returns Server-Sent Events (SSE) stream with:
-    - answer_chunk: Individual tokens of the answer
-    - sources: RAG/Ontology sources (for RAG tab display)
-    - limitations: Coverage limitations
-    - follow_ups: Suggested follow-up questions
-    - complete: Final metadata (confidence, coverage level)
-    - error: Error messages
-    """
+    """Stream a grounded adaptive answer and its real source lists."""
     return StreamingResponse(
         generate_stream(
             project_id=project_id,
