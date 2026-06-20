@@ -30,9 +30,9 @@ export function OntologyMappingPanel({ selectedNode }: { selectedNode?: RDFGraph
     api.rdf.mappingCandidates(externalUri, externalLabel)
       .then((response) => {
         if (!mounted) return;
-        const next = response.candidates.length ? response.candidates : mockMappingCandidates;
-        setCandidates(next);
-        setSelectedCandidate(next[0] ?? null);
+        const candidates = Array.isArray(response?.candidates) ? response.candidates : mockMappingCandidates;
+        setCandidates(candidates);
+        setSelectedCandidate(candidates[0] ?? null);
       })
       .catch(() => {
         if (!mounted) return;

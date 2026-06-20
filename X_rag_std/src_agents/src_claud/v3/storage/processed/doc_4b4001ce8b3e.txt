@@ -1,0 +1,817 @@
+컴퓨터교육학회 논문지 (25권 1호) 51 1. 서론 최근 인공지능 기술의 발달로 인하여 다양한 서비스 도메인에서 이를 활용한 지식 기반의 서비스가 이루어지고 있다[1-4]. 이러한 대부분의 지식 기반 서비스는 사용자의 음성이나 텍스트 및 이용 패턴 등을 인지하여 사용자의 의도를 파악하고 이에 맞는 서비스를 제 공한다. 일반적으로 지식 기반 서비스들은 지식 관리자가 지식 베이스(knowledge base)라 불리는 지식 저장소(knowledge storage)에 서비스를 제공하는 도메인 지식(domain knowledge)을 수동으로 추가하거나 또는 지식을 기반으로 스스로 학습을 통하여 지식이 증가되는 형태로 도메인 지식을 추가한다[5-7]. 이러한 대부분의 지식 기반 서비스는 독립적인 서비스 도메인(service 컴퓨터교육학회 논문지 2022년 제 25 권 제 1 호https://doi.org/10.32431/kace.2022.25.1.005온톨로지 학습 기반 지식 그래프 구축*Developing a Knowledge Graph based on Ontology Learning류민우†⋅차시호††Minwoo Ryu† ž Si-Ho Cha†† 요 약최근 인공지능 기술이 발전하면서 다양한 서비스 영역에서 인공지능 기술을 활용한 지식 서비스가 이뤄지고 있다
+
+yu† ž Si-Ho Cha†† 요 약최근 인공지능 기술이 발전하면서 다양한 서비스 영역에서 인공지능 기술을 활용한 지식 서비스가 이뤄지고 있다. 그러나 대부분의 지식 서비스가 독립적인 서비스 도메인을 구축하기 때문에 서비스 간 지식 공유나 활용은 매우 어려운 실정이다. 또한, 지식 영역은 개별적으로 구축되기 때문에 많은 비용과 시간이 요구되는 문제점이 있다. 이를 해결하기 위해 최근 지식 그래프(knowledge graph)라는 기술에 대한 연구가 활발히 진행되고 있다. 그러나 다양한 도메인에 대한 지식 그래프를 구축하기 위해서는 지식의 상충되는 의미와 지식의 중복 저장 문제를 해결해야 한다. 이를 위해 본 논문에서는 온톨로지 학습(ontology learning)을 기반으로 하는 지식 그래프 구축 방법을 제안한다. 제안된 방법은 지식 입력 시 형태학적 분석을 통해서 지식 문장별로 문장 성분을 분석하고, 지식 데이터를 각 문장 구성요소에 맞게 재처리함으로써 기존의 지식 중복 문제와 지식 의미 충돌 문제를 해결하였다
+
+문장별로 문장 성분을 분석하고, 지식 데이터를 각 문장 구성요소에 맞게 재처리함으로써 기존의 지식 중복 문제와 지식 의미 충돌 문제를 해결하였다.주제어: 지식 그래프, 시맨틱 데이터, 온톨로지, 자기 학습, 지식 시스템ABSTRACTWith the recent development of artificial intelligence technology, knowledge services using artificial intelligence technol-ogy are being made in various service areas. However, since most knowledge services are established in independent service domains so that it is very difficult to share or utilize knowledge between services. In addition, since the knowledge area is built individually, there is a problem that requires a lot of cost and time. To solve this problem, research on a technology called knowledge graph has been actively conducted recently
+
+arch on a technology called knowledge graph has been actively conducted recently. However, to build a knowledge graph for vari-ous domains, the problems of conflicting meanings of knowledge and overlapping storage of knowledge must be solved. To this end, this paper proposes a method of constructing a knowledge graph based on ontology learning. The proposed method solved the existing knowledge redundancy problem and knowledge meaning conflict problem by analyzing sen-tence components for each sentence through morphological analysis, when inputting knowledge, and reprocessing knowl-edge data according to each sentence component
+
+knowledge, and reprocessing knowl-edge data according to each sentence component.Keywords: Knowledge Graph, Semantic Data, Ontology, Self-Learning, Knowledge System †정 회 원: 현대자동차 자동차부분 연구개발본부 책임연구원††정 회 원: 청운대학교 멀티미디어학과 교수(교신저자)논문투고: 2021년 11월 27일, 심사완료: 2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+7일, 심사완료: 2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+일, 심사완료: 2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+, 심사완료: 2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+심사완료: 2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+심사완료: 2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+사완료: 2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+완료: 2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+료: 2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+: 2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+2021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+021년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+21년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+1년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+년 12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+12월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+2월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+월 26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+26일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+6일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+일, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+, 게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+게재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+재확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+확정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+정: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+: 2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+2021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+021년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+21년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+1년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+년 12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+12월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+2월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+월 31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+31일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+1일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+일* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+* 본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+본 논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+논문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+문은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+은 2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+2021학년도 청운대학교 학술연구조성비 지원에 의해
+
+021학년도 청운대학교 학술연구조성비 지원에 의해
+
+21학년도 청운대학교 학술연구조성비 지원에 의해
+
+1학년도 청운대학교 학술연구조성비 지원에 의해
+
+학년도 청운대학교 학술연구조성비 지원에 의해
+
+년도 청운대학교 학술연구조성비 지원에 의해
+
+도 청운대학교 학술연구조성비 지원에 의해
+
+청운대학교 학술연구조성비 지원에 의해
+
+청운대학교 학술연구조성비 지원에 의해
+
+운대학교 학술연구조성비 지원에 의해
+
+대학교 학술연구조성비 지원에 의해
+
+학교 학술연구조성비 지원에 의해
+
+교 학술연구조성비 지원에 의해
+
+학술연구조성비 지원에 의해
+
+학술연구조성비 지원에 의해
+
+술연구조성비 지원에 의해
+
+연구조성비 지원에 의해
+
+구조성비 지원에 의해
+
+조성비 지원에 의해
+
+성비 지원에 의해
+
+비 지원에 의해
+
+지원에 의해
+
+지원에 의해
+
+원에 의해
+
+에 의해
+
+의해
+
+의해
+
+해
+
+수행되었음.
+
+-컴퓨터교육학회 논문지 제 25 권 제 1 호- 52 2022. 1 domain)을 구축하므로 해당 도메인에만 맞춰진 도메인 지식을 제공한다. 이로 인해 다중 도메인을 요구하는 서비스나 복합적인 상황 판단이 필요한 경우에는 사용자의 의도를 파악하지 못하는 문제가 발생하게 되며, 이러한 상황에서 지식 증가를 위해서는 비용과 시간이 너무 많이 요구되는 문제점이 발생한다. 최근에 이러한 문제를 해결하기 위하여 지식 그래프(knowledge graph)라고 불리는 다중 도메인 기반의 지식 저장소에 대한 연구가 활발히 진행되고 있다[8-10]. 지식 그래프는 시맨틱(semantic) 기술을 이용하여 다양한 지식 베이스 내에 저장되어있는 지식의 의미적 그래프를 표현하는 기술이다. 즉, 지식 그래프는 지식과 지식 간의 연결을 통하여 새로운 지식을 제공하거나 복합적 상황인지에 대한 지식 기반의 판단을 제공할 수 있다[11, 12].일반적인 지식 그래프를 구축 방법은 시맨틱 기술을 이용하여 개별 지식 베이스에 있는 지식의 관계 정보를 저장하는 것이다. 그러나 지식이 가지는 다양한 의미 때문에 중복된 지식의 저장 문제와 지식 간 의미 충돌이 발생할 수 있다. 이로 인해 발생하는 지식에 대한 해석 오류 문제를 해결해야 한다
+
+의미 때문에 중복된 지식의 저장 문제와 지식 간 의미 충돌이 발생할 수 있다. 이로 인해 발생하는 지식에 대한 해석 오류 문제를 해결해야 한다. 따라서 본 논문에서는 지식 그래프 구축 시 지식이 가지는 다양한 의미로 인한 중복 저장 문제 및 지식의 의미 충돌 문제를 해결하기 위하여 온톨로지 학습(ontology learning) 기반의 지식 그래프 구축 방법을 제안한다. 본 논문에서 제안된 온톨로지 학습 기반 지식 그래프를 구축하기 위해 Top-Level 온톨로지 모델을 정의하고, 지식 수집 시 형태소 분석기를 이용하여 문장의 구성 성분을 분석하고, 해당 데이터를 온톨로지 모델에 적용함으로써 지식을 구축하였다. 이를 통하여 지식 연결 시 지식이 갖는 다양한 의미로 인한 의미 충돌을 방지하고 지식과 지식 간의 새로운 연결을 가능하게 하였다.본 논문의 구성은 다음과 같다. 2장에서는 본 논문에서 제안하는 온톨로지 학습 기반의 지식 그래프 구축을 위한 Top-level 온톨로지를 정의한다. 3장에서는 온톨로지 학습 기반의 지식 그래프 구축 방법에 대하여 기술하고, 4장에서는 이의 구현에 대하여 기술한다. 5장에서는 본 논문의 결론 및 향후 과제에 대하여 기술한다.2
+
+식 그래프 구축 방법에 대하여 기술하고, 4장에서는 이의 구현에 대하여 기술한다. 5장에서는 본 논문의 결론 및 향후 과제에 대하여 기술한다.2. 지식 그래프 구축을 위한 온톨로지 정의본 절에서는 온톨로지 학습 기반의 지식 그래프 구축을 위하여 Top-level 온톨로지와 지식 구성 요소들의 의미를 식별하기 위한 한글 문장 구성 기반의 SKOS(Simple Knowledge Organization System)[13]를 정의한다. SKOS는 정보 관리를 위한 표현 체계의 네임스페이스로 단순 지식 조식 체계[14]를 의미한다.본 논문에서 제안하는 온톨로지 학습 기반의 지식 그래프를 위한 Top-level 온톨로지는 Figure 1과 같이 구성된다. Figure 1. Top-level ontology 온톨로지 학습 기반 지식 그래프를 위한 Top-level 온톨로지는 크게 Domain, Knowledge, Sentence, Grounding, Description 모델로 구성된다. 여기에서 presents는 Domain 모델을 표현하기 위한 Description 모델과의 시맨틱 연결을 정의한다. Figure 1에서 hasKnowledge는 Domain 모델이 가지는 Knowledge 모델에 속하는 인스턴스들과의 시맨틱 연결을 정의한다
+
+. Figure 1에서 hasKnowledge는 Domain 모델이 가지는 Knowledge 모델에 속하는 인스턴스들과의 시맨틱 연결을 정의한다. express는 Knowledge 모델에서 정의된 인스턴스들과 Sentence 모델에서 정의된 인스턴스들과의 시맨틱 연결을 정의한다. useGrounding은 Knowledge 모델과 Grounding 모델의 각각의 인스턴스들과의 시맨틱 연결을 정의한다.Domain 모델은 지식이 속해있는 서비스 도메인을 나타낸다. 따라서 Domain 모델은 다양한 지식들로 이루어져 있고, 이러한 지식들은 Knowledge 모델에 표현된다. 각 지식들이 속해 있는 위치와 그 지식들을 수집하기 위한 방법은 Grounding 모델에 표현된다. Sentence 모델은 Knowledge 모델에 표현된 지식을 이루는 지식 문장들을 표현하며, 형태소 분석기를 통하여 분석된 각 문장 성분을 지식 데이터로 구성하기 위한 온톨로지 모델을 정의한다. Description 모델은 각 도메인의 설명을 표현한 클래스이다. Domain 모델 온톨로지의 구성은 Figure 2와 같다. Domain 모델은 도메인을 나타내는 Domain 클래스와 Domain이 가지는 서비스들을 표현하기 위한 Service 클래스로 구성된다
+
+같다. Domain 모델은 도메인을 나타내는 Domain 클래스와 Domain이 가지는 서비스들을 표현하기 위한 Service 클래스로 구성된다. 또한, 각각의 Domain 클래스는 해당 도매인을 설명하기 위한 온톨로지 모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+위한 온톨로지 모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+위한 온톨로지 모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+한 온톨로지 모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+온톨로지 모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+온톨로지 모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+톨로지 모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+로지 모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+지 모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+모델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+델인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+인 Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+Description 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+escription 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+scription 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+cription 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+ription 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+iption 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+ption 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+tion 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+ion 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+on 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+n 모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+모델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+델과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+과 해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+해당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+당 도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+도매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+매인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+인에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+에 속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+속하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+하는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+는 지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+지식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+식들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+들을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+을 표현하기 위한 Knowledge 모델과 객체 속성(object
+
+표현하기 위한 Knowledge 모델과 객체 속성(object
+
+표현하기 위한 Knowledge 모델과 객체 속성(object
+
+현하기 위한 Knowledge 모델과 객체 속성(object
+
+하기 위한 Knowledge 모델과 객체 속성(object
+
+기 위한 Knowledge 모델과 객체 속성(object
+
+위한 Knowledge 모델과 객체 속성(object
+
+위한 Knowledge 모델과 객체 속성(object
+
+한 Knowledge 모델과 객체 속성(object
+
+Knowledge 모델과 객체 속성(object
+
+Knowledge 모델과 객체 속성(object
+
+nowledge 모델과 객체 속성(object
+
+owledge 모델과 객체 속성(object
+
+wledge 모델과 객체 속성(object
+
+ledge 모델과 객체 속성(object
+
+edge 모델과 객체 속성(object
+
+dge 모델과 객체 속성(object
+
+ge 모델과 객체 속성(object
+
+e 모델과 객체 속성(object
+
+모델과 객체 속성(object
+
+모델과 객체 속성(object
+
+델과 객체 속성(object
+
+과 객체 속성(object
+
+객체 속성(object
+
+객체 속성(object
+
+체 속성(object
+
+속성(object
+
+속성(object
+
+성(object
+
+(object
+
+object
+
+bject
+
+ject
+
+ect
+
+ct
+
+t
+
+prop-
+
+온톨로지 학습 기반 지식 그래프 구축 컴퓨터교육학회 논문지 (25권 1호) 53 erty)을 이용하여 시맨틱 관계를 갖는다. 여기에서 Grounding 모델은 Domain 클래스와 연결된 다양한 데이터들을 연결하기 위한 표현 방법을 나타내는 클래스로 정의된다. Figure 2. Domain model ontology Figure 3. Knowledge model ontologyKnowledge 모델 온톨로지는 다양한 지식 데이터를 표현하기 위한 온톨로지 모델로 Figure 3과 같이 구성된다. Axiom 클래스는 지식을 판단하기 위한 공리로서 지식 간의 불일치와 같은 잘못된 지식을 판별하기 위한 공리의 집합을 나타낸다. 또한, Knowledge 클래스는 Sentence 모델과 시맨틱적 의미로 연결된다.Sentence 모델 온톨로지는 지식 데이터의 구성을 표현하기 위한 온톨로지 모델로 지식 데이터 수집 시 형태소 분석기를 통하여 구문을 분석하고, 각 문장 성분을 기준으로 지식 데이터 포맷에 맞춰 지식을 정의한다. 이를 위해 Sentence 모델은 Figure 4와 같이 지식 데이터를 표현하기 위한 KnowledgeFormat 클래스와 각 문장 성분을 표현하기 위한 Part 클래스로 구성된다. Figure 4
+
+이 지식 데이터를 표현하기 위한 KnowledgeFormat 클래스와 각 문장 성분을 표현하기 위한 Part 클래스로 구성된다. Figure 4. Sentence model ontologyGrounding 모델 온톨로지는 웹 기반의 지식을 수집하거나 연동할 때 지식의 위치와 지식을 수집하기 위한 방법을 기술한 온톨로지 모델이다. Grounding 모델은 Figure 5에서 보인 것과 같이 지식을 수집하기 위한 프로토콜들을 표현한 Protocol 클래스와 해당 프로토콜을 사용하기 위한 메소드들을 표현한 Method 클래스, 그리고 지식들이 저장되어 있는 저장 정보를 표현하기 위한 Location 클래스로 구성된다. Figure 5. Grounding model ontology3. 온톨로지 학습 기반 지식 그래프 구축 방법본 절에서는 2장에서 정의한 온톨로지 모델을 기반으로 온톨로지 학습 기반 지식 그래프 구축 방법에 대해 기술한다. 제안된 온톨로지 학습 기반 지식 그래프는 지식 데이터 입력 시 형태소 분석을 통하여 지식 데이터의 문장 성분을 분석하고, 각 문장 성분을 기반으로 지식 데이터의 포맷으로 변환한다
+
+래프는 지식 데이터 입력 시 형태소 분석을 통하여 지식 데이터의 문장 성분을 분석하고, 각 문장 성분을 기반으로 지식 데이터의 포맷으로 변환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+터의 포맷으로 변환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+의 포맷으로 변환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+포맷으로 변환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+포맷으로 변환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+맷으로 변환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+으로 변환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+로 변환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+변환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+변환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+환한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+한다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+다. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+. 또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+또한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+한, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+, 지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+지식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+식의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+의 URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+URI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+RI 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+I 입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+입력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+력을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+을 통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+통하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+하여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+여 웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+웹 기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+기반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+반의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+의 지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+지식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+식을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+을 수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+수집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+집하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+하고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+고, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+, 해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+해당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+당 지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+지식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+식의 위치를 기록하여, 다양한 도메인에서의 지식
+
+의 위치를 기록하여, 다양한 도메인에서의 지식
+
+위치를 기록하여, 다양한 도메인에서의 지식
+
+위치를 기록하여, 다양한 도메인에서의 지식
+
+치를 기록하여, 다양한 도메인에서의 지식
+
+를 기록하여, 다양한 도메인에서의 지식
+
+기록하여, 다양한 도메인에서의 지식
+
+기록하여, 다양한 도메인에서의 지식
+
+록하여, 다양한 도메인에서의 지식
+
+하여, 다양한 도메인에서의 지식
+
+여, 다양한 도메인에서의 지식
+
+, 다양한 도메인에서의 지식
+
+다양한 도메인에서의 지식
+
+다양한 도메인에서의 지식
+
+양한 도메인에서의 지식
+
+한 도메인에서의 지식
+
+도메인에서의 지식
+
+도메인에서의 지식
+
+메인에서의 지식
+
+인에서의 지식
+
+에서의 지식
+
+서의 지식
+
+의 지식
+
+지식
+
+지식
+
+식
+
+수
+
+-컴퓨터교육학회 논문지 제 25 권 제 1 호- 54 2022. 1 집 및 연동을 가능하게 한다. 이를 위해 본 논문에서 제안하는 온톨로지 기반 학습 지식 그래프 구축 방법은 Figure 6에서 나타낸 것과 같이 지식 수집 후 지식 문장 성분을 분석하기 위한 형태소 분석기인 Stemming Analyzer와 시맨틱 의미 검색을 위한 Semantic Discoverer, 지식의 중복 확인 및 신규 지식을 생성하기 위한 Knowledge Sentence Maker, 개별 지식들을 온톨로지 모델에 적용하기 위한 Semantic Annotator로 구성된다.온톨로지 기반 학습 지식 그래프 구축 방법에서 지식은 지식 관리자나 개발자를 통하여 외부에 존재하는 지식을 수집하여 입력하거나 자체적으로 생성된 지식을 입력할 수 있다. 이때 수집되는 데이터는 일반적인 평문으로 우리가 이미 잘 알고 있는 네이버, 카카오, 구글 등으로부터 얻은 웹 수집 데이터를 말한다. 이후 수집된 데이터는 Knowledge Sentence Maker로 입력된다. Knowledge Sentence Maker는 웹으로부터 수집된 지식들을 지식 그래프 구축에 맞춰 지식 데이터로 변환하는 과정을 수행하며, 특히 수집된 데이터를 기반으로 각 데이터가 가지는 의미를 분석하기 위하여 Stemming Analyzer를 통해 문장의 성분을 분석한다
+
+행하며, 특히 수집된 데이터를 기반으로 각 데이터가 가지는 의미를 분석하기 위하여 Stemming Analyzer를 통해 문장의 성분을 분석한다. 이를 위하여 먼저 수집된 데이터는 Stemming Analyzer를 통하여 각 형태소가 가지는 형태(예, 명사나 동사 등의 품사)를 추출하고, Semantic Discoverer를 통하여 온톨로지 모델 내에서 Sentence 모델을 기반으로 각 지식의 문장 성분에 따라 지식 데이터 포맷에 맞춰 변환한다. 또한, 지식들의 중복 여부와 지식 생성을 수행한다. 제안된 지식 그래프는 Knowledge 온톨로지 모델 내 Axiom 클래스에 정의된 공리를 기반으로 생성된 지식과 기존 지식의 의미 충돌을 판별할 수 있다. Table 1은 Knowledge Sentence Maker에서 지식 생성 시 지식의 중복 여부를 판단하기 위한 알고리즘을 나타낸 것이다. 1. input "sentence" to Stemming Analyzer 2. if (NN) exist in Results then 3. (NN) compare to all subjects 4. if (NN) == subject then 5. (VV) compare to predicate of the subject 6. if (VV) != subject then 7. create new predicate to subject 8
+
+e of the subject 6. if (VV) != subject then 7. create new predicate to subject 8. else create new knowledge data 9. end if10. end if. Table 1. Algorithm for generating knowledge and determining redundancy Table 1의 2행은 Stemming Analyzer로부터 분석된 명사형 어미(NN)와 온톨로지 모델 내 존재하는 주어(subject)간의 일치 여부를 비교하는 것을 나타낸다. 만약 동일한 주어가 존재한다면, 5행과 같이 분석된 동사형 어미(VV)와 해당 주어와 연결되어 있는 술어(predicate)를 비교하여, 해당 지식의 중복 여부를 체크한다. 만약 추출된 VV와 술어가 동일하지 않으면, 7행과 같이 기존 존재하는 주어에 추출된 VV를 추가적인 술어로 연결한다. 만약 그렇지 않다면 새로운 지식을 8행과 같이 추가한다.4. 온톨로지 학습 기반 지식 그래프 구현온톨로지 학습 기반 지식 그래프는 자바 가상 머신(JVM)에서 동작이 가능하도록 구현하였으며, 온톨로지에 대한 검색 기능과 어노테이션 기능 등을 구현하기 위하여 Apache에서 제공하는 Jena API[15]를 사용하였다. 또한, 다양한 문장의 형태소 분석을 위해서는 카카오에서 개발한 khaii[16]를 이용하였다
+
+에서 제공하는 Jena API[15]를 사용하였다. 또한, 다양한 문장의 형태소 분석을 위해서는 카카오에서 개발한 khaii[16]를 이용하였다. Figure 7과 Figure 8은 각각 Protege[17]를 이용하여 구현한 온톨로지 모델과 khaii를 이용하여 지식 문장의 Stemming Analyzer를 구현한 구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+zer를 구현한 구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+er를 구현한 구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+r를 구현한 구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+를 구현한 구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+구현한 구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+구현한 구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+현한 구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+한 구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+구현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+현 결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+결과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+과를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+를 보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+보인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+인 것이 Figure 6. How to build a knowledge graph based on ontology
+
+것이 Figure 6. How to build a knowledge graph based on ontology
+
+것이 Figure 6. How to build a knowledge graph based on ontology
+
+이 Figure 6. How to build a knowledge graph based on ontology
+
+Figure 6. How to build a knowledge graph based on ontology
+
+Figure 6. How to build a knowledge graph based on ontology
+
+igure 6. How to build a knowledge graph based on ontology
+
+gure 6. How to build a knowledge graph based on ontology
+
+ure 6. How to build a knowledge graph based on ontology
+
+re 6. How to build a knowledge graph based on ontology
+
+e 6. How to build a knowledge graph based on ontology
+
+6. How to build a knowledge graph based on ontology
+
+6. How to build a knowledge graph based on ontology
+
+. How to build a knowledge graph based on ontology
+
+How to build a knowledge graph based on ontology
+
+How to build a knowledge graph based on ontology
+
+ow to build a knowledge graph based on ontology
+
+w to build a knowledge graph based on ontology
+
+to build a knowledge graph based on ontology
+
+to build a knowledge graph based on ontology
+
+o build a knowledge graph based on ontology
+
+build a knowledge graph based on ontology
+
+build a knowledge graph based on ontology
+
+uild a knowledge graph based on ontology
+
+ild a knowledge graph based on ontology
+
+ld a knowledge graph based on ontology
+
+d a knowledge graph based on ontology
+
+a knowledge graph based on ontology
+
+a knowledge graph based on ontology
+
+knowledge graph based on ontology
+
+knowledge graph based on ontology
+
+nowledge graph based on ontology
+
+owledge graph based on ontology
+
+wledge graph based on ontology
+
+ledge graph based on ontology
+
+edge graph based on ontology
+
+dge graph based on ontology
+
+ge graph based on ontology
+
+e graph based on ontology
+
+graph based on ontology
+
+graph based on ontology
+
+raph based on ontology
+
+aph based on ontology
+
+ph based on ontology
+
+h based on ontology
+
+based on ontology
+
+based on ontology
+
+ased on ontology
+
+sed on ontology
+
+ed on ontology
+
+d on ontology
+
+on ontology
+
+on ontology
+
+n ontology
+
+ontology
+
+ontology
+
+ntology
+
+tology
+
+ology
+
+logy
+
+ogy
+
+gy
+
+y
+
+learning
+
+온톨로지 학습 기반 지식 그래프 구축
+컴퓨터교육학회 논문지 (25권 1호) 55
+다. 본 연구에서 구현된 각각의 온톨로지 모델은 객체 속성을 통하여 시맨틱 검색이 가능하게 구현되었다. 또한, khaii를 이용하여 구현된 Stemming Analyzer는 다양한 도매인 지식에 대한 형태소를 분석할 수 있도록 위키피디아의 데이터를 이용하여 사전을 구축하였고, 해당 사전을 khaii와 연동하여 지식 문장의 형태소 분석이 가능하도록 구현하였다. Figure 8에서 보인 것과 같이 수집된 평문 지식은 
+Stemming Analyzer를 통하여 각 문장의 형태소 분석을 수행하고, 각각의 형태소 문장 성분과 단어로 분리된다. 그리고 Figure 7에서 보인 온톨로지 모델 내 Sentence 모델의 인스턴스로 정의되며, 이때 Figure 8에서의 결과는 각 형태소 성분에 따라 Subject, Object, Predicate의 형태로 정의되며, Sentence 모델 내 인스턴스 생성 시 Table 1에서 보인 알고리즘에 따라 해당 인스턴스가 정의된다.
+Figure 7. The result of the ontology model implementation using Protege
+Figure 8. The results of implementation of Stemming Analyzer using khaii
+
+-컴퓨터교육학회 논문지 제 25 권 제 1 호- 56 2022. 1 5. 결론 및 향후 과제본 논문에서는 온톨로지를 활용하여 지식 그래프를 구축하는 방법에 대하여 제안하였다. 제안하는 온톨로지 학습 기반의 지식 그래프 구축 방법은 기존의 다중 도메인으로부터 수집한 지식들을 기반으로 지식 구축 시 지식의 의미적 충돌 문제와 중복 지식의 문제를 해결하였다. 뿐만 아니라, 온톨로지 학습 기반 지식 그래프 구축 방법에서는 평문의 텍스트 형태의 지식 데이터를 형태소 분석기를 이용하여 개별 단어가 가지는 의미와 단어들이 이루는 문장의 구성성분에 대한 분석을 통하여 기존 지식들과의 중복 문제를 해결하였다. 그러나 본 논문에서 제안된 온톨로지 학습 기반 지식 그래프는 다중 도메인으로부터 수집된 지식들의 의미 충돌과 중복 지식의 문제는 해결하였지만 여전히 데이터들을 수동으로 수집하고 입력해야하는 문제점을 가지고 있다. 따라서 향후 과제로는 크롤링을 통하여 다양한 지식들을 자동으로 수집하고, 이를 기반으로 자가 학습을 수행할 수 있는 자가 학습형 지식 그래프 구축 방법에 대한 연구가 필요하다.참고문헌[1]Kisilevsky, B. S., Hains, S. M., Lee, K., Xie, X., Huang, H., Ye, H. H., Wang, Z. (2003). Effects of experience on fetal voice recognition
+
+H., Ye, H. H., Wang, Z. (2003). Effects of experience on fetal voice recognition. Psychological science, 14(3), 220-224.[2] Mann, V. A., Diamond, R., & Carey, S. (1979). Development of voice recognition: Parallels with face recognition. Journal of experimental child psychology, 27(1), 153-165.[3] McGehee, F. (1944). An experimental study of voice recognition. The Journal of General Psychology, 31(1), 53-65.[4] Van Lancker, D., Kreiman, J., & Wickens, T. D. (1985). Familiar voice recognition: Patterns and parameters Part II: Recognition of rate-altered voices. Journal of phonetics, 13(1), 39-52.[5] Wang, M. C., Haertel, G. D., & Walberg, H. J. (1993)
+
+phonetics, 13(1), 39-52.[5] Wang, M. C., Haertel, G. D., & Walberg, H. J. (1993). Toward a knowledge base for school learning. Review of educational research, 63(3), 249-294.[6] Ji, H., & Grishman, R. (2011, June). Knowledge base population: Successful approaches and challenges. In Proceedings of the 49th annual meeting of the asso-ciation for computational linguistics: Human language technologies (pp. 1148-1158).[7] Zhou, K. Z., & Li, C. B. (2012). How knowledge affects radical innovation: Knowledge base, market knowl-edge acquisition, and internal knowledge sharing. Strategic management journal, 33(9), 1090-1102.[8] Wang, Z., Zhang, J., Feng, J., & Chen, Z. (2014, June)
+
+nal, 33(9), 1090-1102.[8] Wang, Z., Zhang, J., Feng, J., & Chen, Z. (2014, June). Knowledge graph embedding by translating on hyperplanes. In Proceedings of the AAAI Conference on Artificial Intelligence (Vol. 28, No. 1).[9] Paulheim, H. (2017). Knowledge graph refinement: A survey of approaches and evaluation methods. Semantic web, 8(3), 489-508.[10] Auer, S., Kovtun, V., Prinz, M., Kasprzik, A., Stocker, M., & Vidal, M. E. (2018, June). Towards a knowledge graph for science. In Proceedings of the 8th International Conference on Web Intelligence, Mining and Semantics (pp. 1-6).[11] Miao, F., Liu, H., Huang, Y., Liu, C., & Wu, X. (2018, October)
+
+s (pp. 1-6).[11] Miao, F., Liu, H., Huang, Y., Liu, C., & Wu, X. (2018, October). Construction of semantic-based traditional Chinese medicine prescription knowledge graph. In Proceedings of 2018 IEEE 3rd Advanced Information Technology, Electronic and Automation Control Conference (IAEAC) (pp. 1194-1198). IEEE.[12] Qiao, B., Fang, K., Chen, Y., & Zhu, X. (2017). Building thesaurus-based knowledge graph based on schema layer. Cluster Computing, 20(1), 81-91.[13] Miles, A., Bechhofer, S. (2009). SKOS Simple Knowledge Organization System Reference. W3C Recommendation, W3C.[14] Allemang, D., Hendler, J., Candon, F. (2020)
+
+rence. W3C Recommendation, W3C.[14] Allemang, D., Hendler, J., Candon, F. (2020). Semantic Web for the Working Ontologist: Linked Data, RDFS, and OWL, 3rd Edition. ACM books, 303-317.[15] Jena API, Apache Jena, Web site,: https://jena.a-pache.org/documentation/ontology/ [16] khaii, kakao Tech, Web Site: https://tech.kakao.com/tag/khaii/[17] Protege, https://protege.stanford
+
+eb Site: https://tech.kakao.com/tag/khaii/[17] Protege,
+
+b Site: https://tech.kakao.com/tag/khaii/[17] Protege,
+
+Site: https://tech.kakao.com/tag/khaii/[17] Protege,
+
+Site: https://tech.kakao.com/tag/khaii/[17] Protege,
+
+ite: https://tech.kakao.com/tag/khaii/[17] Protege,
+
+te: https://tech.kakao.com/tag/khaii/[17] Protege,
+
+e: https://tech.kakao.com/tag/khaii/[17] Protege,
+
+: https://tech.kakao.com/tag/khaii/[17] Protege,
+
+https://tech.kakao.com/tag/khaii/[17] Protege,
+
+https://tech.kakao.com/tag/khaii/[17] Protege,
+
+ttps://tech.kakao.com/tag/khaii/[17] Protege,
+
+tps://tech.kakao.com/tag/khaii/[17] Protege,
+
+ps://tech.kakao.com/tag/khaii/[17] Protege,
+
+s://tech.kakao.com/tag/khaii/[17] Protege,
+
+://tech.kakao.com/tag/khaii/[17] Protege,
+
+//tech.kakao.com/tag/khaii/[17] Protege,
+
+/tech.kakao.com/tag/khaii/[17] Protege,
+
+tech.kakao.com/tag/khaii/[17] Protege,
+
+ech.kakao.com/tag/khaii/[17] Protege,
+
+ch.kakao.com/tag/khaii/[17] Protege,
+
+h.kakao.com/tag/khaii/[17] Protege,
+
+.kakao.com/tag/khaii/[17] Protege,
+
+kakao.com/tag/khaii/[17] Protege,
+
+akao.com/tag/khaii/[17] Protege,
+
+kao.com/tag/khaii/[17] Protege,
+
+ao.com/tag/khaii/[17] Protege,
+
+o.com/tag/khaii/[17] Protege,
+
+.com/tag/khaii/[17] Protege,
+
+com/tag/khaii/[17] Protege,
+
+om/tag/khaii/[17] Protege,
+
+m/tag/khaii/[17] Protege,
+
+/tag/khaii/[17] Protege,
+
+tag/khaii/[17] Protege,
+
+ag/khaii/[17] Protege,
+
+g/khaii/[17] Protege,
+
+/khaii/[17] Protege,
+
+khaii/[17] Protege,
+
+haii/[17] Protege,
+
+aii/[17] Protege,
+
+ii/[17] Protege,
+
+i/[17] Protege,
+
+/[17] Protege,
+
+[17] Protege,
+
+17] Protege,
+
+7] Protege,
+
+] Protege,
+
+Protege,
+
+Protege,
+
+rotege,
+
+otege,
+
+tege,
+
+ege,
+
+ge,
+
+e,
+
+,
+
+https://protege.stanford.edu/
+
+온톨로지 학습 기반 지식 그래프 구축
+컴퓨터교육학회 논문지 (25권 1호) 57
+류 민 우2012년 광운대학교 컴퓨터과학과 (공학박사)2017년 ~ 2021년 KT AI연구소 선임연구원2011년 ~ 2016년 전자부품연구원 선임연구원2021년 ~ 현재 현대자동차 자동차부분 연구개발본부 책임연구원관심분야: 사물인터넷, 시맨틱스, 코그니티브컴퓨팅, 지능네트워크, 차량통신E-Mail: minu0921@gmail.com
+차 시 호2004년 광운대학교 컴퓨터과학과 (공학박사)2020년 Auckland University of Technology 방문교수1997년 ~ 2000년 대우통신 종합연구소 선임연구원2009년 ~ 현재 청운대학교 멀티미디어학과 교수관심분야: 네트워크관리, 차량통신네트워크, 시맨틱웹, 머신러닝E-Mail: shcha@chungwoon.ac.kr

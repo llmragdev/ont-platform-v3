@@ -58,15 +58,104 @@ def _rag_source(result: dict[str, Any], index: int) -> dict[str, Any]:
     }
 
 
+def _entity_id(entity: dict[str, Any]) -> str:
+    return str(entity.get("id") or entity.get("entity_id") or "")
+
+
+def _entity_name(entity: dict[str, Any]) -> str:
+    return str(entity.get("name") or entity.get("entity_name") or entity.get("id") or entity.get("entity_id") or "")
+
+
+def _relation_id(relation: dict[str, Any]) -> str:
+    return str(relation.get("id") or relation.get("relation_id") or "")
+
+
+def _relation_from_id(relation: dict[str, Any]) -> str:
+    return str(relation.get("from_id") or relation.get("from_entity_id") or "")
+
+
+def _relation_to_id(relation: dict[str, Any]) -> str:
+    return str(relation.get("to_id") or relation.get("to_entity_id") or "")
+
+
+def _relation_type(relation: dict[str, Any]) -> str:
+    return str(relation.get("relation") or relation.get("type") or relation.get("relation_type") or "")
+
+
 def _ontology_source(entity: dict[str, Any], index: int) -> dict[str, Any]:
+    entity_id = _entity_id(entity)
+    name = _entity_name(entity) or f"Entity-{index + 1}"
+    description = entity.get("description") or str(entity.get("properties", ""))
     return {
-        "name": entity.get("name") or entity.get("id") or f"Entity-{index + 1}",
-        "entity_id": entity.get("id", ""),
+        "name": name,
+        "entity_name": name,
+        "entity": name,
+        "entity_id": entity_id,
         "type": entity.get("type", ""),
-        "text": entity.get("description") or str(entity.get("properties", "")),
+        "description": description,
+        "text": description,
         "similarity": entity.get("__match_score", 0.0),
         "score": entity.get("__match_score", 0.0),
+        "relation": "",
+        "target": "",
     }
+
+
+def _ontology_sources_with_relationships(
+    matched_entities: list[dict[str, Any]],
+    all_entities: list[dict[str, Any]],
+    relationships: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Return graph-friendly ontology sources for the frontend.
+
+    The query UI expects entity_name/relation/target for graph edges. The
+    ontology store, however, keeps entities and relationships separately.
+    """
+    entity_by_id = {_entity_id(entity): entity for entity in all_entities if _entity_id(entity)}
+    matched_ids = {_entity_id(entity) for entity in matched_entities if _entity_id(entity)}
+    sources: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str]] = set()
+
+    for relation in relationships:
+        from_id = _relation_from_id(relation)
+        to_id = _relation_to_id(relation)
+        if from_id not in matched_ids and to_id not in matched_ids:
+            continue
+
+        from_entity = entity_by_id.get(from_id, {"id": from_id, "name": from_id})
+        to_entity = entity_by_id.get(to_id, {"id": to_id, "name": to_id})
+        relation_label = _relation_type(relation) or "관련"
+        key = (from_id, relation_label, to_id)
+        if key in seen:
+            continue
+        seen.add(key)
+
+        sources.append(
+            {
+                "name": _entity_name(from_entity),
+                "entity_name": _entity_name(from_entity),
+                "entity": _entity_name(from_entity),
+                "entity_id": from_id,
+                "type": from_entity.get("type", ""),
+                "description": from_entity.get("description") or str(from_entity.get("properties", "")),
+                "relation": relation_label,
+                "target": _entity_name(to_entity),
+                "target_id": to_id,
+                "relation_id": _relation_id(relation),
+                "text": f"{_entity_name(from_entity)} -[{relation_label}]-> {_entity_name(to_entity)}",
+                "similarity": 1.0,
+                "score": 1.0,
+            }
+        )
+
+    represented_ids = {source["entity_id"] for source in sources} | {source.get("target_id", "") for source in sources}
+    for index, entity in enumerate(matched_entities):
+        entity_id = _entity_id(entity)
+        if entity_id and entity_id in represented_ids:
+            continue
+        sources.append(_ontology_source(entity, index))
+
+    return sources[:5]
 
 
 def _format_evidence(vector_results: list[dict[str, Any]], ontology_results: list[dict[str, Any]]) -> str:
@@ -218,6 +307,8 @@ async def generate_stream(
 
         vector_results = vector_search.search(query=query, ctx=ctx, k=5)
         ontology_results = ontology_svc.find_by_name(ctx=ctx, name_hint=query)
+        all_ontology_entities = ontology_svc.repo.list_all_entities(ctx)
+        all_ontology_relationships = ontology_svc.repo.list_all_relationships(ctx)
         raw_vector_count = len(vector_results)
         raw_ontology_count = len(ontology_results)
 
@@ -250,7 +341,11 @@ async def generate_stream(
 
         sources_for_tab = {
             "rag": [_rag_source(result, i) for i, result in enumerate(vector_results[:5])],
-            "ontology": [_ontology_source(entity, i) for i, entity in enumerate(ontology_results[:5])],
+            "ontology": _ontology_sources_with_relationships(
+                ontology_results[:5],
+                all_ontology_entities,
+                all_ontology_relationships,
+            ),
             "expert_opinions": [],
         }
         yield _sse("sources", sources_for_tab)

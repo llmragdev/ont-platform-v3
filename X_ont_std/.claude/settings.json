@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python validation/ont_platform_v4_eval/src/correct_snowflake_v2.py)"
+    ]
+  }
+}

@@ -40,8 +40,8 @@ ont_platform v5
 
 | 구성 요소 | 권장 디렉터리 | 기본 포트 | 역할 |
 | --- | --- | ---: | --- |
-| `factory_mcp` | `E:\ontology_edu\X_ont_std\s2_factory_mcp` | 8081 | ont_platform의 tool 호출을 받아 factory_board API로 중계 |
-| `factory_board` | `E:\ontology_edu\X_ont_std\s2_factory_board` | 8091 | 공장 현장 요청/설비 이벤트 mock API/UI |
+| `factory_mcp` | `E:\ontology_edu\X_ont_std\mock_infras\s2_factory_mcp` | 8081 | ont_platform의 tool 호출을 받아 factory_board API로 중계 |
+| `factory_board` | `E:\ontology_edu\X_ont_std\mock_infras\s2_factory_board` | 8091 | 공장 현장 요청/설비 이벤트 mock API/UI |
 | ont_platform backend | `ont_platform/v5/backend` | 8001 | 워크플로우 실행, 온톨로지 write-back |
 | ont_platform frontend | `ont_platform/v5/frontend` | 3002 | Workflow Builder, Workflow Trace, 온톨로지 관리 |
 
@@ -159,7 +159,7 @@ SQLite 사용을 권장한다.
 DB 파일:
 
 ```text
-E:\ontology_edu\X_ont_std\s2_factory_board\s2_factory_board.db
+E:\ontology_edu\X_ont_std\mock_infras\s2_factory_board\s2_factory_board.db
 ```
 
 ### 5.1 factory_events
@@ -659,13 +659,13 @@ Antigravity 구현 완료 기준:
 
 ```powershell
 conda activate claud_be
-cd E:\ontology_edu\X_ont_std\s2_factory_board
+cd E:\ontology_edu\X_ont_std\mock_infras\s2_factory_board
 python main.py
 ```
 
 ```powershell
 conda activate claud_be
-cd E:\ontology_edu\X_ont_std\s2_factory_mcp
+cd E:\ontology_edu\X_ont_std\mock_infras\s2_factory_mcp
 python main.py
 ```
 

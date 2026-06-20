@@ -152,5 +152,5 @@ ont_platform/v5/backend/storage/default/proj-default/events/customer_question_st
 고객사 게시판 DB:
 
 ```text
-s1_customer_board/s1_customer_board.db
+mock_infras/s1_customer_board/s1_customer_board.db
 ```

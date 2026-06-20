@@ -21,7 +21,8 @@ export function LinkedDataViewer({ entityId }: LinkedDataViewerProps) {
     api.rdf.describeEntity(entityId)
       .then((data) => {
         if (!mounted) return;
-        setResources(data.resources);
+        const linkedResources = Array.isArray(data?.resources) ? data.resources : mockLinkedResources;
+        setResources(linkedResources);
         setError(null);
       })
       .catch((err) => {

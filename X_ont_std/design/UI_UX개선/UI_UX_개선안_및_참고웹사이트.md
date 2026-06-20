@@ -433,6 +433,28 @@ relations: has_line, uses, reports, affects, creates, possibly_caused_by
 | Flowise | React Flow 기반 AI 노드 빌더 구성 |
 | Langflow | 노드 카드와 연결선 가독성 |
 | Palantir Foundry | 온톨로지 객체 중심 탐색, lineage, 운영 데이터 연결 |
+| 필라넷 (Philanet) | 분할 뷰(Split View) 기반 실행 기록 및 세부 스킬 일람 구조 |
+
+### 11.1 필라넷 (Philanet) 워크플로우 벤치마킹 분석
+
+![필라넷 워크플로우 실행이력 UI](./philanet_workflow_reference.png)
+
+#### A. 벤치마킹 핵심 요소
+* **좌우 분할 뷰(Split-view) 레이아웃**:
+  * 화면의 60%를 차지하는 좌측 영역은 React Flow 기반의 실행 토폴로지(실행 완료된 성공 노드는 녹색 체크 배지와 소요 시간 명기)를 보여줍니다.
+  * 우측 40% 영역은 실행 세부 요약(실행 ID, 시작 일시, 트리거 정보, 단계별 소요 시간 및 성공 여부 일람 테이블)을 보여주어 시인성이 높습니다.
+* **사용자 액션 분리**:
+  * 하단에 '뒤로가기' 배치 등 단일 테넌트 내에서의 이탈/디버깅 동선이 직관적입니다.
+
+#### B. ont_platform v5의 초격차 개선안 (필라넷 대비 우위 확보 전략)
+필라넷의 레이아웃을 적극 수용하되, 지식 모델링(Ontology)과 양방향 연동이라는 우리만의 고유 가치를 결합하여 더 진보된 형태를 완성합니다.
+
+1. **온톨로지(Ontology) 데이터 드릴다운(Drill-down)**:
+   * 필라넷은 단순 스킬 실행 여부만 표기하지만, 우리는 실행 결과로 생성된 온톨로지 인스턴스(예: `FaultEvent`, `MaintenanceTask` 등)를 클릭하면 우측 탭에서 해당 객체의 연결 족보(Lineage) 및 Properties 정보를 바로 조회하고 객체 탐색기(Explorer)로 이동할 수 있는 **지식 연동성**을 구축합니다.
+2. **실행 시점의 데이터 복원 (Back-tracing)**:
+   * 우측 테이블의 특정 스텝을 클릭하면, 당시 단계에 인입되었던 실제 Input/Output JSON 변수 값(Payload)이 캔버스 노드 팝업창에 자동으로 복원 렌더링되게 하여 디버깅 편의성을 필라넷 이상으로 향상시킵니다.
+3. **편집(Builder)과 실행(Run)의 동적 스위칭 (2-Way Context Panel)**:
+   * 실행 이력 조회 전용 화면을 빌더 내로 완전히 통일하여, 빌더 화면에서 Run 버튼 클릭 시 실시간 로그와 변수가 우측 패널로 자연스럽게 오가는 통합 조종석(Cockpit)으로 개발합니다.
 
 참고할 때 중요한 점은 외형을 그대로 따라 하는 것이 아니라, 다음 UX 원칙을 가져오는 것이다.
 
@@ -440,6 +462,70 @@ relations: has_line, uses, reports, affects, creates, possibly_caused_by
 - 노드 실행 결과는 노드 옆에서 확인되어야 한다.
 - 객체/관계 데이터는 별도 DB처럼 숨겨지면 안 된다.
 - 실행 결과에서 온톨로지 객체로 바로 이동할 수 있어야 한다.
+
+### 11.2 에이전트 스킬 (Skill / Tool) 및 MCP 연동 UI/UX 개선안 및 벤치마킹 레퍼런스
+
+스킬(Skill)은 에이전트나 워크플로우가 작업을 수행할 때 사용하는 기능적 API 블록(예: `comment.create`, `maintenance_task.create`, `azure_webhook_skill` 등)입니다. 복잡한 외부 연동 도구들을 효율적으로 관리하고 결합하기 위해 다음 5가지 핵심 UI/UX 설계 요소를 제안합니다.
+
+#### A. 핵심 UI/UX 설계 제안
+
+1. **스킬 카탈로그 & 상태 모니터링 (Skill Registry Grid)**:
+   * 스킬들을 카테고리별(DB 처리, 메신저 알림, AI 추론, 외부 MCP 어댑터 등)로 분류한 카드 대시보드를 제공합니다.
+   * 각 카드에는 연결 유형(표준 MCP stdio, MCP SSE, custom HTTP Webhook)과 실시간 연결성/헬스 체크 상태(정상 작동: 녹색 펄스, 미설정/인증 유실: 회색, 통신 장애: 적색 경고)를 표시하여 통합 상태를 한눈에 관제합니다.
+2. **동적 파라미터 맵핑 및 스키마 기반 폼 (Dynamic Parameter & Schema-based Form)**:
+   * 워크플로우 빌더 내에서 `skill_call` 노드를 선택했을 때, 우측 속성 패널에서 특정 스킬을 지정하면 해당 스킬의 `input_schema`를 기반으로 입력 GUI 폼이 동적으로 생성(Auto-generated Form)되어야 합니다.
+   * 단순 텍스트 입력창 외에도, 이전 노드의 출력 데이터(예: `{{node_1.output.text}}` 또는 `{{intent_classify.intent}}`)를 쉽게 바인딩할 수 있는 드롭다운 변수 선택기(Autocomplete Variable Picker)를 제공하여 오타를 방지하고 편의성을 높입니다.
+3. **간이 샌드박스 테스팅 도구 (Live Sandbox Test-bed)**:
+   * *가장 중요한 UX 요소*로, 스킬을 워크플로우 캔버스에 직접 배치하여 사용하기 전에, 파라미터 값(Arguments)을 UI에서 직접 테스트 입력하고 **[테스트 실행]** 버튼을 눌러 JSON 응답 결과, HTTP 요청/응답 헤더, 처리 시간(latency), 디버깅용 HTTP 오류 로그를 즉시 확인해볼 수 있는 디버깅 패널을 제공합니다.
+4. **인증 자격 증명 관리 및 보안 가이드 (Credentials Wizard)**:
+   * API Key, Bearer Token, OAuth2, HMAC Signature 등 다양한 외부 인증 설정을 친절하게 가이드해 주는 스텝 바이 스텝 입력 폼을 제공합니다.
+   * 보안이 필요한 Secret 정보는 UI 상에서 마스킹(`••••••••`) 처리하되, "자격 확인(Validate Connection)" 버튼을 통해 연결 성공 여부만 시각적으로 피드백합니다.
+5. **역방향 사용처 분석 (Reverse Usage Tracker / Lineage)**:
+   * 특정 스킬 상세 페이지 내에서 "이 스킬이 현재 어떤 시나리오(워크플로우)의 몇 번 노드에서 참조되어 작동 중인지" 역방향 사용 족보(Lineage) 링크를 제공하여 무분별한 변경으로 인한 시스템 오류(Breakage)를 미연에 방지합니다.
+
+#### B. 대표 벤치마킹 레퍼런스 및 핵심 기능 분석
+
+* **Dify (Tools / Custom Tool)**:
+  * *벤치마킹 포인트*: OpenAPI(Swagger JSON/YAML) 스키마를 붙여넣기만 하면, 입력/출력 매개변수와 설명을 자동으로 파싱하고 UI 입력 폼으로 즉시 변환해 주는 자동 파싱 마법사. 아이콘 커스터마이징 및 에러 핸들링 기본값 정의 기능이 매우 우수합니다.
+* **Coze (Plugin Console & Test Panel)**:
+  * *벤치마킹 포인트*: 플러그인 콘솔 내에서 각 스킬 단위로 우측 슬라이딩 패널을 제공하여, 임의의 매개변수를 입력하고 간이로 API 실행을 테스트해 보는 테스트 베드 패널 구성이 직관적입니다.
+* **n8n (Credential Manager & Dynamic Mapping)**:
+  * *벤치마킹 포인트*: 외부 서비스 연동 시 인증(OAuth/Token) 연동 과정을 시각화하여 사용자가 직관적으로 계정을 연결하고 관리하게 돕는 플로우. 또한, 왼쪽 패널에 이전 노드의 JSON 구조가 Tree 뷰로 표시되어 드래그 앤 드롭으로 변수 값을 입력 칸에 매핑하는 UI/UX가 세계 최고 수준입니다.
+* **Anthropic MCP Inspector (Developer Debugging Console)**:
+  * *벤치마킹 포인트*: MCP stdio 및 SSE 서버를 직접 연결하여 등록된 도구(Tools)의 목록, 입력 스키마, 리소스(Resources), 프롬프트(Prompts)를 트리 뷰로 탐색하고, GUI 환경에서 도구를 직접 호출하여 결과(텍스트/이미지 등)를 실시간으로 확인하는 개발자 친화적 경량 디버거 환경입니다.
+
+#### C. 스킬 UI/UX 핵심 렌더링 컨셉 (Mermaid Visualization)
+
+```mermaid
+graph TD
+    subgraph "스킬 관리 콘솔 (Skill Console) - 좌우 분할 뷰"
+        A[좌측: 스킬 카탈로그/검색] --> B[중앙: 스킬 목록 카드 그리드]
+        B -->|카드 클릭| C[우측: 스킬 디테일 및 샌드박스 테스팅]
+        
+        subgraph "스킬 카드 그리드"
+            B1["🤖 Azure Webhook LLM (Active / HTTP Webhook)"]
+            B2["🔌 Factory Events MCP (Active / Stdio MCP)"]
+            B3["📬 Comment Register (Warning / SSE MCP)"]
+        end
+        
+        subgraph "우측 디테일 패널 (탭 구조)"
+            C1["[설정 탭] - Endpoint, Auth Profile, Timeout"]
+            C2["[테스트 베드] - 변수 입력, [테스트 호출] 버튼, JSON 응답 콘솔"]
+            C3["[사용처 분석] - 이 스킬을 사용하는 워크플로우 목록"]
+        end
+    end
+```
+
+```mermaid
+graph TD
+    subgraph "워크플로우 빌더 캔버스 내 '스킬 노드(Skill Call Node)' 비주얼 디자인"
+        N1["⚡ Skill Call Node (테두리: Neon Violet Glow)"]
+        N1 --> N1a["아이콘: ⚡ (Action Node Indicator)"]
+        N1 --> N1b["스킬 지정: factory_mcp / maintenance_task.create"]
+        N1 --> N1c["동적 입력 매핑: task_title = {{recurrence_check.output.summary}}"]
+        N1 --> N1d["상태 배지: SUCCESS (소요 시간: 1.2초)"]
+    end
+```
 
 ## 12. 단계별 구현 우선순위
 

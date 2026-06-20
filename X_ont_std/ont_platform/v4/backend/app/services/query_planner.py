@@ -17,6 +17,7 @@ from app.services.llm_client import LlmClient
 from app.services.ontology import OntologyService
 from app.services.query_executor import OntologyQueryEngine
 from app.services.vector_search import VectorSearchService
+from app.services.evidence_gate import EvidenceGate
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +52,7 @@ class QueryPlannerService:
         self._llm = llm_client or LlmClient()
         self.ontology_engine = OntologyQueryEngine(ontology_svc)
         self.synthesizer = HybridSynthesizer(llm=self._llm)
+        self.evidence_gate = EvidenceGate()
 
     def classify_intent(self, query: str, ctx: TenantContext | None = None) -> QueryPlanV3:
         schema_context = self._schema_context(ctx) if ctx else {}
@@ -134,7 +136,42 @@ class QueryPlannerService:
             else:
                 trace.append(f"executor: skipped unsupported engine {step.engine.value}")
 
-        response = self.synthesizer.synthesize(query, plan, ontology_results, vector_results, trace)
+        gate_res = self.evidence_gate.check_evidence(query, ontology_results, vector_results)
+        if not gate_res["answer_allowed"]:
+            logger.info("[EVIDENCE_GATE] Blocked query=%r reason=%s", query, gate_res["reason"])
+            trace.append(f"evidence_gate: blocked answer due to {gate_res['reason']}")
+            
+            ontology_items = []
+            for result in ontology_results:
+                ontology_items.extend(result.get("items", []))
+            ontology_sources = [self.synthesizer._ontology_source(item) for item in ontology_items]
+            vector_sources = [self.synthesizer._vector_source(item) for item in vector_results]
+            sources = ontology_sources + vector_sources
+            
+            response = QueryResponse(
+                answer=gate_res["message"],
+                intent=plan.intent,
+                sources=sources,
+                structured_data={
+                    "ontology": {"count": len(ontology_items), "items": ontology_items, "results": ontology_results},
+                    "vector": {"count": len(vector_results), "items": vector_results},
+                },
+                evidence=[],
+                trace=trace,
+                metadata={"plan": self.synthesizer._dump_model(plan), "question": query, "evidence_gate": gate_res},
+                ontology_evidence=[],
+                quality_metrics={
+                    "llm_used": False,
+                    "fallback_used": True,
+                    "vector_hits": len(vector_results),
+                    "ontology_hits": len(ontology_items),
+                    "blocked_by_gate": True,
+                    "gate_reason": gate_res["reason"]
+                }
+            )
+        else:
+            response = self.synthesizer.synthesize(query, plan, ontology_results, vector_results, trace)
+            
         logger.info("[ANSWER] llm_used=%s  answer=%.120s",
                     response.quality_metrics.get("llm_used"),
                     (response.answer or "")[:120])
@@ -179,7 +216,42 @@ class QueryPlannerService:
                 logger.info("[VECTOR] hits=%d", len(results))
                 trace.append(f"vector.search: matched {len(results)} document result(s)")
 
-        response = self.synthesizer.synthesize(query, plan, ontology_results, vector_results, trace)
+        gate_res = self.evidence_gate.check_evidence(query, ontology_results, vector_results)
+        if not gate_res["answer_allowed"]:
+            logger.info("[EVIDENCE_GATE] Blocked query=%r reason=%s", query, gate_res["reason"])
+            trace.append(f"evidence_gate: blocked answer due to {gate_res['reason']}")
+            
+            ontology_items = []
+            for result in ontology_results:
+                ontology_items.extend(result.get("items", []))
+            ontology_sources = [self.synthesizer._ontology_source(item) for item in ontology_items]
+            vector_sources = [self.synthesizer._vector_source(item) for item in vector_results]
+            sources = ontology_sources + vector_sources
+            
+            response = QueryResponse(
+                answer=gate_res["message"],
+                intent=plan.intent,
+                sources=sources,
+                structured_data={
+                    "ontology": {"count": len(ontology_items), "items": ontology_items, "results": ontology_results},
+                    "vector": {"count": len(vector_results), "items": vector_results},
+                },
+                evidence=[],
+                trace=trace,
+                metadata={"plan": self.synthesizer._dump_model(plan), "question": query, "evidence_gate": gate_res},
+                ontology_evidence=[],
+                quality_metrics={
+                    "llm_used": False,
+                    "fallback_used": True,
+                    "vector_hits": len(vector_results),
+                    "ontology_hits": len(ontology_items),
+                    "blocked_by_gate": True,
+                    "gate_reason": gate_res["reason"]
+                }
+            )
+        else:
+            response = self.synthesizer.synthesize(query, plan, ontology_results, vector_results, trace)
+            
         logger.info("[ANSWER] llm_used=%s  answer=%.120s",
                     response.quality_metrics.get("llm_used"), (response.answer or "")[:120])
         append_audit_event(ctx, "COMPLETE_HYBRID_ASK", "query", "hybrid_ask", {

@@ -284,7 +284,7 @@ class WorkflowService:
 
 _GRAPH_WRITE_ROLES = {"Admin", "FinanceManager", "AccountManager"}
 _GRAPH_RUN_ROLES = {"Admin", "FinanceManager", "AccountManager"}
-_GRAPH_DELETE_ROLES = {"Admin"}
+_GRAPH_DELETE_ROLES = {"Admin", "FinanceManager", "AccountManager"}
 _GRAPH_READ_ROLES = {"Admin", "FinanceManager", "AccountManager", "Analyst", "Viewer"}
 
 

@@ -318,6 +318,19 @@
       "version": 1,
       "status": "active",
       "updated_at": "2026-05-14T09:00:00.000000+00:00"
+    },
+    {
+      "type": "PRODUCT",
+      "name": "aa",
+      "properties": {
+        "department2": "총무부"
+      },
+      "id": "EFFEF8A",
+      "created_at": "2026-06-11T04:52:37.692808+00:00",
+      "created_by": "demo-user",
+      "version": 1,
+      "status": "active",
+      "updated_at": "2026-06-11T04:52:37.692808+00:00"
     }
   ],
   "relationships": [

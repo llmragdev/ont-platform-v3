@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Ontology AI Workbench",
-  description: "지능형 객체 기반 의사결정 지원 시스템",
+  description: "온톨로지와 워크플로우를 함께 설계하고 실행하는 AI 업무 플랫폼",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -13,12 +13,11 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 const THEME_KEY = "ont_platform_theme";
 
 export function ThemeContextProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
     const stored = window.localStorage.getItem(THEME_KEY) as Theme | null;
-    const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    setTheme(stored ?? preferred);
+    setTheme(stored ?? "dark");
   }, []);
 
   useEffect(() => {

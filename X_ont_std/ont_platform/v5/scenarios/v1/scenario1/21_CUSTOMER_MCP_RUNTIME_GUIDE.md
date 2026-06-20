@@ -1,8 +1,8 @@
 # Customer MCP Runtime Guide - s1_customer_mcp
 
 작성일: 2026-06-13  
-대상 서버: `E:\ontology_edu\X_ont_std\s1_customer_mcp`  
-원본 운영 문서: `E:\ontology_edu\X_ont_std\s1_customer_mcp\README.md`
+대상 서버: `E:\ontology_edu\X_ont_std\mock_infras\s1_customer_mcp`  
+원본 운영 문서: `E:\ontology_edu\X_ont_std\mock_infras\s1_customer_mcp\README.md`
 
 ## 1. 목적
 
@@ -27,7 +27,7 @@ ont_platform v5
 | --- | --- |
 | 서버명 | `s1_customer_mcp` |
 | 기본 포트 | `8080` |
-| 실행 위치 | `E:\ontology_edu\X_ont_std\s1_customer_mcp` |
+| 실행 위치 | `E:\ontology_edu\X_ont_std\mock_infras\s1_customer_mcp` |
 | 실행 파일 | `src/main.py` |
 | 의존 서버 | `s1_customer_board` |
 | 의존 서버 포트 | `8090` |
@@ -47,7 +47,7 @@ PowerShell:
 
 ```powershell
 conda activate claud_be
-cd E:\ontology_edu\X_ont_std\s1_customer_mcp
+cd E:\ontology_edu\X_ont_std\mock_infras\s1_customer_mcp
 python src/main.py
 ```
 
@@ -156,10 +156,10 @@ GET /mcp/tools/question.list?status=open
 
 | 문서 | 역할 |
 | --- | --- |
-| `s1_customer_mcp/README.md` | 실제 서버 구동 매뉴얼 |
-| `s1_customer_mcp/doc/architecture.md` | 중계 서버 구조 |
-| `s1_customer_mcp/doc/integration_guide.md` | 연동 스모크 테스트 |
-| `s1_customer_mcp/doc/mcp_error_codes.md` | 표준 오류 코드 |
+| `mock_infras/s1_customer_mcp/README.md` | 실제 서버 구동 매뉴얼 |
+| `mock_infras/s1_customer_mcp/doc/architecture.md` | 중계 서버 구조 |
+| `mock_infras/s1_customer_mcp/doc/integration_guide.md` | 연동 스모크 테스트 |
+| `mock_infras/s1_customer_mcp/doc/mcp_error_codes.md` | 표준 오류 코드 |
 | `20_CUSTOMER_MCP_CALL_SPEC.md` | ont_platform -> customer_mcp 공식 호출 계약 |
 | `40_CUSTOMER_MOCK_INFRA_DESIGN.md` | customer_mcp/customer_board 전체 mock 인프라 설계 |
 

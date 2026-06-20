@@ -1,0 +1,2255 @@
+{
+    "concepts": [
+        {
+            "id": "온톨로지",
+            "type": "concept",
+            "frequency": 8
+        },
+        {
+            "id": "RDF",
+            "type": "concept",
+            "frequency": 5
+        },
+        {
+            "id": "이질성",
+            "type": "concept",
+            "frequency": 1
+        },
+        {
+            "id": "자연어",
+            "type": "concept",
+            "frequency": 4
+        },
+        {
+            "id": "언어모델",
+            "type": "concept",
+            "frequency": 2
+        },
+        {
+            "id": "생성형AI",
+            "type": "concept",
+            "frequency": 1
+        },
+        {
+            "id": "데이터베이스",
+            "type": "concept",
+            "frequency": 2
+        },
+        {
+            "id": "지식표현",
+            "type": "concept",
+            "frequency": 2
+        },
+        {
+            "id": "자연어처리",
+            "type": "concept",
+            "frequency": 2
+        },
+        {
+            "id": "감성분석",
+            "type": "concept",
+            "frequency": 1
+        },
+        {
+            "id": "지식그래프",
+            "type": "concept",
+            "frequency": 1
+        },
+        {
+            "id": "국방",
+            "type": "concept",
+            "frequency": 2
+        },
+        {
+            "id": "지휘통제",
+            "type": "concept",
+            "frequency": 2
+        },
+        {
+            "id": "SPARQL",
+            "type": "concept",
+            "frequency": 0
+        },
+        {
+            "id": "의미론",
+            "type": "concept",
+            "frequency": 0
+        },
+        {
+            "id": "분류",
+            "type": "concept",
+            "frequency": 0
+        },
+        {
+            "id": "매칭",
+            "type": "concept",
+            "frequency": 0
+        },
+        {
+            "id": "임베딩",
+            "type": "concept",
+            "frequency": 0
+        },
+        {
+            "id": "벡터",
+            "type": "concept",
+            "frequency": 0
+        },
+        {
+            "id": "LLM",
+            "type": "concept",
+            "frequency": 0
+        },
+        {
+            "id": "NLP",
+            "type": "concept",
+            "frequency": 0
+        }
+    ],
+    "relationships": [
+        {
+            "from": "doc_002",
+            "to": "doc_003",
+            "type": "related_topic",
+            "strength": 0.882,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_002",
+            "to": "doc_004",
+            "type": "related_topic",
+            "strength": 0.897,
+            "shared_concepts": [
+                "온톨로지",
+                "데이터베이스"
+            ]
+        },
+        {
+            "from": "doc_002",
+            "to": "doc_005",
+            "type": "related_topic",
+            "strength": 0.885,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어",
+                "언어모델"
+            ]
+        },
+        {
+            "from": "doc_002",
+            "to": "doc_006",
+            "type": "related_topic",
+            "strength": 0.883,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어"
+            ]
+        },
+        {
+            "from": "doc_002",
+            "to": "doc_007",
+            "type": "related_topic",
+            "strength": 0.864,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_002",
+            "to": "doc_008",
+            "type": "related_topic",
+            "strength": 0.879,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어"
+            ]
+        },
+        {
+            "from": "doc_003",
+            "to": "doc_002",
+            "type": "related_topic",
+            "strength": 0.882,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_003",
+            "to": "doc_004",
+            "type": "related_topic",
+            "strength": 0.868,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_003",
+            "to": "doc_005",
+            "type": "related_topic",
+            "strength": 0.886,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_003",
+            "to": "doc_006",
+            "type": "related_topic",
+            "strength": 0.913,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_003",
+            "to": "doc_007",
+            "type": "related_topic",
+            "strength": 0.931,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_003",
+            "to": "doc_008",
+            "type": "related_topic",
+            "strength": 0.934,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_004",
+            "to": "doc_002",
+            "type": "related_topic",
+            "strength": 0.897,
+            "shared_concepts": [
+                "온톨로지",
+                "데이터베이스"
+            ]
+        },
+        {
+            "from": "doc_004",
+            "to": "doc_003",
+            "type": "related_topic",
+            "strength": 0.868,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_004",
+            "to": "doc_005",
+            "type": "related_topic",
+            "strength": 0.83,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_004",
+            "to": "doc_006",
+            "type": "related_topic",
+            "strength": 0.847,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_004",
+            "to": "doc_007",
+            "type": "related_topic",
+            "strength": 0.871,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_004",
+            "to": "doc_008",
+            "type": "related_topic",
+            "strength": 0.864,
+            "shared_concepts": [
+                "온톨로지",
+                "지식표현"
+            ]
+        },
+        {
+            "from": "doc_005",
+            "to": "doc_002",
+            "type": "related_topic",
+            "strength": 0.885,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어",
+                "언어모델"
+            ]
+        },
+        {
+            "from": "doc_005",
+            "to": "doc_003",
+            "type": "related_topic",
+            "strength": 0.886,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_005",
+            "to": "doc_004",
+            "type": "related_topic",
+            "strength": 0.83,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_005",
+            "to": "doc_006",
+            "type": "related_topic",
+            "strength": 0.957,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어",
+                "자연어처리"
+            ]
+        },
+        {
+            "from": "doc_005",
+            "to": "doc_007",
+            "type": "related_topic",
+            "strength": 0.865,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_005",
+            "to": "doc_008",
+            "type": "related_topic",
+            "strength": 0.878,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어"
+            ]
+        },
+        {
+            "from": "doc_006",
+            "to": "doc_002",
+            "type": "related_topic",
+            "strength": 0.883,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어"
+            ]
+        },
+        {
+            "from": "doc_006",
+            "to": "doc_003",
+            "type": "related_topic",
+            "strength": 0.913,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_006",
+            "to": "doc_004",
+            "type": "related_topic",
+            "strength": 0.847,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_006",
+            "to": "doc_005",
+            "type": "related_topic",
+            "strength": 0.957,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어",
+                "자연어처리"
+            ]
+        },
+        {
+            "from": "doc_006",
+            "to": "doc_007",
+            "type": "related_topic",
+            "strength": 0.885,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_006",
+            "to": "doc_008",
+            "type": "related_topic",
+            "strength": 0.911,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어"
+            ]
+        },
+        {
+            "from": "doc_007",
+            "to": "doc_002",
+            "type": "related_topic",
+            "strength": 0.864,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_007",
+            "to": "doc_003",
+            "type": "related_topic",
+            "strength": 0.931,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_007",
+            "to": "doc_004",
+            "type": "related_topic",
+            "strength": 0.871,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_007",
+            "to": "doc_005",
+            "type": "related_topic",
+            "strength": 0.865,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_007",
+            "to": "doc_006",
+            "type": "related_topic",
+            "strength": 0.885,
+            "shared_concepts": [
+                "RDF",
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_007",
+            "to": "doc_008",
+            "type": "related_topic",
+            "strength": 0.945,
+            "shared_concepts": [
+                "국방",
+                "온톨로지",
+                "지휘통제"
+            ]
+        },
+        {
+            "from": "doc_008",
+            "to": "doc_002",
+            "type": "related_topic",
+            "strength": 0.879,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어"
+            ]
+        },
+        {
+            "from": "doc_008",
+            "to": "doc_003",
+            "type": "related_topic",
+            "strength": 0.934,
+            "shared_concepts": [
+                "온톨로지"
+            ]
+        },
+        {
+            "from": "doc_008",
+            "to": "doc_004",
+            "type": "related_topic",
+            "strength": 0.864,
+            "shared_concepts": [
+                "온톨로지",
+                "지식표현"
+            ]
+        },
+        {
+            "from": "doc_008",
+            "to": "doc_005",
+            "type": "related_topic",
+            "strength": 0.878,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어"
+            ]
+        },
+        {
+            "from": "doc_008",
+            "to": "doc_006",
+            "type": "related_topic",
+            "strength": 0.911,
+            "shared_concepts": [
+                "온톨로지",
+                "자연어"
+            ]
+        },
+        {
+            "from": "doc_008",
+            "to": "doc_007",
+            "type": "related_topic",
+            "strength": 0.945,
+            "shared_concepts": [
+                "국방",
+                "온톨로지",
+                "지휘통제"
+            ]
+        }
+    ],
+    "concept_relationships": [
+        {
+            "from": "온톨로지",
+            "to": "RDF",
+            "type": "related",
+            "strength": 1.0
+        },
+        {
+            "from": "RDF",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 1.0
+        },
+        {
+            "from": "온톨로지",
+            "to": "이질성",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "이질성",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "온톨로지",
+            "to": "자연어",
+            "type": "related",
+            "strength": 0.9
+        },
+        {
+            "from": "자연어",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.9
+        },
+        {
+            "from": "온톨로지",
+            "to": "언어모델",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "언어모델",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "온톨로지",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "생성형AI",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "온톨로지",
+            "to": "데이터베이스",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "데이터베이스",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "온톨로지",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "지식표현",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "온톨로지",
+            "to": "자연어처리",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "자연어처리",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "온톨로지",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "감성분석",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "온톨로지",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지식그래프",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "온톨로지",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "국방",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "온톨로지",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "지휘통제",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "온톨로지",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "온톨로지",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "온톨로지",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "온톨로지",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "온톨로지",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "온톨로지",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "온톨로지",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "온톨로지",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "온톨로지",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "RDF",
+            "to": "이질성",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "이질성",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "RDF",
+            "to": "자연어",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "자연어",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "RDF",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "RDF",
+            "to": "데이터베이스",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "데이터베이스",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "RDF",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지식표현",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "RDF",
+            "to": "자연어처리",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "자연어처리",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "RDF",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "RDF",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지식그래프",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "RDF",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "국방",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "RDF",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지휘통제",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "RDF",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.8
+        },
+        {
+            "from": "SPARQL",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.8
+        },
+        {
+            "from": "RDF",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "RDF",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "RDF",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "RDF",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "RDF",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "RDF",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "RDF",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "RDF",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "자연어",
+            "to": "언어모델",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "언어모델",
+            "to": "자연어",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "자연어",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "생성형AI",
+            "to": "자연어",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "자연어",
+            "to": "데이터베이스",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "데이터베이스",
+            "to": "자연어",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "자연어",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지식표현",
+            "to": "자연어",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "자연어",
+            "to": "자연어처리",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "자연어처리",
+            "to": "자연어",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "자연어",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "감성분석",
+            "to": "자연어",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "자연어",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "국방",
+            "to": "자연어",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "자연어",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지휘통제",
+            "to": "자연어",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "언어모델",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "생성형AI",
+            "to": "언어모델",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "언어모델",
+            "to": "데이터베이스",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "데이터베이스",
+            "to": "언어모델",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "언어모델",
+            "to": "자연어처리",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "자연어처리",
+            "to": "언어모델",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "언어모델",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "감성분석",
+            "to": "언어모델",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "생성형AI",
+            "to": "데이터베이스",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "데이터베이스",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "생성형AI",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식표현",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식그래프",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "국방",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지휘통제",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "생성형AI",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.8
+        },
+        {
+            "from": "LLM",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.8
+        },
+        {
+            "from": "생성형AI",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "생성형AI",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "데이터베이스",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지식표현",
+            "to": "데이터베이스",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지식표현",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식표현",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식그래프",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식표현",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "국방",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지식표현",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지휘통제",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지식표현",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식표현",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식표현",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식표현",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식표현",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식표현",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식표현",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식표현",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "지식표현",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "자연어처리",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "감성분석",
+            "to": "자연어처리",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "감성분석",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식그래프",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "국방",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지휘통제",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "감성분석",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.8
+        },
+        {
+            "from": "NLP",
+            "to": "감성분석",
+            "type": "related",
+            "strength": 0.8
+        },
+        {
+            "from": "지식그래프",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "국방",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지식그래프",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지휘통제",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.6
+        },
+        {
+            "from": "지식그래프",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식그래프",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식그래프",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식그래프",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식그래프",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식그래프",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식그래프",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지식그래프",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "지식그래프",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "국방",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "지휘통제",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.7
+        },
+        {
+            "from": "국방",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "국방",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "국방",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "국방",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "국방",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "국방",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "국방",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "국방",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "국방",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지휘통제",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지휘통제",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지휘통제",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지휘통제",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지휘통제",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지휘통제",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지휘통제",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "지휘통제",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "지휘통제",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "SPARQL",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "SPARQL",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "의미론",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "의미론",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "분류",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "분류",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "매칭",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "매칭",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.8
+        },
+        {
+            "from": "벡터",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.8
+        },
+        {
+            "from": "임베딩",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "임베딩",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "임베딩",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "벡터",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "벡터",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "LLM",
+            "to": "NLP",
+            "type": "related",
+            "strength": 0.3
+        },
+        {
+            "from": "NLP",
+            "to": "LLM",
+            "type": "related",
+            "strength": 0.3
+        }
+    ]
+}

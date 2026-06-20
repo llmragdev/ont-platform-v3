@@ -1,0 +1,207 @@
+{
+    "document_metadata": {
+        "document_metadata": {
+            "doc_001": {
+                "title": "온톨로지이질성문제를해결하기위한온톨로지매칭방법",
+                "category": "NLP",
+                "document_type": "research_paper",
+                "year": 2024,
+                "keywords": [
+                    "온톨로지",
+                    "RDF",
+                    "이질성"
+                ],
+                "authors": [
+                    "알수없음"
+                ],
+                "pages": 6,
+                "abstract_extracted": false,
+                "abstract": ""
+            },
+            "doc_002": {
+                "title": "정적 언어모델부터 생성형AI까지, 텍스트를 다시 쓰는 기술에 대하여",
+                "category": "NLP",
+                "document_type": "research_paper",
+                "year": 2025,
+                "keywords": [
+                    "온톨로지",
+                    "자연어",
+                    "언어모델",
+                    "생성형AI",
+                    "데이터베이스"
+                ],
+                "authors": [
+                    "서술하는",
+                    "방법론적",
+                    "변화",
+                    "과정의",
+                    "흐름을",
+                    "따라가다",
+                    "보면",
+                    "이는",
+                    "자기",
+                    "갱신",
+                    "과정임을",
+                    "알게",
+                    "된다"
+                ],
+                "pages": 37,
+                "abstract_extracted": false,
+                "abstract": ""
+            },
+            "doc_003": {
+                "title": "NLP - 온톨로지 학습 기반 지식 그래프 구축",
+                "category": "NLP",
+                "document_type": "research_paper",
+                "year": 2022,
+                "keywords": [
+                    "온톨로지",
+                    "RDF"
+                ],
+                "authors": [
+                    "알수없음"
+                ],
+                "pages": 7,
+                "abstract_extracted": true,
+                "abstract": "With the recent development of artificial intelligence technology, knowledge services using artificial intelligence technol- ogy are being made in various service areas. However, since most knowledge services are established in independent service domains so that it is very difficult to share or utilize knowledge between services. In addition, since the knowledge area is built individually, there is a problem that requires a lot of cost and time. To solve this problem, research on a technology called knowledge graph has been actively conducted recently. However, to build a knowledge graph for vari- ous domains, the problems of conflicting meanings of knowledge and overlapping storage of knowledge must be solved. To this end, this paper proposes a method of constructing a knowledge graph ba"
+            },
+            "doc_004": {
+                "title": "NLP - 한국근대문인 데이터베이스 구축 방법탐색",
+                "category": "NLP",
+                "document_type": "research_paper",
+                "year": 2025,
+                "keywords": [
+                    "온톨로지",
+                    "RDF",
+                    "데이터베이스",
+                    "지식표현"
+                ],
+                "authors": [
+                    "124"
+                ],
+                "pages": 40,
+                "abstract_extracted": true,
+                "abstract": "> 본연구는 한국근대문인대사전 을기초자료로활용하여개화기부터해방이전활동 을시작한395명의문인을대상으로표준화되고확장가능한데이터베이스를단계적으로 구축하는과정과방법론을제시한다. 이에본연구는근대문인DB구축을위한유관자료(오프라인자료6종과온라인자 료6종)를검토하였고,이자료들이근대문학및한국문학전반에관한정보들을집약적 으로제시해주고있음에도불구하고,정보가중복되면서상호연계기능이낮고,기계가 독성이부족하여디지털환경에서의효율적정보처리와활용에제약이있음을확인하였 다.유관자료의장단점을종합적으로고려하여,본연구에서는데이터베이스구축의기준 대상으로 한국근대문인대사전 을선정하였다.한국근대문인대사전 은문인들의생애, 작품활동,작품목록,참고자료등을체계적으로기록한학술적가치가높은자료이나,인 쇄매체로서의한계와정보의편차,오류가능성등의문제점이존재한다.이러한한계를 극복하기위하여국제표준이름식별자(ISNI),국가전거,한국민족문화대백과사전 ,국립 *제1저자:서울대학교국어국문학과강사 **공동저자:서울과학기술대학교 교양대학강사 ***공동저자:서울대학교국어국문학과박사과정수료 192語文硏究 124(2025. 6) 중앙도서관의근대문학종합목록등다양한데이터자원을통합하여총세단계로데이터 베이스를점진적으로구축하였다. 먼저기본정보(색인명,본명,한자명,생몰년,출생지,성별,ISNI번호),문인들의이칭 관련정보,문학장르,소속단체등을중심으로관계형데이터베이스(RDB)모델링을진 행하였으며,각버전별로명확한원칙과기준에따라데이터의완성도를제고하였다.다 만구축과정에서발생한정보충돌과버전별정보혼재문제를해결하기위해향후RDF 나온톨로지기반지식표현체계로의전환을통해정보의출처와변경이력을명시적으 로관리할필요성이"
+            },
+            "doc_005": {
+                "title": "NLP - 실시간 문맥 인식 감성 분석을 위한 모듈형 아키텍처 설계",
+                "category": "NLP",
+                "document_type": "research_paper",
+                "year": 2025,
+                "keywords": [
+                    "온톨로지",
+                    "자연어처리",
+                    "자연어",
+                    "감성분석",
+                    "언어모델"
+                ],
+                "authors": [
+                    "안은희",
+                    "안정국"
+                ],
+                "pages": 7,
+                "abstract_extracted": true,
+                "abstract": "Recent advancements in artificial intelligence and large language models (LLMs) have significantly improved the accuracy of sentiment analysis. However, the structural foundation for practical applications— such as real-time context awareness, sentiment inference, and responsive user interaction—remains insufficiently addressed. This study proposes a modular architecture designed to support real-time sentiment flow recognition and reactive services, building upon existing sentiment datasets and ontology-based analysis models. The proposed architecture centers around an LSTM-based attention mechanism and is structured to integrate sentiment variation inference and visualization within real-time data stream environments. Furthermore, by combining the contextual understanding capabilities of "
+            },
+            "doc_006": {
+                "title": "온톨로지 기반의 의미 속성 및 감성 판별",
+                "category": "NLP",
+                "document_type": "research_paper",
+                "year": 2025,
+                "keywords": [
+                    "온톨로지",
+                    "RDF",
+                    "자연어처리",
+                    "자연어"
+                ],
+                "authors": [
+                    "안은희",
+                    "안정국"
+                ],
+                "pages": 10,
+                "abstract_extracted": true,
+                "abstract": "Recent Large Language Models (LLMs) have demonstrated strong performance in natural language processing (NLP). However, they face limitations in accurately capturing contextual meaning and sentiment variations across specific domains. This study proposes a sentiment analysis approach that integrates ontology to enhance contextual accuracy and systematically structure sentiment tagging for different domains. A sentiment dataset was constructed through crowdsourcing, and ontology-based sentiment tagging was applied to refine sentiment classification. To evaluate the effectiveness of the proposed method, performance comparisons were conducted with existing sentiment analysis models, including lexicon-based models, machine learning models (SVM, Naïve Bayes), deep learning-based models (BERT), "
+            },
+            "doc_007": {
+                "title": "온톨로지와지식그래프를활용한국방지휘통제데이터통합방법연구",
+                "category": "국방",
+                "document_type": "research_paper",
+                "year": 2025,
+                "keywords": [
+                    "온톨로지",
+                    "지식그래프",
+                    "RDF",
+                    "국방",
+                    "지휘통제"
+                ],
+                "authors": [
+                    "알수없음"
+                ],
+                "pages": 10,
+                "abstract_extracted": true,
+                "abstract": "T o t r a i n A I m o d e l s f o r J o i n t A l l D o m a i n C o m m a n d a n d C o n t r o l ( J A D C 2 ) , i t i s e s s e n t i a l t o s e c u r e t r a i n i n g d a t a . T o t h i s e n d , t h e military i s p r o m o t i n g t h e c o n s t r u c t i o n o f a n i n t e g r a t e d D B i n t h e c o m b a t cloud. However, building an integrated DB from scratch is a di fficult t a s k t h a t r e q u i r e s a l o t o f t i m e a n d e f f o r t . T o r e d u c e t h e s e d i fficulties, this paper proposes a method to build an integrated database u s i n g d a t a s t o r e d a n d m a n a g e d i n t h e c o m m a n d a n d c o n t r o l ( C 2 ) s y s t e m s o p e r a t e d b y t h e J o i n t C h i e f s o f S t a f f ( J C S ) a n d e a c h military branch by utilizing "
+            },
+            "doc_008": {
+                "title": "해외 온톨로지 현황과 한국군 온톨로지 개발방안_202306",
+                "category": "국방",
+                "document_type": "research_paper",
+                "year": 2025,
+                "keywords": [
+                    "온톨로지",
+                    "자연어",
+                    "국방",
+                    "지휘통제",
+                    "지식표현"
+                ],
+                "authors": [
+                    "알수없음"
+                ],
+                "pages": 28,
+                "abstract_extracted": true,
+                "abstract": "군 온톨로지는 정보공유와 지식표현을 용이하게 함으로써 최종적으로 보다 신속하고 효율적 이며 정확한 지휘결심이 이루어지도록 지원할 뿐만 아니라 군의 다양한 분야에 다양한 목적으로도 활용될 수 있다. 이미 해외선진국은 온톨로지를 지휘통제 (Command & Control(C2)), 정보감 시정찰 (Intelligence, Surveillance, and Reconnaissance), 모의훈련 (Simulation and Training), 군수(Logistics), 사이버보안 (Cybersecurity) 등에 적용하고 있다. 본 논문은 해외애서의 온톨 로지 관련 연구 이슈와 군 활용사례에 대한 조사내용을 담고 있으며 , 주요 연구이슈와 개발된 기법, 도구, 활용되고 있는 온톨로지 사례의 개요 등의 전반적인 흐름을 파악한다 . 또한 한국 군의 다양한 분야에 어떻게 개발할 것인지에 대한 방향도 제시한다 . 주제어:한국형임무공간개념모델,온톨로지,개발방법론,모델링&시뮬레이션"
+            }
+        },
+        "potential_analysis": {
+            "extractable_fields": [
+                "title",
+                "category",
+                "document_type",
+                "year",
+                "keywords",
+                "authors",
+                "pages"
+            ],
+            "extraction_rates": {
+                "title": 1.0,
+                "category": 1.0,
+                "document_type": 1.0,
+                "year": 1.0,
+                "keywords": 1.0,
+                "authors": 1.0,
+                "pages": 1.0
+            },
+            "overall_extraction_rate": 1.0,
+            "beneficiary_queries_count": 27,
+            "beneficiary_queries_ratio": 0.9,
+            "potential_improvement": 0.135,
+            "estimated_accuracy": 0.435
+        }
+    },
+    "potential_analysis": {
+        "extractable_fields": [],
+        "extraction_rates": {
+            "title": 0.0,
+            "category": 0.0,
+            "document_type": 0.0,
+            "year": 0.0,
+            "keywords": 0.0,
+            "authors": 0.0,
+            "pages": 0.0
+        },
+        "overall_extraction_rate": 0.0,
+        "beneficiary_queries_count": 21,
+        "beneficiary_queries_ratio": 0.7,
+        "potential_improvement": 0.105,
+        "estimated_accuracy": 0.405
+    }
+}

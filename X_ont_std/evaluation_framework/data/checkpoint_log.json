@@ -1,0 +1,2559 @@
+{
+  "results": [
+    {
+      "problem_id": "STD-O-01",
+      "category": "Ontology",
+      "question": "온톨로지 기반 질의응답에서 온톨로지는 어떤 역할을 하는가?",
+      "original_accuracy": 80,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "question": "온톨로지 기반 질의응답에서 온톨로지는 어떤 역할을 하는가?",
+          "category": "Ontology",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 222,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "category": "Ontology",
+          "expected_answer_length": 148,
+          "actual_answer_length": 222,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 10,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "problem_id": "STD-O-01",
+          "category": "Ontology",
+          "accuracy_score": 10,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 10,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.032705"
+    },
+    {
+      "problem_id": "STD-O-02",
+      "category": "Ontology",
+      "question": "정형 데이터 통합에서 온톨로지와 지식그래프를 어떻게 구분해 적용해야 하는가?",
+      "original_accuracy": 75,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "question": "정형 데이터 통합에서 온톨로지와 지식그래프를 어떻게 구분해 적용해야 하는가?",
+          "category": "Ontology",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 341,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "category": "Ontology",
+          "expected_answer_length": 148,
+          "actual_answer_length": 341,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 2,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "problem_id": "STD-O-02",
+          "category": "Ontology",
+          "accuracy_score": 2,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 2,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.032705"
+    },
+    {
+      "problem_id": "STD-O-03",
+      "category": "Ontology",
+      "question": "DB 스키마를 온톨로지로 변환할 때 어떤 절차가 필요한가?",
+      "original_accuracy": 70,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "question": "DB 스키마를 온톨로지로 변환할 때 어떤 절차가 필요한가?",
+          "category": "Ontology",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 261,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "category": "Ontology",
+          "expected_answer_length": 138,
+          "actual_answer_length": 261,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 8,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "problem_id": "STD-O-03",
+          "category": "Ontology",
+          "accuracy_score": 8,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 8,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.032705"
+    },
+    {
+      "problem_id": "STD-O-04",
+      "category": "Ontology",
+      "question": "온톨로지 이질성 문제는 왜 발생하며, 질의응답 시스템에서 어떤 위험을 만든가?",
+      "original_accuracy": 80,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "question": "온톨로지 이질성 문제는 왜 발생하며, 질의응답 시스템에서 어떤 위험을 만든가?",
+          "category": "Ontology",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 286,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "category": "Ontology",
+          "expected_answer_length": 146,
+          "actual_answer_length": 286,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 3,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "problem_id": "STD-O-04",
+          "category": "Ontology",
+          "accuracy_score": 3,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 3,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.032705"
+    },
+    {
+      "problem_id": "STD-O-05",
+      "category": "Ontology",
+      "question": "SCBOW, BERT, SimRank를 결합한 온톨로지 매칭 방식의 핵심 아이디어는 무엇인가?",
+      "original_accuracy": 75,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "question": "SCBOW, BERT, SimRank를 결합한 온톨로지 매칭 방식의 핵심 아이디어는 무엇인가?",
+          "category": "Ontology",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 315,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "category": "Ontology",
+          "expected_answer_length": 143,
+          "actual_answer_length": 315,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 5,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "problem_id": "STD-O-05",
+          "category": "Ontology",
+          "accuracy_score": 5,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 5,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.032705"
+    },
+    {
+      "problem_id": "STD-O-06",
+      "category": "Ontology",
+      "question": "온톨로지 매칭 성능은 어떤 지표로 평가할 수 있는가?",
+      "original_accuracy": 90,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "question": "온톨로지 매칭 성능은 어떤 지표로 평가할 수 있는가?",
+          "category": "Ontology",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 240,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "category": "Ontology",
+          "expected_answer_length": 96,
+          "actual_answer_length": 240,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 5,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.032705",
+          "problem_id": "STD-O-06",
+          "category": "Ontology",
+          "accuracy_score": 5,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 5,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-O-07",
+      "category": "Ontology",
+      "question": "온톨로지 학습 기반 지식그래프 구축이 중복 지식과 의미 충돌 문제를 줄이는 방식은 무엇인가?",
+      "original_accuracy": 60,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "question": "온톨로지 학습 기반 지식그래프 구축이 중복 지식과 의미 충돌 문제를 줄이는 방식은 무엇인가?",
+          "category": "Ontology",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 178,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "category": "Ontology",
+          "expected_answer_length": 131,
+          "actual_answer_length": 178,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 10,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "problem_id": "STD-O-07",
+          "category": "Ontology",
+          "accuracy_score": 10,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 10,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-O-08",
+      "category": "Ontology",
+      "question": "국방 지휘통제 통합 DB에서 상위 온톨로지가 필요한 이유는 무엇인가?",
+      "original_accuracy": 75,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "question": "국방 지휘통제 통합 DB에서 상위 온톨로지가 필요한 이유는 무엇인가?",
+          "category": "Ontology",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 187,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "category": "Ontology",
+          "expected_answer_length": 132,
+          "actual_answer_length": 187,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 6,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "problem_id": "STD-O-08",
+          "category": "Ontology",
+          "accuracy_score": 6,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 6,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-A-01",
+      "category": "Advanced RAG",
+      "question": "생성형 AI 기반 질의응답에서 RAG나 온톨로지 기반 모델링을 붙이는 이유는 무엇인가?",
+      "original_accuracy": 75,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "question": "생성형 AI 기반 질의응답에서 RAG나 온톨로지 기반 모델링을 붙이는 이유는 무엇인가?",
+          "category": "Advanced RAG",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 368,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "category": "Advanced RAG",
+          "expected_answer_length": 144,
+          "actual_answer_length": 368,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 6,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "problem_id": "STD-A-01",
+          "category": "Advanced RAG",
+          "accuracy_score": 6,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 6,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-A-02",
+      "category": "Advanced RAG",
+      "question": "문서 기반 RAG에서 단순 키워드 검색보다 임베딩 검색이 중요한 이유는 무엇인가?",
+      "original_accuracy": 80,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "question": "문서 기반 RAG에서 단순 키워드 검색보다 임베딩 검색이 중요한 이유는 무엇인가?",
+          "category": "Advanced RAG",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 430,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "category": "Advanced RAG",
+          "expected_answer_length": 139,
+          "actual_answer_length": 430,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 8,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "problem_id": "STD-A-02",
+          "category": "Advanced RAG",
+          "accuracy_score": 8,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 8,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-A-03",
+      "category": "Advanced RAG",
+      "question": "QA 테스트셋을 만들 때 문서를 어떤 기준으로 분절하고 구조화해야 하는가?",
+      "original_accuracy": 60,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "question": "QA 테스트셋을 만들 때 문서를 어떤 기준으로 분절하고 구조화해야 하는가?",
+          "category": "Advanced RAG",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 269,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "category": "Advanced RAG",
+          "expected_answer_length": 142,
+          "actual_answer_length": 269,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 0,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "problem_id": "STD-A-03",
+          "category": "Advanced RAG",
+          "accuracy_score": 0,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 0,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-A-04",
+      "category": "Advanced RAG",
+      "question": "LLM 단독 답변과 문서 근거형 답변을 평가할 때 가장 먼저 확인할 것은 무엇인가?",
+      "original_accuracy": 75,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "question": "LLM 단독 답변과 문서 근거형 답변을 평가할 때 가장 먼저 확인할 것은 무엇인가?",
+          "category": "Advanced RAG",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 319,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "category": "Advanced RAG",
+          "expected_answer_length": 131,
+          "actual_answer_length": 319,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 4,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "problem_id": "STD-A-04",
+          "category": "Advanced RAG",
+          "accuracy_score": 4,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 4,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-A-05",
+      "category": "Advanced RAG",
+      "question": "문맥 의존성이 강한 문서에서 Advanced RAG가 고려해야 할 점은 무엇인가?",
+      "original_accuracy": 50,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "question": "문맥 의존성이 강한 문서에서 Advanced RAG가 고려해야 할 점은 무엇인가?",
+          "category": "Advanced RAG",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 458,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "category": "Advanced RAG",
+          "expected_answer_length": 116,
+          "actual_answer_length": 458,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 3,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "problem_id": "STD-A-05",
+          "category": "Advanced RAG",
+          "accuracy_score": 3,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 3,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-A-06",
+      "category": "Advanced RAG",
+      "question": "실시간 문맥 인식 시스템을 QA 평가 플랫폼에 참고할 때 어떤 구조 요소를 볼 수 있는가?",
+      "original_accuracy": 60,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "question": "실시간 문맥 인식 시스템을 QA 평가 플랫폼에 참고할 때 어떤 구조 요소를 볼 수 있는가?",
+          "category": "Advanced RAG",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 435,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "category": "Advanced RAG",
+          "expected_answer_length": 134,
+          "actual_answer_length": 435,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 7,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "problem_id": "STD-A-06",
+          "category": "Advanced RAG",
+          "accuracy_score": 7,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 7,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-A-07",
+      "category": "Advanced RAG",
+      "question": "retrieval_miss와 hallucination은 QA 평가에서 어떻게 구분해야 하는가?",
+      "original_accuracy": 80,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "question": "retrieval_miss와 hallucination은 QA 평가에서 어떻게 구분해야 하는가?",
+          "category": "Advanced RAG",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 412,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "category": "Advanced RAG",
+          "expected_answer_length": 152,
+          "actual_answer_length": 412,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 9,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "problem_id": "STD-A-07",
+          "category": "Advanced RAG",
+          "accuracy_score": 9,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 9,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-A-08",
+      "category": "Advanced RAG",
+      "question": "도메인 특화 QA에서 온톨로지 기반 접근이 일반 LLM보다 강점을 가질 수 있는 경우는 언제인가?",
+      "original_accuracy": 70,
+      "constrained": false,
+      "constraint_reason": "[중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.95,
+      "constraints": [
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "question": "도메인 특화 QA에서 온톨로지 기반 접근이 일반 LLM보다 강점을 가질 수 있는 경우는 언제인가?",
+          "category": "Advanced RAG",
+          "is_constrained": false,
+          "has_answer": true,
+          "has_sources": true,
+          "source_count": 2,
+          "answer_length": 262,
+          "is_length_ok": true,
+          "source_quality": 0.1,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.10)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 4,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "category": "Advanced RAG",
+          "expected_answer_length": 134,
+          "actual_answer_length": 262,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 11,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.034232",
+          "problem_id": "STD-A-08",
+          "category": "Advanced RAG",
+          "accuracy_score": 11,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": true,
+          "is_score_suspicious": false,
+          "issues": [],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": false,
+        "response_similarity": 1.0,
+        "fallback_applied": false,
+        "impact_score": 0.0
+      },
+      "final_accuracy": 11,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.034232"
+    },
+    {
+      "problem_id": "STD-S-01",
+      "category": "Snowflake",
+      "question": "Snowflake 기반 RAG 평가에서 문서 저장소와 근거 페이지를 왜 함께 관리해야 하는가?",
+      "original_accuracy": 75,
+      "constrained": true,
+      "constraint_reason": "[필수] Snowflake 범주의 필수 개념이 온톨로지에 없음 / [중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.4,
+      "constraints": [
+        {
+          "type": "MISSING_REQUIRED_CONCEPT",
+          "severity": "CRITICAL",
+          "message": "Snowflake 범주의 필수 개념이 온톨로지에 없음",
+          "required_concepts": [
+            "snowflake",
+            "snowflake_rag",
+            "snowflake_specific"
+          ],
+          "ontology_concepts": [
+            "retrieval",
+            "concept",
+            "rdf",
+            "property",
+            "embedding",
+            "class",
+            "knowledge_graph",
+            "metadata",
+            "relationship",
+            "owl"
+          ]
+        },
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "question": "Snowflake 기반 RAG 평가에서 문서 저장소와 근거 페이지를 왜 함께 관리해야 하는가?",
+          "category": "Snowflake",
+          "is_constrained": true,
+          "has_answer": true,
+          "has_sources": false,
+          "source_count": 0,
+          "answer_length": 741,
+          "is_length_ok": true,
+          "source_quality": 0.0,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "근거 없이 답변함 (hallucination 위험)",
+              "severity": "HIGH"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+              "severity": "MEDIUM"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.00)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 2,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "category": "Snowflake",
+          "expected_answer_length": 152,
+          "actual_answer_length": 20,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 2,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "problem_id": "STD-S-01",
+          "category": "Snowflake",
+          "accuracy_score": 2,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": true,
+        "response_similarity": 0.007518796992481203,
+        "fallback_applied": true,
+        "impact_score": 1.0
+      },
+      "final_accuracy": 2,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.035253"
+    },
+    {
+      "problem_id": "STD-S-02",
+      "category": "Snowflake",
+      "question": "Snowflake RAG에서 정형 테이블과 PDF 문서를 함께 다룰 때 어떤 통합 전략이 필요한가?",
+      "original_accuracy": 60,
+      "constrained": true,
+      "constraint_reason": "[필수] Snowflake 범주의 필수 개념이 온톨로지에 없음 / [중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.4,
+      "constraints": [
+        {
+          "type": "MISSING_REQUIRED_CONCEPT",
+          "severity": "CRITICAL",
+          "message": "Snowflake 범주의 필수 개념이 온톨로지에 없음",
+          "required_concepts": [
+            "snowflake",
+            "snowflake_rag",
+            "snowflake_specific"
+          ],
+          "ontology_concepts": [
+            "retrieval",
+            "concept",
+            "rdf",
+            "property",
+            "embedding",
+            "class",
+            "knowledge_graph",
+            "metadata",
+            "relationship",
+            "owl"
+          ]
+        },
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "question": "Snowflake RAG에서 정형 테이블과 PDF 문서를 함께 다룰 때 어떤 통합 전략이 필요한가?",
+          "category": "Snowflake",
+          "is_constrained": true,
+          "has_answer": true,
+          "has_sources": false,
+          "source_count": 0,
+          "answer_length": 168,
+          "is_length_ok": true,
+          "source_quality": 0.0,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "근거 없이 답변함 (hallucination 위험)",
+              "severity": "HIGH"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+              "severity": "MEDIUM"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.00)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 2,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "category": "Snowflake",
+          "expected_answer_length": 134,
+          "actual_answer_length": 20,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 0,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "problem_id": "STD-S-02",
+          "category": "Snowflake",
+          "accuracy_score": 0,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": true,
+        "response_similarity": 0.0,
+        "fallback_applied": false,
+        "impact_score": 1.0
+      },
+      "final_accuracy": 0,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.035253"
+    },
+    {
+      "problem_id": "STD-S-03",
+      "category": "Snowflake",
+      "question": "엔터프라이즈 RAG 운영에서 보안성과 접근통제는 왜 평가 항목이어야 하는가?",
+      "original_accuracy": 75,
+      "constrained": true,
+      "constraint_reason": "[필수] Snowflake 범주의 필수 개념이 온톨로지에 없음 / [중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.4,
+      "constraints": [
+        {
+          "type": "MISSING_REQUIRED_CONCEPT",
+          "severity": "CRITICAL",
+          "message": "Snowflake 범주의 필수 개념이 온톨로지에 없음",
+          "required_concepts": [
+            "snowflake",
+            "snowflake_rag",
+            "snowflake_specific"
+          ],
+          "ontology_concepts": [
+            "retrieval",
+            "concept",
+            "rdf",
+            "property",
+            "embedding",
+            "class",
+            "knowledge_graph",
+            "metadata",
+            "relationship",
+            "owl"
+          ]
+        },
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "question": "엔터프라이즈 RAG 운영에서 보안성과 접근통제는 왜 평가 항목이어야 하는가?",
+          "category": "Snowflake",
+          "is_constrained": true,
+          "has_answer": true,
+          "has_sources": false,
+          "source_count": 0,
+          "answer_length": 260,
+          "is_length_ok": true,
+          "source_quality": 0.0,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "근거 없이 답변함 (hallucination 위험)",
+              "severity": "HIGH"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+              "severity": "MEDIUM"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.00)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 2,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "category": "Snowflake",
+          "expected_answer_length": 133,
+          "actual_answer_length": 20,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 0,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "problem_id": "STD-S-03",
+          "category": "Snowflake",
+          "accuracy_score": 0,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": true,
+        "response_similarity": 0.0,
+        "fallback_applied": true,
+        "impact_score": 1.0
+      },
+      "final_accuracy": 0,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.035253"
+    },
+    {
+      "problem_id": "STD-S-04",
+      "category": "Snowflake",
+      "question": "Snowflake 기반 QA 테스트에서 응답 시간과 운영 제약을 함께 봐야 하는 이유는 무엇인가?",
+      "original_accuracy": 60,
+      "constrained": true,
+      "constraint_reason": "[필수] Snowflake 범주의 필수 개념이 온톨로지에 없음 / [중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.4,
+      "constraints": [
+        {
+          "type": "MISSING_REQUIRED_CONCEPT",
+          "severity": "CRITICAL",
+          "message": "Snowflake 범주의 필수 개념이 온톨로지에 없음",
+          "required_concepts": [
+            "snowflake",
+            "snowflake_rag",
+            "snowflake_specific"
+          ],
+          "ontology_concepts": [
+            "retrieval",
+            "concept",
+            "rdf",
+            "property",
+            "embedding",
+            "class",
+            "knowledge_graph",
+            "metadata",
+            "relationship",
+            "owl"
+          ]
+        },
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "question": "Snowflake 기반 QA 테스트에서 응답 시간과 운영 제약을 함께 봐야 하는 이유는 무엇인가?",
+          "category": "Snowflake",
+          "is_constrained": true,
+          "has_answer": true,
+          "has_sources": false,
+          "source_count": 0,
+          "answer_length": 270,
+          "is_length_ok": true,
+          "source_quality": 0.0,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "근거 없이 답변함 (hallucination 위험)",
+              "severity": "HIGH"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+              "severity": "MEDIUM"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.00)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 2,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "category": "Snowflake",
+          "expected_answer_length": 143,
+          "actual_answer_length": 20,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 0,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "problem_id": "STD-S-04",
+          "category": "Snowflake",
+          "accuracy_score": 0,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": true,
+        "response_similarity": 0.0,
+        "fallback_applied": true,
+        "impact_score": 1.0
+      },
+      "final_accuracy": 0,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.035253"
+    },
+    {
+      "problem_id": "STD-S-05",
+      "category": "Snowflake",
+      "question": "Snowflake RAG 답변의 근거 적합성은 어떻게 판정해야 하는가?",
+      "original_accuracy": 60,
+      "constrained": true,
+      "constraint_reason": "[필수] Snowflake 범주의 필수 개념이 온톨로지에 없음 / [중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.4,
+      "constraints": [
+        {
+          "type": "MISSING_REQUIRED_CONCEPT",
+          "severity": "CRITICAL",
+          "message": "Snowflake 범주의 필수 개념이 온톨로지에 없음",
+          "required_concepts": [
+            "snowflake",
+            "snowflake_rag",
+            "snowflake_specific"
+          ],
+          "ontology_concepts": [
+            "retrieval",
+            "concept",
+            "rdf",
+            "property",
+            "embedding",
+            "class",
+            "knowledge_graph",
+            "metadata",
+            "relationship",
+            "owl"
+          ]
+        },
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "question": "Snowflake RAG 답변의 근거 적합성은 어떻게 판정해야 하는가?",
+          "category": "Snowflake",
+          "is_constrained": true,
+          "has_answer": true,
+          "has_sources": false,
+          "source_count": 0,
+          "answer_length": 502,
+          "is_length_ok": true,
+          "source_quality": 0.0,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "근거 없이 답변함 (hallucination 위험)",
+              "severity": "HIGH"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+              "severity": "MEDIUM"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.00)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 2,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "category": "Snowflake",
+          "expected_answer_length": 131,
+          "actual_answer_length": 20,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 2,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "problem_id": "STD-S-05",
+          "category": "Snowflake",
+          "accuracy_score": 2,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": true,
+        "response_similarity": 0.009900990099009901,
+        "fallback_applied": true,
+        "impact_score": 1.0
+      },
+      "final_accuracy": 2,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.035253"
+    },
+    {
+      "problem_id": "STD-S-06",
+      "category": "Snowflake",
+      "question": "ranking_issue는 Snowflake RAG 평가에서 어떤 경우로 기록해야 하는가?",
+      "original_accuracy": 10,
+      "constrained": true,
+      "constraint_reason": "[필수] Snowflake 범주의 필수 개념이 온톨로지에 없음 / [중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.4,
+      "constraints": [
+        {
+          "type": "MISSING_REQUIRED_CONCEPT",
+          "severity": "CRITICAL",
+          "message": "Snowflake 범주의 필수 개념이 온톨로지에 없음",
+          "required_concepts": [
+            "snowflake",
+            "snowflake_rag",
+            "snowflake_specific"
+          ],
+          "ontology_concepts": [
+            "retrieval",
+            "concept",
+            "rdf",
+            "property",
+            "embedding",
+            "class",
+            "knowledge_graph",
+            "metadata",
+            "relationship",
+            "owl"
+          ]
+        },
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "question": "ranking_issue는 Snowflake RAG 평가에서 어떤 경우로 기록해야 하는가?",
+          "category": "Snowflake",
+          "is_constrained": true,
+          "has_answer": true,
+          "has_sources": false,
+          "source_count": 0,
+          "answer_length": 260,
+          "is_length_ok": true,
+          "source_quality": 0.0,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "근거 없이 답변함 (hallucination 위험)",
+              "severity": "HIGH"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+              "severity": "MEDIUM"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.00)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 2,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "category": "Snowflake",
+          "expected_answer_length": 133,
+          "actual_answer_length": 20,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 0,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "problem_id": "STD-S-06",
+          "category": "Snowflake",
+          "accuracy_score": 0,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": true,
+        "response_similarity": 0.0,
+        "fallback_applied": true,
+        "impact_score": 1.0
+      },
+      "final_accuracy": 0,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.035253"
+    },
+    {
+      "problem_id": "STD-S-07",
+      "category": "Snowflake",
+      "question": "Snowflake RAG가 향후 멀티모달 데이터를 포함하려면 어떤 데이터까지 고려해야 하는가?",
+      "original_accuracy": 75,
+      "constrained": true,
+      "constraint_reason": "[필수] Snowflake 범주의 필수 개념이 온톨로지에 없음 / [중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.4,
+      "constraints": [
+        {
+          "type": "MISSING_REQUIRED_CONCEPT",
+          "severity": "CRITICAL",
+          "message": "Snowflake 범주의 필수 개념이 온톨로지에 없음",
+          "required_concepts": [
+            "snowflake",
+            "snowflake_rag",
+            "snowflake_specific"
+          ],
+          "ontology_concepts": [
+            "retrieval",
+            "concept",
+            "rdf",
+            "property",
+            "embedding",
+            "class",
+            "knowledge_graph",
+            "metadata",
+            "relationship",
+            "owl"
+          ]
+        },
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "question": "Snowflake RAG가 향후 멀티모달 데이터를 포함하려면 어떤 데이터까지 고려해야 하는가?",
+          "category": "Snowflake",
+          "is_constrained": true,
+          "has_answer": true,
+          "has_sources": false,
+          "source_count": 0,
+          "answer_length": 202,
+          "is_length_ok": true,
+          "source_quality": 0.0,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "근거 없이 답변함 (hallucination 위험)",
+              "severity": "HIGH"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+              "severity": "MEDIUM"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.00)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 2,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "category": "Snowflake",
+          "expected_answer_length": 147,
+          "actual_answer_length": 20,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 0,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "problem_id": "STD-S-07",
+          "category": "Snowflake",
+          "accuracy_score": 0,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": true,
+        "response_similarity": 0.0,
+        "fallback_applied": true,
+        "impact_score": 1.0
+      },
+      "final_accuracy": 0,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.035253"
+    },
+    {
+      "problem_id": "STD-S-08",
+      "category": "Snowflake",
+      "question": "1차와 2차 QA 테스트 결과를 비교할 때 Snowflake RAG에서 특히 봐야 할 개선 지표는 무엇인가?",
+      "original_accuracy": 50,
+      "constrained": true,
+      "constraint_reason": "[필수] Snowflake 범주의 필수 개념이 온톨로지에 없음 / [중간] 검색 결과의 신뢰도 낮음 (0.0%)",
+      "constraint_confidence": 0.4,
+      "constraints": [
+        {
+          "type": "MISSING_REQUIRED_CONCEPT",
+          "severity": "CRITICAL",
+          "message": "Snowflake 범주의 필수 개념이 온톨로지에 없음",
+          "required_concepts": [
+            "snowflake",
+            "snowflake_rag",
+            "snowflake_specific"
+          ],
+          "ontology_concepts": [
+            "retrieval",
+            "concept",
+            "rdf",
+            "property",
+            "embedding",
+            "class",
+            "knowledge_graph",
+            "metadata",
+            "relationship",
+            "owl"
+          ]
+        },
+        {
+          "type": "LOW_RETRIEVAL_CONFIDENCE",
+          "severity": "MEDIUM",
+          "message": "검색 결과의 신뢰도 낮음 (0.0%)",
+          "confidence": 0.0,
+          "threshold": 0.3
+        }
+      ],
+      "checkpoints": {
+        "cp1": {
+          "checkpoint_id": "CP1_ANSWER_GENERATION",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "question": "1차와 2차 QA 테스트 결과를 비교할 때 Snowflake RAG에서 특히 봐야 할 개선 지표는 무엇인가?",
+          "category": "Snowflake",
+          "is_constrained": true,
+          "has_answer": true,
+          "has_sources": false,
+          "source_count": 0,
+          "answer_length": 396,
+          "is_length_ok": true,
+          "source_quality": 0.0,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "근거 없이 답변함 (hallucination 위험)",
+              "severity": "HIGH"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+              "severity": "MEDIUM"
+            },
+            {
+              "type": "WARNING",
+              "checkpoint": "CP1",
+              "message": "소스 품질이 낮음 (점수: 0.00)",
+              "severity": "MEDIUM"
+            }
+          ],
+          "passed_checks": 2,
+          "total_checks": 5,
+          "status": "PASS"
+        },
+        "cp2": {
+          "checkpoint_id": "CP2_ACCURACY_SCORING",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "category": "Snowflake",
+          "expected_answer_length": 148,
+          "actual_answer_length": 20,
+          "scoring_method": "SEMANTIC_SIMILARITY",
+          "estimated_accuracy": 0,
+          "issues": [],
+          "status": "REVIEW_NEEDED"
+        },
+        "cp3": {
+          "checkpoint_id": "CP3_QA_VALIDITY",
+          "timestamp": "2026-06-07T19:59:53.035253",
+          "problem_id": "STD-S-08",
+          "category": "Snowflake",
+          "accuracy_score": 0,
+          "expected_answer_valid": true,
+          "actual_answer_relevant": false,
+          "is_score_suspicious": false,
+          "issues": [
+            {
+              "type": "WARNING",
+              "checkpoint": "CP3",
+              "message": "실제답변이 예상답변과 무관해 보임",
+              "severity": "MEDIUM"
+            }
+          ],
+          "red_flags": [],
+          "needs_review": false,
+          "status": "PASS"
+        }
+      },
+      "constraint_impact": {
+        "was_constrained": true,
+        "response_similarity": 0.0,
+        "fallback_applied": true,
+        "impact_score": 1.0
+      },
+      "final_accuracy": 0,
+      "needs_review": false,
+      "timestamp": "2026-06-07T19:59:53.035253"
+    }
+  ],
+  "summary": {
+    "total_evaluated": 24,
+    "constrained_count": 8,
+    "constrain_rate": "33.3%",
+    "needs_review_count": 0,
+    "average_accuracy_change": -63.291666666666664,
+    "checkpoint_summary": {
+      "total_checkpoints": 72,
+      "by_id": {
+        "CP1_ANSWER_GENERATION": {
+          "passed": 24,
+          "failed": 0
+        },
+        "CP2_ACCURACY_SCORING": {
+          "passed": 0,
+          "failed": 24
+        },
+        "CP3_QA_VALIDITY": {
+          "passed": 24,
+          "failed": 0
+        }
+      },
+      "issues": [
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.10)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "근거 없이 답변함 (hallucination 위험)",
+          "severity": "HIGH"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.00)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "근거 없이 답변함 (hallucination 위험)",
+          "severity": "HIGH"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.00)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "근거 없이 답변함 (hallucination 위험)",
+          "severity": "HIGH"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.00)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "근거 없이 답변함 (hallucination 위험)",
+          "severity": "HIGH"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.00)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "근거 없이 답변함 (hallucination 위험)",
+          "severity": "HIGH"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.00)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "근거 없이 답변함 (hallucination 위험)",
+          "severity": "HIGH"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.00)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "근거 없이 답변함 (hallucination 위험)",
+          "severity": "HIGH"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.00)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "근거 없이 답변함 (hallucination 위험)",
+          "severity": "HIGH"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "범위 제약이 적용되었으나 답변에 반영 안 됨",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP1",
+          "message": "소스 품질이 낮음 (점수: 0.00)",
+          "severity": "MEDIUM"
+        },
+        {
+          "type": "WARNING",
+          "checkpoint": "CP3",
+          "message": "실제답변이 예상답변과 무관해 보임",
+          "severity": "MEDIUM"
+        }
+      ],
+      "timestamp": "2026-06-07T19:59:53.035253"
+    }
+  },
+  "timestamp": "2026-06-07T19:59:53.035253"
+}

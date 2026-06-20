@@ -1,0 +1,25 @@
+{
+  "flow_id": "scenario1-customer-question",
+  "scenario_id": "scenario1",
+  "name": "고객사 문의 자동댓글 데이터 흐름",
+  "description": "고객사 게시판 문의 접수부터 AI 답변 생성 및 MCP 댓글 등록, 온톨로지 저장까지의 흐름",
+  "nodes": [
+    { "id": "n1-source", "label": "고객사 게시판", "type": "source", "description": "고객이 문의를 등록하는 외부 게시판 시스템 (포트 8090)" },
+    { "id": "n2-ingest", "label": "이벤트 수신", "type": "ingest", "description": "Webhook 또는 Batch를 통해 문의 이벤트를 온톨로지 플랫폼으로 수집" },
+    { "id": "n3-transform", "label": "문의 분류", "type": "transform", "description": "LLM을 활용해 문의 유형(비밀번호, 주문, 기타)을 자동 분류" },
+    { "id": "n4-retrieve", "label": "RAG 근거 조회", "type": "retrieve", "description": "회사 내부 매뉴얼 및 온톨로지 지식 DB에서 연관 답변 검색" },
+    { "id": "n5-execute", "label": "답변 생성", "type": "execute", "description": "수집된 근거를 결합하여 고객 맞춤형 답변 초안 작성" },
+    { "id": "n6-writeback", "label": "customer_mcp 댓글 등록", "type": "writeback", "description": "고객사 MCP 중계 계층(포트 8080)을 통해 외부 게시판에 댓글 작성" },
+    { "id": "n7-persist", "label": "온톨로지 관계 저장", "type": "persist", "description": "ServiceRequest - has_reply - AutoReply 관계를 온톨로지에 영구 적재" },
+    { "id": "n8-audit", "label": "감사 로그 기록", "type": "audit", "description": "누가 어떤 실행을 통해 무엇을 변경했인지 시스템 감사 로그에 기록" }
+  ],
+  "edges": [
+    { "source": "n1-source", "target": "n2-ingest" },
+    { "source": "n2-ingest", "target": "n3-transform" },
+    { "source": "n3-transform", "target": "n4-retrieve" },
+    { "source": "n4-retrieve", "target": "n5-execute" },
+    { "source": "n5-execute", "target": "n6-writeback" },
+    { "source": "n6-writeback", "target": "n7-persist" },
+    { "source": "n7-persist", "target": "n8-audit" }
+  ]
+}

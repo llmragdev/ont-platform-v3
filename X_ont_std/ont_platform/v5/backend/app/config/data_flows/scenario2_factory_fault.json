@@ -1,0 +1,27 @@
+{
+  "flow_id": "scenario2-factory-fault",
+  "scenario_id": "scenario2",
+  "name": "공장 반복 고장 정비지시 데이터 흐름",
+  "description": "현장 고장 요청 접수부터 라인/설비 매핑, 반복 고장 감지, 정비지시 발행 및 온톨로지 적재 흐름",
+  "nodes": [
+    { "id": "n1-source", "label": "공장 현장 요청", "type": "source", "description": "공장 라인 및 설비 고장 상태가 리포팅되는 외부 팩토리 시스템 (포트 8091)" },
+    { "id": "n2-ingest", "label": "요청 수집", "type": "ingest", "description": "수동 배치(Batch) 또는 실시간 웹훅으로 고장 요청 이벤트를 플랫폼으로 수집" },
+    { "id": "n3-transform", "label": "고장/품질 분류", "type": "transform", "description": "요청의 원문 텍스트를 분류하여 기계적 고장(Fault)인지 품질 결함(Quality)인지 감별" },
+    { "id": "n4-map", "label": "자산 매핑", "type": "transform", "description": "요청 텍스트 상의 공장(Factory), 생산라인(Line), 공정(Process), 설비(Equipment)를 추출하여 온톨로지 지식 객체와 매핑" },
+    { "id": "n5-check", "label": "반복 고장 확인", "type": "retrieve", "description": "온톨로지에서 대상 설비의 최근 7일 내 동일 고장 발생 이력을 쿼리하여 재발 여부 판단" },
+    { "id": "n6-execute", "label": "정비지시 생성", "type": "execute", "description": "반복 발생 횟수 및 심각도(Criticality)에 따른 작업 대응 지침 및 지시서 초안을 AI로 생성" },
+    { "id": "n7-writeback", "label": "factory_mcp 등록", "type": "writeback", "description": "공장 자동화 MCP 중계 계층을 통해 모의 공장 시스템에 정비지시서(Work Order) 등록" },
+    { "id": "n8-persist", "label": "온톨로지 저장", "type": "persist", "description": "FaultEvent 및 MaintenanceTask 인스턴스를 생성하고 has_task 관계로 묶어 온톨로지 적재" },
+    { "id": "n9-audit", "label": "감사 로그 기록", "type": "audit", "description": "정비지시 자동 발행 프로세스 일체의 타임라인과 페이로드를 감사로그에 영구 기록" }
+  ],
+  "edges": [
+    { "source": "n1-source", "target": "n2-ingest" },
+    { "source": "n2-ingest", "target": "n3-transform" },
+    { "source": "n3-transform", "target": "n4-map" },
+    { "source": "n4-map", "target": "n5-check" },
+    { "source": "n5-check", "target": "n6-execute" },
+    { "source": "n6-execute", "target": "n7-writeback" },
+    { "source": "n7-writeback", "target": "n8-persist" },
+    { "source": "n8-persist", "target": "n9-audit" }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-06-14",
+  "description": "Built-in 스킬 카탈로그 - v5 플랫폼 기본 스킬",
+  "builtinSkills": [
+    {
+      "id": "customer-comment-create",
+      "name": "고객 게시판 댓글 등록",
+      "description": "고객 시나리오에서 게시판에 댓글을 등록합니다",
+      "category": "integration",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["mcp_http", "customer", "integration"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "description": "고객 티켓 ID"
+          },
+          "content": {
+            "type": "string",
+            "description": "댓글 내용"
+          },
+          "mode": {
+            "type": "string",
+            "enum": ["dry_run", "post"],
+            "description": "실행 모드 (dry_run: 시뮬레이션, post: 실제 등록)"
+          }
+        },
+        "required": ["ticket_id", "content"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "comment_id": {
+            "type": "string",
+            "description": "생성된 댓글 ID"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["success", "failed"],
+            "description": "실행 결과"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "implementation": {
+        "type": "mcp_http",
+        "callStyle": "tool_endpoint",
+        "server": "s1_customer_mcp",
+        "tool": "comment.create",
+        "endpoint": "http://127.0.0.1:8080/mcp/tools/comment.create",
+        "method": "POST",
+        "timeout": 10000
+      }
+    },
+    {
+      "id": "factory-comment-create",
+      "name": "공장 게시판 댓글 등록",
+      "description": "공장 시나리오에서 게시판에 댓글을 등록합니다",
+      "category": "integration",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["mcp_http", "factory", "integration"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "고장 이벤트 ID"
+          },
+          "content": {
+            "type": "string",
+            "description": "댓글 내용"
+          },
+          "mode": {
+            "type": "string",
+            "enum": ["dry_run", "post"],
+            "description": "실행 모드"
+          }
+        },
+        "required": ["event_id", "content"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "comment_id": { "type": "string" },
+          "status": { "type": "string", "enum": ["success", "failed"] }
+        }
+      },
+      "implementation": {
+        "type": "mcp_http",
+        "callStyle": "tool_endpoint",
+        "server": "s2_factory_mcp",
+        "tool": "comment.create",
+        "endpoint": "http://127.0.0.1:8081/mcp/tools/comment.create",
+        "method": "POST",
+        "timeout": 10000
+      }
+    },
+    {
+      "id": "factory-maintenance-create",
+      "name": "정비 지시 생성",
+      "description": "공장에서 정비팀을 위한 정비 지시를 생성합니다",
+      "category": "integration",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["mcp_http", "factory", "maintenance"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "equipment_id": { "type": "string" },
+          "fault_description": { "type": "string" },
+          "priority": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+          "mode": { "type": "string", "enum": ["dry_run", "post"] }
+        },
+        "required": ["equipment_id", "fault_description"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": { "type": "string" },
+          "status": { "type": "string" }
+        }
+      },
+      "implementation": {
+        "type": "mcp_http",
+        "callStyle": "tool_endpoint",
+        "server": "s2_factory_mcp",
+        "tool": "maintenance.create",
+        "endpoint": "http://127.0.0.1:8081/mcp/tools/maintenance.create",
+        "method": "POST",
+        "timeout": 10000
+      }
+    },
+    {
+      "id": "ontology-write",
+      "name": "온톨로지 저장",
+      "description": "실행 결과를 온톨로지 객체와 관계로 저장합니다",
+      "category": "data",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["ontology", "data"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entityType": { "type": "string", "description": "엔티티 타입 (예: FaultEvent)" },
+          "properties": { "type": "object", "description": "엔티티 속성" },
+          "relations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fromId": { "type": "string" },
+                "relation": { "type": "string" },
+                "toId": { "type": "string" }
+              }
+            },
+            "description": "관계 목록"
+          }
+        },
+        "required": ["entityType", "properties"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "entityId": { "type": "string" },
+          "saved": { "type": "boolean" }
+        }
+      },
+      "implementation": {
+        "type": "builtin",
+        "endpoint": null
+      }
+    },
+    {
+      "id": "rag-ontology-lookup",
+      "name": "RAG/온톨로지 조회",
+      "description": "RAG와 온톨로지에서 관련 근거를 조회합니다",
+      "category": "search",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["rag", "ontology", "search"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "검색 쿼리" },
+          "limit": { "type": "integer", "default": 5, "description": "반환 결과 개수" },
+          "entityTypes": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "필터링할 엔티티 타입"
+          }
+        },
+        "required": ["query"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "documents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "score": { "type": "number" }
+              }
+            }
+          },
+          "entities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "type": { "type": "string" },
+                "name": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "implementation": {
+        "type": "builtin"
+      }
+    },
+    {
+      "id": "fault-recurrence-check",
+      "name": "반복 고장 확인",
+      "description": "설비의 반복 고장 여부를 확인합니다",
+      "category": "analysis",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["factory", "analysis"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "equipmentId": { "type": "string" },
+          "faultType": { "type": "string" },
+          "timeDaysBack": { "type": "integer", "default": 30, "description": "조회 기간 (일)" }
+        },
+        "required": ["equipmentId", "faultType"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "isRecurring": { "type": "boolean" },
+          "occurrenceCount": { "type": "integer" },
+          "lastOccurrence": { "type": "string", "format": "date-time" },
+          "frequency": { "type": "string", "enum": ["daily", "weekly", "monthly"] }
+        }
+      },
+      "implementation": {
+        "type": "builtin"
+      }
+    },
+    {
+      "id": "request-classify",
+      "name": "요청 분류",
+      "description": "사용자 요청을 카테고리로 분류합니다",
+      "category": "nlp",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["nlp", "classification"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": { "type": "string", "description": "분류할 요청 텍스트" },
+          "categories": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "가능한 카테고리 목록"
+          }
+        },
+        "required": ["text", "categories"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "category": { "type": "string" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "alternativeCategories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": { "type": "string" },
+                "confidence": { "type": "number" }
+              }
+            }
+          }
+        }
+      },
+      "implementation": {
+        "type": "builtin"
+      }
+    }
+  ]
+}

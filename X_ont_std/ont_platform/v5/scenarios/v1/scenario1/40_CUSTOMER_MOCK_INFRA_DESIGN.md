@@ -1,4 +1,4 @@
-﻿# Customer Mock Infrastructure Design - Scenario 1
+# Customer Mock Infrastructure Design - Scenario 1
 
 작성일: 2026-06-12
 
@@ -20,8 +20,8 @@ ont_platform v5
 
 | 구성 요소 | 위치 | 기본 포트 | 역할 |
 | --- | --- | ---: | --- |
-| `s1_customer_mcp` | `E:\ontology_edu\X_ont_std\s1_customer_mcp` | 8080 | ont_platform의 MCP 호출을 받아 customer_board API로 중계 |
-| `s1_customer_board` | `E:\ontology_edu\X_ont_std\s1_customer_board` | 8090 | SQLite 기반 고객사 게시판 mock API/UI |
+| `s1_customer_mcp` | `E:\ontology_edu\X_ont_std\mock_infras\s1_customer_mcp` | 8080 | ont_platform의 MCP 호출을 받아 customer_board API로 중계 |
+| `s1_customer_board` | `E:\ontology_edu\X_ont_std\mock_infras\s1_customer_board` | 8090 | SQLite 기반 고객사 게시판 mock API/UI |
 
 ## 3. 데이터베이스 설계
 
@@ -30,7 +30,7 @@ ont_platform v5
 예상 DB 파일:
 
 ```text
-E:\ontology_edu\X_ont_std\s1_customer_board\s1_customer_board.db
+E:\ontology_edu\X_ont_std\mock_infras\s1_customer_board\s1_customer_board.db
 ```
 
 ### 3.1 posts
@@ -220,7 +220,7 @@ Response:
 
 ```powershell
 conda activate claud_be
-cd E:\ontology_edu\X_ont_std\s1_customer_board
+cd E:\ontology_edu\X_ont_std\mock_infras\s1_customer_board
 python src/main.py
 ```
 
@@ -234,7 +234,7 @@ http://localhost:8090
 
 ```powershell
 conda activate claud_be
-cd E:\ontology_edu\X_ont_std\s1_customer_mcp
+cd E:\ontology_edu\X_ont_std\mock_infras\s1_customer_mcp
 python src/main.py
 ```
 

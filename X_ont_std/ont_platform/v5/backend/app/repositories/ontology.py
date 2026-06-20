@@ -55,7 +55,14 @@ class OntologyRepository(BaseRepository):
                     "name": row.get("name"),
                 }
                 if row.get("properties"):
-                    entity["properties"] = row.get("properties")
+                    import json
+                    try:
+                        props = json.loads(row.get("properties"))
+                        entity["properties"] = props
+                        if "description" in props:
+                            entity["description"] = props["description"]
+                    except Exception:
+                        pass
                 all_entities.append(entity)
             return all_entities
 
@@ -139,7 +146,14 @@ class OntologyRepository(BaseRepository):
                     "name": row.get("name"),
                 }
                 if row.get("properties"):
-                    entity["properties"] = row.get("properties")
+                    import json
+                    try:
+                        props = json.loads(row.get("properties"))
+                        entity["properties"] = props
+                        if "description" in props:
+                            entity["description"] = props["description"]
+                    except Exception:
+                        pass
                 all_entities.append(entity)
             return all_entities
 
@@ -167,7 +181,14 @@ class OntologyRepository(BaseRepository):
                     "name": row.get("name"),
                 }
                 if row.get("properties"):
-                    entity["properties"] = row.get("properties")
+                    import json
+                    try:
+                        props = json.loads(row.get("properties"))
+                        entity["properties"] = props
+                        if "description" in props:
+                            entity["description"] = props["description"]
+                    except Exception:
+                        pass
                 results.append(entity)
             return results
 

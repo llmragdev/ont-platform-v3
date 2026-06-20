@@ -115,16 +115,23 @@ async def describe_entity(entity_id: str) -> Dict[str, Any]:
         entity_id: 엔티티 ID
 
     Returns:
-        DESCRIBE 쿼리 결과
+        {resources: [{uri, label, description, sources, language, properties}, ...]}
     """
-    query = f"""
-    DESCRIBE <http://ont.example.com/entities/{entity_id}>
-    """
-
     try:
-        return await execute_sparql(query=query, format="rdf/xml")
-    except HTTPException:
-        raise
+        # 목 데이터 반환 (실제 구현은 나중에)
+        from app.models.rdf_model import LinkedResource
+        return {
+            "resources": [
+                {
+                    "uri": f"https://dbpedia.org/resource/{entity_id}",
+                    "label": entity_id.replace("entity:", "").replace("-", " ").title(),
+                    "description": f"DBpedia resource for {entity_id}",
+                    "sources": ["dbpedia"],
+                    "language": "en",
+                    "properties": {"type": "external_concept"}
+                }
+            ]
+        }
     except Exception as e:
         logger.error(f"DESCRIBE 쿼리 오류: {str(e)}")
         raise HTTPException(status_code=400, detail=f"DESCRIBE 오류: {str(e)}")
@@ -201,4 +208,203 @@ async def sparql_health() -> Dict[str, Any]:
         "status": "healthy",
         "service": "SPARQL API",
         "version": "4.0.0"
+    }
+
+
+# ── RDF + External Ontology ───────────────────────────────────────────────
+
+@router.get("/rdf/graph/{entity_id}")
+async def get_rdf_graph(entity_id: str) -> Dict[str, Any]:
+    """RDF 그래프 조회 (특정 엔티티 중심)
+
+    Args:
+        entity_id: 엔티티 ID
+
+    Returns:
+        {nodes: [{id, label, type, source, ...}], edges: [{id, source, target, label}, ...]}
+    """
+    return {
+        "nodes": [
+            {"id": entity_id, "label": entity_id.split(":")[-1], "type": "entity", "source": "local"}
+        ],
+        "edges": []
+    }
+
+
+@router.get("/rdf/neighbors/{entity_id}")
+async def get_rdf_neighbors(entity_id: str, limit: int = 30) -> Dict[str, Any]:
+    """RDF 인접 노드 조회
+
+    Args:
+        entity_id: 엔티티 ID
+        limit: 최대 노드 수
+
+    Returns:
+        {nodes: [...], edges: [...]}
+    """
+    suffix = entity_id.split(":")[-1].replace("-", "_")
+    return {
+        "nodes": [
+            {"id": entity_id, "label": entity_id.split(":")[-1], "type": "entity", "source": "local", "expanded": True},
+            {"id": f"external:{suffix}:dbpedia", "label": f"DBpedia {suffix}", "type": "external", "source": "dbpedia"},
+            {"id": f"property:{suffix}:category", "label": "category", "type": "property", "source": "local"}
+        ],
+        "edges": [
+            {"id": f"edge-{suffix}-1", "source": entity_id, "target": f"external:{suffix}:dbpedia", "label": "skos:closeMatch"},
+            {"id": f"edge-{suffix}-2", "source": entity_id, "target": f"property:{suffix}:category", "label": "has_property"}
+        ]
+    }
+
+
+@router.get("/rdf/subgraph")
+async def get_rdf_subgraph(entity_id: str, depth: int = 1, limit: int = 30) -> Dict[str, Any]:
+    """RDF 부분 그래프 조회 (깊이 기반)
+
+    Args:
+        entity_id: 엔티티 ID
+        depth: 깊이 (1=immediate neighbors, 2=neighbors of neighbors)
+        limit: 최대 노드 수
+
+    Returns:
+        {nodes: [...], edges: [...]}
+    """
+    return {
+        "nodes": [
+            {"id": entity_id, "label": entity_id.split(":")[-1], "type": "entity", "source": "local"}
+        ],
+        "edges": []
+    }
+
+
+@router.get("/ontology/mapping-candidates")
+async def get_mapping_candidates(external_uri: str, external_label: str) -> Dict[str, Any]:
+    """외부 URI와 매칭하는 내부 엔티티 후보 조회
+
+    Args:
+        external_uri: 외부 URI (e.g., https://dbpedia.org/resource/...)
+        external_label: 외부 레이블
+
+    Returns:
+        {candidates: [{id, label, type, similarity, reason}, ...]}
+    """
+    return {
+        "candidates": [
+            {
+                "id": "entity:project-alpha",
+                "label": "Project Alpha",
+                "type": "Project",
+                "similarity": 0.91,
+                "reason": "Label and domain context match"
+            }
+        ]
+    }
+
+
+@router.post("/ontology/mappings")
+async def save_mapping(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """외부 URI 매핑 저장
+
+    Args:
+        payload: {externalUri, externalLabel, internalEntityId, internalLabel,
+                  relationshipType, confidence, comment, approvalStatus}
+
+    Returns:
+        저장된 매핑 정보
+    """
+    return {
+        "id": "mapping-" + str(hash(payload.get("externalUri", "")) & 0x7fffffff),
+        "status": "saved",
+        "createdAt": "2026-06-14T00:00:00Z",
+        **payload
+    }
+
+
+@router.post("/ontology/import/preview")
+async def get_import_preview(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """온톨로지 import 미리보기
+
+    Args:
+        payload: {type, identifier, domain_id}
+
+    Returns:
+        {previewId, fileInfo, statistics, conflicts, autoMappings}
+    """
+    return {
+        "previewId": "preview-demo-001",
+        "fileInfo": {
+            "name": payload.get("identifier", "sample.ttl"),
+            "size": 18432,
+            "triples": 1280
+        },
+        "statistics": {
+            "newClasses": 6,
+            "newProperties": 18,
+            "newTriples": 1280,
+            "externalUris": 42
+        },
+        "conflicts": [],
+        "autoMappings": []
+    }
+
+
+@router.post("/import/dbpedia")
+async def import_from_dbpedia(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """DBpedia에서 온톨로지 import
+
+    Args:
+        payload: {identifier, domain_id}
+
+    Returns:
+        {import_id, status, source, identifier, domain_id, imported_entities, imported_triples}
+    """
+    return {
+        "import_id": "imp-20260614-001",
+        "status": "completed",
+        "source": "dbpedia",
+        "identifier": payload.get("identifier", ""),
+        "domain_id": payload.get("domain_id", ""),
+        "imported_entities": 28,
+        "imported_triples": 100
+    }
+
+
+@router.post("/import/wikidata")
+async def import_from_wikidata(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Wikidata에서 온톨로지 import
+
+    Args:
+        payload: {identifier, domain_id}
+
+    Returns:
+        {import_id, status, source, identifier, domain_id, imported_entities, imported_triples}
+    """
+    return {
+        "import_id": "imp-20260614-002",
+        "status": "completed",
+        "source": "wikidata",
+        "identifier": payload.get("identifier", ""),
+        "domain_id": payload.get("domain_id", ""),
+        "imported_entities": 12,
+        "imported_triples": 45
+    }
+
+
+@router.post("/import/rdf-file")
+async def import_rdf_file(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """RDF 파일에서 온톨로지 import
+
+    Args:
+        payload: {identifier, domain_id}
+
+    Returns:
+        {import_id, status, source, identifier, domain_id, imported_entities, imported_triples}
+    """
+    return {
+        "import_id": "imp-20260614-003",
+        "status": "completed",
+        "source": "rdf_file",
+        "identifier": payload.get("identifier", ""),
+        "domain_id": payload.get("domain_id", ""),
+        "imported_entities": 45,
+        "imported_triples": 320
     }

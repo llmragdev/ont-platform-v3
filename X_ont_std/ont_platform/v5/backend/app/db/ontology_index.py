@@ -95,7 +95,7 @@ class OntologyIndex:
                 doc_id,
                 entity.get("type", ""),
                 entity.get("name", entity.get("entity_id", "")),
-                json.dumps(entity.get("properties", {})),
+                json.dumps({"description": entity.get("description", ""), **entity.get("properties", {})}),
                 datetime.now(UTC).isoformat()
             ))
             conn.commit()
@@ -117,7 +117,7 @@ class OntologyIndex:
                     doc_id,
                     entity.get("type", ""),
                     entity.get("name", entity.get("entity_id", "")),
-                    json.dumps(entity.get("properties", {})),
+                    json.dumps({"description": entity.get("description", ""), **entity.get("properties", {})}),
                     datetime.now(UTC).isoformat()
                 ))
             conn.commit()

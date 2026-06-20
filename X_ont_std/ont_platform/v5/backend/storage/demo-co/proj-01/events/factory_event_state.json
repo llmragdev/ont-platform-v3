@@ -1,0 +1,571 @@
+{
+  "events": {
+    "batch-fe-ffe3a7b7-e14df43e-8a07-46d9-9962-440fcc6881c8": {
+      "updated_at": "2026-06-13T11:48:11.886966Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-ffe3a7b7",
+      "request_id": "bc058955-d6b0-419d-9604-229556a492cd",
+      "mcp_status": "dry_run"
+    },
+    "batch-fe-ffe3a7b7-f4c7cf29-cbbf-4cd5-827d-f363ebd47ed2": {
+      "updated_at": "2026-06-13T12:19:29.834533Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-ffe3a7b7",
+      "request_id": "1465514b-adbb-4942-a031-34158e9421d2",
+      "mcp_status": "success"
+    },
+    "batch-fe-3dd757bb-9a8c3c3a-88a8-4eac-8e4e-40da1b353df2": {
+      "updated_at": "2026-06-13T12:19:41.043096Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-3dd757bb",
+      "request_id": "9af6f9a1-bba3-4799-8048-061998b17a00",
+      "mcp_status": "success"
+    },
+    "batch-fe-242952c1-d0d3de11-fb0c-41e5-8dd2-5c00e35acfee": {
+      "updated_at": "2026-06-13T13:59:32.885036Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-242952c1",
+      "request_id": "ffb8ce81-288b-4412-8bf1-e9a4324756c8",
+      "mcp_status": "success"
+    },
+    "batch-fe-8d6065de-ae4fb609-4d1d-4f79-9636-dfbfa7c52cbe": {
+      "updated_at": "2026-06-13T13:59:44.067401Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-8d6065de",
+      "request_id": "fa45785a-7127-4283-9672-634ff9f8e2bb",
+      "mcp_status": "success"
+    },
+    "batch-fe-19eceecf-3029eec4-04f6-4c75-8039-de9d22312764": {
+      "updated_at": "2026-06-13T14:02:42.103177Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-19eceecf",
+      "request_id": "04166145-dc55-47d6-bcf9-6ef46ca8c1d9",
+      "mcp_status": "success"
+    },
+    "batch-fe-6f399cc2-adf34ac6-1013-4334-b09e-e5da03818b04": {
+      "updated_at": "2026-06-13T14:02:55.356697Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-6f399cc2",
+      "request_id": "af7afee4-0931-4638-a565-cc4d1c4def22",
+      "mcp_status": "success"
+    },
+    "batch-fe-69c0c7ab-0b713850-e402-4674-83ae-5f26bf27e4bf": {
+      "updated_at": "2026-06-13T14:19:42.388751Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-69c0c7ab",
+      "request_id": "c93a8ee1-9fad-4d0c-95b7-7bf00a43dc98",
+      "mcp_status": "success"
+    },
+    "batch-fe-a988cd14-bee0136f-ec9f-4989-a901-b2dc46bf18ca": {
+      "updated_at": "2026-06-13T14:19:55.094180Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-a988cd14",
+      "request_id": "ae03bfd2-6d40-4ef6-9bf2-b82822920546",
+      "mcp_status": "success"
+    },
+    "batch-fe-ffe3a7b7-94251bdf-5b71-4a37-a6ac-afd6c4474c1f": {
+      "updated_at": "2026-06-13T17:29:47.709432Z",
+      "status": "skipped",
+      "factory_event_id": "fe-ffe3a7b7",
+      "request_id": "85a2f949-c889-4e55-8cd3-129fac85b927",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-3dd757bb-705f787e-16a6-48d6-a836-f41383b1fb5e": {
+      "updated_at": "2026-06-13T17:29:47.732664Z",
+      "status": "skipped",
+      "factory_event_id": "fe-3dd757bb",
+      "request_id": "911b68b4-3b0b-4ec7-b229-e76faf41a6de",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-242952c1-02d00b73-e09b-432b-941a-fb46412d9c35": {
+      "updated_at": "2026-06-13T17:29:47.755199Z",
+      "status": "skipped",
+      "factory_event_id": "fe-242952c1",
+      "request_id": "9efbc16f-9ec5-4075-98eb-b462953d9967",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-8d6065de-a6589732-0542-477f-a10a-52f91cc3da1d": {
+      "updated_at": "2026-06-13T17:29:47.778505Z",
+      "status": "skipped",
+      "factory_event_id": "fe-8d6065de",
+      "request_id": "e53832a2-9a02-470a-861b-c6079987f103",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-19eceecf-89f5a2e3-8928-4c2f-956b-63df8f4578b6": {
+      "updated_at": "2026-06-13T17:29:47.800568Z",
+      "status": "skipped",
+      "factory_event_id": "fe-19eceecf",
+      "request_id": "4d607182-fbd9-4f03-8511-8a7a50b7bf49",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-6f399cc2-3538f399-e4ef-44e0-9046-2c9a9936e34b": {
+      "updated_at": "2026-06-13T17:29:47.825774Z",
+      "status": "skipped",
+      "factory_event_id": "fe-6f399cc2",
+      "request_id": "41017581-e614-42a9-b6af-fd57a80cefa0",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-69c0c7ab-d550e771-e8ce-40c8-b6e4-0dbeb6daadf2": {
+      "updated_at": "2026-06-13T17:29:47.848815Z",
+      "status": "skipped",
+      "factory_event_id": "fe-69c0c7ab",
+      "request_id": "3ec55e9f-16df-4b5f-b499-2942e353c49f",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-a988cd14-90f4ac0b-fce9-4793-ad2e-e35a008510b8": {
+      "updated_at": "2026-06-13T17:29:47.875868Z",
+      "status": "skipped",
+      "factory_event_id": "fe-a988cd14",
+      "request_id": "6b44fc7c-fb93-4709-b34d-06f5d147b3de",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-6d14ee9f-aa7d1524-e124-4826-8695-d872a85e2827": {
+      "updated_at": "2026-06-13T17:29:58.971598Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-6d14ee9f",
+      "request_id": "cca2b65d-e7b5-426d-8f40-1cd1ee8309dc",
+      "mcp_status": "success"
+    },
+    "batch-fe-b0f5e743-6896b7ef-9a0b-47a9-9dc1-76c1c463c7c0": {
+      "updated_at": "2026-06-13T17:30:10.142554Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-b0f5e743",
+      "request_id": "133d38ee-5057-4687-90a7-0796a9cf7d62",
+      "mcp_status": "success"
+    },
+    "batch-fe-ffe3a7b7-fc37aac1-1db4-4aff-9a7f-7237d57b0942": {
+      "updated_at": "2026-06-13T17:36:39.399967Z",
+      "status": "skipped",
+      "factory_event_id": "fe-ffe3a7b7",
+      "request_id": "16ee89c0-37c0-4995-913a-a23816ef44fa",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-ffe3a7b7-b96fcc03-a064-418f-b7ca-e8efd2d73495": {
+      "updated_at": "2026-06-13T17:56:05.857071Z",
+      "status": "skipped",
+      "factory_event_id": "fe-ffe3a7b7",
+      "request_id": "67afdd97-fc93-4557-a2e0-ad9eef89b1e7",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-3dd757bb-af85d7f7-c98d-4471-b345-25626629e70d": {
+      "updated_at": "2026-06-13T17:56:05.877350Z",
+      "status": "skipped",
+      "factory_event_id": "fe-3dd757bb",
+      "request_id": "4dd8efc1-3df0-47bb-8c94-2a340af43355",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-242952c1-4e5ee7ac-59ba-4958-92c4-d2a43a8f4e91": {
+      "updated_at": "2026-06-13T17:56:05.900457Z",
+      "status": "skipped",
+      "factory_event_id": "fe-242952c1",
+      "request_id": "68bf77e6-4bf9-4a50-ad42-9523223eebbb",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-8d6065de-3188100a-b022-40fc-b685-79a4ccff8973": {
+      "updated_at": "2026-06-13T17:56:05.922492Z",
+      "status": "skipped",
+      "factory_event_id": "fe-8d6065de",
+      "request_id": "c86de728-e5b8-4578-8273-4bd146d753e4",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-19eceecf-dd2d0bdb-6ad6-430a-bfba-45e2bf490b80": {
+      "updated_at": "2026-06-13T17:56:05.948696Z",
+      "status": "skipped",
+      "factory_event_id": "fe-19eceecf",
+      "request_id": "f201edfa-a25d-4fb1-8dea-68b27638d657",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-6f399cc2-6c0a5128-8071-4435-a8dd-578c360ffe5a": {
+      "updated_at": "2026-06-13T17:56:05.967144Z",
+      "status": "skipped",
+      "factory_event_id": "fe-6f399cc2",
+      "request_id": "9ef18357-af4c-4327-b493-71d50302d7fb",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-69c0c7ab-29f77b7c-14b5-44d6-abef-da68f13011c5": {
+      "updated_at": "2026-06-13T17:56:05.984914Z",
+      "status": "skipped",
+      "factory_event_id": "fe-69c0c7ab",
+      "request_id": "66edd30b-565b-4afe-bfe0-de032f513012",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-a988cd14-01e6c5cb-6bda-4e37-ac25-617d2750e1f9": {
+      "updated_at": "2026-06-13T17:56:06.002282Z",
+      "status": "skipped",
+      "factory_event_id": "fe-a988cd14",
+      "request_id": "2393c897-3dfe-4b30-a3f5-e02a850f743c",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-fda19732-307ea813-01bd-43a3-a054-d5210bb44260": {
+      "updated_at": "2026-06-13T17:56:17.140239Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-fda19732",
+      "request_id": "52e56e34-48da-4bc8-bb8d-e02aa53ae8a4",
+      "mcp_status": "success"
+    },
+    "batch-fe-6b0b27a2-0743d50d-9a2c-40e3-a8ab-39d0fdfe82a2": {
+      "updated_at": "2026-06-13T17:56:28.331689Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-6b0b27a2",
+      "request_id": "4d78fde3-1cdd-49d3-842d-60e83cf38c18",
+      "mcp_status": "success"
+    },
+    "batch-fe-ffe3a7b7-fe11640d-3168-499f-b3cf-70d7d91950d8": {
+      "updated_at": "2026-06-13T19:28:13.751964Z",
+      "status": "skipped",
+      "factory_event_id": "fe-ffe3a7b7",
+      "request_id": "c7ee6fa6-7306-4054-a4b6-1d7c0bc5e7dd",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-3dd757bb-552cff93-4b70-43ef-b905-24b1da996ecd": {
+      "updated_at": "2026-06-13T19:28:13.776993Z",
+      "status": "skipped",
+      "factory_event_id": "fe-3dd757bb",
+      "request_id": "5955351f-44af-4588-a2a9-1b060623ccac",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-242952c1-0c1ba30f-7339-49be-8524-64721f415be5": {
+      "updated_at": "2026-06-13T19:28:13.800931Z",
+      "status": "skipped",
+      "factory_event_id": "fe-242952c1",
+      "request_id": "6e1cb555-6bd1-4d24-9730-219342a5777a",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-8d6065de-56a005fa-d489-422a-9db1-e9d920abf9c1": {
+      "updated_at": "2026-06-13T19:28:13.823803Z",
+      "status": "skipped",
+      "factory_event_id": "fe-8d6065de",
+      "request_id": "292a47ba-ecbd-46ca-a189-0c25481dc8f5",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-19eceecf-b3987a1a-b12f-4db2-9088-c27288eb0db3": {
+      "updated_at": "2026-06-13T19:28:13.846490Z",
+      "status": "skipped",
+      "factory_event_id": "fe-19eceecf",
+      "request_id": "eceb95b9-1bfe-4944-a4d6-297bc55cf0e7",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-6f399cc2-8bca8ff4-65d2-4f33-a0e8-d71ddf80875e": {
+      "updated_at": "2026-06-13T19:28:13.870156Z",
+      "status": "skipped",
+      "factory_event_id": "fe-6f399cc2",
+      "request_id": "4eb8c45e-05d5-43c7-8b3e-7836b35ee75f",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-69c0c7ab-81fc6e58-8cf0-46a0-9d88-3c0302a388c8": {
+      "updated_at": "2026-06-13T19:28:13.890415Z",
+      "status": "skipped",
+      "factory_event_id": "fe-69c0c7ab",
+      "request_id": "56899345-6692-4b74-9a5b-8738c01734cd",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-a988cd14-14410ebd-222b-4128-b1e5-925829d74bd7": {
+      "updated_at": "2026-06-13T19:28:13.913324Z",
+      "status": "skipped",
+      "factory_event_id": "fe-a988cd14",
+      "request_id": "cbc672e8-fced-4ca2-a658-34dd1846922e",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-6d14ee9f-4c555391-7b7b-4720-94ce-0695c2348c18": {
+      "updated_at": "2026-06-13T19:28:13.938102Z",
+      "status": "skipped",
+      "factory_event_id": "fe-6d14ee9f",
+      "request_id": "1ac51550-6633-41ad-8e61-0e3e7da63ddb",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-b0f5e743-d91ac2a5-c7cb-4718-9512-6084acf41911": {
+      "updated_at": "2026-06-13T19:28:13.960680Z",
+      "status": "skipped",
+      "factory_event_id": "fe-b0f5e743",
+      "request_id": "1cd651e4-96e1-4d0b-a9e7-2bcc87177f46",
+      "reason": "factory_event_already_processed"
+    },
+    "batch-fe-ffe3a7b7-f539bf3e-f2e2-4f3f-8c74-d0cc36eec700": {
+      "updated_at": "2026-06-13T19:33:12.729276Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-ffe3a7b7",
+      "request_id": "ef2dbf92-0137-49b1-88fd-0a52167a9ac8",
+      "mcp_status": "success"
+    },
+    "batch-fe-3dd757bb-cb31521d-42ba-46c3-a0d6-afe75874de81": {
+      "updated_at": "2026-06-13T20:58:43.017662Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-3dd757bb",
+      "request_id": "44b52464-47b3-479c-8630-2d44cfa10897",
+      "mcp_status": "success"
+    },
+    "batch-fe-242952c1-43d82674-d778-408f-be46-7360ca4f27fb": {
+      "updated_at": "2026-06-13T20:58:54.329938Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-242952c1",
+      "request_id": "1dd2e231-0e08-4550-8e57-477fb50651e2",
+      "mcp_status": "success"
+    },
+    "batch-fe-ffe3a7b7-ff912a80-a295-4804-bd68-23fe38b42186": {
+      "updated_at": "2026-06-13T21:08:11.971889Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-ffe3a7b7",
+      "request_id": "66be5aaa-701d-4dc5-b071-d66e1abefa34",
+      "mcp_status": "success"
+    },
+    "batch-fe-ffe3a7b7-48b4edc7-fa7d-4ceb-86fc-7fa04595b195": {
+      "updated_at": "2026-06-13T21:30:57.274910Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-ffe3a7b7",
+      "request_id": "1bda2d29-f85b-4405-9fcf-25cb063eba2f",
+      "mcp_status": "success"
+    },
+    "batch-fe-ffe3a7b7-3d4f05ce-cef6-48e4-a755-30804f5b6bce": {
+      "updated_at": "2026-06-13T23:52:43.154360Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-ffe3a7b7",
+      "request_id": "ba04a5d3-112d-414a-b15c-06d4e46ee685",
+      "mcp_status": "success"
+    },
+    "batch-fe-0eb912de-4b801a1e-85f0-4c79-898a-03b4ef4fd3cc": {
+      "updated_at": "2026-06-14T09:09:06.998031Z",
+      "status": "accepted",
+      "workflow_status": "started",
+      "factory_event_id": "fe-0eb912de",
+      "request_id": "46eb9306-49ff-41ec-b101-6f1973f22d83",
+      "mcp_status": "success"
+    }
+  },
+  "processed_factory_events": {
+    "fe-ffe3a7b7": {
+      "updated_at": "2026-06-13T23:52:43.165438Z",
+      "status": "success",
+      "request_id": "ba04a5d3-112d-414a-b15c-06d4e46ee685",
+      "event_id": "batch-fe-ffe3a7b7-3d4f05ce-cef6-48e4-a755-30804f5b6bce",
+      "response": {
+        "external_response_id": "fr-4d86aefd",
+        "external_event_id": "fe-ffe3a7b7",
+        "url": "http://localhost:8091/events/fe-ffe3a7b7#response-fr-4d86aefd"
+      },
+      "maintenance": {
+        "external_task_id": "mt-9fe70c53",
+        "external_event_id": "fe-ffe3a7b7",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-3dd757bb": {
+      "updated_at": "2026-06-13T20:58:43.035896Z",
+      "status": "success",
+      "request_id": "44b52464-47b3-479c-8630-2d44cfa10897",
+      "event_id": "batch-fe-3dd757bb-cb31521d-42ba-46c3-a0d6-afe75874de81",
+      "response": {
+        "external_response_id": "fr-60ddada4",
+        "external_event_id": "fe-3dd757bb",
+        "url": "http://localhost:8091/events/fe-3dd757bb#response-fr-60ddada4"
+      },
+      "maintenance": {
+        "external_task_id": "mt-906f3b9d",
+        "external_event_id": "fe-3dd757bb",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-242952c1": {
+      "updated_at": "2026-06-13T20:58:54.352919Z",
+      "status": "success",
+      "request_id": "1dd2e231-0e08-4550-8e57-477fb50651e2",
+      "event_id": "batch-fe-242952c1-43d82674-d778-408f-be46-7360ca4f27fb",
+      "response": {
+        "external_response_id": "fr-026397ca",
+        "external_event_id": "fe-242952c1",
+        "url": "http://localhost:8091/events/fe-242952c1#response-fr-026397ca"
+      },
+      "maintenance": {
+        "external_task_id": "mt-2e8cb18a",
+        "external_event_id": "fe-242952c1",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-8d6065de": {
+      "updated_at": "2026-06-13T13:59:44.087483Z",
+      "status": "success",
+      "request_id": "fa45785a-7127-4283-9672-634ff9f8e2bb",
+      "event_id": "batch-fe-8d6065de-ae4fb609-4d1d-4f79-9636-dfbfa7c52cbe",
+      "response": {
+        "external_response_id": "fr-6d59d56c",
+        "external_event_id": "fe-8d6065de",
+        "url": "http://localhost:8091/events/fe-8d6065de#response-fr-6d59d56c"
+      },
+      "maintenance": {
+        "external_task_id": "mt-1e08f991",
+        "external_event_id": "fe-8d6065de",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-19eceecf": {
+      "updated_at": "2026-06-13T14:02:42.124542Z",
+      "status": "success",
+      "request_id": "04166145-dc55-47d6-bcf9-6ef46ca8c1d9",
+      "event_id": "batch-fe-19eceecf-3029eec4-04f6-4c75-8039-de9d22312764",
+      "response": {
+        "external_response_id": "fr-7da37e6c",
+        "external_event_id": "fe-19eceecf",
+        "url": "http://localhost:8091/events/fe-19eceecf#response-fr-7da37e6c"
+      },
+      "maintenance": {
+        "external_task_id": "mt-695b5893",
+        "external_event_id": "fe-19eceecf",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-6f399cc2": {
+      "updated_at": "2026-06-13T14:02:55.368475Z",
+      "status": "success",
+      "request_id": "af7afee4-0931-4638-a565-cc4d1c4def22",
+      "event_id": "batch-fe-6f399cc2-adf34ac6-1013-4334-b09e-e5da03818b04",
+      "response": {
+        "external_response_id": "fr-c10dd6e7",
+        "external_event_id": "fe-6f399cc2",
+        "url": "http://localhost:8091/events/fe-6f399cc2#response-fr-c10dd6e7"
+      },
+      "maintenance": {
+        "external_task_id": "mt-dbe8f346",
+        "external_event_id": "fe-6f399cc2",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-69c0c7ab": {
+      "updated_at": "2026-06-13T14:19:42.409770Z",
+      "status": "success",
+      "request_id": "c93a8ee1-9fad-4d0c-95b7-7bf00a43dc98",
+      "event_id": "batch-fe-69c0c7ab-0b713850-e402-4674-83ae-5f26bf27e4bf",
+      "response": {
+        "external_response_id": "fr-6589250f",
+        "external_event_id": "fe-69c0c7ab",
+        "url": "http://localhost:8091/events/fe-69c0c7ab#response-fr-6589250f"
+      },
+      "maintenance": {
+        "external_task_id": "mt-21d9820e",
+        "external_event_id": "fe-69c0c7ab",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-a988cd14": {
+      "updated_at": "2026-06-13T14:19:55.114072Z",
+      "status": "success",
+      "request_id": "ae03bfd2-6d40-4ef6-9bf2-b82822920546",
+      "event_id": "batch-fe-a988cd14-bee0136f-ec9f-4989-a901-b2dc46bf18ca",
+      "response": {
+        "external_response_id": "fr-d7854eb3",
+        "external_event_id": "fe-a988cd14",
+        "url": "http://localhost:8091/events/fe-a988cd14#response-fr-d7854eb3"
+      },
+      "maintenance": {
+        "external_task_id": "mt-515bac49",
+        "external_event_id": "fe-a988cd14",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-6d14ee9f": {
+      "updated_at": "2026-06-13T17:29:58.987745Z",
+      "status": "success",
+      "request_id": "cca2b65d-e7b5-426d-8f40-1cd1ee8309dc",
+      "event_id": "batch-fe-6d14ee9f-aa7d1524-e124-4826-8695-d872a85e2827",
+      "response": {
+        "external_response_id": "fr-10341b20",
+        "external_event_id": "fe-6d14ee9f",
+        "url": "http://localhost:8091/events/fe-6d14ee9f#response-fr-10341b20"
+      },
+      "maintenance": {
+        "external_task_id": "mt-b4a72d4b",
+        "external_event_id": "fe-6d14ee9f",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-b0f5e743": {
+      "updated_at": "2026-06-13T17:30:10.164741Z",
+      "status": "success",
+      "request_id": "133d38ee-5057-4687-90a7-0796a9cf7d62",
+      "event_id": "batch-fe-b0f5e743-6896b7ef-9a0b-47a9-9dc1-76c1c463c7c0",
+      "response": {
+        "external_response_id": "fr-faeecdd8",
+        "external_event_id": "fe-b0f5e743",
+        "url": "http://localhost:8091/events/fe-b0f5e743#response-fr-faeecdd8"
+      },
+      "maintenance": {
+        "external_task_id": "mt-95b0024b",
+        "external_event_id": "fe-b0f5e743",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-fda19732": {
+      "updated_at": "2026-06-13T17:56:17.155943Z",
+      "status": "success",
+      "request_id": "52e56e34-48da-4bc8-bb8d-e02aa53ae8a4",
+      "event_id": "batch-fe-fda19732-307ea813-01bd-43a3-a054-d5210bb44260",
+      "response": {
+        "external_response_id": "fr-4db83dde",
+        "external_event_id": "fe-fda19732",
+        "url": "http://localhost:8091/events/fe-fda19732#response-fr-4db83dde"
+      },
+      "maintenance": {
+        "external_task_id": "mt-cb0857ad",
+        "external_event_id": "fe-fda19732",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-6b0b27a2": {
+      "updated_at": "2026-06-13T17:56:28.352518Z",
+      "status": "success",
+      "request_id": "4d78fde3-1cdd-49d3-842d-60e83cf38c18",
+      "event_id": "batch-fe-6b0b27a2-0743d50d-9a2c-40e3-a8ab-39d0fdfe82a2",
+      "response": {
+        "external_response_id": "fr-7cc787cc",
+        "external_event_id": "fe-6b0b27a2",
+        "url": "http://localhost:8091/events/fe-6b0b27a2#response-fr-7cc787cc"
+      },
+      "maintenance": {
+        "external_task_id": "mt-a95466e6",
+        "external_event_id": "fe-6b0b27a2",
+        "assigned_team": "정비팀"
+      }
+    },
+    "fe-0eb912de": {
+      "updated_at": "2026-06-14T09:09:07.028372Z",
+      "status": "success",
+      "request_id": "46eb9306-49ff-41ec-b101-6f1973f22d83",
+      "event_id": "batch-fe-0eb912de-4b801a1e-85f0-4c79-898a-03b4ef4fd3cc",
+      "response": {
+        "external_response_id": "fr-4546153f",
+        "external_event_id": "fe-0eb912de",
+        "url": "http://localhost:8091/events/fe-0eb912de#response-fr-4546153f"
+      },
+      "maintenance": {
+        "external_task_id": "mt-09f96d6b",
+        "external_event_id": "fe-0eb912de",
+        "assigned_team": "정비팀"
+      }
+    }
+  },
+  "last_batch": {
+    "updated_at": "2026-06-14T09:09:07.059000Z",
+    "status": "success",
+    "checked": 1,
+    "started": 1,
+    "skipped": 0,
+    "errors": 0
+  }
+}

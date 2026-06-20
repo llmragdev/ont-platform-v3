@@ -520,6 +520,26 @@ app.include_router(workflow_templates_router)
 from app.api.workflow_ontology_mappings import router as workflow_ontology_mappings_router
 app.include_router(workflow_ontology_mappings_router)
 
+# Phase 2.5: Skills API
+from app.api.skills import router as skills_router
+app.include_router(skills_router)
+
+# Phase 9: Platform AI Assistant API
+from app.api.assistant import router as assistant_router
+app.include_router(assistant_router)
+
+# Phase 9: Streamlit Apps API
+from app.api.streamlit_apps import router as streamlit_apps_router
+app.include_router(streamlit_apps_router)
+
+# Data Flow Lineage API
+from app.api.data_flows import router as data_flows_router
+app.include_router(data_flows_router)
+
+# Medallion Data Catalog API
+from app.api.data_catalog import router as data_catalog_router
+app.include_router(data_catalog_router)
+
 
 # ── /api/metrics ──────────────────────────────────────────────────────────────
 

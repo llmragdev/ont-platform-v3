@@ -7,6 +7,87 @@ export interface TenantConfig {
   role: UserRole;
 }
 
+// ── Platform AI Assistant ───────────────────────────────────────────────────
+
+export type AssistantIntent =
+  | "explain_current_view"
+  | "generate_ontology_query"
+  | "create_app"
+  | "edit_streamlit_program"
+  | "analyze_failure"
+  | "suggest_workflow_change"
+  | "general_help";
+
+export interface AssistantContext {
+  current_view?: string | null;
+  view_title?: string | null;
+  company_id?: string | null;
+  project_id?: string | null;
+  user_id?: string | null;
+  role?: string | null;
+  selected_object_id?: string | null;
+  selected_workflow_id?: string | null;
+  selected_workflow_name?: string | null;
+  selected_node_id?: string | null;
+  selected_node_label?: string | null;
+  selected_app_id?: string | null;
+  selected_app_name?: string | null;
+  selected_folder_id?: string | null;
+  selected_folder_name?: string | null;
+  selected_file_path?: string | null;
+  selected_file_name?: string | null;
+  selected_language?: string | null;
+}
+
+export interface GeneratedQuery {
+  query_id: string;
+  language: "SPARQL" | "SQL" | "ONTOLOGY";
+  title: string;
+  description: string;
+  query: string;
+  safe_to_execute: boolean;
+  warnings: string[];
+}
+
+export interface AppWidgetSpec {
+  type: "metric" | "table" | "chart" | "graph" | "text";
+  title: string;
+  query_id?: string | null;
+  description?: string | null;
+}
+
+export interface AppSpecPreview {
+  app_id: string;
+  title: string;
+  description: string;
+  layout: AppWidgetSpec[];
+}
+
+export interface AssistantAction {
+  id: string;
+  label: string;
+  description: string;
+  enabled: boolean;
+}
+
+export interface AssistantChatRequest {
+  message: string;
+  context: AssistantContext;
+}
+
+export interface AssistantChatResponse {
+  conversation_id: string;
+  created_at: string;
+  intent: AssistantIntent;
+  summary: string;
+  answer: string;
+  generated_queries: GeneratedQuery[];
+  app_spec_preview?: AppSpecPreview | null;
+  suggested_actions: AssistantAction[];
+  trace: string[];
+  context_used: AssistantContext;
+}
+
 export interface AuditEvent {
   event_id: string;
   timestamp: string;
@@ -240,7 +321,9 @@ export type GraphNodeKind =
   | "quality_link"
   | "ontology_write"
   | "end_pending"
-  | "end_failed";
+  | "end_failed"
+  | "skill"
+  | "custom_code";
 
 export interface GraphNodeData {
   label?: string;
@@ -255,6 +338,14 @@ export interface GraphNodeData {
   customer_id?: string;
   status?: "idle" | "running" | "success" | "error" | "skipped";
   result?: unknown;
+  // Skill 필드
+  skillId?: string;
+  skillVersion?: string;
+  skillConfig?: {
+    inputMapping?: Record<string, string>;
+    outputMapping?: Record<string, string>;
+    parameters?: Record<string, unknown>;
+  };
 }
 
 export interface GraphNode {
@@ -450,4 +541,51 @@ export interface WorkflowRun {
   steps: WorkflowStepRun[];
   user_trace: string[];
   tech_trace: string[];
+}
+
+// ── Skill System ──────────────────────────────────────────────────────────────
+
+export type SkillImplementationType = "builtin" | "http" | "mcp_http" | "custom";
+
+export interface MCPHttpConfig {
+  transport?: "stdio" | "sse";
+  callStyle?: "tool_endpoint" | "jsonrpc_proxy";
+  server?: string;
+  tool?: string;
+  endpoint: string;
+  method?: string;
+  command?: string;
+  args?: string[];
+  cwd?: string;
+  url?: string;
+  headers?: Record<string, string>;
+  env?: Record<string, string>;
+  timeout?: number;
+}
+
+export interface Skill {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  version: string;
+  author: string;
+  tags?: string[];
+  inputSchema: Record<string, unknown>;
+  outputSchema: Record<string, unknown>;
+  requiredCredentials?: string[];
+  implementation: {
+    type: SkillImplementationType;
+    endpoint?: string;
+    code?: string;
+    mcpConfig?: MCPHttpConfig;
+    credentialMapping?: Record<string, string>;
+    auth?: {
+      type?: "basic" | "bearer" | "custom";
+      username?: string;
+      password?: string;
+    };
+  };
+  createdAt?: string;
+  updatedAt?: string;
 }

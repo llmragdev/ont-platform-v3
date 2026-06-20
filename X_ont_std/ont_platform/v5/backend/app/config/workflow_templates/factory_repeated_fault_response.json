@@ -1,17 +1,19 @@
 {
   "template_id": "factory-repeated-fault-response",
   "template_version": "1.0.0",
-  "name": "공장 반복 고장 대응",
+  "name": "현장 고장 요청 정비 지시 자동화",
   "category": "factory",
-  "summary": "세종 배터리팩 공장 3번 조립 라인의 배터리 탭 용접기 압력 낮음처럼 반복되는 설비 문제를 묶고 정비/품질 확인 건으로 연결합니다.",
+  "summary": "공장 현장에서 고장 요청이 접수되면 요청 내용을 분류하고, 공장·라인·설비를 식별한 뒤 반복 고장 여부를 확인해 정비 지시서와 현장 안내 댓글을 생성합니다.",
   "scenario_id": "factory-repeated-fault",
   "scenario_version": "v1",
   "graph_kind": "system_template",
-  "execution_mode": "simulation",
+  "execution_mode": "batch",
   "runtime": {
     "executor": "factory.repeated_fault_response",
     "default_mode": "post",
     "allow_post": true,
+    "batch_status": "open",
+    "batch_limit": 1,
     "sample_factory": "세종 배터리팩 공장",
     "sample_line": "3번 조립 라인",
     "sample_equipment": "배터리 탭 용접기",
@@ -22,72 +24,72 @@
       "id": "request-input",
       "type": "request_input",
       "position": { "x": 80, "y": 140 },
-      "data": { "label": "현장 요청 입력", "source": "factory_board" }
+      "data": { "label": "현장 고장 요청 접수", "source": "factory_board" }
     },
     {
       "id": "category-classify",
       "type": "intent_classify",
-      "position": { "x": 300, "y": 140 },
-      "data": { "label": "고장/품질 분류" }
+      "position": { "x": 320, "y": 140 },
+      "data": { "label": "요청 유형 분류" }
     },
     {
       "id": "asset-map",
       "type": "equipment_map",
-      "position": { "x": 520, "y": 140 },
-      "data": { "label": "공장-라인-설비 매핑" }
+      "position": { "x": 560, "y": 140 },
+      "data": { "label": "공장·라인·설비 식별" }
     },
     {
       "id": "recurrence-check",
       "type": "recurrence_check",
-      "position": { "x": 760, "y": 140 },
-      "data": { "label": "반복 여부 확인" }
+      "position": { "x": 820, "y": 140 },
+      "data": { "label": "반복 고장 여부 확인" }
     },
     {
       "id": "fault-register",
       "type": "request_register",
-      "position": { "x": 1000, "y": 80 },
-      "data": { "label": "고장 상황 등록" }
+      "position": { "x": 1080, "y": 80 },
+      "data": { "label": "고장 이력 등록" }
     },
     {
       "id": "maintenance-task",
       "type": "maintenance_task",
-      "position": { "x": 1240, "y": 80 },
-      "data": { "label": "정비팀 확인 건 생성" }
+      "position": { "x": 1340, "y": 80 },
+      "data": { "label": "정비 지시서 생성" }
     },
     {
       "id": "quality-link",
       "type": "quality_link",
-      "position": { "x": 1240, "y": 210 },
-      "data": { "label": "품질 문제 연결" }
+      "position": { "x": 1340, "y": 220 },
+      "data": { "label": "품질 영향 연결" }
     },
     {
       "id": "draft-response",
       "type": "draft_response",
-      "position": { "x": 1480, "y": 80 },
-      "data": { "label": "현장 안내 답변 생성" }
+      "position": { "x": 1600, "y": 80 },
+      "data": { "label": "현장 안내 댓글 작성" }
     },
     {
       "id": "notify-teams",
       "type": "notify_user",
-      "position": { "x": 1720, "y": 80 },
-      "data": { "label": "정비/품질팀 알림" }
+      "position": { "x": 1860, "y": 80 },
+      "data": { "label": "정비·품질팀 알림" }
     },
     {
       "id": "ontology-write",
       "type": "ontology_write",
-      "position": { "x": 1960, "y": 80 },
-      "data": { "label": "온톨로지 저장" }
+      "position": { "x": 2120, "y": 80 },
+      "data": { "label": "온톨로지 이력 저장" }
     }
   ],
   "edges": [
     { "id": "e1", "source": "request-input", "target": "category-classify" },
     { "id": "e2", "source": "category-classify", "target": "asset-map" },
     { "id": "e3", "source": "asset-map", "target": "recurrence-check" },
-    { "id": "e4", "source": "recurrence-check", "target": "fault-register", "label": "최초/반복 고장" },
-    { "id": "e5", "source": "fault-register", "target": "maintenance-task", "label": "반복" },
-    { "id": "e6", "source": "fault-register", "target": "draft-response", "label": "최초 발생" },
-    { "id": "e7", "source": "category-classify", "target": "quality-link", "label": "품질 이슈" },
-    { "id": "e8", "source": "quality-link", "target": "maintenance-task", "label": "설비 고장 이후" },
+    { "id": "e4", "source": "recurrence-check", "target": "fault-register", "label": "고장 이력 확인" },
+    { "id": "e5", "source": "fault-register", "target": "maintenance-task", "label": "정비 필요" },
+    { "id": "e6", "source": "fault-register", "target": "draft-response", "label": "현장 안내" },
+    { "id": "e7", "source": "category-classify", "target": "quality-link", "label": "품질 영향 가능" },
+    { "id": "e8", "source": "quality-link", "target": "maintenance-task", "label": "정비 연계" },
     { "id": "e9", "source": "maintenance-task", "target": "draft-response" },
     { "id": "e10", "source": "draft-response", "target": "notify-teams" },
     { "id": "e11", "source": "notify-teams", "target": "ontology-write" }

@@ -1,0 +1,9 @@
+{
+    "success_rate": 0.0,
+    "avg_response_time_ms": 53133.6,
+    "p50_response_time_ms": 53128.0,
+    "p95_response_time_ms": 53296.7,
+    "p99_response_time_ms": 53365.98,
+    "min_response_time_ms": 52769.0,
+    "max_response_time_ms": 53377.0
+}

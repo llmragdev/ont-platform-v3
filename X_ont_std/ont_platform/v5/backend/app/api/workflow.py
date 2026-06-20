@@ -4,6 +4,7 @@ from __future__ import annotations
 import asyncio
 import json as _json
 import uuid
+from typing import Any
 from fastapi import APIRouter, Depends, Header, HTTPException
 from fastapi.responses import StreamingResponse
 
@@ -14,22 +15,25 @@ from app.models.workflow_run import StepStatus, WorkflowRun, WorkflowStepRun
 from app.models.action import ActionRequest, ActionResponse
 from app.services.ontology import OntologyService
 from app.services.workflow import WorkflowGraphService, WorkflowService
+from app.services.skill_service import SkillService
+from app.services.skill_executor import SkillExecutor, SkillExecutionError
+from app.services.expression_renderer import prepare_skill_input
 from storage_config import get_workflow_runs_path
 
 router = APIRouter(prefix="/api/workflow", tags=["workflow"])
 graph_router = APIRouter(prefix="/api/workflow-graphs", tags=["workflow-graphs"])
 
 FACTORY_STEP_LABELS = {
-    "request-input": "현장 요청 입력",
-    "category-classify": "고장/품질 분류",
-    "asset-map": "공장-라인-설비 매핑",
-    "recurrence-check": "반복 여부 확인",
-    "fault-register": "고장 상황 등록",
-    "maintenance-task": "정비팀 확인 건 생성",
-    "quality-link": "품질 문제 연결",
-    "draft-response": "현장 안내 답변 생성",
-    "notify-teams": "정비/품질팀 알림",
-    "ontology-write": "온톨로지 저장",
+    "request-input": "현장 고장 요청 접수",
+    "category-classify": "요청 유형 분류",
+    "asset-map": "공장·라인·설비 식별",
+    "recurrence-check": "반복 고장 여부 확인",
+    "fault-register": "고장 이력 등록",
+    "maintenance-task": "정비 지시서 생성",
+    "quality-link": "품질 영향 연결",
+    "draft-response": "현장 안내 댓글 작성",
+    "notify-teams": "정비·품질팀 알림",
+    "ontology-write": "온톨로지 이력 저장",
 }
 
 
@@ -87,7 +91,7 @@ class WorkflowGraphRunRequest(BaseModel):
     mode: str | None = None
     status: str = "open"
     limit: int = 10
-    force_reprocess: bool = False
+    force_reprocess: bool = True
 
 
 class WorkflowExecuteRequest(BaseModel):
@@ -233,29 +237,87 @@ async def run_graph(
         tech_trace: list[str] = [f"run_id={run_id}", f"graph_id={graph_id}"]
         completed = 0
 
+        # execution_context: {nodes: {node_id: {output: {...}}, ...}}
+        execution_context = {"nodes": {}}
+
         for node in nodes:
             node_id = node.get("id", "?")
             node_type = node.get("type", "start")
-            label = (node.get("data") or {}).get("label") or node_type
+            node_data = node.get("data") or {}
+            label = node_data.get("label") or node_type
             ts = _dt.datetime.utcnow().isoformat() + "Z"
             step_id = f"step-{uuid.uuid4().hex[:8]}"
 
             step_run = WorkflowStepRun(step_id=step_id, node_id=node_id, node_type=node_type,
                                        status=StepStatus.RUNNING, started_at=ts)
             yield f"event: node_started\ndata: {_json.dumps({'node_id': node_id, 'label': label, 'type': node_type, 'started_at': ts})}\n\n"
-            await asyncio.sleep(0.3)
+            await asyncio.sleep(0.1)
 
             finished_ts = _dt.datetime.utcnow().isoformat() + "Z"
-            output = f"[{node_type}] executed"
-            step_run.status = StepStatus.SUCCEEDED
+            node_error = None
+            output = None
+
+            # skill 노드 처리
+            if node_type == "skill":
+                try:
+                    skill_id = node_data.get("skillId")
+                    skill_config = node_data.get("skillConfig")
+
+                    if not skill_id:
+                        raise ValueError("skillId is required for skill nodes")
+
+                    # 스킬 조회
+                    skill_service = SkillService(ctx)
+                    skill = skill_service.get_skill(skill_id)
+
+                    if not skill:
+                        raise ValueError(f"Skill {skill_id} not found")
+
+                    # 입력 데이터 준비
+                    prepared_input = prepare_skill_input(skill_config, execution_context)
+
+                    # 스킬 실행
+                    executor = SkillExecutor(ctx)
+                    output = executor.execute(skill, prepared_input, skill_config, execution_context)
+
+                    step_run.status = StepStatus.SUCCEEDED
+                    step_run.output = output
+
+                except SkillExecutionError as e:
+                    node_error = str(e)
+                    step_run.status = StepStatus.FAILED
+                    step_run.output = {"error": node_error}
+                except Exception as e:
+                    node_error = str(e)
+                    step_run.status = StepStatus.FAILED
+                    step_run.output = {"error": node_error}
+
+            # 기타 노드 (mock 실행)
+            else:
+                await asyncio.sleep(0.2)
+                output = f"[{node_type}] executed"
+                step_run.status = StepStatus.SUCCEEDED
+                step_run.output = {"result": output}
+
             step_run.finished_at = finished_ts
-            step_run.output = {"result": output}
             step_runs.append(step_run)
-            user_trace.append(f"{label} 완료")
-            tech_trace.append(f"node={node_id} type={node_type} duration_ms=300")
+
+            # execution_context 업데이트 (다음 노드에서 참조 가능)
+            execution_context["nodes"][node_id] = {
+                "output": step_run.output or {}
+            }
+
+            if node_error:
+                user_trace.append(f"{label} 실패: {node_error}")
+                tech_trace.append(f"node={node_id} type={node_type} status=failed error={node_error}")
+            else:
+                user_trace.append(f"{label} 완료")
+                tech_trace.append(f"node={node_id} type={node_type} status=success")
+
             completed += 1
 
-            yield f"event: node_finished\ndata: {_json.dumps({'node_id': node_id, 'label': label, 'type': node_type, 'status': 'success', 'output': output, 'started_at': ts, 'finished_at': finished_ts, 'duration_ms': 300})}\n\n"
+            status_str = "failed" if step_run.status == StepStatus.FAILED else "success"
+            yield f"event: node_finished\ndata: {_json.dumps({'node_id': node_id, 'label': label, 'type': node_type, 'status': status_str, 'output': output, 'started_at': ts, 'finished_at': finished_ts})}\n\n"
 
         finished_at = _dt.datetime.utcnow().isoformat() + "Z"
         run = WorkflowRun(

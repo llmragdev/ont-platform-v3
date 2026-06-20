@@ -13,7 +13,7 @@
     "default_mode": "dry_run",
     "allow_post": true,
     "batch_status": "open",
-    "batch_limit": 10
+    "batch_limit": 1
   },
   "nodes": [
     {

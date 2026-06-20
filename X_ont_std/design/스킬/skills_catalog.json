@@ -1,0 +1,339 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-06-14",
+  "description": "워크플로우 스킬 카탈로그 - Built-in과 Custom 스킬 정의",
+
+  "builtinSkills": [
+    {
+      "id": "web-search",
+      "name": "Web Search",
+      "description": "웹에서 키워드로 정보를 검색합니다",
+      "category": "search",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["search", "external", "information"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "검색 키워드"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "반환할 결과 개수",
+            "default": 5
+          }
+        },
+        "required": ["query"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": { "type": "string" },
+                "url": { "type": "string" },
+                "snippet": { "type": "string" }
+              }
+            }
+          },
+          "totalResults": { "type": "integer" }
+        }
+      },
+      "implementation": {
+        "type": "http",
+        "endpoint": "https://api.search.service/search"
+      }
+    },
+
+    {
+      "id": "send-email",
+      "name": "Send Email",
+      "description": "이메일을 전송합니다",
+      "category": "notification",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["email", "notification", "external"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "수신자 이메일 주소"
+          },
+          "subject": {
+            "type": "string",
+            "description": "이메일 제목"
+          },
+          "body": {
+            "type": "string",
+            "description": "이메일 본문"
+          },
+          "cc": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "참조 주소들"
+          }
+        },
+        "required": ["to", "subject", "body"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["success", "failed"],
+            "description": "발송 결과"
+          },
+          "messageId": {
+            "type": "string",
+            "description": "메시지 ID"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "implementation": {
+        "type": "http",
+        "endpoint": "https://api.email.service/send"
+      }
+    },
+
+    {
+      "id": "query-database",
+      "name": "Query Database",
+      "description": "데이터베이스에서 데이터를 조회합니다",
+      "category": "data",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["database", "query", "data"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string",
+            "description": "SQL 쿼리문"
+          },
+          "database": {
+            "type": "string",
+            "description": "데이터베이스 이름",
+            "default": "default"
+          }
+        },
+        "required": ["sql"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": { "type": "object" },
+            "description": "조회 결과 행들"
+          },
+          "rowCount": {
+            "type": "integer",
+            "description": "반환된 행 개수"
+          }
+        }
+      },
+      "implementation": {
+        "type": "http",
+        "endpoint": "https://api.db.service/query"
+      }
+    },
+
+    {
+      "id": "http-request",
+      "name": "HTTP Request",
+      "description": "외부 API에 HTTP 요청을 보냅니다",
+      "category": "integration",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["http", "api", "external"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "요청 URL"
+          },
+          "method": {
+            "type": "string",
+            "enum": ["GET", "POST", "PUT", "DELETE", "PATCH"],
+            "description": "HTTP 메서드",
+            "default": "GET"
+          },
+          "headers": {
+            "type": "object",
+            "description": "HTTP 헤더"
+          },
+          "body": {
+            "type": "object",
+            "description": "요청 본문"
+          }
+        },
+        "required": ["url"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "HTTP 상태 코드"
+          },
+          "headers": {
+            "type": "object",
+            "description": "응답 헤더"
+          },
+          "body": {
+            "type": "object",
+            "description": "응답 본문"
+          }
+        }
+      },
+      "implementation": {
+        "type": "http",
+        "endpoint": "https://api.http.service/request"
+      }
+    },
+
+    {
+      "id": "text-transform",
+      "name": "Text Transform",
+      "description": "텍스트를 변환합니다 (대소문자, 자르기, 정규식 등)",
+      "category": "text",
+      "version": "1.0",
+      "author": "Built-in",
+      "tags": ["text", "transform", "string"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "변환할 텍스트"
+          },
+          "operation": {
+            "type": "string",
+            "enum": ["uppercase", "lowercase", "capitalize", "trim", "replace", "substring"],
+            "description": "변환 작업"
+          },
+          "params": {
+            "type": "object",
+            "description": "작업별 파라미터"
+          }
+        },
+        "required": ["text", "operation"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string",
+            "description": "변환된 텍스트"
+          },
+          "original": {
+            "type": "string",
+            "description": "원본 텍스트"
+          }
+        }
+      },
+      "implementation": {
+        "type": "builtin"
+      }
+    }
+  ],
+
+  "customSkills": [
+    {
+      "id": "custom-extract-keywords",
+      "name": "Extract Keywords",
+      "description": "텍스트에서 주요 키워드를 추출합니다",
+      "category": "text",
+      "version": "1.0",
+      "author": "ontology-team",
+      "tags": ["text", "nlp", "keywords"],
+      "createdAt": "2026-06-14T10:00:00Z",
+      "updatedAt": "2026-06-14T10:00:00Z",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "분석할 텍스트"
+          },
+          "maxKeywords": {
+            "type": "integer",
+            "description": "추출할 최대 키워드 개수",
+            "default": 10
+          },
+          "minLength": {
+            "type": "integer",
+            "description": "최소 단어 길이",
+            "default": 2
+          }
+        },
+        "required": ["text"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "word": { "type": "string" },
+                "frequency": { "type": "integer" },
+                "score": { "type": "number" }
+              }
+            },
+            "description": "추출된 키워드 목록"
+          }
+        }
+      },
+      "implementation": {
+        "type": "custom",
+        "code": "def execute(input):\n    import re\n    from collections import Counter\n    \n    text = input.get('text', '')\n    max_keywords = input.get('maxKeywords', 10)\n    min_length = input.get('minLength', 2)\n    \n    # 텍스트 전처리\n    words = re.findall(r'\\b[가-힣a-z]+\\b', text.lower())\n    words = [w for w in words if len(w) >= min_length]\n    \n    # 키워드 추출\n    counter = Counter(words)\n    keywords = [\n        {'word': word, 'frequency': count, 'score': count / len(words)}\n        for word, count in counter.most_common(max_keywords)\n    ]\n    \n    return {'keywords': keywords}"
+      }
+    }
+  ],
+
+  "categories": [
+    {
+      "id": "search",
+      "label": "검색",
+      "description": "정보 검색 및 조회"
+    },
+    {
+      "id": "text",
+      "label": "텍스트",
+      "description": "텍스트 처리 및 변환"
+    },
+    {
+      "id": "data",
+      "label": "데이터",
+      "description": "데이터베이스 및 데이터 작업"
+    },
+    {
+      "id": "notification",
+      "label": "알림",
+      "description": "이메일, 메시지 등 알림 전송"
+    },
+    {
+      "id": "integration",
+      "label": "통합",
+      "description": "외부 API 및 서비스 연동"
+    },
+    {
+      "id": "ai",
+      "label": "AI",
+      "description": "LLM, 분류, 생성 등 AI 작업"
+    }
+  ]
+}

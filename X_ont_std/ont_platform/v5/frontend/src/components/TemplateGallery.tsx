@@ -7,10 +7,10 @@ import { buildGraphFromTemplate, workflowTemplates, type WorkflowTemplate } from
 import type { ViewKey } from "@/components/Sidebar";
 
 const categoryLabel: Record<WorkflowTemplate["category"], string> = {
-  helpdesk: "?쒕퉬???붿껌",
-  access: "怨꾩젙 議곗튂",
-  approval: "沅뚰븳 ?덈궡",
-  incident: "?μ븷 ?묐?",
+  helpdesk: "서비스 요청",
+  access: "계정 조치",
+  approval: "권한 안내",
+  incident: "장애 대응",
   factory: "공장 자동화",
 };
 
@@ -35,7 +35,7 @@ export function TemplateGallery({ onNavigate }: { onNavigate: (view: ViewKey) =>
       if (typeof window !== "undefined") {
         window.localStorage.setItem("workflow:lastClonedGraphId", saved.id);
       }
-      setMessage(`蹂듭젣 ?꾨즺: ${saved.name}`);
+      setMessage(`복제 완료: ${saved.name}`);
       onNavigate("workflow-graph");
     } catch (error) {
       setMessage(error instanceof Error ? error.message : String(error));
@@ -49,8 +49,8 @@ export function TemplateGallery({ onNavigate }: { onNavigate: (view: ViewKey) =>
       <section className="panel overflow-hidden">
         <div className="panel-header">
           <div>
-            <h2 className="font-semibold text-slate-950 dark:text-slate-100">Template Gallery</h2>
-            <p className="text-xs text-slate-500">Clone a system template into your project and customize it.</p>
+            <h2 className="font-semibold text-slate-950 dark:text-slate-100">템플릿 갤러리</h2>
+            <p className="text-xs text-slate-500">시스템 템플릿을 프로젝트 워크플로우로 복제해 수정합니다.</p>
           </div>
           <GitBranch className="h-4 w-4 text-teal-700" />
         </div>
@@ -71,7 +71,7 @@ export function TemplateGallery({ onNavigate }: { onNavigate: (view: ViewKey) =>
                   <span className="badge badge-neutral">{categoryLabel[template.category]}</span>
                   <h3 className="mt-2 text-sm font-semibold text-slate-950 dark:text-slate-100">{template.name}</h3>
                 </div>
-                <span className="text-xs text-slate-400">{template.graph.nodes.length} nodes</span>
+                <span className="text-xs text-slate-400">{template.graph.nodes.length}개 노드</span>
               </div>
               <p className="mt-2 text-xs leading-5 text-slate-500 dark:text-slate-400">{template.summary}</p>
             </button>
@@ -94,7 +94,7 @@ export function TemplateGallery({ onNavigate }: { onNavigate: (view: ViewKey) =>
             disabled={savingId === selected.templateId}
           >
             <Copy className="mr-2 h-4 w-4" />
-            {savingId === selected.templateId ? "Cloning" : "Clone to project"}
+            {savingId === selected.templateId ? "복제 중" : "프로젝트로 복제"}
           </button>
         </div>
 
@@ -106,19 +106,19 @@ export function TemplateGallery({ onNavigate }: { onNavigate: (view: ViewKey) =>
           )}
 
           <div className="grid gap-3 lg:grid-cols-3">
-            <InfoBlock label="?곸슜 議곌굔" value={selected.appliesTo} />
-            <InfoBlock label="?먮룞???쒖쇅" value={selected.automationBoundary} />
-            <InfoBlock label="洹몃옒???ш린" value={`${selected.graph.nodes.length} nodes / ${selected.graph.edges.length} edges`} />
+            <InfoBlock label="적용 조건" value={selected.appliesTo} />
+            <InfoBlock label="자동화 범위" value={selected.automationBoundary} />
+            <InfoBlock label="그래프 크기" value={`${selected.graph.nodes.length} nodes / ${selected.graph.edges.length} edges`} />
           </div>
 
           <div className="grid gap-4 lg:grid-cols-2">
-            <ListBlock title="Required Skills" items={selected.requiredSkills} />
-            <ListBlock title="Knowledge Sources" items={selected.requiredSources} />
+            <ListBlock title="필요 기능" items={selected.requiredSkills} />
+            <ListBlock title="필요 지식 소스" items={selected.requiredSources} />
           </div>
 
           <div className="rounded-lg border border-slate-200 dark:border-slate-800">
             <div className="border-b border-slate-200 px-4 py-3 dark:border-slate-800">
-              <h3 className="font-semibold text-slate-950 dark:text-slate-100">Template Flow</h3>
+              <h3 className="font-semibold text-slate-950 dark:text-slate-100">템플릿 흐름</h3>
             </div>
             <div className="overflow-x-auto p-4">
               <div className="flex min-w-max items-center gap-3">
@@ -139,7 +139,7 @@ export function TemplateGallery({ onNavigate }: { onNavigate: (view: ViewKey) =>
             <div className="flex gap-3">
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" />
               <div>
-                <div className="font-semibold">Governance</div>
+                <div className="font-semibold">거버넌스</div>
                 <div className="mt-1">{selected.governance.join(" / ")}</div>
               </div>
             </div>

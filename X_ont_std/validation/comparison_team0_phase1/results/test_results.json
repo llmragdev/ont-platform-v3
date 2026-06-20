@@ -1,0 +1,242 @@
+[
+    {
+        "query": "온톨로지란 무엇인가?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 52769,
+        "data": null
+    },
+    {
+        "query": "온톨로지와 지식그래프의 관계는?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53071,
+        "data": null
+    },
+    {
+        "query": "온톨로지 매칭이란 무엇인가?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53089,
+        "data": null
+    },
+    {
+        "query": "온톨로지 이질성 문제는?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53339,
+        "data": null
+    },
+    {
+        "query": "도메인 온톨로지 모델링 방법은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53377,
+        "data": null
+    },
+    {
+        "query": "온톨로지 기반 의미 속성 판별이란?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53054,
+        "data": null
+    },
+    {
+        "query": "온톨로지 학습 기반 지식 그래프 구축 방법은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53029,
+        "data": null
+    },
+    {
+        "query": "RDF는 무엇인가?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53089,
+        "data": null
+    },
+    {
+        "query": "온톨로지 관리 및 유지보수 방법은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53056,
+        "data": null
+    },
+    {
+        "query": "온톨로지의 평가 지표는?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53069,
+        "data": null
+    },
+    {
+        "query": "온톨로지 재사용 전략은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53098,
+        "data": null
+    },
+    {
+        "query": "온톨로지 국제 표준은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53121,
+        "data": null
+    },
+    {
+        "query": "자연어처리(NLP)란?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53187,
+        "data": null
+    },
+    {
+        "query": "정적 언어모델과 생성형AI의 차이는?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53233,
+        "data": null
+    },
+    {
+        "query": "생성형AI의 발전 과정은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53170,
+        "data": null
+    },
+    {
+        "query": "텍스트를 다시 쓰는 기술(Paraphrasing)이란?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53135,
+        "data": null
+    },
+    {
+        "query": "한국근대문인 데이터베이스 구축 방법은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53196,
+        "data": null
+    },
+    {
+        "query": "실시간 문맥 인식 감성 분석이란?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53245,
+        "data": null
+    },
+    {
+        "query": "감성 분석의 모듈형 아키텍처 설계란?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53091,
+        "data": null
+    },
+    {
+        "query": "NLP에서의 감정 판별 기법은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53159,
+        "data": null
+    },
+    {
+        "query": "언어모델의 문맥 이해 방식은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53180,
+        "data": null
+    },
+    {
+        "query": "대규모 언어모델의 학습 방식은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53080,
+        "data": null
+    },
+    {
+        "query": "NLP의 주요 응용 분야는?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53116,
+        "data": null
+    },
+    {
+        "query": "자연어 이해와 생성의 차이는?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53074,
+        "data": null
+    },
+    {
+        "query": "국방 분야에서 온톨로지를 어떻게 활용하는가?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53094,
+        "data": null
+    },
+    {
+        "query": "국방 지휘통제 데이터 통합 방법은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53217,
+        "data": null
+    },
+    {
+        "query": "온톨로지와 지식그래프를 국방에 적용하는 방법은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53189,
+        "data": null
+    },
+    {
+        "query": "해외 온톨로지 현황은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53150,
+        "data": null
+    },
+    {
+        "query": "한국군 온톨로지 개발 방안은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53193,
+        "data": null
+    },
+    {
+        "query": "지식그래프 기반 국방 정보 통합은?",
+        "status": "error",
+        "answer": "Error executing query: Server error '500 Internal Server Error' for url 'http://localhost:8002/api/v1/rag/search'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+        "used_chunks": [],
+        "elapsed_ms": 53138,
+        "data": null
+    }
+]
