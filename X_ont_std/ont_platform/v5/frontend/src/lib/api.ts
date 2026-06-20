@@ -12,6 +12,9 @@ import type {
   OntologyMgmtRelationType,
   OntologyMgmtSchema,
   TenantConfig,
+  Skill,
+  AssistantChatRequest,
+  AssistantChatResponse,
   WorkflowGraph,
   WorkflowOntologyMapping,
   WorkflowOntologyMappingInstallResult,
@@ -112,6 +115,74 @@ export async function checkHealth(): Promise<boolean> {
 export const api = {
   health: () => request<{ status: string; version: string }>("/api/health"),
 
+  demo: {
+    resetBoards: (payload?: any) => request<any>("/api/demo/reset", { method: "POST", body: JSON.stringify(payload) }),
+  },
+
+  dataEngineering: {
+    listDatabases: () => request<any>("/api/data-engineering/databases"),
+    listTables: (db?: string) => request<any>(`/api/data-engineering/tables?db=${db}`),
+    listQueries: (arg1?: any, arg2?: any) => request<any>("/api/data-engineering/queries"),
+    executeQuery: (payload: any) => request<any>("/api/data-engineering/query", { method: "POST", body: JSON.stringify(payload) }),
+    getExecutionStatus: (id: string, arg2?: any, arg3?: any) => request<any>(`/api/data-engineering/execution/${id}`),
+    saveQuery: (payload: any) => request<any>(`/api/data-engineering/queries`, { method: "POST", body: JSON.stringify(payload) })
+  },
+
+  dataCatalog: {
+    getTables: () => request<any>("/api/data-catalog/tables"),
+    executeQuery: (payload: any) => request<any>("/api/data-catalog/query", { method: "POST", body: JSON.stringify(payload) }),
+    search: (q: string) => request<any>(`/api/data-catalog/search?q=${encodeURIComponent(q)}`),
+  },
+
+  // ── Platform AI Assistant ────────────────────────────────────────────────
+
+  assistant: {
+    chat: (body: AssistantChatRequest) =>
+      request<AssistantChatResponse>("/api/assistant/chat", {
+        method: "POST",
+        body: JSON.stringify(body),
+      }),
+  },
+
+  // ── Streamlit Apps ─────────────────────────────────────────────────────────
+
+  streamlitApps: {
+    save: (body: { app_id: string; folder_name: string; file_name: string; code: string }) =>
+      request<{
+        app_id: string;
+        status: "saved";
+        file_path: string;
+        message: string;
+      }>("/api/streamlit-apps/save", {
+        method: "POST",
+        body: JSON.stringify(body),
+      }),
+
+    run: (body: { app_id: string; folder_name: string; file_name: string; code: string }) =>
+      request<{
+        app_id: string;
+        status: "running" | "fallback" | "error";
+        mode: "streamlit" | "fallback";
+        url: string;
+        file_path: string;
+        port: number;
+        message: string;
+      }>("/api/streamlit-apps/run", {
+        method: "POST",
+        body: JSON.stringify(body),
+      }),
+
+    stop: (appId: string) =>
+      request<{ app_id: string; status: string; message: string }>(
+        `/api/streamlit-apps/stop/${encodeURIComponent(appId)}`,
+        { method: "POST" }
+      ),
+
+    list: () => request<{ programs: any[] }>("/api/streamlit-apps"),
+    duplicate: (appId: string, payload?: any) => request<any>(`/api/streamlit-apps/duplicate`, { method: "POST", body: JSON.stringify(payload || appId) }),
+    remove: (appId: string) => request<{ status: string }>(`/api/streamlit-apps/${encodeURIComponent(appId)}`, { method: "DELETE" }),
+  },
+
   // ── Audit ──────────────────────────────────────────────────────────────────
 
   auditEvents: (limit = 200) =>
@@ -120,8 +191,8 @@ export const api = {
   // ── Documents ─────────────────────────────────────────────────────────────
 
   documents: {
-    list: () =>
-      request<{ documents: DocumentInfo[] }>("/api/documents"),
+    list: (projectId?: string) =>
+      request<{ documents: DocumentInfo[] }>(`/api/documents${projectId ? `?project_id=${projectId}` : ""}`),
 
     upload: async (file: File): Promise<DocumentInfo & { status: string }> => {
       const t = _currentTenant;
@@ -260,7 +331,7 @@ export const api = {
       request<{ nodes: OntologyMgmtGraph["nodes"]; edges: OntologyMgmtGraph["edges"] }>(
         `/api/ontology/${encodeURIComponent(docId)}/graph`
       ).then((raw): OntologyMgmtGraph => {
-        const nodes = (raw.nodes ?? []).map((n: { id: string; data?: { label?: string; object_type?: string; [k: string]: unknown }; [k: string]: unknown }) => ({
+        const nodes = (raw.nodes ?? []).map((n: { id: string; data?: { label?: string; object_type?: string;[k: string]: unknown };[k: string]: unknown }) => ({
           id: n.id,
           label: n.data?.label ?? (n as { name?: string }).name ?? n.id,
           type: n.data?.object_type ?? (n as { type?: string }).type ?? "UNKNOWN",
@@ -289,6 +360,101 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ question, doc_ids: docIds ?? null }),
     }),
+
+  // ── Query Stream (SSE) ─────────────────────────────────────────────────
+  // Author: Claude
+  // Purpose: 실제 FastAPI Backend와 SSE 스트리밍 연결
+
+  queryStream: (projectId: string, sessionId: string, query: string, mode: 'document_only' | 'document_with_limits' | 'expert_mode', options: {
+    hide_irrelevant?: boolean;
+    allow_partial?: boolean;
+    separate_sources?: boolean;
+    allow_general?: boolean;
+    onSources?: (sources: any) => void;
+    onToken?: (token: string) => void;
+    onLimitations?: (limitations: string[]) => void;
+    onFollowUps?: (suggestions: any[]) => void;
+    onComplete?: (meta: any) => void;
+    onError?: (error: Error) => void;
+  }) => {
+    const callbacks = options || {};
+    const params = new URLSearchParams({
+      project_id: projectId,
+      session_id: sessionId,
+      query: query,
+      mode: mode,
+      hide_irrelevant: (options?.hide_irrelevant ?? true).toString(),
+      allow_partial: (options?.allow_partial ?? false).toString(),
+      separate_sources: (options?.separate_sources ?? true).toString(),
+      allow_general: (options?.allow_general ?? false).toString(),
+    });
+
+    const url = `${API_BASE}/api/v1/projects/${projectId}/query/stream?${params}`;
+
+    const eventSource = new EventSource(url);
+
+    eventSource.addEventListener('sources', (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        console.log('📊 Sources received:', data);
+        callbacks.onSources?.(data);
+      } catch (err) {
+        console.error('Failed to parse sources:', err);
+      }
+    });
+
+    eventSource.addEventListener('answer_chunk', (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        const token = data.token || '';
+        callbacks.onToken?.(token);
+      } catch (err) {
+        console.error('Failed to parse answer chunk:', err);
+      }
+    });
+
+    eventSource.addEventListener('limitations', (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.limitations && Array.isArray(data.limitations)) {
+          callbacks.onLimitations?.(data.limitations);
+        }
+      } catch (err) {
+        console.error('Failed to parse limitations:', err);
+      }
+    });
+
+    eventSource.addEventListener('follow_ups', (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.follow_up_suggestions && Array.isArray(data.follow_up_suggestions)) {
+          callbacks.onFollowUps?.(data.follow_up_suggestions);
+        }
+      } catch (err) {
+        console.error('Failed to parse follow-ups:', err);
+      }
+    });
+
+    eventSource.addEventListener('complete', (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        console.log('✅ Query complete:', data);
+        callbacks.onComplete?.(data);
+        eventSource.close();
+      } catch (err) {
+        console.error('Failed to parse complete:', err);
+        eventSource.close();
+      }
+    });
+
+    eventSource.addEventListener('error', (event) => {
+      console.error('SSE Error:', event);
+      callbacks.onError?.(new Error('쿼리 처리 중 오류가 발생했습니다.'));
+      eventSource.close();
+    });
+
+    return eventSource;
+  },
 
   // ── SPARQL Workbench ──────────────────────────────────────────────────────
 
@@ -468,6 +634,31 @@ export const api = {
       ),
   },
 
+  skills: {
+    list: () =>
+      request<{ builtinSkills: Skill[]; customSkills: Skill[]; total: number }>("/api/skills"),
+
+    get: (skillId: string) =>
+      request<Skill>(`/api/skills/${encodeURIComponent(skillId)}`),
+
+    createCustom: (skill: Skill) =>
+      request<{ skillId: string; created: boolean }>("/api/skills/custom", {
+        method: "POST",
+        body: JSON.stringify(skill),
+      }),
+
+    updateCustom: (skillId: string, skill: Skill) =>
+      request<{ skillId: string; updated: boolean }>(`/api/skills/custom/${encodeURIComponent(skillId)}`, {
+        method: "PUT",
+        body: JSON.stringify(skill),
+      }),
+
+    deleteCustom: (skillId: string) =>
+      request<{ skillId: string; deleted: boolean }>(`/api/skills/custom/${encodeURIComponent(skillId)}`, {
+        method: "DELETE",
+      }),
+  },
+
   // ── Integration Test ─────────────────────────────────────────────────────
 
   integrationTest: {
@@ -503,5 +694,84 @@ export const api = {
         vector_hits_avg: number;
         ontology_hits_avg: number;
       }>(`/api/metrics/query?limit=${limit}`),
+  },
+
+  // ── Monitoring (v5) ────────────────────────────────────────────────────────
+
+  monitoring: {
+    health: () => request<any>("/api/v5/monitoring/health"),
+    topQueries: (limit = 10) => request<any>(`/api/v5/monitoring/queries/top?limit=${limit}`),
+    searchStats: () => request<any>("/api/v5/monitoring/search/stats"),
+    recentErrors: (limit = 10) => request<any>(`/api/v5/monitoring/errors/recent?limit=${limit}`),
+    throughput: (window = 5) => request<any>(`/api/v5/monitoring/throughput?window_minutes=${window}`),
+  },
+
+  // ── Backup (v5) ────────────────────────────────────────────────────────────
+
+  backup: {
+    list: () => request<any[]>("/api/v5/backup/list"),
+    create: () => request<{ success: boolean; message: string; filename?: string }>("/api/v5/backup/create", { method: "POST" }),
+    restore: (filename: string) => request<{ success: boolean; message: string }>(`/api/v5/backup/restore/${encodeURIComponent(filename)}`, { method: "POST" }),
+  },
+
+  // ── Encore PoC (v5) ────────────────────────────────────────────────────────
+
+  poc: {
+    task5: {
+      bomMatching: (payload: any) => request<any>("/api/poc/task5/bom-matching", { method: "POST", body: JSON.stringify(payload) }),
+      getMaterial: (materialId: string) => request<any>(`/api/poc/task5/materials/${encodeURIComponent(materialId)}`),
+    },
+    task6: {
+      generateReport: (payload: any) => request<any>("/api/poc/task6/generate-report", { method: "POST", body: JSON.stringify(payload) }),
+      getTemplates: () => request<any>("/api/poc/task6/templates"),
+    },
+    task9: {
+      searchDocuments: (payload: any) => request<any>("/api/poc/task9/search-documents", { method: "POST", body: JSON.stringify(payload) }),
+      ragQuery: (payload: any) => request<any>("/api/poc/task9/rag-query", { method: "POST", body: JSON.stringify(payload) }),
+    },
+    ontology: {
+      extractPipeline: (payload: any) => request<any>("/api/poc/ontology/extract", { method: "POST", body: JSON.stringify(payload) }),
+    }
+  },
+
+  // ── Projects (Week 4 Dashboard) ───────────────────────────────────────
+
+  projects: {
+    list: () => request<{ projects: any[] }>("/api/v1/projects"),
+
+    get: (projectId: string) =>
+      request<any>(`/api/v1/projects/${encodeURIComponent(projectId)}`),
+
+    create: (name: string, description: string) =>
+      request<any>("/api/v1/projects", {
+        method: "POST",
+        body: JSON.stringify({ project_name: name, description }),
+      }),
+  },
+
+  // ── ActionDefinition (Phase 3 Mock) ──────────────────────────────────────
+
+  actions: {
+    getAvailable: async (entityId: string, entityType: string) => {
+      // Mocked response for Phase 3 UI development
+      console.log("Mock getAvailable", entityId, entityType);
+      return {
+        actions: ["APPROVE", "REJECT", "CHANGE_DEADLINE", "REQUEST_INFO", "PROCESS_PAYMENT", "COMPLETE"]
+      };
+    },
+
+    execute: async (actionName: string, payload: any) => {
+      // Mocked response for Phase 3 UI development
+      console.log("Mock execute", actionName, payload);
+      await new Promise((resolve) => setTimeout(resolve, 800)); // simulate network delay
+      return {
+        status: "success",
+        result: {
+          action: actionName,
+          payload,
+          executedAt: new Date().toISOString()
+        }
+      };
+    },
   },
 };
