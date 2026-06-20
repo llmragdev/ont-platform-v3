@@ -579,6 +579,13 @@ try:
 except ImportError:
     logging.warning("Factory Events API not available")
 
+# Phase 2: RAG and Projects APIs
+from app.api.projects import router as projects_router
+app.include_router(projects_router)
+
+from app.api.adaptive_query import router as adaptive_query_router
+app.include_router(adaptive_query_router)
+
 # ── /api/ontology/sparql ──────────────────────────────────────────────────────
 
 from app.services.sparql_service_v2 import SPARQLServiceV2
