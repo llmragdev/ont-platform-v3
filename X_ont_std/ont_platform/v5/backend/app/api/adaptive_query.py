@@ -316,11 +316,12 @@ async def generate_stream(
             # Chroma scores are distance-like; keep the current permissive ceiling
             # while avoiding obviously unrelated far hits.
             vector_results = [r for r in vector_results if float(r.get("score", 999.0)) <= 1.2]
-            vector_results, ontology_results = _filter_by_required_terms(
-                query,
-                vector_results,
-                ontology_results,
-            )
+            if not allow_general:
+                vector_results, ontology_results = _filter_by_required_terms(
+                    query,
+                    vector_results,
+                    ontology_results,
+                )
 
         logger.info(
             "[AdaptiveQuery] evidence raw_rag=%d raw_ontology=%d filtered_rag=%d filtered_ontology=%d",

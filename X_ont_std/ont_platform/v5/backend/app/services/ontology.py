@@ -118,6 +118,9 @@ class OntologyService:
         for t in _re.findall(r'[가-힣]{2,}', name_hint):
             query_tokens.add(t.lower())
 
+        stopwords = {"어떤", "무엇", "하는가", "역할", "기반", "질의응답", "차이점", "어떻게", "대한", "대해"}
+        query_tokens = {t for t in query_tokens if t not in stopwords}
+
         logger.info("[find_by_name] query=%r all_entities=%d query_tokens=%s", name_hint, len(all_entities), query_tokens)
 
         results: list[Dict] = []
@@ -149,7 +152,35 @@ class OntologyService:
                 logger.info("[find_by_name] match(3) %s", entity.get("name"))
 
         logger.info("[find_by_name] matched %d results", len(results))
-        return results[:20]
+        results = results[:20]
+
+        # 4) Fetch 1-hop relationships for the matched entities
+        if results:
+            all_rels = self.repo.list_all_relationships(ctx)
+            entity_map = {e.get("entity_id") or e.get("id"): e.get("name") for e in all_entities}
+            for entity in results:
+                entity_id = entity.get("entity_id") or entity.get("id")
+                if not entity_id:
+                    continue
+                related = []
+                for r in all_rels:
+                    from_id = r.get("from_entity_id") or r.get("from_id")
+                    to_id = r.get("to_entity_id") or r.get("to_id")
+                    rel_type = r.get("type") or r.get("relation") or ""
+                    
+                    if from_id == entity_id:
+                        to_name = entity_map.get(to_id, to_id)
+                        related.append(f"-[{rel_type}]-> {to_name}")
+                    elif to_id == entity_id:
+                        from_name = entity_map.get(from_id, from_id)
+                        related.append(f"<-[{rel_type}]- {from_name}")
+                        
+                if related:
+                    desc = entity.get("description") or str(entity.get("properties", ""))
+                    rel_text = "\n[연관 관계] " + ", ".join(related)
+                    entity["description"] = desc + rel_text
+
+        return results
 
     def get_schema(self, ctx: TenantContext) -> Dict:
         schema_path = get_ontology_path(ctx.company_id, ctx.project_id) / "domain_schema.json"
