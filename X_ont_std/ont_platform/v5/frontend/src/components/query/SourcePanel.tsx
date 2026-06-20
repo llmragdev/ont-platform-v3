@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import type { OntologyGraphResponse } from '@/types/api';
+import { OntologyGraphRenderer } from './ontology/OntologyGraphRenderer';
 
 // Status 타입 정의
 type ResultStatus = 'USED' | 'FILTERED_THRESHOLD' | 'FILTERED_REQUIRED_TERMS';
@@ -76,6 +78,16 @@ export const SourcePanel = ({ sources, level }: { sources: any; level?: number }
   const [activeTab, setActiveTab] = useState<'rag' | 'ontology' | 'expert'>('rag');
 
   if (!sources || Object.keys(sources).length === 0) return null;
+
+  const ontologyGraphResponse: OntologyGraphResponse | undefined =
+    sources.ontology_graph_response ||
+    (sources.ontology_graph
+      ? {
+          ontology_contract_version: sources.ontology_contract_version || 'v2',
+          ontology_graph: sources.ontology_graph,
+          ontology: sources.ontology,
+        }
+      : undefined);
 
   const ragResults = (sources.rag || []) as Source[];
   const ontologyResults = (sources.ontology || []) as OntologySource[];
@@ -225,11 +237,11 @@ export const SourcePanel = ({ sources, level }: { sources: any; level?: number }
         {/* Ontology 탭 */}
         {activeTab === 'ontology' && (
           <div className="space-y-4">
-            <div className="p-4 bg-purple-50 border border-purple-100 rounded text-center text-sm text-purple-600 mb-4">
-              [Ontology Graph Visualization Area] (vis-network 연결 예정)
-            </div>
-
-            {ontologyCount > 0 ? (
+            {/* v2 ontology_graph 구조 지원 */}
+            {ontologyGraphResponse ? (
+              <OntologyGraphRenderer response={ontologyGraphResponse} />
+            ) : ontologyCount > 0 ? (
+              /* Fallback: 기존 구조 */
               <>
                 {/* 요약 정보 */}
                 <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">

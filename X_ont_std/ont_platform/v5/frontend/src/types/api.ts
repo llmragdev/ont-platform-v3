@@ -204,6 +204,74 @@ export interface OntologyEvidence {
   confidence: number;
 }
 
+// ── v5.1 Typed Ontology Retrieval ──────────────────────────────────────────
+
+export type EntityTypeName =
+  | "CONCEPT" | "PROPERTY" | "INSTANCE"
+  | "PERSON" | "ORGANIZATION"
+  | "SYSTEM" | "METHOD" | "DOCUMENT" | "UNKNOWN";
+
+export interface SeedEntity {
+  name: string;
+  type: EntityTypeName;
+  rank?: number;
+  confidence?: number;
+  definition?: string | null;
+  source_document?: string | null;
+}
+
+export interface RelatedEntity {
+  name: string;
+  type: EntityTypeName;
+  rank?: number;
+  relation_type?: string | null;
+  confidence?: number;
+  source_document?: string | null;
+  provenance?: {
+    entity_id?: number;
+    relation_id?: number;
+    extraction_method?: string;
+  };
+}
+
+export interface FilteredOutEntity {
+  name: string;
+  type: EntityTypeName;
+  reason: string;
+  original_rank?: number;
+}
+
+export interface OntologyFilterPolicy {
+  intent: string;
+  allowed_entity_types: EntityTypeName[];
+  disallowed_entity_types?: EntityTypeName[];
+  priority_relation_types?: string[];
+  traversal_depth?: number;
+  applied_filters?: number;
+}
+
+export interface OntologyGraphPayload {
+  seed_entity: SeedEntity;
+  related_entities: RelatedEntity[];
+  filtered_out: FilteredOutEntity[];
+  policy: OntologyFilterPolicy;
+  provenance?: {
+    query?: string;
+    vector_search_top1?: string;
+    intent_classification_confidence?: number;
+    extraction_timestamp?: string;
+  };
+}
+
+export interface OntologyGraphResponse {
+  ontology_contract_version: "v2";
+  ontology_graph: OntologyGraphPayload;
+  ontology?: Array<{
+    name: string;
+    type?: string;
+  }>;
+}
+
 // ── Hybrid Ask ───────────────────────────────────────────────────────────────
 
 export type HybridQueryType = "descriptive" | "filter" | "compare" | "calculate" | "hybrid";
