@@ -55,6 +55,8 @@ def _rag_source(result: dict[str, Any], index: int) -> dict[str, Any]:
         "text": (result.get("text") or "")[:500],
         "similarity": result.get("score", 0.0),
         "score": result.get("score", 0.0),
+        "_status": result.get("_status", "USED"),
+        "_reason": result.get("_reason", "답변에 사용됨"),
     }
 
 
@@ -98,6 +100,8 @@ def _ontology_source(entity: dict[str, Any], index: int) -> dict[str, Any]:
         "score": entity.get("__match_score", 0.0),
         "relation": "",
         "target": "",
+        "_status": entity.get("_status", "USED"),
+        "_reason": entity.get("_reason", "답변에 사용됨"),
     }
 
 
@@ -145,6 +149,8 @@ def _ontology_sources_with_relationships(
                 "text": f"{_entity_name(from_entity)} -[{relation_label}]-> {_entity_name(to_entity)}",
                 "similarity": 1.0,
                 "score": 1.0,
+                "_status": from_entity.get("_status", "USED"),
+                "_reason": from_entity.get("_reason", "답변에 사용됨"),
             }
         )
 
@@ -312,28 +318,47 @@ async def generate_stream(
         raw_vector_count = len(vector_results)
         raw_ontology_count = len(ontology_results)
 
+        for r in vector_results:
+            r["_status"] = "USED"
+            r["_reason"] = "답변에 사용됨"
+        for r in ontology_results:
+            r["_status"] = "USED"
+            r["_reason"] = "답변에 사용됨"
+
         if hide_irrelevant:
-            # Chroma scores are distance-like; keep the current permissive ceiling
-            # while avoiding obviously unrelated far hits.
-            vector_results = [r for r in vector_results if float(r.get("score", 999.0)) <= 1.2]
+            for r in vector_results:
+                if float(r.get("score", 999.0)) > 1.2:
+                    r["_status"] = "FILTERED_THRESHOLD"
+                    r["_reason"] = f"유사도 낮음 ({float(r.get('score', 999.0)):.2f})"
+            
             if not allow_general:
-                vector_results, ontology_results = _filter_by_required_terms(
-                    query,
-                    vector_results,
-                    ontology_results,
-                )
+                terms = _required_terms(query)
+                if terms:
+                    for r in vector_results:
+                        if r.get("_status") == "USED":
+                            if not _contains_any_term(" ".join(str(r.get(key, "")) for key in ("filename", "text", "doc_id", "source")), terms):
+                                r["_status"] = "FILTERED_REQUIRED_TERMS"
+                                r["_reason"] = "필수 키워드 누락"
+                    for r in ontology_results:
+                        if r.get("_status") == "USED":
+                            if not _contains_any_term(" ".join(str(r.get(key, "")) for key in ("name", "description", "type", "properties")), terms):
+                                r["_status"] = "FILTERED_REQUIRED_TERMS"
+                                r["_reason"] = "필수 키워드 누락"
+
+        used_vectors = [r for r in vector_results if r.get("_status") == "USED"]
+        used_ontology = [r for r in ontology_results if r.get("_status") == "USED"]
 
         logger.info(
-            "[AdaptiveQuery] evidence raw_rag=%d raw_ontology=%d filtered_rag=%d filtered_ontology=%d",
+            "[AdaptiveQuery] evidence raw_rag=%d raw_ontology=%d used_rag=%d used_ontology=%d",
             raw_vector_count,
             raw_ontology_count,
-            len(vector_results),
-            len(ontology_results),
+            len(used_vectors),
+            len(used_ontology),
         )
 
-        if not vector_results and not ontology_results:
+        if not used_vectors and not used_ontology:
             logger.info(
-                "[AdaptiveQuery] no evidence project=%s mode=%s hide_irrelevant=%s query=%r",
+                "[AdaptiveQuery] no usable evidence project=%s mode=%s hide_irrelevant=%s query=%r",
                 project_id,
                 mode,
                 hide_irrelevant,
@@ -341,9 +366,9 @@ async def generate_stream(
             )
 
         sources_for_tab = {
-            "rag": [_rag_source(result, i) for i, result in enumerate(vector_results[:5])],
+            "rag": [_rag_source(result, i) for i, result in enumerate(vector_results[:10])],
             "ontology": _ontology_sources_with_relationships(
-                ontology_results[:5],
+                ontology_results[:10],
                 all_ontology_entities,
                 all_ontology_relationships,
             ),
@@ -355,8 +380,8 @@ async def generate_stream(
             query=query,
             mode=mode,
             allow_general=allow_general,
-            vector_results=vector_results,
-            ontology_results=ontology_results,
+            vector_results=used_vectors,
+            ontology_results=used_ontology,
         )
 
         for char in answer_text:
