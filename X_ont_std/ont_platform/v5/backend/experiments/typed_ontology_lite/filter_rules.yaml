@@ -1,0 +1,24 @@
+intent_overrides:
+  person_lookup:
+    - "누구"
+    - "저자"
+    - "사람"
+    - "작성"
+    - "발표"
+    - "연구자"
+    - "소속"
+    - "어디"
+
+type_policies:
+  CONCEPT:
+    is_metadata: false
+    priority: 1
+  PROPERTY:
+    is_metadata: false
+    priority: 2
+  PERSON:
+    is_metadata: true
+    priority: 99
+  ORGANIZATION:
+    is_metadata: true
+    priority: 99
