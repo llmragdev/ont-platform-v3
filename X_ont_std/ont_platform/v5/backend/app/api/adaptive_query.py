@@ -212,6 +212,89 @@ def _ontology_graph_entity(entity: dict[str, Any], rank: int, status: str = "USE
     return item
 
 
+def _entity_properties(entity: dict[str, Any]) -> dict[str, Any]:
+    properties = entity.get("properties") or {}
+    return properties if isinstance(properties, dict) else {}
+
+
+def _entity_role(entity: dict[str, Any]) -> str:
+    return str(entity.get("role") or _entity_properties(entity).get("role") or "").lower()
+
+
+def _select_seed_entity(
+    query: str,
+    candidates: list[dict[str, Any]],
+    relationships: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    if not candidates:
+        return None
+
+    degree: dict[str, int] = {}
+    for relation in relationships:
+        for entity_id in (_relation_from_id(relation), _relation_to_id(relation)):
+            if entity_id:
+                degree[entity_id] = degree.get(entity_id, 0) + 1
+
+    preferred_role_fragments = (
+        "core",
+        "domain",
+        "concept",
+        "method",
+        "process",
+        "step",
+        "application",
+        "property",
+        "constraint",
+        "criterion",
+        "metric",
+        "schema",
+        "field",
+        "rule",
+    )
+    metadata_role_fragments = ("metadata", "author", "publication", "affiliation")
+    query_lower = query.lower()
+
+    def score(entity: dict[str, Any]) -> tuple[float, int, str]:
+        entity_id = _entity_id(entity)
+        name = _entity_name(entity)
+        role = _entity_role(entity)
+        properties = _entity_properties(entity)
+        value = float(entity.get("__match_score") or 0.0)
+
+        if name and name.lower() in query_lower:
+            value += 4.0
+        if role:
+            value += 1.0
+        if any(fragment in role for fragment in preferred_role_fragments):
+            value += 5.0
+        if any(fragment in role for fragment in metadata_role_fragments):
+            value -= 5.0
+
+        node_degree = degree.get(entity_id, 0)
+        value += min(node_degree, 10) * 0.75
+
+        richness = sum(
+            1
+            for key in ("description", "source", "confidence", "aliases")
+            if entity.get(key) or properties.get(key)
+        )
+        value += richness * 0.25
+
+        return (value, node_degree, entity_id)
+
+    selected = max(candidates, key=score)
+    selected_score, selected_degree, _ = score(selected)
+    logger.info(
+        "[ontology_graph] seed selected name=%s id=%s score=%.2f degree=%s role=%s",
+        _entity_name(selected),
+        _entity_id(selected),
+        selected_score,
+        selected_degree,
+        _entity_role(selected) or "-",
+    )
+    return selected
+
+
 def _build_ontology_graph_v2(
     query: str,
     matched_entities: list[dict[str, Any]],
@@ -228,7 +311,9 @@ def _build_ontology_graph_v2(
     type_policies = rules.get("type_policies", {})
     metadata_allowed = _is_metadata_lookup(query, rules)
 
-    seed_source = used_matches[0]
+    seed_source = _select_seed_entity(query, used_matches, relationships)
+    if not seed_source:
+        return None
     seed_id = _entity_id(seed_source)
     if not seed_id:
         return None
@@ -322,11 +407,7 @@ def _format_evidence(vector_results: list[dict[str, Any]], ontology_results: lis
 
 def _required_terms(query: str) -> list[str]:
     """Return must-match domain terms for trap/out-of-scope questions."""
-    lowered = query.lower()
-    terms: list[str] = []
-    if "snowflake" in lowered or "스노우플레이크" in query:
-        terms.extend(["snowflake", "스노우플레이크"])
-    return terms
+    return []
 
 
 def _contains_any_term(value: str, terms: list[str]) -> bool:
@@ -514,7 +595,7 @@ async def generate_stream(
         }
         ontology_graph = _build_ontology_graph_v2(
             query=query,
-            matched_entities=ontology_results[:10],
+            matched_entities=ontology_results,
             all_entities=all_ontology_entities,
             relationships=all_ontology_relationships,
             vector_results=vector_results,
