@@ -8,6 +8,8 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, Query
@@ -16,6 +18,8 @@ from fastapi.responses import StreamingResponse
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+ONTOLOGY_RULES_PATH = Path(__file__).resolve().parents[1] / "services" / "ontology_rules.yaml"
 
 
 NO_EVIDENCE_ANSWER = (
@@ -162,6 +166,140 @@ def _ontology_sources_with_relationships(
         sources.append(_ontology_source(entity, index))
 
     return sources[:5]
+
+
+def _load_ontology_rules() -> dict[str, Any]:
+    """Load type filter policy from config, not from hardcoded code branches."""
+    try:
+        import yaml
+
+        with ONTOLOGY_RULES_PATH.open("r", encoding="utf-8") as handle:
+            return yaml.safe_load(handle) or {}
+    except FileNotFoundError:
+        logger.warning("[AdaptiveQuery] ontology rules not found: %s", ONTOLOGY_RULES_PATH)
+    except Exception as exc:
+        logger.warning("[AdaptiveQuery] failed to load ontology rules: %s", exc)
+    return {"intent_overrides": {}, "type_policies": {}}
+
+
+def _entity_type(entity: dict[str, Any]) -> str:
+    return str(entity.get("type") or entity.get("entity_type") or "UNKNOWN").upper()
+
+
+def _is_metadata_lookup(query: str, rules: dict[str, Any]) -> bool:
+    lowered = query.lower()
+    for keywords in rules.get("intent_overrides", {}).values():
+        for keyword in keywords or []:
+            if str(keyword).lower() in lowered:
+                return True
+    return False
+
+
+def _ontology_graph_entity(entity: dict[str, Any], rank: int, status: str = "USED") -> dict[str, Any]:
+    description = entity.get("description") or str(entity.get("properties", ""))
+    item: dict[str, Any] = {
+        "name": _entity_name(entity),
+        "type": _entity_type(entity),
+        "rank": rank,
+        "status": status,
+    }
+    if description:
+        item["definition"] = description
+    if entity.get("source_document"):
+        item["source_document"] = entity.get("source_document")
+    if entity.get("__match_score") is not None:
+        item["confidence"] = entity.get("__match_score")
+    return item
+
+
+def _build_ontology_graph_v2(
+    query: str,
+    matched_entities: list[dict[str, Any]],
+    all_entities: list[dict[str, Any]],
+    relationships: list[dict[str, Any]],
+    vector_results: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    """Build the v2 hierarchical ontology payload while preserving legacy lists."""
+    used_matches = [entity for entity in matched_entities if entity.get("_status", "USED") == "USED"]
+    if not used_matches:
+        return None
+
+    rules = _load_ontology_rules()
+    type_policies = rules.get("type_policies", {})
+    metadata_allowed = _is_metadata_lookup(query, rules)
+
+    seed_source = used_matches[0]
+    seed_id = _entity_id(seed_source)
+    if not seed_id:
+        return None
+
+    entity_by_id = {_entity_id(entity): entity for entity in all_entities if _entity_id(entity)}
+    seed_entity = _ontology_graph_entity(seed_source, rank=1, status="USED")
+    related_entities: list[dict[str, Any]] = []
+    filtered_out: list[dict[str, Any]] = []
+    seen_neighbors: set[str] = set()
+
+    for relation in relationships:
+        from_id = _relation_from_id(relation)
+        to_id = _relation_to_id(relation)
+        if seed_id not in {from_id, to_id}:
+            continue
+
+        if from_id == seed_id:
+            neighbor_id = to_id
+            direction = f"seed -> {_relation_type(relation) or 'related'}"
+        else:
+            neighbor_id = from_id
+            direction = f"{_relation_type(relation) or 'related'} -> seed"
+
+        if not neighbor_id or neighbor_id == seed_id or neighbor_id in seen_neighbors:
+            continue
+        seen_neighbors.add(neighbor_id)
+
+        neighbor = entity_by_id.get(neighbor_id)
+        if not neighbor:
+            continue
+
+        neighbor_type = _entity_type(neighbor)
+        policy = type_policies.get(neighbor_type, {})
+        is_metadata = bool(policy.get("is_metadata", False))
+        rank = int(policy.get("priority", len(related_entities) + len(filtered_out) + 2))
+        item = _ontology_graph_entity(neighbor, rank=rank, status="USED")
+        item["relation_type"] = direction
+
+        if is_metadata and not metadata_allowed:
+            item["status"] = "FILTERED"
+            item["reason"] = f"Config policy: {neighbor_type} is metadata for this intent"
+            filtered_out.append(item)
+        else:
+            item["reason"] = "Used as a related ontology entity"
+            related_entities.append(item)
+
+    allowed_types = [
+        entity_type
+        for entity_type, policy in type_policies.items()
+        if metadata_allowed or not bool((policy or {}).get("is_metadata", False))
+    ]
+    top_vector = vector_results[0].get("filename") if vector_results else ""
+
+    return {
+        "seed_entity": seed_entity,
+        "related_entities": related_entities[:5],
+        "filtered_out": filtered_out[:10],
+        "policy": {
+            "intent": "metadata_lookup" if metadata_allowed else "concept_explanation",
+            "allowed_entity_types": allowed_types,
+            "traversal_depth": 1,
+            "applied_filters": len(filtered_out),
+            "source": ONTOLOGY_RULES_PATH.name,
+        },
+        "provenance": {
+            "query": query,
+            "vector_search_top1": top_vector,
+            "intent_classification_confidence": 1.0 if metadata_allowed else 0.8,
+            "extraction_timestamp": datetime.now(timezone.utc).isoformat(),
+        },
+    }
 
 
 def _format_evidence(vector_results: list[dict[str, Any]], ontology_results: list[dict[str, Any]]) -> str:
@@ -374,6 +512,16 @@ async def generate_stream(
             ),
             "expert_opinions": [],
         }
+        ontology_graph = _build_ontology_graph_v2(
+            query=query,
+            matched_entities=ontology_results[:10],
+            all_entities=all_ontology_entities,
+            relationships=all_ontology_relationships,
+            vector_results=vector_results,
+        )
+        if ontology_graph:
+            sources_for_tab["ontology_contract_version"] = "v2"
+            sources_for_tab["ontology_graph"] = ontology_graph
         yield _sse("sources", sources_for_tab)
 
         answer_text = _build_answer(

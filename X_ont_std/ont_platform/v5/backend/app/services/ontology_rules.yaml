@@ -1,0 +1,41 @@
+intent_overrides:
+  metadata_lookup:
+    - "누구"
+    - "저자"
+    - "작성자"
+    - "발표자"
+    - "소속"
+    - "기관"
+    - "연구자"
+    - "author"
+    - "organization"
+    - "affiliation"
+
+type_policies:
+  CONCEPT:
+    is_metadata: false
+    priority: 1
+  PROPERTY:
+    is_metadata: false
+    priority: 2
+  INSTANCE:
+    is_metadata: false
+    priority: 3
+  SYSTEM:
+    is_metadata: false
+    priority: 4
+  METHOD:
+    is_metadata: false
+    priority: 5
+  DOCUMENT:
+    is_metadata: true
+    priority: 50
+  PERSON:
+    is_metadata: true
+    priority: 90
+  ORGANIZATION:
+    is_metadata: true
+    priority: 95
+  UNKNOWN:
+    is_metadata: false
+    priority: 99
