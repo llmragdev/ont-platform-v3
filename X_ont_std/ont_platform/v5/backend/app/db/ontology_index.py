@@ -80,9 +80,16 @@ class OntologyIndex:
 
     def index_entity(self, entity: Dict[str, Any], doc_id: str) -> None:
         """Index a single entity"""
-        entity_id = entity.get("entity_id")
+        entity_id = entity.get("entity_id") or entity.get("id")
         if not entity_id:
             return
+        properties = {
+            "description": entity.get("description", ""),
+            **entity.get("properties", {}),
+        }
+        for optional_key in ("role", "source", "confidence", "aliases"):
+            if optional_key in entity:
+                properties[optional_key] = entity[optional_key]
 
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
@@ -94,8 +101,8 @@ class OntologyIndex:
                 entity_id,
                 doc_id,
                 entity.get("type", ""),
-                entity.get("name", entity.get("entity_id", "")),
-                json.dumps({"description": entity.get("description", ""), **entity.get("properties", {})}),
+                entity.get("name", entity_id),
+                json.dumps(properties),
                 datetime.now(UTC).isoformat()
             ))
             conn.commit()
@@ -105,9 +112,16 @@ class OntologyIndex:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             for entity in entities:
-                entity_id = entity.get("entity_id")
+                entity_id = entity.get("entity_id") or entity.get("id")
                 if not entity_id:
                     continue
+                properties = {
+                    "description": entity.get("description", ""),
+                    **entity.get("properties", {}),
+                }
+                for optional_key in ("role", "source", "confidence", "aliases"):
+                    if optional_key in entity:
+                        properties[optional_key] = entity[optional_key]
                 cursor.execute("""
                     INSERT OR REPLACE INTO entities
                     (entity_id, doc_id, entity_type, name, properties, updated_at)
@@ -116,17 +130,21 @@ class OntologyIndex:
                     entity_id,
                     doc_id,
                     entity.get("type", ""),
-                    entity.get("name", entity.get("entity_id", "")),
-                    json.dumps({"description": entity.get("description", ""), **entity.get("properties", {})}),
+                    entity.get("name", entity_id),
+                    json.dumps(properties),
                     datetime.now(UTC).isoformat()
                 ))
             conn.commit()
 
     def index_relationship(self, relation: Dict[str, Any], doc_id: str) -> None:
         """Index a single relationship"""
-        relation_id = relation.get("relation_id")
+        relation_id = relation.get("relation_id") or relation.get("id")
         if not relation_id:
             return
+        properties = relation.get("properties", {}).copy()
+        for optional_key in ("relation_label", "description", "source", "confidence"):
+            if optional_key in relation:
+                properties[optional_key] = relation[optional_key]
 
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
@@ -136,11 +154,11 @@ class OntologyIndex:
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             """, (
                 relation_id,
-                relation.get("from_entity_id", ""),
-                relation.get("to_entity_id", ""),
-                relation.get("type", ""),
+                relation.get("from_entity_id") or relation.get("from_id", ""),
+                relation.get("to_entity_id") or relation.get("to_id", ""),
+                relation.get("relation_type") or relation.get("type") or relation.get("relation", ""),
                 doc_id,
-                json.dumps(relation.get("properties", {})),
+                json.dumps(properties),
                 datetime.now(UTC).isoformat()
             ))
             conn.commit()
@@ -150,20 +168,24 @@ class OntologyIndex:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             for relation in relations:
-                relation_id = relation.get("relation_id")
+                relation_id = relation.get("relation_id") or relation.get("id")
                 if not relation_id:
                     continue
+                properties = relation.get("properties", {}).copy()
+                for optional_key in ("relation_label", "description", "source", "confidence"):
+                    if optional_key in relation:
+                        properties[optional_key] = relation[optional_key]
                 cursor.execute("""
                     INSERT OR REPLACE INTO relationships
                     (relation_id, from_entity_id, to_entity_id, relation_type, doc_id, properties, created_at)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                 """, (
                     relation_id,
-                    relation.get("from_entity_id", ""),
-                    relation.get("to_entity_id", ""),
-                    relation.get("type", ""),
+                    relation.get("from_entity_id") or relation.get("from_id", ""),
+                    relation.get("to_entity_id") or relation.get("to_id", ""),
+                    relation.get("relation_type") or relation.get("type") or relation.get("relation", ""),
                     doc_id,
-                    json.dumps(relation.get("properties", {})),
+                    json.dumps(properties),
                     datetime.now(UTC).isoformat()
                 ))
             conn.commit()

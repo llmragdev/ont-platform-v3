@@ -35,6 +35,7 @@ class OntologyRepository(BaseRepository):
 
         # Index entities and relationships
         index = self._get_index(ctx)
+        index.delete_doc_index(doc_id)
         index.index_entities_batch(data.get("entities", []), doc_id)
         index.index_relationships_batch(data.get("relationships", []), doc_id)
 
