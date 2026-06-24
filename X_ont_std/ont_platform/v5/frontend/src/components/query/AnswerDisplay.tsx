@@ -4,13 +4,16 @@
 // Date: 2026-06-20
 // Purpose: Level별 동적 답변 렌더링 (보완책 #1, #2 구현)
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import html2canvas from 'html2canvas';
 import { useQueryStore, QueryMessage } from '@/store/useQueryStore';
 import { SourcePanel } from './SourcePanel';
 
 export const AnswerDisplay = () => {
   const currentQuery = useQueryStore(state => state.currentQuery);
   const mode = useQueryStore(state => state.mode);
+  const reportRef = useRef<HTMLDivElement>(null);
+  const [isExporting, setIsExporting] = useState(false);
 
   if (!currentQuery) {
     return (
@@ -20,9 +23,88 @@ export const AnswerDisplay = () => {
     );
   }
 
-  const level = currentQuery.coverage_level || 1;
   const confidence = currentQuery.confidence_score || 0;
   const isStreaming = currentQuery.isStreaming;
+  const isInitialStreaming = isStreaming && !currentQuery.answer.trim();
+  const level = isInitialStreaming ? 2 : (currentQuery.coverage_level || 1);
+  const answerStatus = currentQuery.v5_3?.answer_status;
+  const gateDecision = currentQuery.v5_3?.gate?.decision;
+
+  const escapeHtml = (value: unknown) =>
+    String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
+  const handleExportWord = async () => {
+    if (!currentQuery || !reportRef.current || isExporting) return;
+
+    setIsExporting(true);
+    try {
+      const canvas = await html2canvas(reportRef.current, {
+        backgroundColor: '#ffffff',
+        scale: 2,
+        useCORS: true,
+      });
+      const imageData = canvas.toDataURL('image/png');
+      const createdAt = new Date().toLocaleString('ko-KR');
+      const safeStatus = answerStatus || 'UNKNOWN';
+      const safeQuestion = currentQuery.question.replace(/[\\/:*?"<>|]/g, '_').slice(0, 40) || 'query';
+      const fileName = `v5.3_QA_${safeStatus}_${safeQuestion}.doc`;
+      const limitations = (currentQuery.limitations || [])
+        .map((item: any) => `<li>${escapeHtml(item)}</li>`)
+        .join('');
+
+      const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>v5.3 QA Report</title>
+  <style>
+    body { font-family: Malgun Gothic, Arial, sans-serif; color: #111827; line-height: 1.55; max-width: 720px; }
+    h1 { font-size: 22px; margin-bottom: 8px; }
+    h2 { font-size: 16px; margin-top: 22px; border-bottom: 1px solid #d1d5db; padding-bottom: 4px; }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+    th, td { border: 1px solid #d1d5db; padding: 8px; vertical-align: top; }
+    th { width: 160px; background: #f3f4f6; text-align: left; }
+    pre { white-space: pre-wrap; font-family: Malgun Gothic, Arial, sans-serif; }
+    img { width: 680px; max-width: 100%; height: auto; border: 1px solid #d1d5db; }
+  </style>
+</head>
+<body>
+  <h1>v5.3 Hybrid QA 결과 보고서</h1>
+  <table>
+    <tr><th>생성 시각</th><td>${escapeHtml(createdAt)}</td></tr>
+    <tr><th>질문</th><td>${escapeHtml(currentQuery.question)}</td></tr>
+    <tr><th>모드</th><td>${escapeHtml(mode)}</td></tr>
+    <tr><th>v5.3 판정</th><td>${escapeHtml(answerStatus || '-')} / ${escapeHtml(gateDecision || '-')}</td></tr>
+    <tr><th>신뢰도</th><td>${(confidence * 100).toFixed(0)}%</td></tr>
+    <tr><th>레벨</th><td>${escapeHtml(level)}</td></tr>
+  </table>
+  <h2>답변</h2>
+  <pre>${escapeHtml(currentQuery.answer)}</pre>
+  ${limitations ? `<h2>제한사항</h2><ul>${limitations}</ul>` : ''}
+  <h2>화면 캡처</h2>
+  <p>아래 이미지는 저장 시점의 답변/근거 패널 화면입니다.</p>
+  <img src="${imageData}" alt="QA result screenshot" width="680" />
+</body>
+</html>`;
+
+      const blob = new Blob(['\ufeff', html], { type: 'application/msword;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   // Level별 색상 및 배지
   const levelConfig = {
@@ -56,6 +138,35 @@ export const AnswerDisplay = () => {
 
   return (
     <div className="w-full space-y-4">
+      {isInitialStreaming && (
+        <div className="rounded-lg border-2 border-blue-200 bg-blue-50 p-6">
+          <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-blue-700">
+            <span>검색 중</span>
+          </div>
+          <div className="space-y-3">
+            <div className="h-4 w-2/3 animate-pulse rounded bg-blue-100" />
+            <div className="h-4 w-5/6 animate-pulse rounded bg-blue-100" />
+            <div className="h-4 w-1/2 animate-pulse rounded bg-blue-100" />
+          </div>
+          <p className="mt-4 text-sm text-blue-700">
+            문서, 온톨로지, 전문가 근거를 확인하고 있습니다.
+          </p>
+        </div>
+      )}
+      {!isStreaming && (
+        <div className="flex justify-end">
+          <button
+            type="button"
+            onClick={handleExportWord}
+            disabled={isExporting}
+            className="px-3 py-2 rounded border border-blue-200 bg-blue-50 text-sm font-semibold text-blue-700 hover:bg-blue-100 disabled:opacity-60"
+          >
+            {isExporting ? 'Word 저장 중...' : 'Word 저장'}
+          </button>
+        </div>
+      )}
+      {!isInitialStreaming && (
+      <div ref={reportRef} className="space-y-4">
       {/* Level 1: 붉은 경고 (특별 UI) */}
       {level === 1 && (
         <div className={`p-6 rounded-lg border-2 ${config.bg} ${config.border}`}>
@@ -79,9 +190,22 @@ export const AnswerDisplay = () => {
         <div className={`rounded-lg border-2 border-l-4 ${config.bg} ${config.border} p-6`}>
           {/* 배지 + 신뢰도 */}
           <div className="flex items-center justify-between mb-4">
-            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${config.badgeBg}`}>
-              {config.badge}
-            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className={`px-3 py-1 rounded-full text-sm font-semibold ${config.badgeBg}`}>
+                {config.badge}
+              </span>
+              {answerStatus && (
+                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                  answerStatus === 'NO_ANSWER'
+                    ? 'bg-red-100 text-red-700'
+                    : answerStatus === 'GENERAL_ONLY'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'bg-slate-100 text-slate-700'
+                }`}>
+                  v5.3 {answerStatus}{gateDecision ? ` / ${gateDecision}` : ''}
+                </span>
+              )}
+            </div>
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600">
                 신뢰도: <span className="font-bold text-gray-800">{(confidence * 100).toFixed(0)}%</span>
@@ -214,6 +338,8 @@ export const AnswerDisplay = () => {
         <div className={`mt-8 ${level === 1 ? 'border-t-2 border-red-200 pt-6' : ''}`}>
           <SourcePanel sources={currentQuery.sources} level={level} />
         </div>
+      )}
+      </div>
       )}
     </div>
   );

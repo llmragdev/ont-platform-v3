@@ -416,7 +416,9 @@ export const api = {
     eventSource.addEventListener('limitations', (event) => {
       try {
         const data = JSON.parse(event.data);
-        if (data.limitations && Array.isArray(data.limitations)) {
+        if (Array.isArray(data)) {
+          callbacks.onLimitations?.(data);
+        } else if (data.limitations && Array.isArray(data.limitations)) {
           callbacks.onLimitations?.(data.limitations);
         }
       } catch (err) {
@@ -427,7 +429,14 @@ export const api = {
     eventSource.addEventListener('follow_ups', (event) => {
       try {
         const data = JSON.parse(event.data);
-        if (data.follow_up_suggestions && Array.isArray(data.follow_up_suggestions)) {
+        if (Array.isArray(data)) {
+          callbacks.onFollowUps?.(data.map((question, index) => ({
+            rank: index + 1,
+            question,
+            reason: '',
+            confidence: 1,
+          })));
+        } else if (data.follow_up_suggestions && Array.isArray(data.follow_up_suggestions)) {
           callbacks.onFollowUps?.(data.follow_up_suggestions);
         }
       } catch (err) {

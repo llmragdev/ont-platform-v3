@@ -65,5 +65,6 @@ class VectorSearchService:
                 "filename": doc.metadata.get("filename", ""),
                 "page": doc.metadata.get("page", 0),
                 "shard_id": path.name,
+                "metadata": dict(doc.metadata or {}),
             })
         return results

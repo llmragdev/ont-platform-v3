@@ -16,6 +16,7 @@ export interface QueryMessage {
   coverage_level: number;
   coverage_level_name?: string;
   confidence_score: number;
+  v5_3?: any;
   sources: any;
   limitations: any[];
   follow_up_suggestions: FollowUpSuggestion[];

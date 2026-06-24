@@ -5,7 +5,7 @@ import type { OntologyGraphResponse } from '@/types/api';
 import { OntologyGraphRenderer } from './ontology/OntologyGraphRenderer';
 
 // Status 타입 정의
-type ResultStatus = 'USED' | 'FILTERED_THRESHOLD' | 'FILTERED_REQUIRED_TERMS';
+type ResultStatus = 'USED' | 'FILTERED' | 'FILTERED_THRESHOLD' | 'FILTERED_REQUIRED_TERMS';
 
 interface Source {
   filename?: string;
@@ -45,6 +45,12 @@ const getStatusStyle = (status?: ResultStatus) => {
         badge: 'bg-gray-100 text-gray-600',
         icon: '✗',
       };
+    case 'FILTERED':
+      return {
+        container: 'border-l-4 border-red-400 bg-red-50',
+        badge: 'bg-red-100 text-red-700',
+        icon: '⛔',
+      };
     case 'FILTERED_REQUIRED_TERMS':
       return {
         container: 'border-l-4 border-yellow-400 bg-yellow-50',
@@ -66,6 +72,8 @@ const getStatusLabel = (status?: ResultStatus) => {
       return '사용됨';
     case 'FILTERED_THRESHOLD':
       return '필터됨 (유사도)';
+    case 'FILTERED':
+      return '필터됨 (답변 차단)';
     case 'FILTERED_REQUIRED_TERMS':
       return '필터됨 (키워드)';
     default:
@@ -93,11 +101,11 @@ export const SourcePanel = ({ sources, level }: { sources: any; level?: number }
   const ontologyResults = (sources.ontology || []) as OntologySource[];
 
   const ragCount = ragResults.length;
-  const ragUsedCount = ragResults.filter((r) => r._status === 'USED').length;
+  const ragUsedCount = ragResults.filter((r) => r._status === 'USED' && r.used !== false).length;
   const ragFilteredCount = ragCount - ragUsedCount;
 
   const ontologyCount = ontologyResults.length;
-  const ontologyUsedCount = ontologyResults.filter((r) => r._status === 'USED').length;
+  const ontologyUsedCount = ontologyResults.filter((r) => r._status === 'USED' && r.used !== false).length;
   const ontologyFilteredCount = ontologyCount - ontologyUsedCount;
 
   const expertCount = sources.expert_opinions?.length || 0;
@@ -156,7 +164,7 @@ export const SourcePanel = ({ sources, level }: { sources: any; level?: number }
                     <h5 className="font-bold text-green-700 mb-2">✓ 사용된 문서 ({ragUsedCount})</h5>
                     <div className="space-y-3">
                       {ragResults
-                        .filter((item) => item._status === 'USED')
+                        .filter((item) => item._status === 'USED' && item.used !== false)
                         .map((item, idx) => {
                           const score = item.score || 0;
                           const scorePercent = typeof score === 'number' ? Math.round(score * 100) : null;
@@ -201,7 +209,7 @@ export const SourcePanel = ({ sources, level }: { sources: any; level?: number }
                     <p className="text-xs text-gray-500 mb-3">※ 다음 문서들은 검색되었지만 품질 기준에 맞지 않아 답변에 사용되지 않았습니다.</p>
                     <div className="space-y-2">
                       {ragResults
-                        .filter((item) => item._status !== 'USED')
+                        .filter((item) => item._status !== 'USED' || item.used === false)
                         .map((item, idx) => {
                           const score = item.score || 0;
                           const scorePercent = typeof score === 'number' ? Math.round(score * 100) : null;
@@ -213,7 +221,7 @@ export const SourcePanel = ({ sources, level }: { sources: any; level?: number }
                                   {statusStyle.icon} {item.filename || '문서'} (p.{item.page || '-'})
                                 </span>
                                 <span className={`px-2 py-0.5 rounded-full ${statusStyle.badge}`}>
-                                  {scorePercent}%
+                                  {getStatusLabel(item._status)} · {scorePercent}%
                                 </span>
                               </div>
                               {item._reason && (
@@ -268,7 +276,7 @@ export const SourcePanel = ({ sources, level }: { sources: any; level?: number }
                     <h5 className="font-bold text-green-700 mb-2">✓ 사용된 엔티티 ({ontologyUsedCount})</h5>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {ontologyResults
-                        .filter((entity) => entity._status === 'USED')
+                        .filter((entity) => entity._status === 'USED' && entity.used !== false)
                         .map((entity, idx) => {
                           const statusStyle = getStatusStyle('USED');
                           return (
@@ -304,7 +312,7 @@ export const SourcePanel = ({ sources, level }: { sources: any; level?: number }
                     <p className="text-xs text-gray-500 mb-3">※ 다음 엔티티들은 검색되었지만 품질 기준에 맞지 않아 답변에 사용되지 않았습니다.</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       {ontologyResults
-                        .filter((entity) => entity._status !== 'USED')
+                        .filter((entity) => entity._status !== 'USED' || entity.used === false)
                         .map((entity, idx) => {
                           const statusStyle = getStatusStyle(entity._status);
                           return (

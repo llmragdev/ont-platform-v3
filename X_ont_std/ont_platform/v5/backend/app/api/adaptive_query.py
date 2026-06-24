@@ -567,6 +567,66 @@ async def generate_stream(
         used_vectors = [r for r in vector_results if r.get("_status") == "USED"]
         used_ontology = [r for r in ontology_results if r.get("_status") == "USED"]
 
+        # --- v5.3 Hybrid Search OAG (Entity Gate) ---
+        from app.services.entity_gate import extract_query_entity_candidates, calculate_ontology_entity_overlap, evaluate_chunk_entity_match
+        from app.services.answerability_gate import evaluate_answerability
+
+        query_entities = extract_query_entity_candidates(query)
+        ont_names = [_entity_name(e) for e in used_ontology]
+        chunk_text_combined = " ".join([r.get("text", "") for r in used_vectors])
+        
+        ontology_overlap = calculate_ontology_entity_overlap(query_entities, ont_names)
+        chunk_match = evaluate_chunk_entity_match(query_entities, chunk_text_combined, {})
+        chunk_overlap = chunk_match["chunk_entity_overlap"]
+        
+        gate_result = evaluate_answerability(
+            ontology_overlap,
+            chunk_overlap,
+            mode,
+            matched_query_entities_count=chunk_match["matched_query_entities_count"],
+        )
+        answer_status = gate_result["answer_status"]
+        fallback_answer_bypassed = answer_status == "NO_ANSWER"
+        
+        v5_3_meta = {
+            "answer_status": answer_status,
+            "gate": {
+                "decision": gate_result["decision"],
+                "query_entities": query_entities,
+                "matched_query_entities": chunk_match["matched_query_entities"],
+                "missing_query_entities": chunk_match["missing_query_entities"],
+                "matched_query_entities_count": chunk_match["matched_query_entities_count"],
+                "ontology_entity_overlap": ontology_overlap,
+                "chunk_entity_overlap": chunk_overlap,
+                "metadata_absent_fallback_used": chunk_match["metadata_absent_fallback_used"],
+                "fallback_answer_bypassed": fallback_answer_bypassed,
+            },
+            "gate_status": gate_result["gate_status"],
+            "thresholds": gate_result.get("thresholds", {}),
+            "entity_gate": {
+                "query_entities": query_entities,
+                "matched_ontology_entities": ont_names,
+                "matched_query_entities": chunk_match["matched_query_entities"],
+                "missing_query_entities": chunk_match["missing_query_entities"],
+                "matched_query_entities_count": chunk_match["matched_query_entities_count"],
+                "ontology_entity_overlap": ontology_overlap,
+                "chunk_entity_overlap": chunk_overlap,
+                "metadata_absent_fallback_used": chunk_match["metadata_absent_fallback_used"],
+            }
+        }
+        
+        logger.info(
+            "[AdaptiveQuery] v5.3 Gate: status=%s decision=%s ontology_overlap=%.2f chunk_overlap=%.2f matched=%d metadata_absent_fallback_used=%s fallback_answer_bypassed=%s",
+            answer_status,
+            gate_result["decision"],
+            ontology_overlap,
+            chunk_overlap,
+            chunk_match["matched_query_entities_count"],
+            chunk_match["metadata_absent_fallback_used"],
+            fallback_answer_bypassed,
+        )
+        # --------------------------------------------
+
         logger.info(
             "[AdaptiveQuery] evidence raw_rag=%d raw_ontology=%d used_rag=%d used_ontology=%d",
             raw_vector_count,
@@ -593,6 +653,15 @@ async def generate_stream(
             ),
             "expert_opinions": [],
         }
+        if answer_status == "NO_ANSWER":
+            for source in sources_for_tab["rag"]:
+                source["_status"] = "FILTERED"
+                source["used"] = False
+                source["reason"] = "answerability_gate_blocked"
+            for source in sources_for_tab["ontology"]:
+                source["_status"] = "FILTERED"
+                source["used"] = False
+                source["reason"] = "answerability_gate_blocked"
         ontology_graph = _build_ontology_graph_v2(
             query=query,
             matched_entities=ontology_results,
@@ -605,19 +674,24 @@ async def generate_stream(
             sources_for_tab["ontology_graph"] = ontology_graph
         yield _sse("sources", sources_for_tab)
 
-        answer_text = _build_answer(
-            query=query,
-            mode=mode,
-            allow_general=allow_general,
-            vector_results=used_vectors,
-            ontology_results=used_ontology,
-        )
+        if answer_status == "NO_ANSWER":
+            answer_text = "죄송합니다. 제공된 문서와 온톨로지 지식에서 질문에 대한 관련 근거를 찾지 못했습니다."
+        else:
+            answer_text = _build_answer(
+                query=query,
+                mode=mode,
+                allow_general=allow_general,
+                vector_results=used_vectors,
+                ontology_results=used_ontology,
+            )
 
         for char in answer_text:
             await asyncio.sleep(0.001)
             yield _sse("answer_chunk", {"token": char})
 
         limitations: list[str] = []
+        if answer_status == "NO_ANSWER":
+            limitations.append("Answerability Gate blocked the response because direct evidence was not confirmed.")
         if not vector_results and not ontology_results:
             limitations.append("문서/온톨로지 근거 없음")
         elif allow_partial:
@@ -632,13 +706,22 @@ async def generate_stream(
         yield _sse("follow_ups", follow_ups)
 
         has_evidence = bool(vector_results or ontology_results)
+        if answer_status == "NO_ANSWER":
+            response_confidence = 0.0
+        elif answer_status == "GENERAL_ONLY":
+            response_confidence = 0.55
+        elif answer_status == "PARTIAL":
+            response_confidence = 0.75
+        else:
+            response_confidence = 0.95 if has_evidence else 0.0
         complete_meta = {
             "level": 3 if vector_results and ontology_results else (2 if has_evidence else 1),
             "relevance_level": 3 if vector_results and ontology_results else (2 if has_evidence else 1),
-            "confidence": 0.85 if has_evidence else 0.0,
-            "confidence_score": 0.85 if has_evidence else 0.0,
+            "confidence": response_confidence,
+            "confidence_score": response_confidence,
             "sources": sources_for_tab,
             "limitations": limitations,
+            "v5_3": v5_3_meta,
         }
         yield _sse("complete", complete_meta)
 

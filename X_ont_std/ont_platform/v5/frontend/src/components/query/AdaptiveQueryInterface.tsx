@@ -40,6 +40,7 @@ export const AdaptiveQueryInterface = () => {
   const updateStreamChunk = useQueryStore(state => state.updateStreamChunk);
   const finishQuery = useQueryStore(state => state.finishQuery);
   const currentQuery = useQueryStore(state => state.currentQuery);
+  const currentProjectId = useQueryStore(state => state.currentProjectId);
   const isLoading = useQueryStore(state => state.isLoading);
 
   const handleSubmit = async () => {
@@ -50,7 +51,7 @@ export const AdaptiveQueryInterface = () => {
     try {
       // Week 4: 실제 Backend API와 연결
       // 프로젝트 ID는 window 전역 변수에서 가져옴 (QueryTab에서 설정함)
-      const projectId = (typeof window !== 'undefined' && (window as any).__projectId) || 'proj-01';
+      const projectId = currentProjectId || (typeof window !== 'undefined' && (window as any).__projectId) || 'proj-deafe1fe';
       const sessionId = `session-${Date.now()}`;
 
       // SSE 스트림 실행
@@ -85,6 +86,7 @@ export const AdaptiveQueryInterface = () => {
             finishQuery({
               coverage_level: meta.level ?? meta.relevance_level ?? 1,
               confidence_score: meta.confidence ?? meta.confidence_score ?? 0,
+              v5_3: meta.v5_3,
               sources: meta.sources || useQueryStore.getState().currentQuery?.sources || { rag: [], ontology: [], expert_opinions: [] },
               limitations: meta.limitations || [],
               follow_up_suggestions: meta.follow_up_suggestions || []
