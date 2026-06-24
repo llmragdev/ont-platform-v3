@@ -53,12 +53,12 @@ Write-Host "Backend log file: $LogFile" -ForegroundColor Cyan
 Write-Host "Latest log file : $LatestLogFile" -ForegroundColor Cyan
 
 if ($NoReload) {
-    cmd /c "python -m uvicorn app.main:app --port $Port 2>&1" |
+    cmd /c "python -m uvicorn app.main:app --port $Port --env-file .env 2>&1" |
         Tee-Object -FilePath $LogFile |
         Tee-Object -FilePath $LatestLogFile
     exit $LASTEXITCODE
 }
 
-cmd /c "python -m uvicorn app.main:app --reload --reload-dir=app --port $Port 2>&1" |
+cmd /c "python -m uvicorn app.main:app --reload --reload-dir=app --port $Port --env-file .env 2>&1" |
     Tee-Object -FilePath $LogFile |
     Tee-Object -FilePath $LatestLogFile

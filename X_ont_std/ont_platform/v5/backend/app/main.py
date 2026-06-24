@@ -19,9 +19,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 # .env 로드 (프로젝트 루트에서, 없어도 무시)
 try:
     from dotenv import load_dotenv
-    # 프로젝트 루트의 .env를 읽음 (v3/.env)
-    project_root = Path(__file__).resolve().parents[3]  # src/backend/app/main.py → v3/
-    env_file = project_root / ".env"
+    # v5 백엔드 폴더의 .env를 읽음
+    backend_root = Path(__file__).resolve().parents[1]  # v5/backend/app/main.py -> v5/backend/
+    env_file = backend_root / ".env"
     if env_file.exists():
         load_dotenv(env_file)
 except ImportError:
