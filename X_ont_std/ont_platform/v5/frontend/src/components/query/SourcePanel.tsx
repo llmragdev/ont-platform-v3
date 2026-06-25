@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import type { OntologyGraphResponse } from '@/types/api';
 import { OntologyGraphRenderer } from './ontology/OntologyGraphRenderer';
+import { api } from '@/lib/api';
 
 // Status 타입 정의
 type ResultStatus = 'USED' | 'FILTERED' | 'FILTERED_THRESHOLD' | 'FILTERED_REQUIRED_TERMS';
@@ -84,6 +85,15 @@ const getStatusLabel = (status?: ResultStatus) => {
 // 간단한 Mock UI 컴포넌트들을 사용하여 SourcePanel 구성
 export const SourcePanel = ({ sources, level }: { sources: any; level?: number }) => {
   const [activeTab, setActiveTab] = useState<'rag' | 'ontology' | 'expert'>('rag');
+  const [showExpertForm, setShowExpertForm] = useState(false);
+  const [expertForm, setExpertForm] = useState({
+    expert_name: '',
+    role: '',
+    topic: '',
+    opinion: '',
+    keywords: '',
+  });
+  const [isSaving, setIsSaving] = useState(false);
 
   if (!sources || Object.keys(sources).length === 0) return null;
 
@@ -346,19 +356,138 @@ export const SourcePanel = ({ sources, level }: { sources: any; level?: number }
         {/* Expert 탭 */}
         {activeTab === 'expert' && (
           <div className="space-y-4">
-            {sources.expert_opinions?.length > 0 ? sources.expert_opinions.map((exp: any, idx: number) => (
-              <div key={idx} className="p-4 border-l-4 border-green-500 bg-green-50 rounded-r">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xl">👨‍💼</span>
-                  <h4 className="font-bold text-green-800">{exp.expert_name || '전문가'}</h4>
-                  <span className="text-xs text-green-600 font-semibold bg-green-100 px-2 py-0.5 rounded">Verified</span>
+            {/* 전문가 의견 입력 폼 */}
+            {showExpertForm && (
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg space-y-3">
+                <h3 className="font-semibold text-blue-900">전문가 의견 등록</h3>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">전문가명</label>
+                  <input
+                    type="text"
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                    placeholder="예: 홍길동"
+                    value={expertForm.expert_name}
+                    onChange={(e) => setExpertForm({ ...expertForm, expert_name: e.target.value })}
+                  />
                 </div>
-                <p className="text-sm text-gray-800 italic">"{exp.opinion}"</p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">역할</label>
+                    <input
+                      type="text"
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                      placeholder="예: Domain Expert"
+                      value={expertForm.role}
+                      onChange={(e) => setExpertForm({ ...expertForm, role: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">주제</label>
+                    <input
+                      type="text"
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                      placeholder="예: 온톨로지"
+                      value={expertForm.topic}
+                      onChange={(e) => setExpertForm({ ...expertForm, topic: e.target.value })}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">의견</label>
+                  <textarea
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                    placeholder="전문가 의견을 입력하세요"
+                    rows={3}
+                    value={expertForm.opinion}
+                    onChange={(e) => setExpertForm({ ...expertForm, opinion: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">키워드 (쉼표로 구분)</label>
+                  <input
+                    type="text"
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                    placeholder="예: 온톨로지, 근거, 검증"
+                    value={expertForm.keywords}
+                    onChange={(e) => setExpertForm({ ...expertForm, keywords: e.target.value })}
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 disabled:bg-blue-300"
+                    disabled={isSaving || !expertForm.expert_name || !expertForm.opinion}
+                    onClick={async () => {
+                      try {
+                        setIsSaving(true);
+                        await api.expertOpinions.create({
+                          expert_name: expertForm.expert_name,
+                          role: expertForm.role,
+                          topic: expertForm.topic,
+                          opinion: expertForm.opinion,
+                          keywords: expertForm.keywords.split(',').map(k => k.trim()).filter(k => k),
+                        });
+                        setExpertForm({ expert_name: '', role: '', topic: '', opinion: '', keywords: '' });
+                        setShowExpertForm(false);
+                        // Refresh would be needed here in a real app
+                      } catch (error) {
+                        console.error('Failed to save expert opinion:', error);
+                        alert('저장 실패');
+                      } finally {
+                        setIsSaving(false);
+                      }
+                    }}
+                  >
+                    {isSaving ? '저장 중...' : '저장'}
+                  </button>
+                  <button
+                    className="flex-1 px-3 py-2 bg-gray-300 text-gray-700 text-sm rounded hover:bg-gray-400"
+                    onClick={() => setShowExpertForm(false)}
+                  >
+                    취소
+                  </button>
+                </div>
               </div>
-            )) : (
+            )}
+
+            {/* 전문가 의견 목록 */}
+            {sources.expert_opinions?.length > 0 ? (
+              <>
+                {sources.expert_opinions.map((exp: any, idx: number) => {
+                  const isFiltered = exp._status === 'FILTERED';
+                  const statusStyle = getStatusStyle(exp._status);
+                  return (
+                    <div key={idx} className={`p-4 border-l-4 rounded-r ${isFiltered ? 'border-gray-400 bg-gray-50 opacity-60' : statusStyle.container}`}>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xl">{statusStyle.icon}</span>
+                        <h4 className={`font-bold ${isFiltered ? 'text-gray-600' : 'text-green-800'}`}>{exp.expert_name || '전문가'}</h4>
+                        {exp.role && <span className={`text-xs ${isFiltered ? 'text-gray-500' : 'text-green-600'}`}>{exp.role}</span>}
+                        {isFiltered && <span className={`px-2 py-0.5 text-xs rounded-full ${statusStyle.badge}`}>{getStatusLabel(exp._status)}</span>}
+                      </div>
+                      <p className={`text-sm ${isFiltered ? 'text-gray-600' : 'text-gray-800'}`}>"{exp.opinion}"</p>
+                      {exp._reason && <p className={`text-xs mt-1 ${isFiltered ? 'text-gray-500' : 'text-green-600'}`}>사유: {exp._reason}</p>}
+                    </div>
+                  );
+                })}
+                {!showExpertForm && (
+                  <button
+                    className="w-full py-2 text-sm text-blue-600 border border-blue-200 rounded hover:bg-blue-50"
+                    onClick={() => setShowExpertForm(true)}
+                  >
+                    + 의견 추가
+                  </button>
+                )}
+              </>
+            ) : (
               <div className="text-center py-8">
-                <p className="text-gray-400">관련된 전문가 의견(Expert DB)이 없습니다.</p>
-                <p className="text-xs text-gray-300 mt-1">Level 4 지식통합 단계에서만 참조됩니다.</p>
+                <p className="text-gray-400 mb-4">등록된 전문가 의견이 없습니다.</p>
+                {!showExpertForm && (
+                  <button
+                    className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
+                    onClick={() => setShowExpertForm(true)}
+                  >
+                    첫 의견 등록
+                  </button>
+                )}
               </div>
             )}
           </div>
