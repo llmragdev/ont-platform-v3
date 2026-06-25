@@ -1,0 +1,1 @@
+{"policy":"category_irrelevant","category":"Snowflake","question_pattern":"Snowflake|스노우플레이크|ranking_issue","condition":"no direct evidence in category documents","target_response":"질문은 해당 카테고리 문서와 관련이 없습니다.","applies_to":["evaluation","evidence_gate","regression_test"]}

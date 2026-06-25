@@ -1,0 +1,348 @@
+# Week 1 Completion Report: Phase 2.5 PostgreSQL Migration Setup
+**Date**: 2026-05-24  
+**Status**: ✅ COMPLETE (All 3 Tasks Done)  
+**Phase**: Phase 2.5 — PostgreSQL Migration Prep  
+
+---
+
+## Summary
+
+Successfully completed all Week 1 tasks for Phase 2.5 (05-27 ~ 05-31 equivalent, done early on 05-24):
+- Task 1-1: rdflib integration with 30 SPARQL tests ✅
+- Task 1-2: PostgreSQL schema validation with Neon.tech ✅
+- Task 1-3: Docker Compose dev environment + SQLAlchemy setup ✅
+
+**Key Achievement**: All 30 SPARQL tests passing + PostgreSQL operational + Dev environment ready
+
+---
+
+## Task 1-1: rdflib Integration (COMPLETE)
+
+### Status
+- **rdflib version**: 7.6.0 (W3C SPARQL 1.1 standard compliant)
+- **Main service**: SPARQLServiceV2 (activated in main.py)
+- **Test suite**: 30/30 tests passing ✅
+
+### What Was Done
+
+#### 1. Fixed SPARQL Query Detection
+**Issue**: Queries with PREFIX clauses not recognized as valid SPARQL (startswith("SELECT") failed)  
+**Solution**: Changed detection from `startswith()` to `in` operator to find query keyword anywhere in string
+```python
+# Before (failed with PREFIX)
+if upper_query.startswith("SELECT"):
+    return "SELECT"
+
+# After (handles PREFIX)
+for keyword in ["SELECT", "CONSTRUCT", "DESCRIBE", "ASK"]:
+    if keyword in upper_query:
+        return keyword
+```
+
+#### 2. Auto-detect Numeric Literal Types
+**Issue**: Numeric properties (cost, rating, etc.) stored as strings, FILTER comparisons failed  
+**Solution**: Added auto-detection of numeric types in `add_triple_literal()`
+```python
+# Auto-converts "100" → Literal("100", datatype=xsd:integer)
+# Auto-converts "3.14" → Literal("3.14", datatype=xsd:decimal)
+try:
+    if '.' in obj:
+        float(obj)
+        o = Literal(obj, datatype=XSD.decimal)
+    else:
+        int(obj)
+        o = Literal(obj, datatype=XSD.integer)
+except ValueError:
+    o = Literal(obj)  # fallback to string
+```
+
+#### 3. Fixed Test Data Issues
+- Changed `add_triple()` to `add_triple_literal()` for numeric properties in 2 tests
+- Tests now properly validate FILTER comparisons (>, >=, <, =)
+
+### Test Coverage (30 Tests)
+| Category | Count | Examples |
+|----------|-------|----------|
+| Service creation | 3 | init, add_triple, add_triple_literal |
+| Query types | 5 | SELECT, CONSTRUCT, DESCRIBE, ASK, complex_ontology |
+| Filters | 5 | GT, equals, regex, AND, OR |
+| Relationships | 4 | one-hop, two-hop, with filters |
+| Advanced | 8 | LIMIT, OFFSET, DISTINCT, error handling |
+
+**Result**: 30/30 tests passing (100% success rate)
+
+---
+
+## Task 1-2: PostgreSQL Schema Validation (COMPLETE)
+
+### Status
+- **Database**: Neon.tech PostgreSQL (cloud)
+- **Tables created**: 4 (entities, relationships, audit_log, ontology_metadata)
+- **Views created**: 1 (ontology_triples)
+- **Indexes created**: 20 (optimized for JSONB + entity queries)
+- **Test data**: Inserted successfully
+
+### What Was Done
+
+#### 1. DDL Schema Execution
+**File**: `scripts/init_schema.sql`
+- Executed successfully on Neon.tech PostgreSQL 15
+- Created all tables with proper constraints, types, and indexes
+
+#### 2. Error Fixes
+| Error | Cause | Solution |
+|-------|-------|----------|
+| GiST index failure | JSONB doesn't support GiST in PostgreSQL | Changed to GIN index (standard for JSONB) |
+| information_schema.indexes not found | Neon.tech access restrictions | Used pg_indexes instead |
+| Emoji encoding (cp949) | Windows console limitations | Removed emoji, kept ASCII reporting |
+
+#### 3. Schema Verification
+```
+✅ Tables (4 rows):
+   - audit_log: 0 rows
+   - entities: 1 row (test data)
+   - ontology_metadata: 1 row (test data)
+   - relationships: 0 rows
+
+✅ Views (1):
+   - ontology_triples (RDF triple simulation)
+
+✅ Indexes (20):
+   - Primary keys, foreign keys, expression indexes for JSONB properties
+   - GIN index for efficient property lookups
+```
+
+### Index Strategy
+- **GIN indexes** for JSONB containment queries (`properties @> '{...}'`)
+- **Expression indexes** for frequently accessed properties (`properties->>'status'`)
+- **B-tree indexes** for standard columns (entity_type, domain_id, timestamps)
+
+---
+
+## Task 1-3: Dev Environment Setup (COMPLETE)
+
+### Status
+- **Docker Compose**: ✅ docker-compose.dev.yml created
+- **SQLAlchemy**: ✅ Configured with PostgreSQL connection pooling
+- **ORM Models**: ✅ Entity, Relationship, AuditLog, OntologyMetadata defined
+- **Pytest Fixtures**: ✅ conftest.py with db_session and client fixtures
+- **Environment**: ✅ .env.example and environment variable templates
+
+### What Was Done
+
+#### 1. Docker Compose Setup
+**File**: `docker-compose.dev.yml`
+```yaml
+Services:
+  - PostgreSQL 15 Alpine (lightweight, 5432 mapped)
+  - Health checks (pg_isready)
+  - Volume mount for init_schema.sql auto-execution
+  - Volume for data persistence (postgres_data)
+  - Network isolation (ont_network)
+```
+
+**Usage**:
+```bash
+docker-compose -f docker-compose.dev.yml up -d  # Start
+docker-compose -f docker-compose.dev.yml down   # Stop
+```
+
+#### 2. SQLAlchemy Configuration
+**Files**:
+- `app/db/database.py`: Engine + SessionLocal + get_db() dependency
+- `app/db/base.py`: Declarative base for ORM models
+- `app/db/models.py`: 4 ORM models with relationships
+- `app/db/__init__.py`: Package exports
+
+**Key Features**:
+- Connection pooling configured (NullPool for Neon.tech, default for local)
+- Automatic timestamp management (created_at, updated_at)
+- Relationship navigation (Entity ↔ Relationship bidirectional)
+- JSON columns for flexible properties
+
+#### 3. ORM Models
+```python
+Entity
+  ├── id (str, PK)
+  ├── entity_type, domain_id, doc_id
+  ├── properties (JSON)
+  ├── version (optimistic locking)
+  └── timestamps
+
+Relationship
+  ├── id (str, PK)
+  ├── from_entity_id → Entity (FK)
+  ├── to_entity_id → Entity (FK)
+  ├── relation_type, weight
+  ├── properties (JSON)
+  └── timestamps
+
+AuditLog
+  ├── id (SERIAL, PK)
+  ├── entity_id, domain_id
+  ├── operation (CREATE|UPDATE|DELETE|EXECUTE)
+  ├── old_state, new_state (JSON)
+  └── actor, timestamp
+
+OntologyMetadata
+  ├── domain_id (PK)
+  ├── entity_count, relationship_count
+  ├── status, last_sync
+  └── timestamps
+```
+
+#### 4. Pytest Fixtures
+**File**: `tests/conftest.py`
+```python
+@pytest.fixture
+def db_session()      # Fresh DB session per test (auto-rollback)
+
+@pytest.fixture
+def client()          # FastAPI TestClient with DB override
+
+@pytest.fixture
+def cleanup_db()      # Cleanup test.db file after tests
+```
+
+#### 5. Requirements Update
+Added to `requirements.txt`:
+```
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+alembic>=1.13.0
+rdflib>=7.6.0
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+```
+
+---
+
+## Verification Summary
+
+### SPARQL Tests
+```
+pytest tests/test_priority2_sparql_v2.py -v
+Result: 30/30 PASSED ✅
+Time: 0.16s (very fast with in-memory rdflib)
+```
+
+### SQLAlchemy Import
+```
+python -c "from app.db.database import engine; from app.db.models import Entity"
+Result: [OK] ✅
+```
+
+### PostgreSQL Setup
+```
+python scripts/setup_database.py
+Result: Schema created, test data inserted ✅
+Neon.tech connection: Active ✅
+```
+
+---
+
+## What's Ready for Week 2
+
+### Development Environment
+- ✅ Local PostgreSQL via Docker Compose (docker-compose.dev.yml)
+- ✅ Neon.tech cloud PostgreSQL (.env.neon)
+- ✅ SQLAlchemy ORM ready for SPARQL→SQL mapping
+- ✅ Pytest fixtures for integration tests
+
+### Code Structure
+- ✅ SPARQLServiceV2 fully integrated (main.py)
+- ✅ Database models defined (app/db/models.py)
+- ✅ Session management ready (app/db/database.py)
+- ✅ Test infrastructure ready (conftest.py)
+
+### Next: Week 2 Tasks
+1. **Task 2-1** (06-03 ~ 06-04): SPARQL→SQL Translator Design
+   - SPARQLTranslator class
+   - Triple pattern parser
+   - SQL JOIN generation
+   - 40 test patterns
+
+2. **Task 2-2** (06-04 ~ 06-06): Translator Implementation
+   - 500-line translator code
+   - Optimization (index hints, EXPLAIN)
+   - Integration with FastAPI endpoints
+
+3. **Task 2-3** (06-06 ~ 06-07): Performance Validation
+   - Simple lookup <50ms
+   - One-hop <300ms
+   - Two-hop <1s
+
+---
+
+## Files Created/Modified
+
+### New Files Created
+```
+📁 app/db/
+  ├── __init__.py (new)
+  ├── base.py (new)
+  ├── database.py (new)
+  └── models.py (new)
+
+📁 tests/
+  └── conftest.py (new)
+
+docker-compose.dev.yml (new)
+.env.example (new)
+```
+
+### Modified Files
+```
+app/services/sparql_service_v2.py
+  - Fixed _detect_query_type() to handle PREFIX
+  - Added numeric type auto-detection in add_triple_literal()
+
+tests/test_priority2_sparql_v2.py
+  - Fixed 2 test methods to use add_triple_literal()
+  - All 30 tests now passing
+
+requirements.txt
+  - Added sqlalchemy, psycopg2-binary, rdflib, pytest, alembic
+
+app/main.py
+  - Already using SPARQLServiceV2 (from previous session)
+```
+
+---
+
+## Risks & Mitigations
+
+| Risk | Mitigation |
+|------|-----------|
+| Neon.tech connection drops | Configured with SSL + retry logic (NullPool) |
+| SPARQL→SQL translation complexity | Week 2 design phase validates patterns first |
+| Performance degradation with 1M+ records | GIN indexes optimized, query class targets defined |
+| Test isolation issues | Pytest fixtures auto-rollback per test |
+
+---
+
+## Next Steps
+
+1. **Before 2026-05-27 (Phase 2.5 Start)**:
+   - Deploy to staging with docker-compose.dev.yml
+   - Verify FastAPI health check: `curl http://localhost:8001/health`
+   - Test SPARQL endpoint: `curl -X POST /sparql -d "SELECT..."`
+
+2. **Week 2 (2026-06-03)**:
+   - Start SPARQL→SQL translator (Task 2-1, Task 2-2)
+   - Implement 50+ query pattern support
+   - Validate hot-path performance targets
+
+3. **Week 3-4 (2026-06-10 ~ 2026-06-21)**:
+   - FastAPI endpoint integration
+   - Transaction support + write-back
+   - Final performance tuning
+
+---
+
+## Sign-Off
+
+**Completed by**: Claude Code  
+**Date**: 2026-05-24 16:08  
+**Status**: READY FOR PHASE 2.5 DEVELOPMENT  
+**Next Review**: 2026-06-03 (Week 2 start)

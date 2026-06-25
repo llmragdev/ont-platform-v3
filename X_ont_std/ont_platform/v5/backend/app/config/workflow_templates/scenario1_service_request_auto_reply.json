@@ -1,0 +1,84 @@
+{
+  "template_id": "service-request-auto-reply",
+  "template_version": "1.0.0",
+  "name": "서비스 요청 자동댓글",
+  "category": "helpdesk",
+  "summary": "고객 문의를 수집하고 답변 초안을 생성한 뒤 customer_mcp를 통해 게시판 댓글을 등록합니다.",
+  "scenario_id": "scenario1",
+  "scenario_version": "v1",
+  "graph_kind": "system_template",
+  "execution_mode": "batch",
+  "runtime": {
+    "executor": "scenario1.customer_question_auto_reply",
+    "default_mode": "dry_run",
+    "allow_post": true,
+    "batch_status": "open",
+    "batch_limit": 1
+  },
+  "nodes": [
+    {
+      "id": "request-input",
+      "type": "request_input",
+      "position": { "x": 80, "y": 120 },
+      "data": { "label": "문의 입력", "source": "customer_board" }
+    },
+    {
+      "id": "question-normalize",
+      "type": "request_register",
+      "position": { "x": 300, "y": 120 },
+      "data": { "label": "문의 정규화" }
+    },
+    {
+      "id": "intent-classify",
+      "type": "intent_classify",
+      "position": { "x": 520, "y": 120 },
+      "data": { "label": "의도 분류" }
+    },
+    {
+      "id": "knowledge-lookup",
+      "type": "knowledge_lookup",
+      "position": { "x": 740, "y": 120 },
+      "data": { "label": "지식/RAG 조회" }
+    },
+    {
+      "id": "evidence-gate",
+      "type": "evidence_gate",
+      "position": { "x": 960, "y": 120 },
+      "data": { "label": "근거 검증" }
+    },
+    {
+      "id": "draft-response",
+      "type": "draft_response",
+      "position": { "x": 1180, "y": 80 },
+      "data": { "label": "답변 초안 생성", "api": "/api/extn/customer-replies/draft" }
+    },
+    {
+      "id": "post-comment",
+      "type": "customer_mcp_comment_create",
+      "position": { "x": 1400, "y": 80 },
+      "data": { "label": "고객사 댓글 등록", "api": "/api/extn/customer-replies/post-via-mcp", "mode": "dry_run" }
+    },
+    {
+      "id": "human-handoff",
+      "type": "human_handoff",
+      "position": { "x": 1180, "y": 210 },
+      "data": { "label": "수동 이관" }
+    },
+    {
+      "id": "audit-write",
+      "type": "notify_user",
+      "position": { "x": 1620, "y": 80 },
+      "data": { "label": "감사 기록 확인" }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "request-input", "target": "question-normalize" },
+    { "id": "e2", "source": "question-normalize", "target": "intent-classify" },
+    { "id": "e3", "source": "intent-classify", "target": "knowledge-lookup" },
+    { "id": "e4", "source": "knowledge-lookup", "target": "evidence-gate" },
+    { "id": "e5", "source": "evidence-gate", "target": "draft-response", "label": "enough evidence" },
+    { "id": "e6", "source": "evidence-gate", "target": "human-handoff", "label": "insufficient" },
+    { "id": "e7", "source": "draft-response", "target": "post-comment" },
+    { "id": "e8", "source": "post-comment", "target": "audit-write" }
+  ]
+}

@@ -1,0 +1,10 @@
+{"query": "status가 Submitted인 Order를 찾아줘", "expected_intent": "filter", "expected_answer_contains": []}
+{"query": "Approved 상태인 주문 목록 보여줘", "expected_intent": "filter", "expected_answer_contains": []}
+{"query": "PRODUCT 타입 엔티티를 모두 조회해줘", "expected_intent": "filter", "expected_answer_contains": []}
+{"query": "status: Rejected인 항목 찾아줘", "expected_intent": "filter", "expected_answer_contains": []}
+{"query": "amount=5000 이상인 Order를 보여줘", "expected_intent": "filter", "expected_answer_contains": []}
+{"query": "customer_id가 C001인 주문 목록", "expected_intent": "filter", "expected_answer_contains": []}
+{"query": "Fulfilled된 Order 전체 목록", "expected_intent": "filter", "expected_answer_contains": []}
+{"query": "PERSON 타입 엔티티 리스트", "expected_intent": "filter", "expected_answer_contains": []}
+{"query": "region이 Seoul인 Customer 조회", "expected_intent": "filter", "expected_answer_contains": []}
+{"query": "Closed 상태인 모든 주문을 보여줘", "expected_intent": "filter", "expected_answer_contains": []}

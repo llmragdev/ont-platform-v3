@@ -1,0 +1,27 @@
+ont_platform v4 RAG Validation Metrics Summary
+Date: 2026-06-07 13:35:44
+Target: ont_platform v4 /api/hybrid/ask
+Tenant: codex_eval/ont_platform_v4_pdf8
+Total Documents: 8 PDFs
+Total Uploaded Chunks: 305
+Total Queries: 30 standardized queries
+
+Measured Performance:
+- Overall Accuracy: 76.30%
+- API Success Rate: 100.0%
+- Avg Response Time: 3286.0 ms
+- Min Response Time: 2300.83 ms
+- Max Response Time: 21236.77 ms
+- P50 Response Time: 2649.11 ms
+- P95 Response Time: 3383.19 ms
+- P99 Response Time: 16076.46 ms
+
+Category Accuracy:
+- Ontology: 73.83%
+- NLP & Generative AI: 79.33%
+- Defense: 75.17%
+
+Execution Evidence:
+- LLM Used Queries: 30/30
+- Total Vector Hits: 150
+- Evaluation Type: direct execution, not simulation

@@ -1,0 +1,129 @@
+{
+  "mapping_id": "scenario1.customer_question_auto_reply.v1",
+  "mapping_version": "1.0.0",
+  "name": "서비스 요청 자동댓글 온톨로지 매핑",
+  "scenario_id": "scenario1",
+  "workflow_template_id": "service-request-auto-reply",
+  "workflow_executor": "scenario1.customer_question_auto_reply",
+  "summary": "고객 게시판 문의를 워크플로우가 처리한 뒤, 문의-실행-자동답변-외부댓글 흐름을 온톨로지 관계도로 저장합니다.",
+  "ontology_document": {
+    "doc_id": "service-requests",
+    "domain": "scenario1"
+  },
+  "entity_types": [
+    {
+      "name": "ServiceRequest",
+      "label": "서비스 요청",
+      "description": "고객 게시판, 현장 알림, 설비 고장 신고처럼 처리가 필요한 요청입니다.",
+      "properties": ["external_id", "source_system", "status", "title", "content", "requester", "mode", "last_processed_at"]
+    },
+    {
+      "name": "WorkflowExecution",
+      "label": "워크플로우 실행",
+      "description": "어떤 워크플로우가 언제 어떤 모드로 요청을 처리했는지 남기는 실행 기록입니다.",
+      "properties": ["run_id", "graph_id", "graph_name", "executor", "mode", "status", "checked", "started", "skipped", "errors", "started_at", "finished_at"]
+    },
+    {
+      "name": "AutoReply",
+      "label": "자동 답변",
+      "description": "워크플로우가 생성한 답변 초안 또는 실제 등록된 답변입니다.",
+      "properties": ["message", "mode", "status", "confidence", "generated_by", "request_id", "created_at"]
+    },
+    {
+      "name": "ExternalComment",
+      "label": "외부 댓글",
+      "description": "customer_mcp를 통해 고객사 게시판에 등록된 댓글 결과입니다.",
+      "properties": ["external_comment_id", "external_thread_id", "url", "source_system", "status", "audit_id", "posted_at"]
+    }
+  ],
+  "relation_types": [
+    {
+      "name": "handled_by",
+      "label": "처리됨",
+      "from_type": "ServiceRequest",
+      "to_type": "WorkflowExecution",
+      "description": "이 요청이 어떤 워크플로우 실행으로 처리됐는지 연결합니다."
+    },
+    {
+      "name": "generated",
+      "label": "생성함",
+      "from_type": "WorkflowExecution",
+      "to_type": "AutoReply",
+      "description": "워크플로우 실행이 어떤 자동 답변을 만들었는지 연결합니다."
+    },
+    {
+      "name": "posted_as",
+      "label": "등록됨",
+      "from_type": "AutoReply",
+      "to_type": "ExternalComment",
+      "description": "자동 답변이 고객사 게시판의 어떤 댓글로 등록됐는지 연결합니다."
+    },
+    {
+      "name": "has_reply",
+      "label": "답변 보유",
+      "from_type": "ServiceRequest",
+      "to_type": "AutoReply",
+      "description": "요청과 생성된 답변을 바로 볼 수 있게 연결합니다."
+    }
+  ],
+  "workflow_node_mappings": [
+    {
+      "node_id": "request-input",
+      "node_label": "문의 입력",
+      "creates_or_updates": "ServiceRequest",
+      "key": "draft.question_id",
+      "field_map": {
+        "external_id": "draft.question_id",
+        "title": "event.title",
+        "content": "event.content",
+        "source_system": "customer_board"
+      }
+    },
+    {
+      "node_id": "draft-response",
+      "node_label": "답변 초안 생성",
+      "creates_or_updates": "AutoReply",
+      "key": "draft.question_id + run_id",
+      "field_map": {
+        "message": "draft.reply_message",
+        "confidence": "draft.confidence",
+        "request_id": "item.request_id"
+      }
+    },
+    {
+      "node_id": "post-comment",
+      "node_label": "고객사 댓글 등록",
+      "creates_or_updates": "ExternalComment",
+      "key": "mcp.result.external_comment_id",
+      "field_map": {
+        "external_comment_id": "mcp.result.external_comment_id",
+        "external_thread_id": "mcp.result.external_thread_id",
+        "url": "mcp.result.url",
+        "audit_id": "mcp.audit_id"
+      }
+    },
+    {
+      "node_id": "audit-write",
+      "node_label": "감사 기록 확인",
+      "creates_or_updates": "WorkflowExecution",
+      "key": "run_id",
+      "field_map": {
+        "run_id": "run_id",
+        "graph_id": "graph.id",
+        "status": "batch_result.errors"
+      }
+    }
+  ],
+  "relationship_mappings": [
+    { "from": "ServiceRequest", "relation": "handled_by", "to": "WorkflowExecution" },
+    { "from": "WorkflowExecution", "relation": "generated", "to": "AutoReply" },
+    { "from": "AutoReply", "relation": "posted_as", "to": "ExternalComment" },
+    { "from": "ServiceRequest", "relation": "has_reply", "to": "AutoReply" }
+  ],
+  "setup_steps": [
+    "워크플로우 템플릿을 프로젝트로 복제합니다.",
+    "이 매핑 템플릿을 선택하고 프로젝트 온톨로지 스키마에 설치합니다.",
+    "워크플로우 노드별 생성 객체와 필드 매핑을 확인합니다.",
+    "dry_run으로 실행해 관계도 기록만 확인한 뒤 post 모드로 실제 댓글 등록까지 검증합니다."
+  ]
+}

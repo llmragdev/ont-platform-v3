@@ -15,7 +15,17 @@ import type {
   WorkflowGraph,
   WorkflowQueueRow,
   WorkflowRun,
+  SparqlQueryResponse,
 } from "@/types/api";
+import type {
+  AuditLogResponse,
+  AuditQuery,
+  DataQualityInfo,
+  EntityMetadata,
+  EntityVersion,
+  ImpactInfo,
+  LineageInfo,
+} from "@/types/metadata";
 
 // ── Global tenant state ───────────────────────────────────────────────────────
 
@@ -75,8 +85,10 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   try { data = text ? (JSON.parse(text) as Record<string, unknown>) : null; } catch { /* non-JSON response */ }
   if (!response.ok) {
     const err = data?.error as Record<string, unknown> | undefined;
+    const detail = data?.detail as Record<string, unknown> | string | undefined;
+    const detailError = typeof detail === "object" ? (detail.error as Record<string, unknown> | undefined) : undefined;
     const code = (err?.code ?? "UNKNOWN") as string;
-    const message = (err?.message ?? data?.detail ?? text ?? response.statusText) as string;
+    const message = (err?.message ?? detailError?.message ?? (typeof detail === "string" ? detail : undefined) ?? text ?? response.statusText) as string;
     throw new ApiClientError(code, message, response.status);
   }
   return data as T;
@@ -268,6 +280,61 @@ export const api = {
       body: JSON.stringify({ question, doc_ids: docIds ?? null }),
     }),
 
+  // ── SPARQL Workbench ──────────────────────────────────────────────────────
+
+  sparql: {
+    query: (query: string, signal?: AbortSignal) =>
+      request<SparqlQueryResponse>("/api/ontology/sparql", {
+        method: "POST",
+        body: JSON.stringify({ query }),
+        signal,
+      }),
+  },
+
+  rdf: {
+    getNeighborhoodOptimized: async (
+      uri: string,
+      limit: number = 50,
+      depth: number = 1
+    ) => {
+      const cacheKey = `rdf:neighborhood:${uri}:${depth}:${limit}`;
+      const storageAvailable = typeof window !== "undefined" && window.localStorage;
+      if (storageAvailable) {
+        const cached = window.localStorage.getItem(cacheKey);
+        if (cached) {
+          try {
+            const entry = JSON.parse(cached);
+            if (Date.now() - entry.timestamp < 5 * 60 * 1000) {
+              return entry.data;
+            }
+          } catch {
+            /* ignore invalid cache */
+          }
+        }
+      }
+
+      const response = await request<{
+        centerNode: string;
+        nodes: Array<{ id: string; label: string }>;
+        edges: Array<{ source: string; target: string; predicate: string }>;
+        hasMore: boolean;
+        processingTimeMs: number;
+        cached: boolean;
+      }>(
+        `/api/rdf/neighborhood-optimized/${encodeURIComponent(uri)}?limit=${limit}&depth=${depth}`
+      );
+
+      if (storageAvailable) {
+        window.localStorage.setItem(
+          cacheKey,
+          JSON.stringify({ data: response, timestamp: Date.now() })
+        );
+      }
+
+      return response;
+    },
+  },
+
   // ── RAG vector search ─────────────────────────────────────────────────────
 
   ragAsk: (question: string) =>
@@ -365,5 +432,44 @@ export const api = {
         vector_hits_avg: number;
         ontology_hits_avg: number;
       }>(`/api/metrics/query?limit=${limit}`),
+  },
+
+  metadata: {
+    getMetadata: (entityId: string) =>
+      request<EntityMetadata>(`/api/entities/${encodeURIComponent(entityId)}/metadata`),
+
+    getVersions: (entityId: string) =>
+      request<EntityVersion[]>(`/api/entities/${encodeURIComponent(entityId)}/versions`),
+
+    rollbackVersion: (entityId: string, versionId: string) =>
+      request<EntityMetadata>(
+        `/api/entities/${encodeURIComponent(entityId)}/versions/${encodeURIComponent(versionId)}/rollback`,
+        { method: "POST" }
+      ),
+
+    getLineage: (entityId: string) =>
+      request<LineageInfo>(`/api/entities/${encodeURIComponent(entityId)}/lineage`),
+
+    getImpact: (entityId: string) =>
+      request<ImpactInfo>(`/api/entities/${encodeURIComponent(entityId)}/impact`),
+
+    getDataQuality: (entityId: string) =>
+      request<DataQualityInfo>(`/api/entities/${encodeURIComponent(entityId)}/data-quality`),
+
+    getAuditLogs: (filters: AuditQuery = {}) => {
+      const qs = new URLSearchParams();
+      if (filters.entity_id) qs.set("entity_id", filters.entity_id);
+      if (filters.action) qs.set("action", filters.action);
+      if (filters.performed_by) qs.set("performed_by", filters.performed_by);
+      if (filters.date_from) qs.set("date_from", filters.date_from);
+      if (filters.date_to) qs.set("date_to", filters.date_to);
+      if (filters.page) qs.set("page", String(filters.page));
+      if (filters.page_size) qs.set("page_size", String(filters.page_size));
+      const query = qs.toString();
+      return request<AuditLogResponse>(`/api/audit/logs${query ? "?" + query : ""}`);
+    },
+
+    exportAuditLogsUrl: (format: "json" | "csv" = "csv") =>
+      `/api/audit/logs/export?format=${encodeURIComponent(format)}`,
   },
 };

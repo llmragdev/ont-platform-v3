@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>임시 게시판</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="게시판 요약">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">B</div>
+          <div>
+            <h1>임시 게시판</h1>
+            <p>공지, 할 일, 회의 메모를 빠르게 남깁니다.</p>
+          </div>
+        </div>
+
+        <section class="summary-grid" aria-label="게시글 통계">
+          <div>
+            <span id="totalCount">0</span>
+            <p>전체 글</p>
+          </div>
+          <div>
+            <span id="pinnedCount">0</span>
+            <p>중요</p>
+          </div>
+          <div>
+            <span id="todayCount">0</span>
+            <p>오늘 작성</p>
+          </div>
+        </section>
+
+        <section class="quick-note">
+          <h2>사용 범위</h2>
+          <p>브라우저에만 저장되는 임시 게시판입니다. 다른 사람과 공유하려면 파일 저장 또는 서버 연동이 필요합니다.</p>
+        </section>
+      </aside>
+
+      <main class="main-panel">
+        <header class="toolbar">
+          <div>
+            <p class="eyebrow">Local board</p>
+            <h2>게시글</h2>
+          </div>
+          <button id="newPostButton" class="primary-button" type="button">새 글</button>
+        </header>
+
+        <section class="controls" aria-label="게시글 필터">
+          <label class="search-field">
+            <span>검색</span>
+            <input id="searchInput" type="search" placeholder="제목, 작성자, 내용 검색" />
+          </label>
+
+          <label class="select-field">
+            <span>분류</span>
+            <select id="categoryFilter">
+              <option value="all">전체</option>
+              <option value="notice">공지</option>
+              <option value="task">할 일</option>
+              <option value="meeting">회의</option>
+              <option value="idea">아이디어</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="board-layout">
+          <div class="post-list" id="postList" aria-live="polite"></div>
+
+          <article class="detail-panel" id="detailPanel">
+            <div class="empty-state">
+              <h3>게시글을 선택하세요</h3>
+              <p>왼쪽 목록에서 글을 선택하거나 새 글을 작성할 수 있습니다.</p>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="postDialog" class="post-dialog">
+      <form id="postForm" method="dialog">
+        <header>
+          <h2 id="dialogTitle">새 글 작성</h2>
+          <button id="closeDialogButton" type="button" class="icon-button" aria-label="닫기">×</button>
+        </header>
+
+        <input id="postId" type="hidden" />
+
+        <label>
+          <span>제목</span>
+          <input id="titleInput" type="text" maxlength="80" required />
+        </label>
+
+        <div class="form-row">
+          <label>
+            <span>작성자</span>
+            <input id="authorInput" type="text" maxlength="30" required />
+          </label>
+
+          <label>
+            <span>분류</span>
+            <select id="categoryInput">
+              <option value="notice">공지</option>
+              <option value="task">할 일</option>
+              <option value="meeting">회의</option>
+              <option value="idea">아이디어</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="checkbox-line">
+          <input id="pinnedInput" type="checkbox" />
+          <span>중요 글로 고정</span>
+        </label>
+
+        <label>
+          <span>내용</span>
+          <textarea id="bodyInput" rows="8" required></textarea>
+        </label>
+
+        <footer>
+          <button id="cancelButton" class="secondary-button" type="button">취소</button>
+          <button class="primary-button" type="submit">저장</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "e1",
+    "name": "온톨로지",
+    "type": "CONCEPT",
+    "description": "데이터 간의 관계를 정의하는 지식 표현 체계",
+    "score": 0.95
+  },
+  {
+    "id": "e2",
+    "name": "김정윤",
+    "type": "PERSON",
+    "description": "국방기술진흥연구소 선임연구원",
+    "score": 0.90
+  },
+  {
+    "id": "e3",
+    "name": "RAG",
+    "type": "CONCEPT",
+    "description": "검색 증강 생성 기술",
+    "score": 0.85
+  },
+  {
+    "id": "e4",
+    "name": "국방기술진흥연구소",
+    "type": "ORGANIZATION",
+    "description": "국방 기술 연구 기관",
+    "score": 0.80
+  }
+]

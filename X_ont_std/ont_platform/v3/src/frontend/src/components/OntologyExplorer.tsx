@@ -72,7 +72,7 @@ export default function OntologyExplorer() {
     setError(null);
     try {
       const response = await fetch(
-        `/api/ontology/explore?entity_uri=${encodeURIComponent(entityUri)}`
+        `/api/rdf/neighborhood-optimized/${encodeURIComponent(entityUri)}?limit=50&depth=1`
       );
 
       if (!response.ok) {
@@ -80,7 +80,17 @@ export default function OntologyExplorer() {
       }
 
       const result = await response.json();
-      setQueryResult(result);
+      setQueryResult({
+        query_id: `neighborhood-${Date.now()}`,
+        variables: ['id', 'label'],
+        results: (result.nodes ?? []).map((node: any) => ({
+          id: node.id,
+          label: node.label,
+        })),
+        result_count: (result.nodes ?? []).length,
+        execution_time_ms: result.processingTimeMs ?? 0,
+        timestamp: new Date().toISOString(),
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {

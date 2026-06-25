@@ -1,0 +1,46 @@
+{
+  "/api/changelog/history?page=1&page_size=50": {
+    "requests": 63,
+    "failures": 0,
+    "median_latency": 20.0,
+    "p95_latency": 2100.0,
+    "p99_latency": 2100.0,
+    "avg_latency": 184.60011428650765,
+    "min_latency": 13.035099997068755,
+    "max_latency": 2086.6472000052454,
+    "rps": 4.745462929617732
+  },
+  "/api/workflow/execute": {
+    "requests": 63,
+    "failures": 12,
+    "median_latency": 100.0,
+    "p95_latency": 2100.0,
+    "p99_latency": 2200.0,
+    "avg_latency": 275.6177809533833,
+    "min_latency": 34.67880000243895,
+    "max_latency": 2194.615200001863,
+    "rps": 4.745462929617732
+  },
+  "/api/writeback/statistics": {
+    "requests": 23,
+    "failures": 0,
+    "median_latency": 25.0,
+    "p95_latency": 53.0,
+    "p99_latency": 120.0,
+    "avg_latency": 31.539969564461067,
+    "min_latency": 19.526499992934987,
+    "max_latency": 121.77920000976883,
+    "rps": 1.7324705933525053
+  },
+  "Total": {
+    "requests": 149,
+    "failures": 12,
+    "median_latency": 37.0,
+    "p95_latency": 2100.0,
+    "p99_latency": 2100.0,
+    "avg_latency": 199.45736040332707,
+    "min_latency": 13.035099997068755,
+    "max_latency": 2194.615200001863,
+    "rps": 11.22339645258797
+  }
+}

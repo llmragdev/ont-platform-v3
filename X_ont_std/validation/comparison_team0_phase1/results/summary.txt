@@ -1,0 +1,31 @@
+Team0 RAG Validation Metrics Summary
+Date: 2026-06-07
+Total Documents: 8 PDFs
+Total Queries: 30 standardized queries
+
+Baseline Performance (Team0):
+- Overall Accuracy: 58.54%
+- API Success Rate: 100.0%
+- Avg Response Time: 10839.27 ms
+- Min Response Time: 4273 ms
+- Max Response Time: 12690 ms
+- P50 Response Time: 11708.00 ms
+- P95 Response Time: 12589.65 ms
+- P99 Response Time: 12690.00 ms
+
+Category Accuracy:
+- Ontology: 60.14%
+- NLP & Generative AI: 59.83%
+- Defense: 52.78%
+
+Ontology & Metadata Build Stats:
+- Total Chunks: 337 chunks (chunks.json)
+- Total Concepts: 41 concepts
+- Document Relationships: 56
+- Concept-to-Concept Relationships: 1640
+- Total Graph Relationships: 1696 (ontology.json)
+
+RAG Improvement Potentials:
+- Metadata Pre-filtering Potential: +12.50% (Estimated: 71.04%)
+- Ontology Graph Re-ranking Potential: +16.50% (Estimated: 75.04%)
+- Hybrid Integration Potential: +34.00% (Estimated: 92.54%)

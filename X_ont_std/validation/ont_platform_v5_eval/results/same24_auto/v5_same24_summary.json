@@ -1,0 +1,97 @@
+{
+  "generated_at": "2026-06-07T23:23:54",
+  "source_results": "E:\\ontology_edu\\X_ont_std\\validation\\ont_platform_v5_eval\\results\\same24_auto\\v5_same24_auto_results.json",
+  "original_expected_summary": {
+    "overall": {
+      "team0": 60.42,
+      "team1": 71.77,
+      "team2": 65.21,
+      "team5": 49.38
+    },
+    "by_category": {
+      "Advanced RAG": {
+        "team0": 66.25,
+        "team1": 71.88,
+        "team2": 66.25,
+        "team5": 65.0
+      },
+      "Ontology": {
+        "team0": 61.25,
+        "team1": 75.94,
+        "team2": 74.38,
+        "team5": 73.12
+      },
+      "Snowflake": {
+        "team0": 53.75,
+        "team1": 67.5,
+        "team2": 55.0,
+        "team5": 10.0
+      }
+    },
+    "ranks": [
+      [
+        "team1",
+        71.77
+      ],
+      [
+        "team2",
+        65.21
+      ],
+      [
+        "team0",
+        60.42
+      ],
+      [
+        "team5",
+        49.38
+      ]
+    ]
+  },
+  "stds_no_answer_summary": {
+    "overall": {
+      "team0": 60.42,
+      "team1": 71.77,
+      "team2": 65.21,
+      "team5_stds_no_answer_accuracy": 75.21
+    },
+    "by_category": {
+      "Advanced RAG": {
+        "team0": 66.25,
+        "team1": 71.88,
+        "team2": 66.25,
+        "team5_stds_no_answer_accuracy": 65.0
+      },
+      "Ontology": {
+        "team0": 61.25,
+        "team1": 75.94,
+        "team2": 74.38,
+        "team5_stds_no_answer_accuracy": 73.12
+      },
+      "Snowflake": {
+        "team0": 53.75,
+        "team1": 67.5,
+        "team2": 55.0,
+        "team5_stds_no_answer_accuracy": 87.5
+      }
+    },
+    "ranks": [
+      [
+        "team5_stds_no_answer_accuracy",
+        75.21
+      ],
+      [
+        "team1",
+        71.77
+      ],
+      [
+        "team2",
+        65.21
+      ],
+      [
+        "team0",
+        60.42
+      ]
+    ]
+  },
+  "stds_no_answer_constant": "질문은 해당 카테고리 문서와 관련이 없습니다."
+}

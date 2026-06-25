@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import sys
+import time
 from pathlib import Path
 
 logging.basicConfig(
@@ -15,15 +16,20 @@ logging.basicConfig(
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-# .env 로드 (없어도 무시)
+# .env 로드 (프로젝트 루트에서, 없어도 무시)
 try:
     from dotenv import load_dotenv
-    load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+    # 프로젝트 루트의 .env를 읽음 (v3/.env)
+    project_root = Path(__file__).resolve().parents[3]  # src/backend/app/main.py → v3/
+    env_file = project_root / ".env"
+    if env_file.exists():
+        load_dotenv(env_file)
 except ImportError:
     pass
 
 from fastapi import Depends, FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app.models.tenant_context import TenantContext
 from app.services.document import DocumentService
@@ -36,7 +42,14 @@ from app.dependencies import (
     get_vector_search_service,
     get_query_planner_service,
     get_tenant_context,
+    get_sparql_translator_service,
+    get_db,
 )
+from app.db.models import ChangeLog, WriteBackQueue
+from sqlalchemy import and_
+from sqlalchemy.orm import Session
+from datetime import datetime
+from typing import Optional
 
 app = FastAPI(title="ont_platform v3.0", version="3.0.0")
 
@@ -212,6 +225,10 @@ def search(
 from app.api import hybrid
 app.include_router(hybrid.router)
 
+# ── /api/rdf ─────────────────────────────────────────────────────────────────
+
+from app.api import optimized_api
+app.include_router(optimized_api.router)
 
 # ── /api/integration-test ─────────────────────────────────────────────────────
 
@@ -335,6 +352,10 @@ app.include_router(wfg_router)
 from app.api.metrics import router as metrics_router
 app.include_router(metrics_router)
 
+# Phase 3: Actions API
+from app.api.actions import router as actions_router
+app.include_router(actions_router)
+
 
 # ── /api/ontology/sparql ──────────────────────────────────────────────────────
 
@@ -348,18 +369,182 @@ def get_sparql_service() -> SPARQLServiceV2:
     return _sparql_service
 
 
+def _detect_sparql_query_type(query: str) -> str:
+    normalized = _re.sub(r"#[^\n\r]*", " ", query).upper()
+    for keyword in ("SELECT", "ASK", "CONSTRUCT", "DESCRIBE"):
+        if keyword in normalized:
+            return keyword
+    return "UNKNOWN"
+
+
+def _select_vars_for_contract(raw_vars) -> list[str]:
+    return [var if str(var).startswith("?") else f"?{var}" for var in (raw_vars or [])]
+
+
+def _sparql_error_response(
+    *,
+    status_code: int,
+    code: str,
+    message: str,
+    query: str,
+    source: str = "error",
+    sql_generated: str | None = None,
+    error_type: str | None = None,
+):
+    return JSONResponse(
+        status_code=status_code,
+        content={
+            "source": source,
+            "query_type": _detect_sparql_query_type(query),
+            "select_vars": [],
+            "patterns": 0,
+            "pattern_ids": [],
+            "results": [],
+            "result_count": 0,
+            "execution_time_ms": 0,
+            "sql_generated": sql_generated,
+            "cache_hit": False,
+            "warnings": [],
+            "error": {
+                "code": code,
+                "message": message,
+                "type": error_type,
+            },
+        },
+    )
+
+
+@app.post("/api/sparql/query")
 @app.post("/api/ontology/sparql")
-def execute_sparql_query(
+def execute_sparql_query_contract(
     body: dict,
+    tenant: TenantContext = Depends(get_tenant_context),
+    translator_svc = Depends(get_sparql_translator_service),
     svc: SPARQLService = Depends(get_sparql_service),
 ):
-    """SPARQL 쿼리 실행"""
     query_string = body.get("query", "").strip()
+    limit = body.get("limit", 1000)
+
+    if not query_string:
+        return _sparql_error_response(
+            status_code=400,
+            code="SPARQL_QUERY_REQUIRED",
+            message="SPARQL query is required.",
+            query=query_string,
+        )
+
+    try:
+        result = translator_svc.execute_sparql(
+            query_string,
+            domain_id=tenant.project_id,
+            limit=limit,
+        )
+        if "error" not in result:
+            patterns = result.get("patterns", [])
+            select_vars = result.get("select_vars", [])
+            return {
+                "source": "sql_translator",
+                "type": result.get("query_type"),
+                "query_type": result.get("query_type"),
+                "select_vars": select_vars,
+                "head": {"vars": [v.lstrip("?") for v in select_vars]},
+                "patterns": len(patterns),
+                "pattern_ids": result.get("pattern_ids", []),
+                "results": result.get("results", []),
+                "result_count": result.get("result_count", 0),
+                "execution_time_ms": result.get("execution_time_ms"),
+                "sql_generated": result.get("sql_generated"),
+                "cache_hit": False,
+                "warnings": [],
+                "translator_used": True,
+            }
+    except Exception as e:
+        import logging
+        logging.warning(f"SQL translation failed: {str(e)}")
+
+    fallback_started = time.time()
+    result = svc.query(query_string)
+    fallback_execution_time_ms = round((time.time() - fallback_started) * 1000, 2)
+    if "error" in result:
+        return _sparql_error_response(
+            status_code=400,
+            code="SPARQL_EXECUTION_ERROR",
+            message=result.get("error", "SPARQL execution failed."),
+            query=query_string,
+            source="rdflib",
+            error_type="RdflibExecutionError",
+        )
+
+    query_type = result.get("type", _detect_sparql_query_type(query_string))
+    result_rows = result.get("results", [])
+    select_vars = _select_vars_for_contract(result_rows[0].keys() if result_rows else [])
+    result_count = result.get("count")
+    if result_count is None:
+        result_count = 1 if "boolean" in result else len(result.get("results", result.get("triples", [])))
+    return {
+        "source": "rdflib",
+        "type": query_type,
+        "query_type": query_type,
+        "select_vars": select_vars,
+        "head": {"vars": [v.lstrip("?") for v in select_vars]},
+        "patterns": 0,
+        "pattern_ids": [],
+        "results": result.get("results", []),
+        "triples": result.get("triples", []),
+        "boolean": result.get("boolean"),
+        "result_count": result_count,
+        "execution_time_ms": result.get("execution_time_ms", fallback_execution_time_ms),
+        "sql_generated": None,
+        "cache_hit": False,
+        "warnings": ["SQL translator did not support this query; rdflib fallback was used."],
+        "translator_used": False,
+    }
+
+
+@app.post("/api/legacy/sparql/query")
+@app.post("/api/legacy/ontology/sparql")
+def execute_sparql_query(
+    body: dict,
+    tenant: TenantContext = Depends(get_tenant_context),
+    translator_svc = Depends(get_sparql_translator_service),
+    svc: SPARQLService = Depends(get_sparql_service),
+):
+    """SPARQL 쿼리 실행 - SQL 경로 우선, 실패 시 rdflib 폴백"""
+    return execute_sparql_query_contract(body, tenant, translator_svc, svc)
+
+    query_string = body.get("query", "").strip()
+    limit = body.get("limit", 1000)
+
     if not query_string:
         raise HTTPException(status_code=400, detail="SPARQL 쿼리가 필요합니다.")
 
+    try:
+        # Try fast SQL translation path for hot-path patterns
+        result = translator_svc.execute_sparql(
+            query_string,
+            domain_id=tenant.project_id,
+            limit=limit
+        )
+
+        # If SQL translation succeeded (no error), return results
+        if "error" not in result:
+            return {
+                "source": "sql_translator",
+                "query_type": result.get("query_type"),
+                "select_vars": result.get("select_vars"),
+                "results": result.get("results", []),
+                "result_count": result.get("result_count", 0),
+                "execution_time_ms": result.get("execution_time_ms"),
+            }
+    except Exception as e:
+        # Log SQL path error but continue to fallback
+        import logging
+        logging.warning(f"SQL translation failed: {str(e)}")
+
+    # Fallback to rdflib for unsupported patterns
     result = svc.execute_sparql_query(query_string)
     return {
+        "source": "rdflib",
         "query_id": result.query_id,
         "variables": result.variables,
         "results": result.results,
@@ -482,8 +667,301 @@ def get_ontology_stats(
     }
 
 
+# ── /api/changelog ────────────────────────────────────────────────────────────
+
+@app.get("/api/changelog/history")
+def get_changelog_history(
+    entity_id: Optional[str] = None,
+    domain_id: Optional[str] = None,
+    action_type: Optional[str] = None,
+    sync_status: Optional[str] = None,
+    date_from: Optional[str] = None,
+    date_to: Optional[str] = None,
+    page: int = 1,
+    page_size: int = 50,
+    db: Session = Depends(get_db),
+):
+    """
+    Changelog 조회
+
+    **필터**:
+    - entity_id: 엔티티 ID
+    - domain_id: 도메인 ID
+    - action_type: 액션 유형
+    - sync_status: 동기화 상태 (PENDING, SYNCED, FAILED)
+    - date_from: 시작 날짜 (ISO8601)
+    - date_to: 종료 날짜 (ISO8601)
+
+    **페이징**:
+    - page: 페이지 번호 (기본값: 1)
+    - page_size: 페이지당 항목 수 (기본값: 50)
+    """
+    query = db.query(ChangeLog)
+
+    if entity_id:
+        query = query.filter(ChangeLog.entity_id == entity_id)
+    if domain_id:
+        query = query.filter(ChangeLog.domain_id == domain_id)
+    if action_type:
+        query = query.filter(ChangeLog.action_type == action_type)
+    if sync_status:
+        query = query.filter(ChangeLog.sync_status == sync_status)
+    if date_from:
+        query = query.filter(ChangeLog.timestamp >= datetime.fromisoformat(date_from))
+    if date_to:
+        query = query.filter(ChangeLog.timestamp <= datetime.fromisoformat(date_to))
+
+    total = query.count()
+    items = query.order_by(ChangeLog.timestamp.desc())\
+                 .offset((page - 1) * page_size)\
+                 .limit(page_size)\
+                 .all()
+
+    return {
+        "items": [
+            {
+                "id": item.id,
+                "entity_id": item.entity_id,
+                "entity_type": item.entity_type,
+                "domain_id": item.domain_id,
+                "action_type": item.action_type,
+                "actor": item.actor,
+                "old_status": item.old_status,
+                "new_status": item.new_status,
+                "timestamp": item.timestamp.isoformat(),
+                "sync_status": item.sync_status,
+                "target_system": item.target_system,
+                "sync_timestamp": item.sync_timestamp.isoformat() if item.sync_timestamp else None,
+                "error_message": item.error_message,
+            }
+            for item in items
+        ],
+        "total": total,
+        "page": page,
+        "page_size": page_size,
+    }
+
+
+# ── /api/writeback ────────────────────────────────────────────────────────────
+
+@app.get("/api/writeback/queue")
+def get_writeback_queue(
+    status: Optional[str] = None,
+    domain_id: Optional[str] = None,
+    limit: int = 100,
+    db: Session = Depends(get_db),
+):
+    """
+    WriteBack 큐 상태 조회
+
+    **필터**:
+    - status: 상태 (PENDING, SENT, CONFIRMED, FAILED)
+    - domain_id: 도메인 ID (옵션)
+    - limit: 반환할 최대 항목 수 (기본값: 100)
+    """
+    query = db.query(WriteBackQueue)
+
+    if status:
+        query = query.filter(WriteBackQueue.status == status)
+
+    total = query.count()
+    items = query.limit(limit).all()
+
+    pending = db.query(WriteBackQueue).filter(WriteBackQueue.status == "PENDING").count()
+    confirmed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "CONFIRMED").count()
+    failed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "FAILED").count()
+
+    return {
+        "pending": pending,
+        "confirmed": confirmed,
+        "failed": failed,
+        "items": [
+            {
+                "id": item.id,
+                "action_execution_id": item.action_execution_id,
+                "target_system": item.target_system,
+                "status": item.status,
+                "retry_count": item.retry_count,
+                "created_at": item.created_at.isoformat(),
+                "sent_at": item.sent_at.isoformat() if item.sent_at else None,
+                "error_message": item.error_message,
+            }
+            for item in items
+        ],
+    }
+
+
+@app.get("/api/writeback/statistics")
+def get_writeback_statistics(db: Session = Depends(get_db)):
+    """
+    WriteBack 통계 조회
+    """
+    total = db.query(WriteBackQueue).count()
+    confirmed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "CONFIRMED").count()
+    failed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "FAILED").count()
+    pending = total - confirmed - failed
+
+    success_rate = (confirmed / total) if total > 0 else 0
+
+    avg_retry = 0
+    if total > 0:
+        retry_sum = sum(item.retry_count for item in db.query(WriteBackQueue).all())
+        avg_retry = retry_sum / total
+
+    last_sync = db.query(WriteBackQueue).filter(
+        WriteBackQueue.status == "CONFIRMED"
+    ).order_by(WriteBackQueue.sent_at.desc()).first()
+
+    return {
+        "total_processed": total,
+        "success_rate": round(success_rate, 4),
+        "failure_count": failed,
+        "pending_count": pending,
+        "avg_retry_attempts": round(avg_retry, 2),
+        "last_sync_time": last_sync.sent_at.isoformat() if last_sync and last_sync.sent_at else None,
+    }
+
+
+# ── /api/changelog / /api/writeback ─────────────────────────────────────────────
+
+@app.get("/api/changelog/history", tags=["monitoring"])
+def get_changelog_history(
+    entity_id: str | None = None,
+    domain_id: str | None = None,
+    action_type: str | None = None,
+    sync_status: str | None = None,
+    date_from: str | None = None,
+    date_to: str | None = None,
+    page: int = 1,
+    page_size: int = 50,
+    db = Depends(get_db)
+):
+    from app.db.models import ChangeLog
+    from datetime import datetime
+
+    query = db.query(ChangeLog)
+    
+    if entity_id:
+        query = query.filter(ChangeLog.entity_id == entity_id)
+    if domain_id:
+        query = query.filter(ChangeLog.domain_id == domain_id)
+    if action_type:
+        query = query.filter(ChangeLog.action_type == action_type)
+    if sync_status:
+        query = query.filter(ChangeLog.sync_status == sync_status)
+    if date_from:
+        try:
+            query = query.filter(ChangeLog.timestamp >= datetime.fromisoformat(date_from.replace('Z', '+00:00')))
+        except ValueError:
+            pass
+    if date_to:
+        try:
+            query = query.filter(ChangeLog.timestamp <= datetime.fromisoformat(date_to.replace('Z', '+00:00')))
+        except ValueError:
+            pass
+
+    total = query.count()
+    items = query.order_by(ChangeLog.timestamp.desc())\
+                 .offset((page - 1) * page_size)\
+                 .limit(page_size)\
+                 .all()
+
+    formatted_items = []
+    for item in items:
+        formatted_items.append({
+            "id": item.id,
+            "entity_id": item.entity_id,
+            "entity_type": item.entity_type,
+            "domain_id": item.domain_id,
+            "action_type": item.action_type,
+            "actor": item.actor,
+            "source": item.source,
+            "timestamp": item.timestamp.isoformat() if item.timestamp else None,
+            "sync_status": item.sync_status,
+            "target_system": item.target_system,
+            "error_message": item.error_message
+        })
+
+    return {
+        "items": formatted_items,
+        "total": total,
+        "page": page,
+        "page_size": page_size
+    }
+
+
+@app.get("/api/writeback/queue", tags=["monitoring"])
+def get_writeback_queue(
+    status: str | None = None,
+    domain_id: str | None = None,
+    limit: int = 100,
+    db = Depends(get_db)
+):
+    from app.db.models import WriteBackQueue, ActionExecution
+
+    pending = db.query(WriteBackQueue).filter(WriteBackQueue.status == "PENDING").count()
+    confirmed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "CONFIRMED").count()
+    failed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "FAILED").count()
+
+    query = db.query(WriteBackQueue)
+    if status:
+        query = query.filter(WriteBackQueue.status == status)
+    if domain_id:
+        query = query.join(ActionExecution).filter(ActionExecution.domain_id == domain_id)
+
+    items = query.order_by(WriteBackQueue.created_at.desc()).limit(limit).all()
+
+    formatted_items = []
+    for item in items:
+        formatted_items.append({
+            "id": item.id,
+            "action_execution_id": item.action_execution_id,
+            "target_system": item.target_system,
+            "status": item.status,
+            "retry_count": item.retry_count,
+            "created_at": item.created_at.isoformat() if item.created_at else None,
+            "sent_at": item.sent_at.isoformat() if item.sent_at else None,
+            "error_message": item.error_message
+        })
+
+    return {
+        "pending": pending,
+        "confirmed": confirmed,
+        "failed": failed,
+        "items": formatted_items
+    }
+
+
+@app.get("/api/writeback/statistics", tags=["monitoring"])
+def get_writeback_statistics(db = Depends(get_db)):
+    from app.db.models import WriteBackQueue
+    from sqlalchemy import func
+
+    total = db.query(WriteBackQueue).count()
+    confirmed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "CONFIRMED").count()
+    failed = db.query(WriteBackQueue).filter(WriteBackQueue.status == "FAILED").count()
+
+    success_rate = confirmed / total if total > 0 else 0.0
+
+    avg_retry = db.query(func.avg(WriteBackQueue.retry_count)).scalar() or 0.0
+    avg_retry = float(avg_retry)
+
+    last_sync = db.query(func.max(WriteBackQueue.sent_at)).scalar()
+    last_sync_time = last_sync.isoformat() if last_sync else None
+
+    return {
+        "total_processed": total,
+        "success_rate": round(success_rate, 4),
+        "failure_count": failed,
+        "avg_retry_attempts": round(avg_retry, 2),
+        "last_sync_time": last_sync_time
+    }
+
+
+
 # ── /api/health ───────────────────────────────────────────────────────────────
 
 @app.get("/api/health")
 def health():
     return {"status": "ok", "version": "3.0.0"}
+

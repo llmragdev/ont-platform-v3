@@ -1,0 +1,111 @@
+{
+  "session_id": "correction_20260607_201955",
+  "timestamp": "2026-06-07T20:19:55.962467",
+  "total_processed": 8,
+  "corrections": [
+    {
+      "problem_id": "STD-S-01",
+      "category": "Snowflake",
+      "question": "Snowflake 기반 RAG 평가에서 문서 저장소와 근거 페이지를 왜 함께 관리해야 하는가?",
+      "original_expected_answer": "RAG 답변은 검색된 문서 조각에 의존하므로, 질문별로 어떤 문서와 페이지가 검색·사용됐는지 관리해야 재현성과 근거 적합성을 평가할 수 있다. 데이터셋의 분절 기준과 구조화 형식이 검색 단위와 답변 범위를 결정하기 때문에 문서명, 페이지, 청크 ID를 함께 저장해야 한다.",
+      "corrected_expected_answer": "해당 카테고리 문서와 관련이 없습니다",
+      "correction_type": "MODIFIED",
+      "correction_reason": "Snowflake 범위 외 기술로, 해당 카테고리 문서 미제공",
+      "evidence": [],
+      "team_accuracy_before": 2,
+      "review_status": "PENDING",
+      "timestamp": "2026-06-07T20:19:55.961187"
+    },
+    {
+      "problem_id": "STD-S-02",
+      "category": "Snowflake",
+      "question": "Snowflake RAG에서 정형 테이블과 PDF 문서를 함께 다룰 때 어떤 통합 전략이 필요한가?",
+      "original_expected_answer": "정형 테이블은 스키마, 필드, 값의 의미를 온톨로지 구조로 정리하고, PDF 같은 비정형 문서는 지식그래프나 문서 청크로 관리한다. 두 계층을 연결하면 질의가 테이블 필드와 문서 근거를 함께 참조할 수 있어 통합 답변 품질을 높일 수 있다.",
+      "corrected_expected_answer": "해당 카테고리 문서와 관련이 없습니다",
+      "correction_type": "MODIFIED",
+      "correction_reason": "Snowflake 범위 외 기술로, 해당 카테고리 문서 미제공",
+      "evidence": [],
+      "team_accuracy_before": 0,
+      "review_status": "PENDING",
+      "timestamp": "2026-06-07T20:19:55.961460"
+    },
+    {
+      "problem_id": "STD-S-03",
+      "category": "Snowflake",
+      "question": "엔터프라이즈 RAG 운영에서 보안성과 접근통제는 왜 평가 항목이어야 하는가?",
+      "original_expected_answer": "통합 DB나 문서 저장소에는 민감한 정보가 포함될 수 있으므로, 기존 보안 규칙 준수, 정보의 기밀성·무결성·가용성, 접근통제, 공유 수준 설정이 필요하다. QA 평가에서도 답변 정확도뿐 아니라 권한 없는 근거 노출 여부를 확인해야 한다.",
+      "corrected_expected_answer": "해당 카테고리 문서와 관련이 없습니다",
+      "correction_type": "MODIFIED",
+      "correction_reason": "Snowflake 범위 외 기술로, 해당 카테고리 문서 미제공",
+      "evidence": [],
+      "team_accuracy_before": 0,
+      "review_status": "PENDING",
+      "timestamp": "2026-06-07T20:19:55.961643"
+    },
+    {
+      "problem_id": "STD-S-04",
+      "category": "Snowflake",
+      "question": "Snowflake 기반 QA 테스트에서 응답 시간과 운영 제약을 함께 봐야 하는 이유는 무엇인가?",
+      "original_expected_answer": "엔터프라이즈 환경에서는 정확도뿐 아니라 통신 대역폭, 전산 자원, 캐싱·압축 같은 운영 제약이 품질에 영향을 준다. RAG 시스템도 검색, 재랭킹, 생성 단계가 길어질 수 있으므로 elapsed_ms, timeout, 캐시 사용 여부를 함께 기록해야 한다.",
+      "corrected_expected_answer": "해당 카테고리 문서와 관련이 없습니다",
+      "correction_type": "MODIFIED",
+      "correction_reason": "Snowflake 범위 외 기술로, 해당 카테고리 문서 미제공",
+      "evidence": [],
+      "team_accuracy_before": 0,
+      "review_status": "PENDING",
+      "timestamp": "2026-06-07T20:19:55.961793"
+    },
+    {
+      "problem_id": "STD-S-05",
+      "category": "Snowflake",
+      "question": "Snowflake RAG 답변의 근거 적합성은 어떻게 판정해야 하는가?",
+      "original_expected_answer": "답변이 질문의 핵심 개념을 포함하고, 검색 근거 문서의 해당 페이지 내용과 충돌하지 않으며, 문서에 없는 결론을 과도하게 추가하지 않아야 한다. 검색된 페이지가 정답 근거 페이지와 일치하거나 의미적으로 충분히 가까운지도 함께 평가한다.",
+      "corrected_expected_answer": "해당 카테고리 문서와 관련이 없습니다",
+      "correction_type": "MODIFIED",
+      "correction_reason": "Snowflake 범위 외 기술로, 해당 카테고리 문서 미제공",
+      "evidence": [],
+      "team_accuracy_before": 2,
+      "review_status": "PENDING",
+      "timestamp": "2026-06-07T20:19:55.961918"
+    },
+    {
+      "problem_id": "STD-S-06",
+      "category": "Snowflake",
+      "question": "ranking_issue는 Snowflake RAG 평가에서 어떤 경우로 기록해야 하는가?",
+      "original_expected_answer": "정답 근거 문서가 검색 후보에는 포함됐지만 상위 결과에 밀려 생성 단계에서 사용되지 않았거나, 더 적합한 페이지보다 덜 관련된 페이지가 우선 사용된 경우 ranking_issue로 기록한다. 이는 검색 실패가 아니라 순위화 실패에 가깝다.",
+      "corrected_expected_answer": "해당 카테고리 문서와 관련이 없습니다",
+      "correction_type": "MODIFIED",
+      "correction_reason": "Snowflake 범위 외 기술로, 해당 카테고리 문서 미제공",
+      "evidence": [],
+      "team_accuracy_before": 0,
+      "review_status": "PENDING",
+      "timestamp": "2026-06-07T20:19:55.962058"
+    },
+    {
+      "problem_id": "STD-S-07",
+      "category": "Snowflake",
+      "question": "Snowflake RAG가 향후 멀티모달 데이터를 포함하려면 어떤 데이터까지 고려해야 하는가?",
+      "original_expected_answer": "텍스트 문서뿐 아니라 동영상, 오디오, 사진, 보고서, 메일 본문 등 반정형·비정형 데이터를 포함할 수 있어야 한다. 이러한 데이터는 독립 파일이나 전자문서관리시스템에 있을 수 있으므로 메타데이터, 원본 위치, 접근 권한, 텍스트 추출 결과를 함께 관리해야 한다.",
+      "corrected_expected_answer": "해당 카테고리 문서와 관련이 없습니다",
+      "correction_type": "MODIFIED",
+      "correction_reason": "Snowflake 범위 외 기술로, 해당 카테고리 문서 미제공",
+      "evidence": [],
+      "team_accuracy_before": 0,
+      "review_status": "PENDING",
+      "timestamp": "2026-06-07T20:19:55.962164"
+    },
+    {
+      "problem_id": "STD-S-08",
+      "category": "Snowflake",
+      "question": "1차와 2차 QA 테스트 결과를 비교할 때 Snowflake RAG에서 특히 봐야 할 개선 지표는 무엇인가?",
+      "original_expected_answer": "동일 질문에 대한 정답률, 근거 페이지 일치율, 검색 후보 재현율, 상위 랭킹 정확도, 응답 시간, 실패 유형 변화, 권한 없는 근거 노출 여부를 비교해야 한다. Snowflake 기반 운영에서는 성능과 거버넌스가 함께 중요하므로 정확도와 운영 안정성을 같이 본다.",
+      "corrected_expected_answer": "해당 카테고리 문서와 관련이 없습니다",
+      "correction_type": "MODIFIED",
+      "correction_reason": "Snowflake 범위 외 기술로, 해당 카테고리 문서 미제공",
+      "evidence": [],
+      "team_accuracy_before": 0,
+      "review_status": "PENDING",
+      "timestamp": "2026-06-07T20:19:55.962365"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "run_id": "run-5aa2022cd9bb",
+  "graph_id": "wfg-089ea014778d",
+  "status": "succeeded",
+  "triggered_by": "demo-user",
+  "started_at": "2026-06-09T06:33:58.562090Z",
+  "finished_at": "2026-06-09T06:34:00.108200Z",
+  "steps": [
+    {
+      "step_id": "step-d5546be5",
+      "node_id": "n-27x9nh",
+      "node_type": "llm",
+      "status": "succeeded",
+      "started_at": "2026-06-09T06:33:58.562090Z",
+      "finished_at": "2026-06-09T06:33:58.860978Z",
+      "input": {},
+      "output": {
+        "result": "[llm] executed"
+      },
+      "error": null
+    },
+    {
+      "step_id": "step-837d5d6c",
+      "node_id": "n-79qizl",
+      "node_type": "start",
+      "status": "succeeded",
+      "started_at": "2026-06-09T06:33:58.860978Z",
+      "finished_at": "2026-06-09T06:33:59.165807Z",
+      "input": {},
+      "output": {
+        "result": "[start] executed"
+      },
+      "error": null
+    },
+    {
+      "step_id": "step-a30eab6f",
+      "node_id": "n-z5ghhz",
+      "node_type": "condition",
+      "status": "succeeded",
+      "started_at": "2026-06-09T06:33:59.165807Z",
+      "finished_at": "2026-06-09T06:33:59.484401Z",
+      "input": {},
+      "output": {
+        "result": "[condition] executed"
+      },
+      "error": null
+    },
+    {
+      "step_id": "step-a50a8dd8",
+      "node_id": "n-3eaes6",
+      "node_type": "risk_assess",
+      "status": "succeeded",
+      "started_at": "2026-06-09T06:33:59.484401Z",
+      "finished_at": "2026-06-09T06:33:59.789330Z",
+      "input": {},
+      "output": {
+        "result": "[risk_assess] executed"
+      },
+      "error": null
+    },
+    {
+      "step_id": "step-ee0ab36e",
+      "node_id": "n-grt4pc",
+      "node_type": "end",
+      "status": "succeeded",
+      "started_at": "2026-06-09T06:33:59.789330Z",
+      "finished_at": "2026-06-09T06:34:00.108200Z",
+      "input": {},
+      "output": {
+        "result": "[end] executed"
+      },
+      "error": null
+    }
+  ],
+  "user_trace": [
+    "LLM 27x 완료",
+    "Start 79q 완료",
+    "Condition z5g 완료",
+    "RiskAssess 3ea 완료",
+    "End grt 완료"
+  ],
+  "tech_trace": [
+    "run_id=run-5aa2022cd9bb",
+    "graph_id=wfg-089ea014778d",
+    "node=n-27x9nh type=llm duration_ms=300",
+    "node=n-79qizl type=start duration_ms=300",
+    "node=n-z5ghhz type=condition duration_ms=300",
+    "node=n-3eaes6 type=risk_assess duration_ms=300",
+    "node=n-grt4pc type=end duration_ms=300"
+  ]
+}

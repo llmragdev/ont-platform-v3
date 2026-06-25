@@ -1,0 +1,132 @@
+domain_id: ai-voucher-2025
+ontology_style: property_graph
+display_name: AI Voucher 2025
+description: AI 바우처 프로젝트 관리 시스템
+
+entity_types:
+  PROJECT:
+    name: PROJECT
+    display_name: Project
+    description: AI 바우처 프로젝트
+    properties:
+      name:
+        name: name
+        display_name: Project Name
+        property_type: string
+        required: true
+        indexed: true
+      budget:
+        name: budget
+        display_name: Budget Amount
+        property_type: integer
+        required: false
+      deadline:
+        name: deadline
+        display_name: Deadline
+        property_type: datetime
+        required: false
+      status:
+        name: status
+        display_name: Project Status
+        property_type: string
+        required: true
+        default_value: "pending"
+      category:
+        name: category
+        display_name: Category
+        property_type: string
+        required: true
+
+  PERSON:
+    name: PERSON
+    display_name: Person
+    description: 프로젝트 참여자
+    properties:
+      email:
+        name: email
+        display_name: Email
+        property_type: string
+        required: true
+        unique: true
+      name:
+        name: name
+        display_name: Full Name
+        property_type: string
+        required: true
+      role:
+        name: role
+        display_name: Role
+        property_type: string
+        required: false
+      department:
+        name: department
+        display_name: Department
+        property_type: string
+        required: false
+
+  ORGANIZATION:
+    name: ORGANIZATION
+    display_name: Organization
+    description: 참여 기관
+    properties:
+      name:
+        name: name
+        display_name: Organization Name
+        property_type: string
+        required: true
+        indexed: true
+      type:
+        name: type
+        display_name: Organization Type
+        property_type: string
+        required: true
+      website:
+        name: website
+        display_name: Website
+        property_type: uri
+        required: false
+
+relation_types:
+  leads:
+    name: leads
+    display_name: Leads
+    description: 프로젝트 리더
+    from_type: PERSON
+    to_type: PROJECT
+    cardinality: 1:N
+    directed: true
+    properties:
+      start_date:
+        name: start_date
+        display_name: Start Date
+        property_type: datetime
+
+  participates_in:
+    name: participates_in
+    display_name: Participates In
+    description: 프로젝트 참여
+    from_type: PERSON
+    to_type: PROJECT
+    cardinality: N:M
+    directed: true
+    properties:
+      role:
+        name: role
+        display_name: Role in Project
+        property_type: string
+      start_date:
+        name: start_date
+        display_name: Participation Start
+        property_type: datetime
+
+  belongs_to:
+    name: belongs_to
+    display_name: Belongs To
+    description: 기관 소속
+    from_type: PERSON
+    to_type: ORGANIZATION
+    cardinality: N:1
+    directed: true
+
+version: "1.0"
+created_by: admin

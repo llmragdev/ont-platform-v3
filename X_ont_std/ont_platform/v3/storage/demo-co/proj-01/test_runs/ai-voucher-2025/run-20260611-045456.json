@@ -1,0 +1,1222 @@
+{
+  "run_id": "run-20260611-045456",
+  "project": "ai-voucher-2025",
+  "timestamp": "2026-06-11T04:55:46.890148+00:00",
+  "summary": {
+    "total": 25,
+    "passed": 19,
+    "failed": 6,
+    "pass_rate": 0.76,
+    "duration_sec": 50.01,
+    "by_source": {
+      "ontology": {
+        "total": 7,
+        "passed": 7
+      },
+      "vector": {
+        "total": 9,
+        "passed": 6
+      },
+      "hybrid": {
+        "total": 7,
+        "passed": 6
+      },
+      "no_evidence": {
+        "total": 2,
+        "passed": 0
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "Q001",
+      "tags": [
+        "ontology",
+        "budget"
+      ],
+      "question": "2025년 AI바우처 총 예산은 얼마야?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "276억",
+        "276,000"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "2025년 AI바우처 총 예산은 276억원입니다. 이는 2025년 총 예산으로 명시되어 있으며, 2025년 AI바우처 프로그램의 예산과도 일치합니다. [출처: doc-0 p.1, doc-4 p.7]",
+      "ontology_hits": 6,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "AI바우처 2025",
+          "entity_type": "PROGRAM"
+        },
+        {
+          "type": "ontology",
+          "entity": "AI바우처 2024",
+          "entity_type": "PROGRAM"
+        },
+        {
+          "type": "ontology",
+          "entity": "2025총예산",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.558173656463623,
+          "text": "18\n구분 2025년 비고\n일반(의료포함)\nAI반도체\n소상공인\n글로벌"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5523489117622375,
+          "text": "13\n구분 2024년 2025년\n일반\n(의료포함) 총 5개(최대)\n(분과별\n최대 2개)\n총 2개(최대)\n(분과별\n최대 1개)\nAI반도체\n소상공인\n글로벌"
+        }
+      ],
+      "duration_ms": 5481,
+      "note": ""
+    },
+    {
+      "id": "Q002",
+      "tags": [
+        "ontology",
+        "quota"
+      ],
+      "question": "2025년 총 과제수는 몇 개야?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "130개",
+        "130"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "2025년 총 과제수는 130개입니다. 이는 AI바우처 프로그램의 2025년 쿼터와 일치합니다. [출처: doc-0001 p.1, doc-0005 p.1]",
+      "ontology_hits": 5,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "AI바우처 2025",
+          "entity_type": "PROGRAM"
+        },
+        {
+          "type": "ontology",
+          "entity": "2025총예산",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "ontology",
+          "entity": "일반과제접수마감",
+          "entity_type": "EVENT"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5266836881637573,
+          "text": "20\n해당분과 2025년 비고\n일반\n(의료포함)\nAI반도체\n공급기업 기술력\n(기본)\n수요기업\n*준비사항\n*의지/적극성\n*활용능력\n*서비스구체성\n*매출연계방안 등\n`24년 대비\n변동"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5184416174888611,
+          "text": "21\n구분 2024년 2025년\n수요기관\n과제신청수\n병원당 최대 2개\n(旣 지원 진료과/센터\n불가)\n병원당 최대 1개\n(旣 지원 진료과/센터\n불가)\n식약처 인허가\nAI솔루션\n우대\n"
+        }
+      ],
+      "duration_ms": 1488,
+      "note": ""
+    },
+    {
+      "id": "Q003",
+      "tags": [
+        "ontology",
+        "division"
+      ],
+      "question": "글로벌 분과의 2025년 과제수는?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "30개",
+        "30"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "글로벌 분과의 2025년 과제수는 30개입니다. [출처: doc-0004 p.8]",
+      "ontology_hits": 6,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "AI바우처 2025",
+          "entity_type": "PROGRAM"
+        },
+        {
+          "type": "ontology",
+          "entity": "글로벌분과",
+          "entity_type": "CATEGORY"
+        },
+        {
+          "type": "ontology",
+          "entity": "2025총예산",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5454280376434326,
+          "text": "15\n구분 2020~2024년 2025년\n일반\n(의료포함)\nAI반도체\n소상공인\n글로벌"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5423567891120911,
+          "text": "16\n구분 2024년 2025년\n일반\n(의료포함)\n편성 불가\n(솔루션비 증빙시\n데이터관련 내역 불가)\n(데이터관련 담당 직원\n인건비 편성 불가)\n편성 불가\n*검증 강화*\n(솔루션비"
+        }
+      ],
+      "duration_ms": 1864,
+      "note": ""
+    },
+    {
+      "id": "Q004",
+      "tags": [
+        "ontology",
+        "organization"
+      ],
+      "question": "AI반도체 분과 CSP 컨소시엄 구성 기업을 모두 나열해줘",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "리벨리온",
+        "퓨리오사",
+        "KT클라우드",
+        "NHN"
+      ],
+      "match_mode": "all",
+      "actual_source": "hybrid",
+      "actual_answer": "AI반도체 분과 CSP 컨소시엄 구성 기업은 다음과 같습니다.\n\n*   리벨리온㈜ – ㈜KT클라우드\n*   리벨리온㈜ - NHN클라우드㈜\n*   리벨리온㈜ – ㈜엘리스그룹\n*   ㈜퓨리오사AI – ㈜엘리스그룹\n\n[출처: doc-22 p.22]",
+      "ontology_hits": 11,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "리벨리온",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "ontology",
+          "entity": "퓨리오사AI",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "ontology",
+          "entity": "KT클라우드",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5747214555740356,
+          "text": "8\n구분 2024년 2025년\n일반 70 60개\n(일반+의료)의료 30\nAI반도체 30 20개\n소상공인 21 20개\n글로벌 50 30개"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5690961480140686,
+          "text": "12\n구분 수요기업 공급기업(현물\n만)\n일반 (현금) 6,667천원\n(현물) 60,000천원\n총 66,667천원 이상\n현물만\n(66,667천원\n이상)\nAI반도체\n일반/AI반도체\n("
+        }
+      ],
+      "duration_ms": 1410,
+      "note": ""
+    },
+    {
+      "id": "Q005",
+      "tags": [
+        "ontology",
+        "organization"
+      ],
+      "question": "이 사업의 주관 기관은 어디야?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "NIPA",
+        "정보통신산업진흥원",
+        "과학기술정보통신부"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "이 사업의 주관 기관은 과학기술정보통신부입니다. [출처: ontology-1]",
+      "ontology_hits": 1,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "과학기술정보통신부",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6339429616928101,
+          "text": "7\n구분 2024년 2025년\n총 예산 425억 276억\n총 과제수 201개 130개\n과제당\n지원비 최대 2억 최대 2억"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6301515698432922,
+          "text": "13\n구분 2024년 2025년\n일반\n(의료포함) 총 5개(최대)\n(분과별\n최대 2개)\n총 2개(최대)\n(분과별\n최대 1개)\nAI반도체\n소상공인\n글로벌"
+        }
+      ],
+      "duration_ms": 1301,
+      "note": ""
+    },
+    {
+      "id": "Q006",
+      "tags": [
+        "ontology",
+        "quota"
+      ],
+      "question": "공급기업이 연간 신청할 수 있는 최대 과제수는?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "2개",
+        "분과별 1개"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "공급기업은 연간 최대 2개의 과제를 신청할 수 있습니다. 다만, 분과별로는 최대 1개까지만 신청 가능합니다. [출처: 온톨로지 p.1]",
+      "ontology_hits": 2,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "과제당최대지원비",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "ontology",
+          "entity": "공급기업연간최대과제수",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5539685487747192,
+          "text": "7\n구분 2024년 2025년\n총 예산 425억 276억\n총 과제수 201개 130개\n과제당\n지원비 최대 2억 최대 2억"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5478010177612305,
+          "text": "13\n구분 2024년 2025년\n일반\n(의료포함) 총 5개(최대)\n(분과별\n최대 2개)\n총 2개(최대)\n(분과별\n최대 1개)\nAI반도체\n소상공인\n글로벌"
+        }
+      ],
+      "duration_ms": 1905,
+      "note": ""
+    },
+    {
+      "id": "Q007",
+      "tags": [
+        "ontology",
+        "event"
+      ],
+      "question": "과제 수행 기간은 언제부터 언제까지야?",
+      "expected_source": "ontology",
+      "expected_keywords": [
+        "5월",
+        "11월",
+        "2025"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "과제 수행 기간은 2025년 5월 1일부터 2025년 11월 30일까지입니다. [출처: EVENT p.1]",
+      "ontology_hits": 5,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "과제당최대지원비",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "ontology",
+          "entity": "공급기업연간최대과제수",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "ontology",
+          "entity": "일반과제접수마감",
+          "entity_type": "EVENT"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6417782306671143,
+          "text": "4\n과제신청\nPool\n공개\n신청서류"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6375331878662109,
+          "text": "16\n구분 2024년 2025년\n일반\n(의료포함)\n편성 불가\n(솔루션비 증빙시\n데이터관련 내역 불가)\n(데이터관련 담당 직원\n인건비 편성 불가)\n편성 불가\n*검증 강화*\n(솔루션비"
+        }
+      ],
+      "duration_ms": 1881,
+      "note": ""
+    },
+    {
+      "id": "Q008",
+      "tags": [
+        "vector",
+        "procedure"
+      ],
+      "question": "공급기업 Pool 신규 등록 절차를 설명해줘",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "신청서",
+        "제출서류",
+        "AI솔루션"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "공급기업 Pool 신규 등록 절차에 대한 구체적인 정보는 제공되지 않았습니다. 다만, 공급기업 Pool 등록은 과제 신청 전에 완료되어야 하며, 신규/변경 등록 마감일이 존재함을 알 수 있습니다. [출처: doc-3 p.3, doc-2 p.2]",
+      "ontology_hits": 1,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "공급기업연간최대과제수",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6528966426849365,
+          "text": "19\n구분 2024년 2025년\n일반\n(의료포함)\n청년기업, 지역기업\n(수요0.5 +공급0.5)\n클라우드(2)\n청년기업\n(수요0.5점 + 공급0.5점)\n지역기업\n(수요1점 + 공급"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6336596012115479,
+          "text": "12\n구분 수요기업 공급기업(현물\n만)\n일반 (현금) 6,667천원\n(현물) 60,000천원\n총 66,667천원 이상\n현물만\n(66,667천원\n이상)\nAI반도체\n일반/AI반도체\n("
+        }
+      ],
+      "duration_ms": 1485,
+      "note": ""
+    },
+    {
+      "id": "Q009",
+      "tags": [
+        "vector",
+        "policy"
+      ],
+      "question": "데이터 관련 비용은 사업비로 쓸 수 있어?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "불가",
+        "무상제공",
+        "자체비용"
+      ],
+      "match_mode": "any",
+      "actual_source": "vector",
+      "actual_answer": "데이터 관련 비용은 사업비로 처리할 수 없습니다. 데이터 수집 비용은 사업비로 처리할 수 없으며, 데이터 구매 또한 자체 비용으로 처리해야 합니다. 데이터 정제 및 가공은 인건비를 편성하지 않은 참여 인력이 가능하지만, 외부 용역 시에는 자체 비용으로 처리해야 합니다. [출처: doc-17 p.17]",
+      "ontology_hits": 0,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6663341522216797,
+          "text": "25\n※ 의료/바이오 관련 임상 및 인증만 가능\n■ 국제거래문서와 사업계획서에 해외수요처와 협의사항 명시\n1) 해외수요처에서 최종제출: 임상결과서, 인증결과서, PoC결과서\n2) "
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6649935841560364,
+          "text": "18\n구분 2025년 비고\n일반(의료포함)\nAI반도체\n소상공인\n글로벌"
+        }
+      ],
+      "duration_ms": 1414,
+      "note": ""
+    },
+    {
+      "id": "Q010",
+      "tags": [
+        "vector",
+        "documents"
+      ],
+      "question": "글로벌 분과에서 제출해야 하는 서류는?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "K-SURE",
+        "국제거래문서",
+        "NDA"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "글로벌 분과 제출 서류는 다음과 같습니다.\n\n*   해외수요처 및 현지파트너 신용조사 보고서 (한국무역보험공사(K-SURE)의 국외기업신용조사 서비스 신청)\n*   국제거래문서 중 1개 제출 (국제거래(매매)계약서, NDA, 임상시험계약서, MOU, MOA, LOI 등)\n\n[출처: doc-26 p.1, doc-26 p.1]",
+      "ontology_hits": 1,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "글로벌분과",
+          "entity_type": "CATEGORY"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.629708468914032,
+          "text": "14\n구분 접수마감 접수예시 자동탈락순서\n일반\n(의료포함) `25.3.13(목)\n15:00\n① ②\n*분과초과 우선탈락\n(②)\n*총 과제수 초과\n접수순 탈락\n(④)\n※ ①③만 접수가"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6287652254104614,
+          "text": "4\n과제신청\nPool\n공개\n신청서류"
+        }
+      ],
+      "duration_ms": 1510,
+      "note": ""
+    },
+    {
+      "id": "Q011",
+      "tags": [
+        "vector",
+        "matching"
+      ],
+      "question": "민간매칭에서 현금과 현물의 차이는 뭐야?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "현금",
+        "현물",
+        "인건비"
+      ],
+      "match_mode": "any",
+      "actual_source": "vector",
+      "actual_answer": "민간매칭에서 현금과 현물의 차이는 다음과 같습니다.\n\n*   **수요기업:** 현금과 현물 매칭이 모두 가능합니다. 다만, 청년기업, 지역기업, 비영리기관의 경우 현금 매칭이 면제될 수 있습니다. [출처: doc-005 p.9]\n*   **공급기업:** 일반적으로 현물 매칭만 가능합니다. AI반도체 분야의 경우, 일반/AI반도체 (비영리, 청년기업, 지역기업)는 현물만 매칭이 가능하며, 소상공인은 50백만원 이상의 현물 매칭이 필요합니다. [출처: doc-004 p.12, doc-005 p.9]\n\n일반 분야의 경우, 수요기업은 현금 6,667천원과 현물 60,000천원 이상을 포함하여 총 66,667천원 이상을 매칭해야 하며, 공급기업은 현물만 60,000천원 이상을 매칭해야 합니다. [출처: doc-004 p.12]",
+      "ontology_hits": 0,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.7553533911705017,
+          "text": "19\n구분 2024년 2025년\n일반\n(의료포함)\n청년기업, 지역기업\n(수요0.5 +공급0.5)\n클라우드(2)\n청년기업\n(수요0.5점 + 공급0.5점)\n지역기업\n(수요1점 + 공급"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.735990583896637,
+          "text": "2\n*공급기업Pool 등록\n(신규/변경) 마감\n과제 접수 마감\n선정 평가\n협약 및\n과제수행\n결과평가\n및 정산\n최종선정 및\n합격자 발표\n*일반/소상공인: 3/13\n*AI반도체/글로벌"
+        }
+      ],
+      "duration_ms": 2603,
+      "note": ""
+    },
+    {
+      "id": "Q012",
+      "tags": [
+        "vector",
+        "restriction"
+      ],
+      "question": "타기관 사업과 중복 지원이 안 되는 경우는?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "KOICA",
+        "KOTRA",
+        "수출바우처"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "타기관 사업과 중복 지원이 안 되는 경우는 다음과 같습니다.\n\n*   **한국국제협력단(KOICA)** 및 **대한무역투자진흥공사(KOTRA)**에서 지원하는 사업은 중복 지원이 금지됩니다. [출처: ontology p.1]\n*   의료 분야의 경우, 병원당 최대 지원 과제 수를 초과하거나 이미 지원받은 진료과/센터에 대한 중복 지원이 불가합니다. [출처: doc-21 p.1]\n*   솔루션비 증빙 시 데이터 관련 내역 편성이나 데이터 관련 담당 직원의 인건비 편성은 불가할 수 있습니다. [출처: doc-16 p.1]",
+      "ontology_hits": 2,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "KOICA",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "ontology",
+          "entity": "KOTRA",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6388185620307922,
+          "text": "21\n구분 2024년 2025년\n수요기관\n과제신청수\n병원당 최대 2개\n(旣 지원 진료과/센터\n불가)\n병원당 최대 1개\n(旣 지원 진료과/센터\n불가)\n식약처 인허가\nAI솔루션\n우대\n"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6314190626144409,
+          "text": "14\n구분 접수마감 접수예시 자동탈락순서\n일반\n(의료포함) `25.3.13(목)\n15:00\n① ②\n*분과초과 우선탈락\n(②)\n*총 과제수 초과\n접수순 탈락\n(④)\n※ ①③만 접수가"
+        }
+      ],
+      "duration_ms": 2305,
+      "note": ""
+    },
+    {
+      "id": "Q013",
+      "tags": [
+        "vector",
+        "medical"
+      ],
+      "question": "의료 분과에서 병원이 신청할 때 제한 사항은?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "병원당",
+        "1개",
+        "진료과"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "의료 분과에서 병원이 신청할 때 제한 사항은 다음과 같습니다.\n\n2024년에는 병원당 최대 2개의 과제를 신청할 수 있으며, 이미 지원받은 진료과 또는 센터는 신청할 수 없습니다. 2025년에는 병원당 최대 1개의 과제만 신청 가능하며, 마찬가지로 이미 지원받은 진료과 또는 센터는 신청할 수 없습니다. [출처: doc-21 p.21]",
+      "ontology_hits": 1,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "일반분과",
+          "entity_type": "CATEGORY"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6181067228317261,
+          "text": "14\n구분 접수마감 접수예시 자동탈락순서\n일반\n(의료포함) `25.3.13(목)\n15:00\n① ②\n*분과초과 우선탈락\n(②)\n*총 과제수 초과\n접수순 탈락\n(④)\n※ ①③만 접수가"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6039792895317078,
+          "text": "13\n구분 2024년 2025년\n일반\n(의료포함) 총 5개(최대)\n(분과별\n최대 2개)\n총 2개(최대)\n(분과별\n최대 1개)\nAI반도체\n소상공인\n글로벌"
+        }
+      ],
+      "duration_ms": 1457,
+      "note": ""
+    },
+    {
+      "id": "Q014",
+      "tags": [
+        "vector",
+        "bonus"
+      ],
+      "question": "가점을 받을 수 있는 항목들은 뭐야?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "청년기업",
+        "지역기업",
+        "클라우드"
+      ],
+      "match_mode": "any",
+      "actual_source": "vector",
+      "actual_answer": "가점을 받을 수 있는 항목들은 다음과 같습니다.\n\n*   **기업 규모별 가점:** 청년기업, 중소기업/병원, 중견기업에 따라 가점이 부여됩니다. [출처: doc-0002 p.9, doc-0004 p.12]\n*   **수요기업 및 공급기업 매칭:** 수요기업은 현금과 현물을 매칭하고, 공급기업은 현물만 매칭하는 경우 가점이 있습니다. [출처: doc-0002 p.9, doc-0003 p.12]\n*   **특정 기업 유형:** 청년기업, 지역기업, 비영리기관, 소상공인 등 특정 유형의 기업에게는 현금 매칭이 면제되거나 추가 가점이 부여될 수 있습니다. [출처: doc-0002 p.9, doc-0004 p.12, doc-0005 p.19]\n*   **국외 기업 신용 조사 보고서 제출:** 한국무역보험공사(K-SURE)의 국외기업 신용 조사 서비스 보고서를 제출하면 가점을 받을 수 있습니다. [출처: doc-0001 p.26]",
+      "ontology_hits": 0,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6760664582252502,
+          "text": "26\nK\n-\nSURE\n국외기업\n신용조사\n국제거래문서\n 중\n 1\n개\n 제출\n국제거래(매매)계약서 NDA(비밀유지계약) 임상시험계약서\nMOU(양해각서) MOA(합의각서) LOI(의향서"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6741082668304443,
+          "text": "20\n해당분과 2025년 비고\n일반\n(의료포함)\nAI반도체\n공급기업 기술력\n(기본)\n수요기업\n*준비사항\n*의지/적극성\n*활용능력\n*서비스구체성\n*매출연계방안 등\n`24년 대비\n변동"
+        }
+      ],
+      "duration_ms": 2102,
+      "note": ""
+    },
+    {
+      "id": "Q015",
+      "tags": [
+        "vector",
+        "procedure"
+      ],
+      "question": "공급기업 변경 등록 대상은 누구야?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "기등록",
+        "변경등록",
+        "우정사항"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "공급기업 변경 등록 대상은 명확하게 명시되지 않았습니다. 다만, 공급기업 Pool 등록이 완료되어야 하는 대상에 대한 언급이 있습니다. [출처: doc-3 p.1]",
+      "ontology_hits": 1,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "공급기업연간최대과제수",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6418110132217407,
+          "text": "9\n구분 2025년 비고\n일반\n(의료포함)\n수요 + 공급\n<수요,공급 각각>\n*청년기업(10%)\n*중소기업/병원(20%)\n*중견기업(30%)\n*수요는 현금+현물 매칭\n*공급은 현물"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6092914342880249,
+          "text": "19\n구분 2024년 2025년\n일반\n(의료포함)\n청년기업, 지역기업\n(수요0.5 +공급0.5)\n클라우드(2)\n청년기업\n(수요0.5점 + 공급0.5점)\n지역기업\n(수요1점 + 공급"
+        }
+      ],
+      "duration_ms": 1515,
+      "note": ""
+    },
+    {
+      "id": "Q016",
+      "tags": [
+        "vector",
+        "hardware"
+      ],
+      "question": "소상공인 분과에서 하드웨어 지원이 가능해?",
+      "expected_source": "vector",
+      "expected_keywords": [
+        "하드웨어",
+        "소상공인"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "네, 소상공인 분과에서 하드웨어 지원이 가능합니다. 소상공인에게 납품할 하드웨어 지원이 가능하며, 2025년에는 20개, 2024년에는 21개의 지원 쿼터가 있습니다. [출처: doc-16 p.1, doc-9 p.1, doc-13 p.1, doc-12 p.1, doc-23 p.1]",
+      "ontology_hits": 1,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "소상공인분과",
+          "entity_type": "CATEGORY"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5802223682403564,
+          "text": "16\n구분 2024년 2025년\n일반\n(의료포함)\n편성 불가\n(솔루션비 증빙시\n데이터관련 내역 불가)\n(데이터관련 담당 직원\n인건비 편성 불가)\n편성 불가\n*검증 강화*\n(솔루션비"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5729204416275024,
+          "text": "9\n구분 2025년 비고\n일반\n(의료포함)\n수요 + 공급\n<수요,공급 각각>\n*청년기업(10%)\n*중소기업/병원(20%)\n*중견기업(30%)\n*수요는 현금+현물 매칭\n*공급은 현물"
+        }
+      ],
+      "duration_ms": 1488,
+      "note": ""
+    },
+    {
+      "id": "Q017",
+      "tags": [
+        "hybrid",
+        "comparison"
+      ],
+      "question": "2024년과 2025년을 비교하면 예산과 과제수가 어떻게 달라졌어?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "276억",
+        "425억",
+        "130",
+        "201"
+      ],
+      "match_mode": "all",
+      "actual_source": "hybrid",
+      "actual_answer": "2024년과 2025년을 비교했을 때, 총 예산은 425억원에서 276억원으로 감소했으며, 총 과제 수는 201개에서 130개로 감소했습니다. [출처: doc-7 p.1]",
+      "ontology_hits": 8,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "AI바우처 2025",
+          "entity_type": "PROGRAM"
+        },
+        {
+          "type": "ontology",
+          "entity": "AI바우처 2024",
+          "entity_type": "PROGRAM"
+        },
+        {
+          "type": "ontology",
+          "entity": "2025총예산",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5649031400680542,
+          "text": "24\n구분 2024년 2025년\n분야 구분 일반, 의료\n별도 구분\n일반, 의료\n별도 구분 없음\n*계약을 목적으로하는 PoC (임상 및 해외인증 획득은 의료/바이오 분야만 가능)"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5482602119445801,
+          "text": "13\n구분 2024년 2025년\n일반\n(의료포함) 총 5개(최대)\n(분과별\n최대 2개)\n총 2개(최대)\n(분과별\n최대 1개)\nAI반도체\n소상공인\n글로벌"
+        }
+      ],
+      "duration_ms": 1913,
+      "note": "비교 질문 — 2024·2025 양쪽 수치가 모두 언급되어야 통과"
+    },
+    {
+      "id": "Q018",
+      "tags": [
+        "hybrid",
+        "organization"
+      ],
+      "question": "리벨리온이 제공하는 서비스는 뭐야?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "NPU",
+        "AI반도체",
+        "컨소시엄"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "리벨리온은 AI 반도체 분야의 NPU 공급사입니다. 특히 NPU 기반 알고리즘 서비스 제공을 위해 ㈜KT클라우드, NHN클라우드㈜, ㈜엘리스그룹 등과 컨소시엄을 구성하고 있습니다. [출처: ontology-1]",
+      "ontology_hits": 1,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "리벨리온",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.7817849516868591,
+          "text": "26\nK\n-\nSURE\n국외기업\n신용조사\n국제거래문서\n 중\n 1\n개\n 제출\n국제거래(매매)계약서 NDA(비밀유지계약) 임상시험계약서\nMOU(양해각서) MOA(합의각서) LOI(의향서"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.7809567451477051,
+          "text": "16\n구분 2024년 2025년\n일반\n(의료포함)\n편성 불가\n(솔루션비 증빙시\n데이터관련 내역 불가)\n(데이터관련 담당 직원\n인건비 편성 불가)\n편성 불가\n*검증 강화*\n(솔루션비"
+        }
+      ],
+      "duration_ms": 1979,
+      "note": ""
+    },
+    {
+      "id": "Q019",
+      "tags": [
+        "hybrid",
+        "matching"
+      ],
+      "question": "일반 분과와 소상공인 분과의 민간매칭 방식이 어떻게 달라?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "일반",
+        "소상공인",
+        "현금",
+        "현물"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "일반 분과와 소상공인 분과의 민간매칭 방식은 다음과 같은 차이가 있습니다.\n\n일반 분과는 수요기업과 공급기업 모두 매칭에 참여하며, 수요기업은 현금과 현물 매칭이 가능합니다. 반면, 소상공인 분과는 공급만 매칭에 참여하며, 현물 매칭만 가능합니다. 또한, 일반 분과는 2025년 60개, 2024년 100개의 쿼터가 있지만, 소상공인 분과는 2025년 20개, 2024년 21개의 쿼터를 가지고 있습니다.\n\n[출처: doc-2 p.1, doc-3 p.12, doc-3 p.9]",
+      "ontology_hits": 3,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "일반분과",
+          "entity_type": "CATEGORY"
+        },
+        {
+          "type": "ontology",
+          "entity": "소상공인분과",
+          "entity_type": "CATEGORY"
+        },
+        {
+          "type": "ontology",
+          "entity": "일반과제접수마감",
+          "entity_type": "EVENT"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5652827024459839,
+          "text": "2\n*공급기업Pool 등록\n(신규/변경) 마감\n과제 접수 마감\n선정 평가\n협약 및\n과제수행\n결과평가\n및 정산\n최종선정 및\n합격자 발표\n*일반/소상공인: 3/13\n*AI반도체/글로벌"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5579349994659424,
+          "text": "13\n구분 2024년 2025년\n일반\n(의료포함) 총 5개(최대)\n(분과별\n최대 2개)\n총 2개(최대)\n(분과별\n최대 1개)\nAI반도체\n소상공인\n글로벌"
+        }
+      ],
+      "duration_ms": 2156,
+      "note": ""
+    },
+    {
+      "id": "Q020",
+      "tags": [
+        "hybrid",
+        "organization"
+      ],
+      "question": "NIPA가 이 사업에서 하는 역할은 뭐야?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "NIPA",
+        "운영",
+        "정보통신산업진흥원"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "NIPA(정보통신산업진흥원)는 이 사업에서 운영기관의 역할을 수행합니다. NIPA는 공공기관으로서 사업의 전반적인 운영을 담당하며, 예산 및 과제 수 관리, 접수 마감일 안내, 선정 평가, 협약 및 과제 수행 지원, 결과 평가 및 정산 등 사업의 모든 단계를 관리합니다. [출처: ontology-1 p.1]",
+      "ontology_hits": 1,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "NIPA",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6653585433959961,
+          "text": "14\n구분 접수마감 접수예시 자동탈락순서\n일반\n(의료포함) `25.3.13(목)\n15:00\n① ②\n*분과초과 우선탈락\n(②)\n*총 과제수 초과\n접수순 탈락\n(④)\n※ ①③만 접수가"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6547093391418457,
+          "text": "7\n구분 2024년 2025년\n총 예산 425억 276억\n총 과제수 201개 130개\n과제당\n지원비 최대 2억 최대 2억"
+        }
+      ],
+      "duration_ms": 1652,
+      "note": ""
+    },
+    {
+      "id": "Q021",
+      "tags": [
+        "hybrid",
+        "deadline"
+      ],
+      "question": "AI반도체 분과 신청 마감일은 언제고 신청 방법은?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "3월 24일",
+        "3.24",
+        "2025-03-24"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "AI반도체 분과 신청 마감일은 2025년 3월 24일 15:00입니다. 신청 방법은 별도로 명시되어 있지 않으나, 공급기업Pool 등록이 완료되어야 하며, AI반도체 분과의 경우 수요기업만 신청 가능합니다. [출처: EVENT-AI반도체과제접수마감 p.1, doc-2 p.2]",
+      "ontology_hits": 8,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "리벨리온",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "ontology",
+          "entity": "퓨리오사AI",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "ontology",
+          "entity": "일반분과",
+          "entity_type": "CATEGORY"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.527375340461731,
+          "text": "13\n구분 2024년 2025년\n일반\n(의료포함) 총 5개(최대)\n(분과별\n최대 2개)\n총 2개(최대)\n(분과별\n최대 1개)\nAI반도체\n소상공인\n글로벌"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5178048610687256,
+          "text": "20\n해당분과 2025년 비고\n일반\n(의료포함)\nAI반도체\n공급기업 기술력\n(기본)\n수요기업\n*준비사항\n*의지/적극성\n*활용능력\n*서비스구체성\n*매출연계방안 등\n`24년 대비\n변동"
+        }
+      ],
+      "duration_ms": 1585,
+      "note": ""
+    },
+    {
+      "id": "Q022",
+      "tags": [
+        "hybrid",
+        "eligibility"
+      ],
+      "question": "소상공인이 글로벌 분과에 신청할 수 있어?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "해외",
+        "글로벌",
+        "수요처"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "네, 소상공인은 글로벌 분과에 신청할 수 있습니다. 특히 AI반도체 분야의 소상공인은 글로벌 분과 편성이 가능합니다. [출처: doc-16 p.1, doc-13 p.1, doc-3 p.1]",
+      "ontology_hits": 1,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": true,
+      "passed": true,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "글로벌분과",
+          "entity_type": "CATEGORY"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.555112361907959,
+          "text": "23\n구분 2024년 2025년\n소상공인\n지원수\n확산형\n(10개 이상) 변동없음\n*소상공인에게 납품할 하드웨어 지원 가능"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.551418662071228,
+          "text": "16\n구분 2024년 2025년\n일반\n(의료포함)\n편성 불가\n(솔루션비 증빙시\n데이터관련 내역 불가)\n(데이터관련 담당 직원\n인건비 편성 불가)\n편성 불가\n*검증 강화*\n(솔루션비"
+        }
+      ],
+      "duration_ms": 2240,
+      "note": ""
+    },
+    {
+      "id": "Q023",
+      "tags": [
+        "edge",
+        "inference"
+      ],
+      "question": "이 사업에 반도체 기업이 수요기업으로 참여할 수 있어?",
+      "expected_source": "hybrid",
+      "expected_keywords": [
+        "중소기업",
+        "중견기업",
+        "자격"
+      ],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "네, 반도체 기업이 수요기업으로 참여할 수 있습니다. 특히 AI반도체 분야에서는 AI반도체 활용기업을 수요기업으로 모집하고 있습니다. [출처: doc-000 p.1, doc-001 p.2]\n\nAI반도체 분과에서는 2025년 3월 24일까지 수요기업 신청을 받으며, AI반도체 공급기업 풀 등록이 완료된 국내 AI기업(법인)은 수요기업으로 참여 가능합니다. [출처: doc-001 p.2, doc-004 p.3]\n\n다만, 수요기업으로 참여 시 AI 활용 평가가 강화될 예정입니다. [출처: doc-000 p.1]",
+      "ontology_hits": 4,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": true,
+      "keyword_matched": false,
+      "passed": false,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "리벨리온",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "ontology",
+          "entity": "퓨리오사AI",
+          "entity_type": "ORGANIZATION"
+        },
+        {
+          "type": "ontology",
+          "entity": "AI반도체분과",
+          "entity_type": "CATEGORY"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5324519276618958,
+          "text": "20\n해당분과 2025년 비고\n일반\n(의료포함)\nAI반도체\n공급기업 기술력\n(기본)\n수요기업\n*준비사항\n*의지/적극성\n*활용능력\n*서비스구체성\n*매출연계방안 등\n`24년 대비\n변동"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5171723365783691,
+          "text": "2\n*공급기업Pool 등록\n(신규/변경) 마감\n과제 접수 마감\n선정 평가\n협약 및\n과제수행\n결과평가\n및 정산\n최종선정 및\n합격자 발표\n*일반/소상공인: 3/13\n*AI반도체/글로벌"
+        }
+      ],
+      "duration_ms": 3254,
+      "note": ""
+    },
+    {
+      "id": "Q024",
+      "tags": [
+        "edge",
+        "out_of_scope"
+      ],
+      "question": "과제 선정 시 평가 배점 기준표는?",
+      "expected_source": "no_evidence",
+      "expected_keywords": [],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "과제 선정 시 평가 배점 기준표에 대한 정보는 제공되지 않았습니다. 다만, 과제 신청 시 고려될 수 있는 몇 가지 기준이 있습니다.\n\n*   **과제당 최대 지원비**: 최대 2억원입니다. [출처: METRIC]\n*   **공급기업 연간 최대 과제 수**: 분과별 최대 1개입니다. [출처: METRIC]\n*   **접수 마감일**: 일반 과제는 2025년 3월 13일 15:00, AI반도체 과제는 2025년 3월 24일 15:00입니다. [출처: EVENT]\n*   **과제 수행 기간**: 2025년 5월 1일부터 2025년 11월 30일까지입니다. [출처: EVENT]\n\n또한, 일반 과제의 경우 분과 초과 시 우선 탈락하며, 총 과제 수 초과 시 접수 순으로 탈락할 수 있습니다. [출처: doc-14 p.14] 청년기업 및 지역기업의 경우 수요와 공급 점수를 합산하여 평가될 수 있습니다. [출처: doc-19 p.19]",
+      "ontology_hits": 5,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": false,
+      "keyword_matched": true,
+      "passed": false,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "과제당최대지원비",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "ontology",
+          "entity": "공급기업연간최대과제수",
+          "entity_type": "METRIC"
+        },
+        {
+          "type": "ontology",
+          "entity": "일반과제접수마감",
+          "entity_type": "EVENT"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6086901426315308,
+          "text": "4\n과제신청\nPool\n공개\n신청서류"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.5823900103569031,
+          "text": "14\n구분 접수마감 접수예시 자동탈락순서\n일반\n(의료포함) `25.3.13(목)\n15:00\n① ②\n*분과초과 우선탈락\n(②)\n*총 과제수 초과\n접수순 탈락\n(④)\n※ ①③만 접수가"
+        }
+      ],
+      "duration_ms": 2274,
+      "note": "문서에 없는 정보 — 시스템이 '근거 없음'을 명시해야 통과"
+    },
+    {
+      "id": "Q025",
+      "tags": [
+        "edge",
+        "hallucination"
+      ],
+      "question": "2026년 AI바우처 예산은 얼마야?",
+      "expected_source": "no_evidence",
+      "expected_keywords": [],
+      "match_mode": "any",
+      "actual_source": "hybrid",
+      "actual_answer": "2026년 AI바우처 예산에 대한 정보는 현재 제공된 온톨로지 및 문서 검색 결과에서 찾을 수 없습니다.\n\n[출처: 온톨로지 검색 결과 (2건), 문서 검색 결과 (5건)]",
+      "ontology_hits": 2,
+      "vector_hits": 5,
+      "llm_used": true,
+      "source_matched": false,
+      "keyword_matched": true,
+      "passed": false,
+      "evidence": [
+        {
+          "type": "ontology",
+          "entity": "AI바우처 2025",
+          "entity_type": "PROGRAM"
+        },
+        {
+          "type": "ontology",
+          "entity": "AI바우처 2024",
+          "entity_type": "PROGRAM"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6137207746505737,
+          "text": "13\n구분 2024년 2025년\n일반\n(의료포함) 총 5개(최대)\n(분과별\n최대 2개)\n총 2개(최대)\n(분과별\n최대 1개)\nAI반도체\n소상공인\n글로벌"
+        },
+        {
+          "type": "vector",
+          "doc_id": "doc-9ce276d5",
+          "score": 0.6041581630706787,
+          "text": "15\n구분 2020~2024년 2025년\n일반\n(의료포함)\nAI반도체\n소상공인\n글로벌"
+        }
+      ],
+      "duration_ms": 1735,
+      "note": "미래 정보 — 환각 방지 검증. LLM API 유무와 무관하게 no_evidence여야 통과"
+    }
+  ]
+}

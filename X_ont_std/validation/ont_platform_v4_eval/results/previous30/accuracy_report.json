@@ -1,0 +1,250 @@
+{
+  "overall_accuracy": 0.763,
+  "by_category": {
+    "ontology": 0.7383,
+    "nlp": 0.7933,
+    "defense": 0.7517
+  },
+  "queries": [
+    {
+      "query": "온톨로지란 무엇인가?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.6,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.75
+    },
+    {
+      "query": "온톨로지와 지식그래프의 관계는?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.4,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.67
+    },
+    {
+      "query": "온톨로지 매칭이란 무엇인가?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.6,
+      "answer_completeness": 1.0,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.84
+    },
+    {
+      "query": "온톨로지 이질성 문제는?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.2,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.59
+    },
+    {
+      "query": "도메인 온톨로지 모델링 방법은?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.4,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.67
+    },
+    {
+      "query": "온톨로지 기반 의미 속성 판별이란?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.83
+    },
+    {
+      "query": "온톨로지 학습 기반 지식 그래프 구축 방법은?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.4,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.67
+    },
+    {
+      "query": "RDF는 무엇인가?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.83
+    },
+    {
+      "query": "온톨로지 관리 및 유지보수 방법은?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.6,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.75
+    },
+    {
+      "query": "온톨로지의 평가 지표는?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.83
+    },
+    {
+      "query": "온톨로지 재사용 전략은?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.4,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.67
+    },
+    {
+      "query": "온톨로지 국제 표준은?",
+      "category": "ontology",
+      "keyword_presence_ratio": 0.4,
+      "answer_completeness": 1.0,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.76
+    },
+    {
+      "query": "자연어처리(NLP)란?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.83
+    },
+    {
+      "query": "정적 언어모델과 생성형AI의 차이는?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.4,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.67
+    },
+    {
+      "query": "생성형AI의 발전 과정은?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 1.0,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.92
+    },
+    {
+      "query": "텍스트를 다시 쓰는 기술(Paraphrasing)이란?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.83
+    },
+    {
+      "query": "한국근대문인 데이터베이스 구축 방법은?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.4,
+      "answer_completeness": 1.0,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.76
+    },
+    {
+      "query": "실시간 문맥 인식 감성 분석이란?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.83
+    },
+    {
+      "query": "감성 분석의 모듈형 아키텍처 설계란?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.83
+    },
+    {
+      "query": "NLP에서의 감정 판별 기법은?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 1.0,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.92
+    },
+    {
+      "query": "언어모델의 문맥 이해 방식은?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.6,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.75
+    },
+    {
+      "query": "대규모 언어모델의 학습 방식은?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.4,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.67
+    },
+    {
+      "query": "NLP의 주요 응용 분야는?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.2,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.59
+    },
+    {
+      "query": "자연어 이해와 생성의 차이는?",
+      "category": "nlp",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 1.0,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.92
+    },
+    {
+      "query": "국방 분야에서 온톨로지를 어떻게 활용하는가?",
+      "category": "defense",
+      "keyword_presence_ratio": 0.2,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.59
+    },
+    {
+      "query": "국방 지휘통제 데이터 통합 방법은?",
+      "category": "defense",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.83
+    },
+    {
+      "query": "온톨로지와 지식그래프를 국방에 적용하는 방법은?",
+      "category": "defense",
+      "keyword_presence_ratio": 0.6,
+      "answer_completeness": 0.7,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.75
+    },
+    {
+      "query": "해외 온톨로지 현황은?",
+      "category": "defense",
+      "keyword_presence_ratio": 0.2,
+      "answer_completeness": 0.4,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.5
+    },
+    {
+      "query": "한국군 온톨로지 개발 방안은?",
+      "category": "defense",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 1.0,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.92
+    },
+    {
+      "query": "지식그래프 기반 국방 정보 통합은?",
+      "category": "defense",
+      "keyword_presence_ratio": 0.8,
+      "answer_completeness": 1.0,
+      "answer_relevance": 1.0,
+      "accuracy_score": 0.92
+    }
+  ]
+}

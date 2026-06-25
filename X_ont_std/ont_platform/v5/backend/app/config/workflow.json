@@ -1,0 +1,337 @@
+{
+  "version": "3.0",
+  "description": "Workflow configuration for ont_platform v3 — Multi-domain state machines",
+
+  "domains": {
+    "ai-voucher-2025": {
+      "entity_type": "PROJECT",
+      "display_name": "AI바우처 2025",
+
+      "statuses": [
+        {
+          "name": "Submitted",
+          "display": "신청됨",
+          "type": "initial",
+          "color": "#gray"
+        },
+        {
+          "name": "UnderReview",
+          "display": "심사 중",
+          "type": "intermediate",
+          "color": "#yellow"
+        },
+        {
+          "name": "Approved",
+          "display": "승인됨",
+          "type": "intermediate",
+          "color": "#blue"
+        },
+        {
+          "name": "Rejected",
+          "display": "반려됨",
+          "type": "final",
+          "color": "#red"
+        },
+        {
+          "name": "InProgress",
+          "display": "진행 중",
+          "type": "intermediate",
+          "color": "#purple"
+        },
+        {
+          "name": "Completed",
+          "display": "완료됨",
+          "type": "final",
+          "color": "#green"
+        }
+      ],
+
+      "actions": {
+        "request_review": {
+          "display_name": "심사 요청",
+          "from_statuses": ["Submitted"],
+          "to_status": "UnderReview",
+          "allowed_roles": ["Admin", "FinanceManager", "AccountManager"],
+          "preconditions": [
+            {
+              "field": "properties.manager",
+              "operator": "not_null",
+              "message": "담당자를 배정하세요"
+            },
+            {
+              "field": "properties.budget",
+              "operator": "gte",
+              "value": 10000000,
+              "message": "최소 예산(1천만원) 이상이어야 합니다"
+            }
+          ]
+        },
+
+        "reject_submission": {
+          "display_name": "신청 반려",
+          "from_statuses": ["Submitted"],
+          "to_status": "Rejected",
+          "allowed_roles": ["Admin", "FinanceManager", "AccountManager"],
+          "preconditions": [],
+          "required_fields": ["rejection_reason"]
+        },
+
+        "approve_project": {
+          "display_name": "과제 승인",
+          "from_statuses": ["UnderReview"],
+          "to_status": "Approved",
+          "preconditions": [
+            {
+              "field": "properties.manager",
+              "operator": "not_null",
+              "message": "담당자를 배정하세요"
+            },
+            {
+              "field": "properties.budget",
+              "operator": "gte",
+              "value": 10000000,
+              "message": "최소 예산 이상이어야 합니다"
+            }
+          ],
+          "conditional_permissions": [
+            {
+              "condition": {
+                "field": "properties.budget",
+                "operator": "lte",
+                "value": 50000000
+              },
+              "allowed_roles": ["TeamLead", "FinanceManager", "Admin"],
+              "description": "예산 5천만원 이하: 팀장 이상"
+            },
+            {
+              "condition": {
+                "field": "properties.budget",
+                "operator": "gt",
+                "value": 50000000,
+                "and": {
+                  "field": "properties.budget",
+                  "operator": "lte",
+                  "value": 200000000
+                }
+              },
+              "allowed_roles": ["FinanceManager", "Admin"],
+              "description": "예산 5천~2억원: 재무팀장 이상"
+            },
+            {
+              "condition": {
+                "field": "properties.budget",
+                "operator": "gt",
+                "value": 200000000
+              },
+              "allowed_roles": ["Admin"],
+              "description": "예산 2억원 초과: 관리자만"
+            }
+          ],
+          "property_changes": [
+            {
+              "field": "properties.approved_by",
+              "value": "{{ user_id }}"
+            },
+            {
+              "field": "properties.approved_at",
+              "value": "{{ timestamp }}"
+            }
+          ],
+          "side_effects": [
+            {
+              "type": "changelog"
+            },
+            {
+              "type": "write_back",
+              "target_system": "SAP"
+            },
+            {
+              "type": "notification",
+              "recipients": ["applicant", "manager"]
+            }
+          ]
+        },
+
+        "reject_project": {
+          "display_name": "과제 반려",
+          "from_statuses": ["Submitted", "UnderReview"],
+          "to_status": "Rejected",
+          "allowed_roles": ["Admin", "FinanceManager", "AccountManager"],
+          "preconditions": [],
+          "required_fields": ["rejection_reason"],
+          "property_changes": [
+            {
+              "field": "properties.rejected_by",
+              "value": "{{ user_id }}"
+            },
+            {
+              "field": "properties.rejected_at",
+              "value": "{{ timestamp }}"
+            }
+          ]
+        },
+
+        "request_more_info": {
+          "display_name": "추가 정보 요청",
+          "from_statuses": ["UnderReview"],
+          "to_status": "UnderReview",
+          "allowed_roles": ["Admin", "FinanceManager", "AccountManager"],
+          "preconditions": [],
+          "required_fields": ["info_needed"],
+          "property_changes": [
+            {
+              "field": "properties.info_requested_at",
+              "value": "{{ timestamp }}"
+            },
+            {
+              "field": "properties.info_requested_by",
+              "value": "{{ user_id }}"
+            }
+          ]
+        },
+
+        "change_deadline": {
+          "display_name": "일정 변경",
+          "from_statuses": ["Approved", "InProgress"],
+          "to_status": null,
+          "allowed_roles": ["Admin", "FinanceManager", "Manager"],
+          "preconditions": [
+            {
+              "field": "properties.deadline",
+              "operator": "exists",
+              "message": "현재 일정이 설정되어 있지 않습니다"
+            }
+          ],
+          "required_fields": ["new_deadline"],
+          "property_changes": [
+            {
+              "field": "properties.deadline",
+              "value": "{{ new_deadline }}"
+            },
+            {
+              "field": "properties.deadline_changed_by",
+              "value": "{{ user_id }}"
+            },
+            {
+              "field": "properties.deadline_changed_at",
+              "value": "{{ timestamp }}"
+            }
+          ]
+        },
+
+        "start_payment": {
+          "display_name": "지급 시작",
+          "from_statuses": ["Approved"],
+          "to_status": "InProgress",
+          "allowed_roles": ["Admin", "FinanceManager", "PaymentManager"],
+          "preconditions": [
+            {
+              "field": "properties.payment_schedule",
+              "operator": "not_null",
+              "message": "지급 일정을 확정하세요"
+            },
+            {
+              "field": "properties.bank_account_verified",
+              "operator": "equals",
+              "value": true,
+              "message": "신청사 계좌 검증이 필요합니다"
+            }
+          ],
+          "property_changes": [
+            {
+              "field": "properties.payment_started_at",
+              "value": "{{ timestamp }}"
+            },
+            {
+              "field": "properties.payment_started_by",
+              "value": "{{ user_id }}"
+            }
+          ],
+          "side_effects": [
+            {
+              "type": "write_back",
+              "target_system": "SAP"
+            },
+            {
+              "type": "notification",
+              "recipients": ["applicant", "manager"]
+            }
+          ]
+        },
+
+        "complete_project": {
+          "display_name": "과제 완료",
+          "from_statuses": ["InProgress"],
+          "to_status": "Completed",
+          "allowed_roles": ["Admin", "FinanceManager"],
+          "preconditions": [
+            {
+              "field": "properties.payment_completed",
+              "operator": "equals",
+              "value": true,
+              "message": "지급이 완료되지 않았습니다"
+            },
+            {
+              "field": "properties.final_report_submitted",
+              "operator": "equals",
+              "value": true,
+              "message": "최종 보고서가 제출되지 않았습니다"
+            }
+          ],
+          "property_changes": [
+            {
+              "field": "properties.completed_at",
+              "value": "{{ timestamp }}"
+            },
+            {
+              "field": "properties.completed_by",
+              "value": "{{ user_id }}"
+            }
+          ],
+          "side_effects": [
+            {
+              "type": "write_back",
+              "target_system": "SAP"
+            }
+          ]
+        }
+      }
+    },
+
+    "order": {
+      "entity_type": "Order",
+      "display_name": "Order (Legacy)",
+      "description": "이전 구조 — 향후 마이그레이션 예정",
+
+      "statuses": ["Submitted", "Review", "Approved", "Rejected", "Fulfilled", "Closed"],
+
+      "actions": {
+        "ApproveOrder": {
+          "from_statuses": ["Submitted", "Review"],
+          "to_status": "Approved",
+          "allowed_roles": ["Admin", "FinanceManager"]
+        },
+        "RejectOrder": {
+          "from_statuses": ["Submitted", "Review"],
+          "to_status": "Rejected",
+          "allowed_roles": ["Admin", "FinanceManager", "AccountManager"]
+        },
+        "HoldOrder": {
+          "from_statuses": ["Submitted"],
+          "to_status": "Review",
+          "allowed_roles": ["Admin", "FinanceManager", "AccountManager"]
+        },
+        "FulfillOrder": {
+          "from_statuses": ["Approved"],
+          "to_status": "Fulfilled",
+          "allowed_roles": ["Admin", "FinanceManager"]
+        },
+        "CloseOrder": {
+          "from_statuses": ["Fulfilled"],
+          "to_status": "Closed",
+          "allowed_roles": ["Admin", "FinanceManager"]
+        }
+      }
+    }
+  }
+}

@@ -17,20 +17,26 @@
 
 ```bash
 cd E:\ontology_edu\X_rag_std\src_agents\llm_gateway
+conda activate .\.conda
 pip install -r requirements.txt
-cp .env.example .env   # 키 설정
 uvicorn app.main:app --port 8010 --reload
 ```
 
+**주의**: `.env` 파일은 이미 설정되어 있습니다. (Gemini API 키 포함)
+
 ## 환경변수 (.env)
 
-```
-GEMINI_API_KEY=your_gemini_api_key_here
+현재 `.env`에 설정된 Gemini API 키 (우선순위: 3K → 20K → 무료):
 
-# 모델 (기본값으로 사용 시 불필요)
-# GEMINI_EMBED_MODEL=models/gemini-embedding-001
-# GEMINI_LLM_MODEL=gemini-2.5-flash-lite
-```
+| 키 | 한도 | 상태 | 설명 |
+|----|------|------|------|
+| `GEMINI_API_KEY1` | 3,000원 | 유료 [PRIMARY] | Gemini Project namkyu 2026 |
+| `GEMINI_API_KEY2` | 20,000원 | 유료 [SECONDARY] | my Project - paid |
+| `GEMINI_API_KEY3` | 무료 | [FALLBACK] | Gemini Project - new1 |
+| `GEMINI_API_KEY4` | 무료 | [FALLBACK] | Gemini Project-2026 |
+| `GEMINI_API_KEY` | 기본값 | - | KEY1 (3,000원) |
+
+**라운드 로빈 순환**: KEY1(3K) → KEY2(20K) → KEY3 → KEY4 → KEY1...
 
 ## 엔드포인트
 
